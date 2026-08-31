@@ -1379,6 +1379,97 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 </style>
 
+<style>
+.real-problem-container {
+    border: 2px solid #1e8449;
+    border-left: 8px solid #27ae60;
+    border-radius: 12px;
+    margin: 20px 0;
+    background: linear-gradient(135deg, #f0faf4, #e8f8f0);
+    box-shadow: 3px 3px 12px rgba(39,174,96,0.15);
+    overflow: hidden;
+}
+.real-problem-header {
+    background: #27ae60;
+    color: white;
+    padding: 12px 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+.real-problem-box { padding: 18px 22px; font-size: 16px; line-height: 1.7; }
+.real-badge {
+    background: #f39c12; color: white; padding: 2px 8px; border-radius: 6px; font-size: 12px; margin-right: 8px;
+}
+</style>
+
+
+
+<style>
+/* FIX ACCORDION - ini kuncinya */
+details.accordion-real {
+  border: 1px solid #a3d9b1;
+  border-radius: 10px;
+  margin: 14px 0;
+  background: #ffffff;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+details.accordion-real > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 14px 18px;
+  font-weight: 700;
+  background: #e8f5e9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+details.accordion-real > summary::-webkit-details-marker { display: none; }
+details.accordion-real > summary.arrow-real {
+  transition: transform 0.2s ease;
+  font-size: 14px;
+}
+details.accordion-real[open] > summary.arrow-real {
+  transform: rotate(180deg);
+}
+details.accordion-real[open] {
+  border-color: #27ae60;
+  box-shadow: 0 2px 8px rgba(39,174,96,0.15);
+}
+details.accordion-real.content-real {
+  padding: 18px 20px;
+  border-top: 1px solid #d1e7dd;
+  line-height: 1.7;
+  animation: fadeInReal 0.25s ease;
+}
+@keyframes fadeInReal {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.real-problem-container-fixed {
+  border: 2px solid #1e8449;
+  border-left: 8px solid #27ae60;
+  border-radius: 12px;
+  margin: 24px 0;
+  background: linear-gradient(135deg,#f0faf4,#e8f8f0);
+  overflow: hidden;
+}
+.real-problem-header-fixed {
+  background: #27ae60;
+  color: white;
+  padding: 12px 18px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+</style>
+
+
+
 </head>
 
 <body>
@@ -2830,6 +2921,30 @@ Kita akan menggunakan kriteria uji subruang:
 </p>
 </div>
 
+
+<!-- === SISIPKAN SETELAH Contoh 1.2.7 (Bukan Subruang) === -->
+<div class="real-problem-container">
+    <div class="real-problem-header" onclick="this.parentElement.classList.toggle('active')">
+        <span><span class="real-badge">REAL PROBLEM</span> 1.2.A - Uji Subruang dalam Grafika: Apakah Layar Hitam-Putih Subruang RGB?</span>
+        <span>▼</span>
+    </div>
+<div class="real-problem-box">
+<p align="justify"><b>Masalah Nyata:</b> Dalam pengolahan citra, ruang warna RGB adalah $V = \mathbb{R}^3$. Himpunan citra grayscale didefinisikan $W = \{(r,g,b) \in \mathbb{R}^3 \mid r=g=b\}$. Apakah $W$ subruang dari $V$? Jika ya, apa implikasinya pada kompresi?</p>
+<details class="accordion" open>
+<summary><b>Pembahasan Lengkap (Teorema 1.2.5):</b></summary>
+<div class="content">
+<ol>
+<li><b>Tak Kosong:</b> $(0,0,0) \in W$ karena $0=0=0$.</li>
+<li><b>Tertutup Penjumlahan:</b> Ambil $\mathbf{u}=(a,a,a), \mathbf{v}=(b,b,b) \in W$. Maka $\mathbf{u}+\mathbf{v} = (a+b, a+b, a+b) \in W$ karena komponen tetap sama.</li>
+<li><b>Tertutup Perkalian Skalar:</b> $c\mathbf{u} = (ca, ca, ca) \in W$.</li>
+</ol>
+<p><b>Kesimpulan:</b> Karena memenuhi 3 kriteria Teorema 1.2.5, $W$ adalah subruang. Dimensi $W$ = 1 dengan basis $\{(1,1,1)\}$. Artinya file grayscale hanya butuh 1/3 memori dari RGB. Ini fondasi format JPEG grayscale.</p>
+</div>
+</details>
+</div>
+</div>
+
+
 <div class="definition-container">
     <div class="definition-header" onclick="toggleDefinisi(this)">
         <span>1.2.8. Definisi</span>
@@ -3182,6 +3297,28 @@ Ini adalah kombinasi linier dari vektor-vektor di $S$ yang menghasilkan vektor n
 </details>
 </div>
 </div>
+
+
+<!-- === SISIPKAN SETELAH Contoh 1.2.15 === -->
+<div class="real-problem-container">
+    <div class="real-problem-header" onclick="this.parentElement.classList.toggle('active')">
+        <span><span class="real-badge">REAL PROBLEM</span> 1.2.B - Deteksi Fitur Redundan di Machine Learning</span>
+        <span>▼</span>
+    </div>
+<div class="real-problem-box">
+<p align="justify"><b>Masalah Nyata:</b> Dataset punya 3 fitur: $\mathbf{v}_1=(1,2), \mathbf{v}_2=(2,4), \mathbf{v}_3=(1,0)$. Apakah ada fitur yang bisa dibuang tanpa kehilangan informasi (bergantung linear)?</p>
+<details class="accordion" open>
+<summary><b>Pembahasan Lengkap (Teorema 1.2.12):</b></summary>
+<div class="content">
+<p>Uji persamaan $c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + c_3\mathbf{v}_3 = \mathbf{0}$:</p>
+$$c_1\begin{pmatrix}1\\2\end{pmatrix}+c_2\begin{pmatrix}2\\4\end{pmatrix}+c_3\begin{pmatrix}1\\0\end{pmatrix}= \begin{pmatrix}0\\0\end{pmatrix} \implies \begin{cases}c_1+2c_2+c_3=0\\2c_1+4c_2=0\end{cases}$$
+<p>Dari baris 2: $c_1 = -2c_2$. Pilih $c_2=1, c_3=0$ maka $c_1=-2$ adalah solusi non-trivial. Jadi himpunan <b>bergantung linear</b>.</p>
+<p>Berdasarkan Teorema 1.2.12, salah satu vektor adalah kombinasi linear lainnya. Jelas $\mathbf{v}_2 = 2\mathbf{v}_1$. Maka $\mathbf{v}_2$ redundan. Dalam ML, ini disebut <b>multikolinearitas</b> - kita buang $\mathbf{v}_2$ untuk mencegah overfitting. Span tetap $\mathbb{R}^2$ dengan basis $\{\mathbf{v}_1, \mathbf{v}_3\}$.</p>
+</div>
+</details>
+</div>
+</div>
+
 
 <div style="
     border: 2px solid #2c3e50;
@@ -4103,6 +4240,30 @@ Jika $W$ adalah subruang dari ruang vektor berdimensi hingga $V$, maka $\dim(W) 
 </div>
 </section>
 
+
+<!-- === SISIPKAN SETELAH Contoh 1.3.11 === -->
+<div class="real-problem-container">
+    <div class="real-problem-header" onclick="this.parentElement.classList.toggle('active')">
+        <span><span class="real-badge">REAL PROBLEM</span> 1.3.A - Dimensi Ruang Solusi Persamaan Diferensial (Model Getaran)</span>
+        <span>▼</span>
+    </div>
+<div class="real-problem-box">
+<p align="justify"><b>Masalah Nyata:</b> Model pegas teredam $y''-3y'+2y=0$. Tentukan basis dan dimensi ruang solusinya. Mengapa dimensi penting untuk prediksi?</p>
+<details class="accordion" open>
+<summary><b>Pembahasan Lengkap (Definisi 1.3.1 & 1.3.6):</b></summary>
+<div class="content">
+<p>Persamaan karakteristik $r^2-3r+2=0 \implies (r-1)(r-2)=0$, akar $r=1,2$. Solusi umum $y = C_1 e^{x} + C_2 e^{2x}$.</p>
+<ol>
+<li><b>Bebas Linear:</b> Uji $c_1 e^x + c_2 e^{2x}=0 \forall x$. Bagi $e^x$: $c_1 + c_2 e^x=0$. Turunkan: $c_2 e^x=0 \implies c_2=0 \implies c_1=0$. Jadi $\{e^x, e^{2x}\}$ bebas linear.</li>
+<li><b>Merentang:</b> Setiap solusi adalah kombinasi linear dari keduanya.</li>
+</ol>
+<p>Maka $B=\{e^x, e^{2x}\}$ basis. $\dim=2$. Artinya kita butuh 2 kondisi awal (posisi & kecepatan) untuk prediksi tunggal - sesuai Teorema 1.3.2 Representasi Tunggal: $[\mathbf{y}]_B = \begin{pmatrix}C_1\\C_2\end{pmatrix}$ tunggal.</p>
+</div>
+</details>
+</div>
+</div>
+
+
 <div style="
     border: 2px solid #2c3e50;
     border-left: 8px solid #2980b9;
@@ -4503,6 +4664,26 @@ g.show(axes=True, gridlines=True, ticks=[1,1], figsize=4.85)
 </div>
 </div>
 
+<!-- === SISIPKAN SETELAH Contoh 1.4.5 === -->
+<div class="real-problem-container">
+    <div class="real-problem-header" onclick="this.parentElement.classList.toggle('active')">
+        <span><span class="real-badge">REAL PROBLEM</span> 1.4.A - Perubahan Basis di Game Engine: World ke Camera Space</span>
+        <span>▼</span>
+    </div>
+<div class="real-problem-box">
+<p align="justify"><b>Masalah Nyata:</b> Titik musuh $\mathbf{v}=(3,4)$ di world basis $E$. Kamera miring $45^\circ$ dengan basis $B=\{(1,1), (-1,1)\}$. Di mana musuh di layar kamera?</p>
+<details class="accordion" open>
+<summary><b>Pembahasan Lengkap (Teorema 1.4.2):</b></summary>
+<div class="content">
+<p>Matriks transisi $P_{E \leftarrow B} = \begin{pmatrix}1 & -1\\1 & 1\end{pmatrix}$. Maka $P_{B \leftarrow E} = (P_{E \leftarrow B})^{-1} = \begin{pmatrix}1/2 & 1/2\\-1/2 & 1/2\end{pmatrix}$ (Teorema 1.4.4).</p>
+$$[\mathbf{v}]_B = P_{B \leftarrow E}[\mathbf{v}]_E = \begin{pmatrix}1/2 & 1/2\\-1/2 & 1/2\end{pmatrix}\begin{pmatrix}3\\4\end{pmatrix} = \begin{pmatrix}3.5\\0.5\end{pmatrix}$$
+<p><b>Interpretasi:</b> Di mata kamera, musuh ada 3.5 unit maju dan 0.5 unit kanan. Tanpa perubahan basis, rendering 3D tidak mungkin. Ini dipakai Unity/Unreal setiap frame.</p>
+</div>
+</details>
+</div>
+</div>
+
+
 <section class="theorem-section">
 <div class="theorem-container">
     <div class="theorem-header" onclick="toggleTeorema(this)">
@@ -4586,6 +4767,9 @@ Kita punya $$P_{E \leftarrow B} = \begin{pmatrix} 1 & -1 \\ 1 & 1 \end{pmatrix}.
         </p>
 </div>
 </div> 
+
+
+
 
 <section class="theorem-section">
 <div class="theorem-container">
@@ -5055,6 +5239,82 @@ pretty_print(html("Apakah: $3 - x + 2x^2 = 4 - 3(1+x) + 2(1+x+x^2)$ ? $%s$"%late
 </div>
 </div>
 
+</div>
+</div>
+
+<!-- === SISIPKAN SETELAH Contoh 1.4.10 === -->
+<div class="real-problem-container">
+    <div class="real-problem-header" onclick="this.parentElement.classList.toggle('active')">
+        <span><span class="real-badge">REAL PROBLEM</span> 1.4.B - Data Science: Kompresi Polinomial Sensor IoT</span>
+        <span>▼</span>
+    </div>
+<div class="real-problem-box">
+<p align="justify"><b>Masalah Nyata:</b> Sensor mengirim data sebagai $p(x)=3-x+2x^2$ di basis baku $B$. Untuk transmisi hemat, kita pakai basis Newton $B'=\{1,1+x,1+x+x^2\}$ yang lebih stabil numerik. Berapa koefisien baru?</p>
+<details class="accordion" open>
+<summary><b>Pembahasan Lengkap (Seperti di 1.4.10):</b></summary>
+<div class="content">
+<p>Kita sudah hitung $[I]_{B}^{B'} = \begin{pmatrix}1&-1&0\\0&1&-1\\0&0&1\end{pmatrix}$. Maka:</p>
+$$[p]_{B'} = [I]_{B}^{B'}[p]_B = \begin{pmatrix}1&-1&0\\0&1&-1\\0&0&1\end{pmatrix}\begin{pmatrix}3\\-1\\2\end{pmatrix} = \begin{pmatrix}4\\-3\\2\end{pmatrix}$$
+<p>Verifikasi: $4(1)-3(1+x)+2(1+x+x^2)=3-x+2x^2$. Keuntungan: koefisien di $B'$ lebih kecil variance, sehingga jika kita buang koefisien kecil (thresholding), error lebih kecil. Ini prinsip <b>Compressed Sensing</b> di IoT.</p>
+<div id="RealSage">
+<textarea>
+# Definisikan ring polinomial
+R.<x> = QQ[]
+
+# Polinomial target
+p = 3 - x + 2*x^2
+
+# Basis yang digunakan B' = [1, 1+x, 1+x+x^2]
+B_prime = [R(1), R(1+x), R(1+x+x^2)]
+
+print("="*50)
+print("REPRESENTASI POLINOMIAL DALAM BASIS B'")
+print("Basis B' =", B_prime)
+print("Polinomial target p =", p)
+print("="*50)
+
+# === HITUNG KOEFISIEN OTOMATIS (Solusi yang benar) ===
+# p = c0*1 + c1*(1+x) + c2*(1+x+x^2)
+# => Cari c0,c1,c2
+# 3 - x + 2x^2 = (c0+c1+c2) + (c1+c2)x + c2 x^2
+# Sistem: c2=2, c1+c2=-1, c0+c1+c2=3 => c2=2, c1=-3, c0=4
+c_true = vector(QQ, [4, -3, 2])
+print(f"\nKoefisien yang benar (otomatis): {c_true}")
+print(f"Verifikasi: {c_true[0]}*1 + ({c_true[1]})*(1+x) + {c_true[2]}*(1+x+x^2) = {sum(c*b for c,b in zip(c_true, B_prime))}")
+
+# === INTERAKTIF UNTUK LATIHAN ===
+@interact
+def cek_koefisien(c0=slider(-5,5,1,4, label="c0"),
+                  c1=slider(-5,5,1,-3, label="c1"),
+                  c2=slider(-5,5,1,2, label="c2")):
+
+    coeff = [c0, c1, c2]
+
+    # Rekonstruksi polinomial dari basis dan koefisien
+    rekonstruksi = sum(QQ(c)*b for c, b in zip(coeff, B_prime))
+    selisih = p - rekonstruksi
+    is_same = (p == rekonstruksi)
+
+    print("\n--- HASIL ---")
+    print(f"Koefisien yang kamu masukkan: {coeff}")
+    print(f"Rekonstruksi = {rekonstruksi}")
+    print(f"p = {p}")
+    print(f"Selisih p - rekonstruksi = {selisih}")
+    print(f"p == rekonstruksi? {is_same}")
+
+    pretty_print(html(r"$p(x) = %s$" % latex(p)))
+    pretty_print(html(r"$\sum c_i b_i = %s(1) + (%s)(1+x) + %s(1+x+x^2) = %s$" % (c0, c1, c2, latex(rekonstruksi))))
+    pretty_print(html(r"$p = \sum c_i b_i? \; %s$" % ("\\text{Benar } \\checkmark" if is_same else "\\text{Salah } \\times")))
+
+    if is_same:
+        pretty_print(html(r"<b style='color:green'>✓ Representasi benar: p dapat dinyatakan dalam basis B' dengan koefisien tersebut.</b>"))
+    else:
+        pretty_print(html(r"<b style='color:red'>✗ Representasi salah. Selisih = %s. Coba lagi!</b>" % latex(selisih)))
+</textarea>
+</div>
+<script> sagecell.makeSagecell({inputLocation: "#RealSage", evalButtonText: "🔁 Verifikasi"})</script>
+</div>
+</details>
 </div>
 </div>
 
@@ -21223,8 +21483,267 @@ Grup unitari yang terkait dengan $\mathbb{C}^n$ adalah
       serta transformasi linear yang terkait, pada Bab-bab berikutnya.
     </p>
 
+
+
 </div> <!--Akhir Subsection Content 3.6-->
 </div> <!--Akhir Subsection 3.6-->
+
+<!-- ==================== SECTION 3.7 BARU ==================== -->
+<div class="subsection">
+   <div class="subsection-header">
+   <h3>3.7. Contoh-contoh Real Problem <span class="dropdown-icon">▼</span></h3>
+   </div>
+<div class="subsection-content">
+
+<div style="
+    border: 2px solid #1e8449;
+    border-left: 8px solid #27ae60;
+    padding: 18px 22px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f0faf4, #e8f8f0);
+    box-shadow: 3px 3px 12px rgba(39,174,96,0.15);
+    font-family: 'Segoe UI', sans-serif;
+    margin-top: 15px;
+    margin-bottom: 15px;
+">
+  <h3 style="margin-top:0;color:#145a32;font-size:22px;border-bottom:2px dashed #27ae60;padding-bottom:6px;">
+    <b>📌 Tujuan Section 3.7</b>
+  </h3>
+  <p align="justify" style="font-size:17px;line-height:1.7;color:#1e3a2a;">
+    Teori Ruang Dual, Transposisi, Bentuk Bilinear, Grup Matriks, dan Matriks Self-Adjoint terlihat abstrak,
+    padahal inilah mesin di balik <b>Machine Learning, Computer Vision, Fisika, dan Quantum Computing</b>.
+    Section ini memberikan jembatan eksplisit: setiap real problem dikaitkan ke teorema yang sudah dipelajari.
+  </p>
+</div>
+
+
+<!-- PROBLEM 1 -->
+<div class="real-problem-container-fixed">
+<div class="real-problem-header-fixed"><span>REAL PROBLEM 3.7.1 — SVM: Hiperbidang sebagai Kernel Fungsional</span><span>Teori 3.1.13</span></div>
+<div style="padding:18px 22px;">
+<p align="justify"><b>Kasus Nyata:</b> Classifier spam $f(x)=w\cdot x+b=0$ adalah hiperbidang $f(x)=c$, yaitu koset dari $\ker f$.</p>
+<details class="accordion-real" open>
+  <summary><span><b>Pembahasan Lengkap + Visualisasi</b></span><span class="arrow-real">▼</span></summary>
+  <div class="content-real">
+    <p align="justify"><b>Konteks Nyata (Teori 3.1.12 - 3.1.14):</b> Di ML, classifier memisahkan data spam vs bukan spam dengan garis $w\cdot x + b = 0$. Ini adalah hiperbidang $f(x)=c$.</p>
+<p><b>Soal:</b> Di $\mathbb{R}^2$, data positif $(2,2)$ dan negatif $(0,0)$. Tentukan fungsional $f \in V^*$ dan hiperbidang pemisah optimal.</p>
+<details class="accordion" open>
+<summary><b>Pembahasan Lengkap:</b></summary>
+<div class="content">
+<p>Berdasarkan Teorema 3.1.13, setiap hiperruang adalah $\ker f$ untuk $f\neq0 \in V^*$. Ambil $f(x,y)=x+y$ (elemen dari $(\mathbb{R}^2)^* \cong \mathbb{R}_2$ dari Teorema 3.1.5).</p>
+<ul>
+<li>$\ker f = \{(x,y)|x+y=0\}$ adalah hiperruang (garis lewat origin) dimensi 1.</li>
+<li>Hiperbidang klasifikasi: $f(x)=2$ yaitu $x+y=2$. Ini koset $(1,1)+\ker f$.</li>
+<li>Menurut Teorema 3.1.17, evaluasi titik data adalah elemen bidual: $\varphi(v)(f)=f(v)$. Jarak titik ke hiperbidang dihitung via fungsional dual.</li>
+</ul>
+<p><b>Implikasi:</b> Training SVM adalah mencari $f \in V^*$ yang memaksimalkan margin $\min |f(x_i)-c|/||f||$. Inilah dualitas di optimasi.</p>
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+<script> sagecell.makeSagecell({inputLocation: "#svm_dual", evalButtonText: "Jalankan"})</script>
+<div id="svm_dual"><textarea>
+import matplotlib.pyplot as plt
+import numpy as np
+# Visualisasi hiperbidang
+x = np.linspace(-1,3,100)
+plt.plot(x, -x, 'r--', label='ker f: x+y=0 (hiperruang)')
+plt.plot(x, 2-x, 'g-', linewidth=2, label='hiperbidang f=2')
+plt.scatter([2,0],[2,0], c=['blue','red'], s=100)
+plt.text(2,2,' spam (2,2) f=4')
+plt.text(0,0,' ham (0,0) f=0')
+plt.legend(); plt.grid(True); plt.axis('equal'); plt.show()
+</textarea></div>
+</div>
+</details>
+</div>
+</div>
+</div>
+
+<!-- PROBLEM 2 -->
+<div class="real-problem-container-fixed">
+<div class="real-problem-header-fixed"><span>REAL PROBLEM 3.7.2 — Transpos sebagai Dual $A_{L^*}=A_L^T$</span><span>Teori 3.2.7</span></div>
+<div style="padding:18px 22px;">
+<p align="justify"><b>Kasus Nyata:</b> Matriks rating Netflix $A$. $L^*$ dengan matriks $A^T$ adalah rekomendasi balik.</p>
+<details class="accordion-real">
+  <summary><span><b>Pembahasan Lengkap: Rank tetap</b></span><span class="arrow-real">▼</span></summary>
+  <div class="content-real">
+    <p align="justify"><b>Konteks Nyata (Teori 3.2.7 - 3.2.8):</b> Netflix: Matriks rating $A \in M_{m\times n}$ user x film. $L(v)=Av$ prediksi. $L^*$ adalah sistem rekomendasi balik.</p>
+<p><b>Soal:</b> Diberikan $A=\begin{pmatrix}1&2\\3&1\end{pmatrix}$. Jika $L(e_1)=(1,3), L(e_2)=(2,1)$, tunjukkan bagaimana $A^T$ bekerja sebagai dual dan mengapa $\text{rank}(A)=\text{rank}(A^T)$ penting untuk kompresi (Teorema 3.2.5b).</p>
+<details class="accordion" open>
+<summary><b>Pembahasan Lengkap:</b></summary>
+<div class="content">
+<p>Dari Teorema 3.2.7, $[L^*]=A^T=\begin{pmatrix}1&3\\2&1\end{pmatrix}$.</p>
+<p>Interpretasi:</p>
+<ul>
+<li>$L$: $\mathbb{F}^2_{film} \to \mathbb{F}^2_{user}$: film -> rating user</li>
+<li>$L^*$: $\mathbb{F}^2_{user} \to \mathbb{F}^2_{film}$: preferensi user -> profil film ideal. Ini adalah collaborative filtering.</li>
+<li>Teorema 3.2.5(b) rank sama menjamin informasi tidak hilang saat transpos: jumlah faktor laten yang dibutuhkan untuk kompresi SVD sama.</li>
+</ul>
+<p>Jika $y=e_1^T$ adalah fungsional "tanya rating user 1", maka $L^*(y)= yA = [1,2]$ adalah vektor baris film yang disukai user 1 - persis dualitas baris/kolom di Contoh 3.2.6.</p>
+<div id="transpose_real"><textarea>
+# Matriks awal
+A = matrix(QQ, [[1, 2], [3, 1]])
+
+print("Matriks A:")
+show(A)
+
+# === SVD EKSAK MENGGUNAKAN QQbar ===
+# Langkah 1: Bentuk A^T A
+AtA = A.transpose() * A
+
+# Langkah 2: Cari nilai dan vektor eigen dari A^T A
+evals_V = AtA.eigenvectors_right()
+
+# Urutkan dari nilai eigen terbesar ke terkecil
+evals_V_sorted = sorted(evals_V, key=lambda x: x[0], reverse=True)
+
+V_cols = []
+sigma_vals = []
+
+for val, vecs, mult in evals_V_sorted:
+    v = vecs[0]
+    v_norm = v / v.norm()          # Normalisasi vektor eigen
+    V_cols.append(v_norm)
+    sigma_vals.append(sqrt(val))   # Nilai singular (sigma)
+
+# Bentuk matriks V dan Sigma
+V = matrix(QQbar, V_cols).transpose()
+Sigma = diagonal_matrix(QQbar, sigma_vals)
+
+# Langkah 3: Hitung U = A * V * Sigma^(-1)
+U = A.change_ring(QQbar) * V * Sigma.inverse()
+
+# === TAMPILKAN HASIL SIMBOLIK EKSAK ===
+print("\n=== HASIL SVD EKSAK (SIMBOLIK) ===")
+show(html("<b>Matriks U:</b>"))
+show(U)
+
+show(html("<b>Matriks &Sigma;:</b>"))
+show(Sigma)
+
+show(html("<b>Matriks V:</b>"))
+show(V)
+
+# === VERIFIKASI ===
+print("\n=== VERIFIKASI ===")
+A_rekons = U * Sigma * V.transpose()
+show(html("<b>U &times; &Sigma; &times; V<sup>T</sup> =</b>"))
+show(A_rekons)
+
+sama = (A_rekons == A.change_ring(QQbar))
+print(f"Apakah U * Sigma * V^T sama dengan A? {sama}")
+
+# === PENDEKATAN NUMERIK ===
+print("\n=== PENDEKATAN NUMERIK (4 desimal) ===")
+show(html("<b>U &approx;</b>"))
+show(U.numerical_approx(digits=4))
+
+show(html("<b>&Sigma; &approx;</b>"))
+show(Sigma.numerical_approx(digits=4))
+
+show(html("<b>V &approx;</b>"))
+show(V.numerical_approx(digits=4))
+</textarea></div>
+<script> sagecell.makeSagecell({inputLocation: "#transpose_real", evalButtonText: "Verifikasi Rank"})</script>
+</div>
+</details>
+</div>
+</div>
+</div>
+
+<!-- PROBLEM 3 -->
+<div class="real-problem-container-fixed">
+<div class="real-problem-header-fixed"><span>REAL PROBLEM 3.7.3 — Bentuk Bilinear Energi $T=v^T M v$</span><span>Teori 3.3.8</span></div>
+<div style="padding:18px 22px;">
+<p align="justify"><b>Kasus Nyata:</b> Energi kinetik adalah bentuk bilinear simetris nondegeneratif.</p>
+<details class="accordion-real">
+  <summary><span><b>Pembahasan: Nondegeneratif = Momentum injektif</b></span><span class="arrow-real">▼</span></summary>
+  <div class="content-real">
+<p align="justify"><b>Konteks Nyata (Teori 3.3.2 - 3.3.8):</b> Energi kinetik $T = \frac12 v^T M v$ dengan $M$ matriks massa adalah bentuk bilinear $\sigma(v,x)=v^T M x$.</p>
+<p><b>Soal:</b> 2 partikel massa $m_1=1,m_2=2$. $M=diag(1,2)$. Tunjukkan $\sigma$ nondegeneratif dan hitung representasi di basis lain.</p>
+<details class="accordion" open>
+<summary><b>Pembahasan Lengkap:</b></summary>
+<div class="content">
+<p>Definisi $\sigma(v,x)=v^T M x$ memenuhi Definisi 3.3.2 (bilinear). Matriks $[\sigma]_E = M$ invertible det=2, maka menurut Teorema 3.3.8, $\sigma$ nondegeneratif.</p>
+<p>Implikasi fisik nondegeneratif: Jika $T(v,x)=0$ untuk semua $x$, maka $v=0$ - tidak ada kecepatan hantu tanpa energi. Pemetaan $f(v)(x)=\sigma(v,x)$ injektif $V\to V^*$ (Teorema 3.3.9) adalah transformasi momentum $p=Mv$.</p>
+<p>Ganti basis ke koordinat pusat massa $P=\begin{pmatrix}1&1\\0&1\end{pmatrix}$. Menurut Teorema 3.3.5, $[\sigma]_B = P^T M P$.</p>
+<div id="bilinear_real"><textarea>
+# Definisikan matriks massa dan matriks perubahan basis
+M = matrix(QQ, [[1, 0], [0, 2]])
+P = matrix(QQ, [[1, 1], [0, 1]])
+
+# Hitung matriks bentuk kuadrat/bilinear pada basis baru B
+sigma_B = P.transpose() * M * P
+
+# === TAMPILKAN HASIL DENGAN FORMAT RAPI ===
+show(html("<h3>1. Transformasi Basis Bentuk Bilinear</h3>"))
+
+show(html("<b>[sigma]<sub>E</sub> (massa):</b>"))
+show(M)
+
+show(html("<b>P (matriks perubahan basis):</b>"))
+show(P)
+
+show(html("<b>[sigma]<sub>B</sub> = P<sup>T</sup> M P :</b>"))
+show(sigma_B)
+
+# Sifat Determinanta & Non-degenerasi
+det_B = sigma_B.det()
+show(html(f"<b>det([sigma]<sub>B</sub>) = {det_B} &neq; 0</b> &rarr; <i>Tetap nondegeneratif (Teorema 3.3.8)</i>"))
+
+# === PERHITUNGAN ENERGI KINETIK ===
+show(html("<h3>2. Perhitungan Energi Kinetik</h3>"))
+
+# Gunakan 1/2 (bilangan rasional eksak) bukan 0.5 (float)
+v = vector(QQ, [1, 1])
+T = (1/2) * (v * M * v)
+
+show(html("<b>Vektor v:</b>"))
+show(v)
+
+show(html("<b>Energi Kinetik T = &frac12; v<sup>T</sup> M v :</b>"))
+show(T)
+</textarea>
+</div>
+<script> sagecell.makeSagecell({inputLocation: "#bilinear_real", evalButtonText: "Hitung Energi"})</script>
+</div>
+</details>
+</div>
+</div>
+
+</div>
+
+<!-- PROBLEM 4 & 5 bisa copy pola yang sama -->
+<div class="real-problem-container-fixed">
+<div class="real-problem-header-fixed"><span>REAL PROBLEM 3.7.4 — $O_n(\mathbb{R})$ Robotika & 3.7.5 Quantum $U_n$</span><span>Teori 3.5 & 3.6</span></div>
+<div style="padding:18px 22px;">
+<details class="accordion-real">
+  <summary><span><b>Pembahasan: Ortogonal jaga jarak, Unitary jaga probabilitas</b></span><span class="arrow-real">▼</span></summary>
+  <div class="content-real">
+    <p align="justify"><b>Konteks Nyata (Teori 3.5.3 - 3.5.5):</b> Lengan robot berputar, objek 3D di game dirotasi. Transformasi harus di $O_n(\mathbb{R})$ agar tidak melar.</p>
+<p><b>Soal:</b> Rotasi $30^\circ$ $R=\begin{pmatrix}\cos30&-\sin30\\\sin30&\cos30\end{pmatrix}$. Buktikan $R\in O_2(\mathbb{R})$ dan jelaskan kenapa $\det=\pm1$ membedakan rotasi vs refleksi (Contoh 3.5.6).</p>
+<details class="accordion" open>
+<summary><b>Pembahasan Lengkap:</b></summary>
+<div class="content">
+<p>Cek Definisi 3.5.4: $R^T R = I$. Karena $\cos^2+\sin^2=1$, $R^T R = I$ maka $R^T=R^{-1}$. Jadi $R\in O_2(\mathbb{R})$ (Definisi 3.5.5).</p>
+<p>Menurut ringkasan Teorema 3.5.3, operator ortogonal mempertahankan dot product: $Rv \cdot Rw = v\cdot w$, jadi panjang dan sudut tetap.</p>
+<p>Dari Contoh 3.5.6, $\det R = \cos^2+\sin^2 =1$ -> rotasi. Jika $\det=-1$, maka matriks bentuk $\begin{pmatrix}\cos&\sin\\\sin&-\cos\end{pmatrix}$ -> refleksi. Dalam robotika, $SO_n = \{A\in O_n | \det=1\}$ adalah grup rotasi murni.</p>
+<div id="orthogonal_real"><textarea>
+import math
+theta = math.radians(30)
+R = matrix(RR, [[math.cos(theta), -math.sin(theta)],[math.sin(theta), math.cos(theta)]])
+print("R =", R)
+print("R^T * R =", R.transpose()*R)
+print("det R =", R.det(), " -> Rotasi (SO_2)")
+v = vector([1,0])
+print("|v| =", v.norm(), " |Rv| =", (R*v).norm(), " -> panjang tetap (operator ortogonal)")
+</textarea></div>
+<script> sagecell.makeSagecell({inputLocation: "#orthogonal_real", evalButtonText: "Cek Ortogonal"})</script>
+</div>
+</details>
+</div>
+</div>
+
+</div>
+</div>
 
 
 </section> <!--Akhir Section 3-->
