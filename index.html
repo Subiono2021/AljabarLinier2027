@@ -21727,14 +21727,51 @@ show(T)
 <p>Menurut ringkasan Teorema 3.5.3, operator ortogonal mempertahankan dot product: $Rv \cdot Rw = v\cdot w$, jadi panjang dan sudut tetap.</p>
 <p>Dari Contoh 3.5.6, $\det R = \cos^2+\sin^2 =1$ -> rotasi. Jika $\det=-1$, maka matriks bentuk $\begin{pmatrix}\cos&\sin\\\sin&-\cos\end{pmatrix}$ -> refleksi. Dalam robotika, $SO_n = \{A\in O_n | \det=1\}$ adalah grup rotasi murni.</p>
 <div id="orthogonal_real"><textarea>
-import math
-theta = math.radians(30)
-R = matrix(RR, [[math.cos(theta), -math.sin(theta)],[math.sin(theta), math.cos(theta)]])
-print("R =", R)
-print("R^T * R =", R.transpose()*R)
-print("det R =", R.det(), " -> Rotasi (SO_2)")
-v = vector([1,0])
-print("|v| =", v.norm(), " |Rv| =", (R*v).norm(), " -> panjang tetap (operator ortogonal)")
+# Sudut eksak
+theta = pi/6
+
+# Matriks rotasi eksak
+R = matrix(SR, [
+    [cos(theta), -sin(theta)],
+    [sin(theta),  cos(theta)]
+])
+R = R.apply_map(lambda x: x.simplify_full())
+
+# === 1. MATRIKS ROTASI ===
+pretty_print(html("<h3>1. Matriks Rotasi R (&theta; = 30&deg;)</h3>"))
+pretty_print(html(r"<b>R =</b>"))
+show(R)
+
+RtR = (R.transpose() * R).apply_map(lambda x: x.simplify_full())
+pretty_print(html(r"<b>R<sup>T</sup> &times; R =</b>"))
+show(RtR)
+
+detR = R.det().simplify_full()
+pretty_print(html(r"<b>det(R) = %s</b> → Rotasi SO<sub>2</sub>" % latex(detR)))
+
+# === 2. PELESTARIAN PANJANG ===
+pretty_print(html("<h3>2. Pelestarian Panjang</h3>"))
+
+v = vector(QQ, [1, 0])   # vektor rasional -> norm tidak perlu simplify
+Rv = R * v               # hasil rotasi jadi simbolik
+
+pretty_print(html(r"<b>Vektor asal v:</b>"))
+show(v.column())
+
+pretty_print(html(r"<b>Vektor hasil rotasi R·v:</b>"))
+show(Rv.column())
+
+# FIX: jangan simplify_full() untuk Integer
+norm_v = v.norm()  # untuk QQ cukup .norm()
+# Untuk SR, pakai .norm() lalu simplify
+norm_Rv = Rv.norm().simplify_full()
+
+pretty_print(html(r"||v|| = %s" % latex(norm_v)))
+pretty_print(html(r"||R·v|| = %s" % latex(norm_Rv)))
+pretty_print(html(r"<b style='color:green'>✓ ||Rv|| = ||v|| = 1 → R ∈ O<sub>2</sub>(ℝ)</b>"))
+
+# Cek tambahan eksplisit
+pretty_print(html(r"<b>Check: cos²+sin² =</b> %s" % latex((cos(theta)^2 + sin(theta)^2).simplify_full())))
 </textarea></div>
 <script> sagecell.makeSagecell({inputLocation: "#orthogonal_real", evalButtonText: "Cek Ortogonal"})</script>
 </div>
