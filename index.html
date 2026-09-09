@@ -14982,8 +14982,7 @@ dengan metrik <strong>PSNR</strong> dan <strong>SSIM</strong>.</p>
       border-radius: 10px;
       background-color: rgba(41, 128, 185, 0.08);
   ">
-Misalkan gambar digital berbentuk matriks RGB berukuran $m\times n \times 3$, dengan masing-masing 
-kanal (R, G, B) sebagai representasi fungsi dua variabel diskret. Kompresi dilakukan dengan mentransformasikan matriks tersebut ke dalam basis yang lebih efisien.
+Misalkan sebuah gambar digital berwarna direpresentasikan sebagai tensor RGB berukuran $m\times n \times 3$, yang secara praktis dapat diartikan sebagai tiga lapis matriks berukuran $m\times n$ untuk masing-masing kanal warna Merah, Hijau, dan Biru. Pada setiap lapisan tersebut, nilai intensitas warna merupakan fungsi dari dua variabel diskrit, yaitu posisi baris dan kolom piksel. Proses kompresi dilakukan dengan mentransformasi data dari ketiga lapisan matriks ini ke dalam basis representasi alternatif (misalnya basis frekuensi atau wavelet), yang bertujuan untuk memusatkan energi sinyal visual ke dalam sejumlah kecil koefisien dominan, sehingga koefisien-koefisien yang bernilai sangat kecil dapat diabaikan untuk mencapai efisiensi penyimpanan.  
 </p>
 <hr class="garis-elegan">
 <h4><b>2.1 Transformasi dan Proyeksi</b></h4>
