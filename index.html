@@ -14982,7 +14982,7 @@ dengan metrik <strong>PSNR</strong> dan <strong>SSIM</strong>.</p>
       border-radius: 10px;
       background-color: rgba(41, 128, 185, 0.08);
   ">
-Misalkan gambar digital berbentuk matriks RGB berukuran $m\times n \timse 3$, dengan masing-masing 
+Misalkan gambar digital berbentuk matriks RGB berukuran $m\times n \times 3$, dengan masing-masing 
 kanal (R, G, B) sebagai representasi fungsi dua variabel diskret. Kompresi dilakukan dengan mentransformasikan matriks tersebut ke dalam basis yang lebih efisien.
 </p>
 <hr class="garis-elegan">
@@ -24528,6 +24528,450 @@ analyze_state(psi3, "Masalah 3 (Entangled – non-diagonal)")
 
 </div> <!-- penutup subsection-content -->
 </div> <!-- penutup subsection 4.3 -->
+
+<!-- ================= SECTION BARU 4.4 ================= -->
+<div class="subsection">
+  <div class="subsection-header">
+    <h3>4.4. Contoh-contoh Real Problem Lanjut <span class="dropdown-icon">▼</span></h3>
+  </div>
+  <div class="subsection-content">
+
+    <!-- ---------------------------------------------- -->
+    <div class="example-container">
+      <div class="example-header" onclick="this.parentElement.classList.toggle('active')">
+        <span><b>4.4.1. Tensor Rank dan Dekomposisi CP (CANDECOMP/PARAFAC)</b></span>
+        <span class="example-arrow">▼</span>
+      </div>
+      <div class="example-box">
+
+        <p align="justify">
+          Dalam analisis data multidimensi, <b>dekomposisi CP</b> (CANDECOMP/PARAFAC) memfaktorkan sebuah tensor menjadi sejumlah <em>rank-1</em> tensor (tensor murni).
+          Untuk tensor orde 3 \(\mathcal{T} \in \mathbb{R}^{I \times J \times K}\), dekomposisi CP dengan rank \(R\) adalah:
+          \[
+          \mathcal{T} \approx \sum_{r=1}^{R} \mathbf{a}_r \circ \mathbf{b}_r \circ \mathbf{c}_r,
+          \]
+          di mana \(\circ\) adalah produk vektor luar (outer product) dan \(\mathbf{a}_r \in \mathbb{R}^I\), \(\mathbf{b}_r \in \mathbb{R}^J\), \(\mathbf{c}_r \in \mathbb{R}^K\).
+        </p>
+
+        <p align="justify">
+          <b>Masalah:</b> Diberikan tensor sintetik berukuran \(3 \times 4 \times 2\) yang merupakan penjumlahan dari 2 rank-1 tensor. 
+          Tentukan rank tensor tersebut dengan menghitung dekomposisi CP menggunakan algoritma ALS (Alternating Least Squares) yang tersedia di SageMath (via paket <code>tensor</code> atau kita bisa mengimplementasikan secara sederhana). 
+          Karena SageMath tidak memiliki dekomposisi CP bawaan, kita akan menggunakan pendekatan SVD pada matriks <em>unfolding</em> untuk memperkirakan rank.
+        </p>
+
+        <p align="justify">
+          <b>Pembahasan:</b> Salah satu cara untuk menentukan rank tensor adalah dengan melihat rank dari <em>matriks unfolding</em> (mode-1, mode-2, mode-3). 
+          Untuk tensor rank \(R\), setiap <em>unfolding</em> memiliki rank \(\le R\). 
+          Kita dapat menghitung nilai singular dari setiap unfolding dan mengamati jumlah nilai singular yang signifikan.
+        </p>
+
+        <div class="sage-cell-content">
+          <script type="text/x-sage">
+# ====================================================
+# Contoh 4.4.1: Tensor Rank via Unfolding - VERSI INTERAKTIF & SIMBOLIK
+# ====================================================
+from sage.all import *
+
+@interact
+def tensor_rank_interactive(
+    rank = slider([1, 2, 3], default=2, label="Rank Tensor"),
+    show_unfolding = checkbox(True, label="Tampilkan Matriks Unfolding"),
+    show_svd = checkbox(True, label="Tampilkan Analisis Rank Simbolik")
+):
+    print("=== 4.4.1: Tensor Rank dan Unfolding (Simbolik) ===\n")
+
+    # 1. DEFINISI SIMBOLIK (QQ)
+    a1 = vector(QQ, [1, 2, 3])
+    b1 = vector(QQ, [1/2, 1, 3/2, 2])
+    c1 = vector(QQ, [1, -1])
+
+    a2 = vector(QQ, [2, 1, 0])
+    b2 = vector(QQ, [1, 0, -1, 1])
+    c2 = vector(QQ, [0, 1])
+
+    a3 = vector(QQ, [0, 1, 1])
+    b3 = vector(QQ, [1, 1, 0, -1])
+    c3 = vector(QQ, [1, 1])
+
+    komponen = [(a1, b1, c1), (a2, b2, c2), (a3, b3, c3)]
+
+    # Tampilkan definisi simbolik
+    show(LatexExpr(r"\text{Tensor dibangun sebagai: } \mathcal{T} = \sum_{r=1}^{R} a_r \circ b_r \circ c_r"))
+    for r in range(rank):
+        a, b, c = komponen[r]
+        show(LatexExpr(r"a_%s = %s,\quad b_%s = %s,\quad c_%s = %s" % (r+1, latex(a), r+1, latex(b), r+1, latex(c))))
+
+    # 2. BANGUN TENSOR (QQ)
+    T = [[[0 for k in range(2)] for j in range(4)] for i in range(3)]
+    for i in range(3):
+        for j in range(4):
+            for k in range(2):
+                s = 0
+                for r in range(rank):
+                    a, b, c = komponen[r]
+                    s += a[i]*b[j]*c[k]
+                T[i][j][k] = s
+
+    # 3. FUNGSI UNFOLDING
+    def get_unfoldings(T):
+        M1 = matrix(QQ, 3, 8)
+        for i in range(3):
+            for j in range(4):
+                for k in range(2):
+                    M1[i, j*2 + k] = T[i][j][k]
+
+        M2 = matrix(QQ, 4, 6)
+        for j in range(4):
+            for i in range(3):
+                for k in range(2):
+                    M2[j, i*2 + k] = T[i][j][k]
+
+        M3 = matrix(QQ, 2, 12)
+        for k in range(2):
+            for i in range(3):
+                for j in range(4):
+                    M3[k, i*4 + j] = T[i][j][k]
+        return M1, M2, M3
+
+    M1, M2, M3 = get_unfoldings(T)
+
+    # 4. ANALISIS RANK & SVD
+    for idx, M in enumerate([M1, M2, M3], 1):
+        # Gunakan html('<hr>') untuk pemisah garis pembatas yang rapi
+        html('<hr style="border-top: 1px solid #ccc; margin: 15px 0;">')
+        show(LatexExpr(r"\text{Mode-%s Unfolding: } %s \times %s" % (idx, M.nrows(), M.ncols())))
+        
+        if show_unfolding:
+            show(M)
+
+        if show_svd:
+            r = M.rank()
+            G = M * M.transpose() # Gram Matrix (QQ)
+            
+            show(LatexExpr(r"\text{rank}(T_{(%s)}) = %s" % (idx, r)))
+            show(LatexExpr(r"T_{(%s)} T_{(%s)}^T = %s" % (idx, idx, latex(G))))
+            
+            try:
+                G_sym = G.change_ring(SR)
+                ev = G_sym.eigenvalues()
+                show(LatexExpr(r"\text{Eigenvalues } T_{(%s)}T_{(%s)}^T = %s" % (idx, idx, latex(ev))))
+                
+                sv = [sqrt(e) for e in ev if e > 0]
+                show(LatexExpr(r"\sigma_{%s} = %s" % (idx, latex(sv))))
+            except Exception:
+                M_rdf = matrix(RDF, M)
+                S = M_rdf.singular_values()
+                show(LatexExpr(r"\sigma_{%s} \approx %s \text{ (numerik fallback)}" % (idx, [round(float(s), 4) for s in S])))
+
+    html('<hr style="border-top: 2px solid #000; margin: 20px 0;">')
+    show(LatexExpr(r"\textbf{Kesimpulan: Multilinear rank } = (%s, %s, %s) \implies \text{ CP-rank } \ge %s" % (
+        M1.rank(), M2.rank(), M3.rank(), max(M1.rank(), M2.rank(), M3.rank())
+    )))
+          </script>
+        </div>
+
+        <p align="justify">
+          <b>Hasil:</b> Dari SVD setiap unfolding, terlihat bahwa hanya ada 2 nilai singular yang signifikan (≫ 0), sedangkan sisanya mendekati nol. 
+          Ini menunjukkan bahwa tensor tersebut memiliki <b>rank = 2</b>, sesuai dengan konstruksi. 
+          Metode ini adalah pendekatan praktis untuk memperkirakan rank tensor ketika dekomposisi CP eksplisit tidak tersedia.
+        </p>
+      </div>
+    </div>
+
+    <!-- ---------------------------------------------- -->
+    <div class="example-container">
+      <div class="example-header" onclick="this.parentElement.classList.toggle('active')">
+        <span><b>4.4.2. Persamaan Sylvester dan Vektorisasi dengan Kronecker Product</b></span>
+        <span class="example-arrow">▼</span>
+      </div>
+      <div class="example-box">
+
+        <p align="justify">
+          Persamaan Sylvester \(AX + XB = C\) muncul dalam teori kontrol, stabilisasi, dan pemrosesan sinyal.
+          Dengan menggunakan vektorisasi dan Kronecker product, persamaan ini dapat diubah menjadi sistem linear:
+          \[
+          (I \otimes A + B^T \otimes I)\,\operatorname{vec}(X) = \operatorname{vec}(C).
+          \]
+        </p>
+
+        <p align="justify">
+          <b>Masalah:</b> Selesaikan persamaan Sylvester untuk
+          \[
+          A = \begin{pmatrix}1 & 2 \\ 3 & 4\end{pmatrix},\quad
+          B = \begin{pmatrix}5 & 6 \\ 7 & 8\end{pmatrix},\quad
+          C = \begin{pmatrix}9 & 10 \\ 11 & 12\end{pmatrix}.
+          \]
+          Tentukan matriks \(X\) dan verifikasi solusinya.
+        </p>
+
+        <p align="justify">
+          <b>Pembahasan:</b> Kita bentuk matriks koefisien \(M = I_2 \otimes A + B^T \otimes I_2\) (ukuran 4×4), lalu selesaikan \(M\,\operatorname{vec}(X) = \operatorname{vec}(C)\). 
+          Setelah mendapat \(\operatorname{vec}(X)\), kita <em>reshape</em> kembali menjadi matriks 2×2.
+        </p>
+
+        <div class="sage-cell-content">
+          <script type="text/x-sage">
+# ====================================================
+# Contoh 4.4.2: Persamaan Sylvester
+# ====================================================
+print("=== 4.4.2: Persamaan Sylvester dengan Kronecker ===")
+
+A = matrix(RR, [[1,2],[3,4]])
+B = matrix(RR, [[5,6],[7,8]])
+C = matrix(RR, [[9,10],[11,12]])
+
+I = identity_matrix(RR, 2)
+# M = I ⊗ A + B^T ⊗ I
+M = I.tensor_product(A) + B.transpose().tensor_product(I)
+print("Matriks koefisien M =")
+show(M)
+
+# Vektorisasi C
+vecC = matrix(RR, 4, 1, [C[0,0], C[1,0], C[0,1], C[1,1]])  # kolom demi kolom
+# Selesaikan sistem
+sol = M.solve_right(vecC)
+print("Solusi vec(X) =", sol.transpose())
+
+# Reshape ke matriks 2x2 (kolom demi kolom)
+X = matrix(RR, 2, 2, [sol[0,0], sol[2,0], sol[1,0], sol[3,0]])
+print("X =")
+show(X)
+
+# Verifikasi
+AX = A*X
+XB = X*B
+AX_plus_XB = AX + XB
+print("A X + X B =")
+show(AX_plus_XB)
+print("C =")
+show(C)
+print("Selisih (norm Frobenius):", (AX_plus_XB - C).norm('fro'))
+          </script>
+        </div>
+
+        <p align="justify">
+          <b>Hasil:</b> Solusi \(X\) yang diperoleh memenuhi persamaan dengan galat yang sangat kecil (orde \(10^{-15}\)), yang menegaskan kebenaran metode vektorisasi. 
+          Pendekatan ini sangat berguna untuk menyelesaikan persamaan matriks linear secara sistematis.
+        </p>
+      </div>
+    </div>
+
+    <!-- ---------------------------------------------- -->
+    <div class="example-container">
+      <div class="example-header" onclick="this.parentElement.classList.toggle('active')">
+        <span><b>4.4.3. Tensor Faraday dan Invarians Lorentz</b></span>
+        <span class="example-arrow">▼</span>
+      </div>
+      <div class="example-box">
+
+        <p align="justify">
+          Dalam elektrodinamika relativistik, tensor medan elektromagnetik \(F_{\mu\nu}\) adalah 2-form alternating (antisimetris) pada ruang Minkowski. 
+          Dua invarian Lorentz utama adalah:
+          \[
+          F_{\mu\nu}F^{\mu\nu} = 2(|\mathbf{B}|^2 - |\mathbf{E}|^2/c^2),\quad
+          \epsilon^{\mu\nu\rho\sigma}F_{\mu\nu}F_{\rho\sigma} = -8(\mathbf{E}\cdot\mathbf{B}/c).
+          \]
+        </p>
+
+        <p align="justify">
+          <b>Masalah:</b> Diberikan medan listrik \(\mathbf{E} = (E_x, E_y, E_z) = (1, 0, 0)\) dan medan magnet \(\mathbf{B} = (0, 1, 0)\) (dengan \(c=1\)). 
+          Bentuk tensor Faraday \(F_{\mu\nu}\) dan hitung kedua invarian tersebut.
+        </p>
+
+        <p align="justify">
+          <b>Pembahasan:</b> Tensor Faraday (dengan konvensi \(F^{0i} = -E_i\), \(F^{ij} = -\epsilon^{ijk} B_k\)) adalah:
+          \[
+          F = \begin{pmatrix}
+          0 & -E_x & -E_y & -E_z \\
+          E_x & 0 & -B_z & B_y \\
+          E_y & B_z & 0 & -B_x \\
+          E_z & -B_y & B_x & 0
+          \end{pmatrix}.
+          \]
+          Dengan \(E=(1,0,0), B=(0,1,0)\):
+          \[
+          F = \begin{pmatrix}
+          0 & -1 & 0 & 0 \\
+          1 & 0 & 0 & 0 \\
+          0 & 0 & 0 & -1 \\
+          0 & 0 & 1 & 0
+          \end{pmatrix}.
+          \]
+          Kemudian hitung \(F_{\mu\nu}F^{\mu\nu}\) dan \(\epsilon^{\mu\nu\rho\sigma}F_{\mu\nu}F_{\rho\sigma}\).
+        </p>
+
+        <div class="sage-cell-content">
+          <script type="text/x-sage">
+# ====================================================
+# Contoh 4.4.3: Tensor Faraday dan Invarian
+# ====================================================
+print("=== 4.4.3: Tensor Faraday dan Invarian Lorentz ===")
+
+# Metrik Minkowski (+,---) dengan c=1
+eta = diag_matrix([1, -1, -1, -1])
+eta_inv = diag_matrix([1, -1, -1, -1])  # sama karena diagonal
+
+E = vector([1, 0, 0])
+B = vector([0, 1, 0])
+
+# Bentuk tensor Faraday F (indeks 0..3)
+F = matrix(RR, 4, 4, [
+    [0, -E[0], -E[1], -E[2]],
+    [E[0], 0, -B[2], B[1]],
+    [E[1], B[2], 0, -B[0]],
+    [E[2], -B[1], B[0], 0]
+])
+print("F =")
+show(F)
+
+# Hitung F^μν = eta^{μρ} eta^{νσ} F_{ρσ}
+# Karena eta diagonal, kita dapat mengalikan baris dan kolom dengan faktor ±1
+F_upper = matrix(RR, 4, 4)
+for mu in range(4):
+    for nu in range(4):
+        F_upper[mu, nu] = eta_inv[mu, mu] * eta_inv[nu, nu] * F[mu, nu]
+
+print("F^{μν} =")
+show(F_upper)
+
+# Invarian pertama: F_{μν} F^{μν} (trace of F * F_upper)
+inv1 = (F * F_upper).trace()
+print("F_{μν} F^{μν} =", inv1)
+print("Secara teori: 2(|B|^2 - |E|^2) =", 2*(B.norm()^2 - E.norm()^2))
+
+# Invarian kedua: epsilon^{μνρσ} F_{μν} F_{ρσ}
+# Kita gunakan rumus: -8 E·B (dengan c=1)
+inv2 = -8 * (E.dot_product(B))
+print("epsilon^{μνρσ} F_{μν} F_{ρσ} =", inv2)
+
+# Verifikasi dengan epsilon tensor (hanya untuk cek)
+# Definisikan epsilon (Levi-Civita) untuk 4D
+eps = [[[[0 for _ in range(4)] for _ in range(4)] for _ in range(4)] for _ in range(4)]
+# Isi epsilon untuk permutasi genap (0123, 0132, 0213, ...) - kita sederhanakan dengan loop
+# Kita hanya butuh epsilon^{μνρσ} F_{μν} F_{ρσ}
+# Kita bisa hitung manual: sum over all indices
+total = 0
+def epsilon_sign(mu,nu,rho,sigma):
+    # permutasi (0,1,2,3) -> tanda
+    p = [mu,nu,rho,sigma]
+    # jika ada duplikat -> 0
+    if len(set(p)) < 4:
+        return 0
+    # hitung inversi
+    inv = 0
+    for i in range(4):
+        for j in range(i+1,4):
+            if p[i] > p[j]:
+                inv += 1
+    return (-1)**inv
+# Sum over all indices
+for mu in range(4):
+    for nu in range(4):
+        for rho in range(4):
+            for sigma in range(4):
+                total += epsilon_sign(mu,nu,rho,sigma) * F[mu,nu] * F[rho,sigma]
+print("Dari definisi epsilon: sum =", total)
+print("Nilai ini seharusnya sama dengan -8 E·B =", -8*E.dot_product(B))
+          </script>
+        </div>
+
+        <p align="justify">
+          <b>Hasil:</b> Kedua invarian terhitung: \(F_{\mu\nu}F^{\mu\nu} = 2(1 - 1) = 0\) dan \(\epsilon^{\mu\nu\rho\sigma}F_{\mu\nu}F_{\rho\sigma} = -8(0) = 0\). 
+          Ini konsisten dengan medan listrik dan magnet yang saling tegak lurus dan sama besar (gelombang elektromagnetik vakum).
+        </p>
+      </div>
+    </div>
+
+    <!-- ---------------------------------------------- -->
+    <div class="example-container">
+      <div class="example-header" onclick="this.parentElement.classList.toggle('active')">
+        <span><b>4.4.4. Kernel Simetris untuk Support Vector Machine (SVM)</b></span>
+        <span class="example-arrow">▼</span>
+      </div>
+      <div class="example-box">
+
+        <p align="justify">
+          Dalam pembelajaran mesin, fungsi kernel \(K(x,y)\) harus simetris dan positif semidefinit. 
+          Kernel polinomial derajat \(d\): \(K(x,y) = (x\cdot y + 1)^d\) adalah simetris.
+        </p>
+
+        <p align="justify">
+          <b>Masalah:</b> Diberikan data titik \(x_1 = (1,2), x_2 = (3,4), x_3 = (5,6)\). 
+          Hitung matriks kernel polinomial derajat 2, \(K_{ij} = (x_i \cdot x_j + 1)^2\). 
+          Periksa simetri dan positif semidefinit (nilai eigen ≥ 0).
+        </p>
+
+        <p align="justify">
+          <b>Pembahasan:</b> Kernel polinomial derajat 2 secara otomatis simetris karena hasil kali titik bersifat komutatif. 
+          Kita akan menghitung matriks kernel dan memeriksa nilai eigennya.
+        </p>
+
+        <div class="sage-cell-content">
+          <script type="text/x-sage">
+# ====================================================
+# Contoh 4.4.4: Kernel Simetris untuk SVM
+# ====================================================
+print("=== 4.4.4: Kernel Polinomial Simetris ===")
+
+data = matrix(RR, [[1,2],[3,4],[5,6]])  # 3 titik, masing-masing 2D
+n = data.nrows()
+
+# Fungsi kernel polinomial derajat 2
+def kernel(x,y):
+    return (x.dot_product(y) + 1)^2
+
+# Matriks kernel
+K = matrix(RR, n, n)
+for i in range(n):
+    for j in range(n):
+        K[i,j] = kernel(data.row(i), data.row(j))
+
+print("Matriks kernel K =")
+show(K)
+
+# Periksa simetri
+print("K - K^T =")
+show(K - K.transpose())  # harus nol
+
+# Nilai eigen
+eigvals = K.eigenvalues()
+print("Nilai eigen K:", [round(ev, 4) for ev in eigvals])
+
+# Periksa positif semidefinit
+if all(ev >= -1e-10 for ev in eigvals):
+    print("K adalah positif semidefinit (semua nilai eigen ≥ 0).")
+else:
+    print("K tidak positif semidefinit.")
+          </script>
+        </div>
+
+        <p align="justify">
+          <b>Hasil:</b> Matriks kernel simetris (selisih \(K-K^T\) ≈ 0) dan semua nilai eigen non-negatif, sehingga memenuhi syarat sebagai kernel yang valid.
+        </p>
+      </div>
+    </div>
+
+    <hr class="garis-elegan">
+
+    <!-- Ringkasan penutup -->
+    <div style="border-left: 6px solid #8e44ad; background: #f4ecf7; padding: 12px 18px; border-radius: 10px; margin-top: 15px;">
+      <h4 style="margin: 0 0 8px 0; color: #6c3483;">📌 Intisari Section 4.4</h4>
+      <p align="justify">
+        Empat contoh di atas menunjukkan bagaimana alat aljabar multilinear (tensor, Kronecker product, alternating form, kernel) diterapkan dalam berbagai bidang:
+        <ul>
+          <li><b>Tensor rank</b> melalui SVD unfolding untuk analisis data multidimensi.</li>
+          <li><b>Persamaan Sylvester</b> diselesaikan dengan vektorisasi dan Kronecker product, penting dalam kontrol.</li>
+          <li><b>Tensor Faraday</b> dan invariants Lorentz dalam fisika.</li>
+          <li><b>Kernel simetris</b> untuk machine learning, memastikan validitas metode kernel.</li>
+        </ul>
+        Semua hasil diverifikasi secara numerik menggunakan SageMath.
+      </p>
+    </div>
+
+  </div> <!-- penutup subsection-content -->
+</div> <!-- penutup subsection 4.4 -->
+<!-- ================= AKHIR SECTION 4.4 ================= -->
+
 
 </section>
 
