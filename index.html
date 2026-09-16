@@ -753,6 +753,75 @@ function toggleDefinisi(header) {
 .definition-container.active .arrow {
     transform: rotate(180deg);
 }
+
+
+
+/* ===== Blok Narasi & Latihan ===== */
+.narrative-section,
+.exercise-section {
+  margin: 24px 0;
+}
+
+.narrative-container,
+.exercise-container {
+  border: 1px solid #d0d7de;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+
+.narrative-header,
+.exercise-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  background: #f6f8fa;
+  border-bottom: 1px solid #d0d7de;
+  font-weight: 600;
+  user-select: none;
+}
+
+.narrative-header:hover,
+.exercise-header:hover {
+  background: #eef2f6;
+}
+
+.narrative-box,
+.exercise-box {
+  display: none;
+  padding: 16px;
+  text-align: justify;
+}
+
+.narrative-container.active .narrative-box,
+.exercise-container.active .exercise-box {
+  display: block;
+}
+
+.narrative-header .arrow,
+.exercise-header .arrow {
+  transition: transform .25s ease;
+}
+
+.narrative-container.active .arrow,
+.exercise-container.active .arrow {
+  transform: rotate(180deg);
+}
+
+/* Opsional untuk daftar soal */
+.exercise-box ol {
+  padding-left: 1.4rem;
+}
+
+.exercise-box li {
+  margin-bottom: 1rem;
+}
+
+
 </style>
 
 <script>
@@ -13832,6 +13901,493 @@ $$
 </ul>
 </div>
 </div>
+
+
+<section class="narrative-section">
+  <div class="narrative-container">
+    <div class="narrative-header" onclick="this.parentElement.classList.toggle('active')">
+      <span><b>Catatan: Memahami Proyeksi Secara Lebih Utuh</b></span>
+      <span class="arrow">▼</span>
+    </div>
+
+    <div class="narrative-box">
+      <p align="justify">
+        Definisi proyeksi bertumpu pada satu gagasan sederhana namun sangat kuat, yaitu
+        <b>idempoten</b>. Jika $L$ adalah proyeksi, maka $L^2 = L$. Artinya, setelah suatu vektor
+        diproyeksikan sekali, memproyeksikannya lagi tidak akan mengubah hasilnya. Dalam bahasa
+        geometris, hasil proyeksi sudah “berada di tempat tujuan”, sehingga proyeksi berikutnya
+        tidak lagi memindahkannya.
+      </p>
+
+      <p align="justify">
+        Teorema $V = L[V] \oplus \ker L$ memberi gambaran struktural yang sangat penting. Setiap
+        vektor $\mathbf{v} \in V$ dapat ditulis secara unik sebagai jumlah dari:
+      </p>
+
+      $$
+      \mathbf{v} = \underbrace{L(\mathbf{v})}_{\in L[V]} + \underbrace{(\mathbf{v} - L(\mathbf{v}))}_{\in \ker L}.
+      $$
+
+      <p align="justify">
+        Komponen pertama adalah “bayangan” atau hasil proyeksi, sedangkan komponen kedua adalah
+        bagian yang “dihilangkan” oleh proyeksi. Karena $L[V] \cap \ker L = \{\mathbf{0}\}$,
+        dekomposisi ini bersifat langsung.
+      </p>
+
+      <p align="justify">
+        Kebalikannya juga benar dan sering dipakai: jika $V = U \oplus W$, maka kita dapat
+        mendefinisikan operator $L$ oleh
+      </p>
+
+      $$
+      L(\mathbf{u} + \mathbf{w}) = \mathbf{u}, \qquad \mathbf{u} \in U,\ \mathbf{w} \in W.
+      $$
+
+      <p align="justify">
+        Operator ini linear, nontrivial selama $U \neq \{\mathbf{0}\}$ dan $W \neq V$, serta
+        memenuhi $L^2 = L$. Jadi proyeksi ditentukan sepenuhnya oleh pasangan
+        $(L[V], \ker L)$, yaitu oleh image dan kernelnya.
+      </p>
+
+      <p align="justify">
+        Dalam dimensi berhingga, jika basis dipilih sesuai dekomposisi
+        $V = L[V] \oplus \ker L$, maka matriks proyeksi berbentuk blok diagonal
+      </p>
+
+      $$
+      [L] =
+      \begin{pmatrix}
+      I & 0 \\
+      0 & 0
+      \end{pmatrix}.
+      $$
+
+      <p align="justify">
+        Karena itu, nilai eigen proyeksi hanya $0$ dan $1$. Vektor eigen dengan nilai eigen $1$
+        adalah vektor tetap, yaitu anggota $L[V]$, sedangkan vektor eigen dengan nilai eigen $0$
+        adalah anggota $\ker L$. Selain itu, untuk ruang berdimensi berhingga berlaku
+      </p>
+
+      $$
+      \operatorname{rank}(L) = \dim L[V] = \operatorname{tr}(L).
+      $$
+
+      <p align="justify">
+        Perlu dibedakan antara <b>proyeksi ortogonal</b> dan <b>proyeksi miring</b>. Pada proyeksi
+        ortogonal, kernel selalu tegak lurus terhadap image. Pada proyeksi miring, kernel tidak
+        harus tegak lurus terhadap image. Contoh $L(a,b) = (a-b,0)$ di $\mathbb{R}^2$ adalah
+        proyeksi miring: image-nya adalah sumbu-$x$, tetapi kernel-nya adalah garis
+        $\operatorname{Span}\{(1,1)\}$, yang tidak tegak lurus terhadap sumbu-$x$.
+      </p>
+
+      <p align="justify">
+        Dengan pemahaman ini, proyeksi dapat dipandang sebagai cara memilih satu subruang sebagai
+        “informasi yang dipertahankan” dan subruang komplemennya sebagai “informasi yang
+        dihilangkan”. Cara pandang inilah yang membuat proyeksi sangat penting dalam aljabar
+        linear, geometri, statistika, grafika komputer, pemrosesan sinyal, dan metode kuadrat
+        terkecil.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="exercise-section">
+  <div class="exercise-container">
+    <div class="exercise-header" onclick="this.parentElement.classList.toggle('active')">
+      <span><b>Latihan 2.7.17–2.7.26: Proyeksi (Soal &amp; Pembahasan)</b></span>
+      <span class="arrow">▼</span>
+    </div>
+
+    <div class="exercise-box">
+      <ol>
+        <li>
+          <p><b>Soal 1.</b> Diketahui $L : \mathbb{R}^2 \to \mathbb{R}^2$ dengan
+          $L(x,y) = (x,0)$. Buktikan bahwa $L$ adalah proyeksi, lalu tentukan
+          $L[\mathbb{R}^2]$ dan $\ker L$.</p>
+
+          <p><b>Pembahasan.</b> Perhatikan bahwa</p>
+          $$
+          L^2(x,y) = L(L(x,y)) = L(x,0) = (x,0) = L(x,y).
+          $$
+          <p>Jadi $L^2 = L$, sehingga $L$ adalah proyeksi. Karena $L$ tidak memetakan semua
+          vektor ke nol, operator ini nontrivial.</p>
+          $$
+          L[\mathbb{R}^2] = \{(x,0) : x \in \mathbb{R}\} = \operatorname{Span}\{(1,0)\}.
+          $$
+          $$
+          \ker L = \{(x,y) : (x,0) = (0,0)\} = \{(0,y) : y \in \mathbb{R}\}
+          = \operatorname{Span}\{(0,1)\}.
+          $$
+          <p>Dengan demikian,</p>
+          $$
+          \mathbb{R}^2 = \operatorname{Span}\{(1,0)\} \oplus \operatorname{Span}\{(0,1)\}.
+          $$
+        </li>
+
+        <li>
+          <p><b>Soal 2.</b> Diketahui matriks</p>
+          $$
+          A = \begin{pmatrix} 1 & 2 \\ 0 & 0 \end{pmatrix}.
+          $$
+          <p>Tunjukkan bahwa $A$ adalah matriks proyeksi. Tentukan image dan kernelnya.</p>
+
+          <p><b>Pembahasan.</b> Hitung</p>
+          $$
+          A^2 =
+          \begin{pmatrix} 1 & 2 \\ 0 & 0 \end{pmatrix}
+          \begin{pmatrix} 1 & 2 \\ 0 & 0 \end{pmatrix}
+          =
+          \begin{pmatrix} 1 & 2 \\ 0 & 0 \end{pmatrix}
+          = A.
+          $$
+          <p>Jadi $A$ adalah matriks proyeksi. Untuk $(x,y) \in \mathbb{R}^2$,</p>
+          $$
+          A\begin{pmatrix} x \\ y \end{pmatrix}
+          =
+          \begin{pmatrix} x + 2y \\ 0 \end{pmatrix}.
+          $$
+          <p>Maka</p>
+          $$
+          \operatorname{Im}(A) = \operatorname{Span}\{(1,0)\}.
+          $$
+          <p>Kernelnya diberikan oleh $x + 2y = 0$, sehingga $x = -2y$. Jadi</p>
+          $$
+          \ker A = \operatorname{Span}\{(-2,1)\}.
+          $$
+          <p>Dekomposisinya:</p>
+          $$
+          \mathbb{R}^2 = \operatorname{Span}\{(1,0)\} \oplus \operatorname{Span}\{(-2,1)\}.
+          $$
+        </li>
+
+        <li>
+          <p><b>Soal 3.</b> Diketahui $L : \mathbb{R}^3 \to \mathbb{R}^3$ dengan
+          $L(x,y,z) = (x,0,z)$. Buktikan $L$ proyeksi, lalu tentukan
+          $L[\mathbb{R}^3]$ dan $\ker L$.</p>
+
+          <p><b>Pembahasan.</b></p>
+          $$
+          L^2(x,y,z) = L(L(x,y,z)) = L(x,0,z) = (x,0,z) = L(x,y,z).
+          $$
+          <p>Jadi $L$ adalah proyeksi. Image-nya adalah bidang $xz$:</p>
+          $$
+          L[\mathbb{R}^3] = \{(x,0,z) : x,z \in \mathbb{R}\}
+          = \operatorname{Span}\{(1,0,0),(0,0,1)\}.
+          $$
+          <p>Kernelnya adalah sumbu-$y$:</p>
+          $$
+          \ker L = \{(0,y,0) : y \in \mathbb{R}\}
+          = \operatorname{Span}\{(0,1,0)\}.
+          $$
+          <p>Jadi</p>
+          $$
+          \mathbb{R}^3 = \operatorname{Span}\{(1,0,0),(0,0,1)\}
+          \oplus \operatorname{Span}\{(0,1,0)\}.
+          $$
+        </li>
+
+        <li>
+          <p><b>Soal 4.</b> Tentukan operator proyeksi $L : \mathbb{R}^2 \to \mathbb{R}^2$
+          yang memiliki</p>
+          $$
+          L[\mathbb{R}^2] = \operatorname{Span}\{(1,1)\},
+          \qquad
+          \ker L = \operatorname{Span}\{(1,-1)\}.
+          $$
+
+          <p><b>Pembahasan.</b> Kita ingin $L$ mempertahankan komponen pada arah $(1,1)$
+          dan menghilangkan komponen pada arah $(1,-1)$. Untuk $(x,y)$, tulis</p>
+          $$
+          (x,y) = a(1,1) + b(1,-1).
+          $$
+          <p>Maka</p>
+          $$
+          x = a + b, \qquad y = a - b.
+          $$
+          <p>Dengan menjumlahkan dan mengurangkan diperoleh</p>
+          $$
+          a = \frac{x+y}{2}, \qquad b = \frac{x-y}{2}.
+          $$
+          <p>Karena proyeksi mempertahankan komponen image, maka</p>
+          $$
+          L(x,y) = a(1,1)
+          = \left(\frac{x+y}{2}, \frac{x+y}{2}\right).
+          $$
+          <p>Dalam bentuk matriks:</p>
+          $$
+          [L] =
+          \begin{pmatrix}
+          \frac12 & \frac12 \\[4pt]
+          \frac12 & \frac12
+          \end{pmatrix}.
+          $$
+          <p>Perhatikan bahwa $L(1,1) = (1,1)$ dan $L(1,-1) = (0,0)$.</p>
+        </li>
+
+        <li>
+          <p><b>Soal 5.</b> Jika $L$ adalah proyeksi, buktikan bahwa $I - L$ juga proyeksi.
+          Tentukan $L[V]$ dan $\ker(I-L)$ serta hubungannya dengan $\ker L$.</p>
+
+          <p><b>Pembahasan.</b> Karena $L^2 = L$,</p>
+          $$
+          (I-L)^2 = I - 2L + L^2 = I - 2L + L = I - L.
+          $$
+          <p>Jadi $I-L$ adalah proyeksi. Sekarang,</p>
+          $$
+          \operatorname{Im}(I-L) = \ker L.
+          $$
+          <p>Buktinya: jika $v = (I-L)u$, maka</p>
+          $$
+          L(v) = L(u - Lu) = Lu - L^2u = Lu - Lu = 0,
+          $$
+          <p>sehingga $v \in \ker L$. Sebaliknya, jika $w \in \ker L$, maka</p>
+          $$
+          w = w - 0 = w - Lw = (I-L)w,
+          $$
+          <p>sehingga $w \in \operatorname{Im}(I-L)$. Selanjutnya,</p>
+          $$
+          \ker(I-L) = \operatorname{Im}L.
+          $$
+          <p>Jika $(I-L)v = 0$, maka $v = Lv$, jadi $v \in \operatorname{Im}L$.
+          Sebaliknya, jika $v \in \operatorname{Im}L$, maka $v = Lu$ untuk suatu $u$, sehingga</p>
+          $$
+          (I-L)v = v - Lv = Lu - L^2u = Lu - Lu = 0.
+          $$
+          <p>Jadi $I-L$ adalah proyeksi ke $\ker L$ sepanjang $L[V]$.</p>
+        </li>
+
+        <li>
+          <p><b>Soal 6 (Real Problem) — Grafika Komputer.</b> Sebuah titik 3D $(x,y,z)$
+          diproyeksikan ke lantai $z=0$ sepanjang arah cahaya $\mathbf{d} = (1,2,1)$.
+          Tentukan operator proyeksinya, buktikan idempoten, dan hitung bayangan titik
+          $(3,4,2)$.</p>
+
+          <p><b>Pembahasan.</b> Titik $(x,y,z)$ bergerak sepanjang arah $\mathbf{d} = (1,2,1)$:</p>
+          $$
+          (x,y,z) + t(1,2,1).
+          $$
+          <p>Agar mencapai lantai $z=0$, kita perlu</p>
+          $$
+          z + t = 0 \implies t = -z.
+          $$
+          <p>Jadi bayangannya adalah</p>
+          $$
+          (x-z, y-2z, 0).
+          $$
+          <p>Operator proyeksinya:</p>
+          $$
+          L(x,y,z) = (x-z, y-2z, 0).
+          $$
+          <p>Cek idempoten:</p>
+          $$
+          L^2(x,y,z)
+          = L(x-z, y-2z, 0)
+          = (x-z-0, y-2z-0, 0)
+          = (x-z, y-2z, 0)
+          = L(x,y,z).
+          $$
+          <p>Untuk titik $(3,4,2)$:</p>
+          $$
+          L(3,4,2) = (3-2, 4-4, 0) = (1,0,0).
+          $$
+          <p>Jadi bayangannya adalah $(1,0,0)$.</p>
+        </li>
+
+        <li>
+          <p><b>Soal 7 (Real Problem) — Statistika.</b> Data $v = (4,7,10,13) \in \mathbb{R}^4$
+          diproyeksikan ke subruang nilai rata-rata konstan $\operatorname{Span}\{(1,1,1,1)\}$.
+          Tentukan hasil proyeksi, buktikan operatornya idempoten, dan jelaskan maknanya.</p>
+
+          <p><b>Pembahasan.</b> Subruang nilai rata-rata konstan adalah</p>
+          $$
+          W = \operatorname{Span}\{(1,1,1,1)\}.
+          $$
+          <p>Proyeksi ortogonal ke $W$ adalah</p>
+          $$
+          P(v) = \frac{v \cdot \mathbf{1}}{\mathbf{1}\cdot \mathbf{1}}\mathbf{1}
+          = \bar{v}\mathbf{1},
+          $$
+          <p>dengan $\bar{v}$ adalah rata-rata komponen $v$. Untuk $v = (4,7,10,13)$:</p>
+          $$
+          \bar{v} = \frac{4+7+10+13}{4} = \frac{34}{4} = 8{,}5.
+          $$
+          <p>Maka</p>
+          $$
+          P(v) = (8{,}5,\ 8{,}5,\ 8{,}5,\ 8{,}5).
+          $$
+          <p>Operator ini idempoten karena jika $P(v)$ sudah konstan, rata-ratanya tetap sama:</p>
+          $$
+          P(P(v)) = P(v).
+          $$
+          <p>Secara statistik, $P(v)$ adalah komponen baseline atau level rata-rata data,
+          sedangkan $v - P(v) = (-4{,}5,-1{,}5,1{,}5,4{,}5)$ adalah fluktuasi di sekitar
+          rata-rata.</p>
+        </li>
+
+        <li>
+          <p><b>Soal 8 (Real Problem) — Regresi / Least Squares.</b> Data $(x,y)$ adalah
+          $(0,1),(1,2),(2,4)$. Akan dicocokkan garis $y = a + bx$. Tentukan vektor proyeksi
+          dan nilai $a,b$ dengan proyeksi ke ruang kolom matriks desain.</p>
+
+          <p><b>Pembahasan.</b> Model $y = a + bx$ dapat ditulis</p>
+          $$
+          \begin{pmatrix} 1 \\ 2 \\ 4 \end{pmatrix}
+          \approx
+          \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \end{pmatrix}
+          \begin{pmatrix} a \\ b \end{pmatrix}.
+          $$
+          <p>Misalkan</p>
+          $$
+          A = \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \end{pmatrix},
+          \qquad
+          v = \begin{pmatrix} 1 \\ 2 \\ 4 \end{pmatrix}.
+          $$
+          <p>Proyeksi $v$ ke ruang kolom $A$ memenuhi persamaan normal</p>
+          $$
+          A^T A \begin{pmatrix} a \\ b \end{pmatrix} = A^T v.
+          $$
+          <p>Hitung:</p>
+          $$
+          A^T A =
+          \begin{pmatrix}
+          1 & 1 & 1 \\
+          0 & 1 & 2
+          \end{pmatrix}
+          \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \end{pmatrix}
+          =
+          \begin{pmatrix} 3 & 3 \\ 3 & 5 \end{pmatrix}.
+          $$
+          $$
+          A^T v =
+          \begin{pmatrix}
+          1 & 1 & 1 \\
+          0 & 1 & 2
+          \end{pmatrix}
+          \begin{pmatrix} 1 \\ 2 \\ 4 \end{pmatrix}
+          =
+          \begin{pmatrix} 7 \\ 10 \end{pmatrix}.
+          $$
+          <p>Jadi</p>
+          $$
+          \begin{cases}
+          3a + 3b = 7,\\
+          3a + 5b = 10.
+          \end{cases}
+          $$
+          <p>Kurangkan:</p>
+          $$
+          2b = 3 \implies b = \frac32.
+          $$
+          <p>Substitusi:</p>
+          $$
+          3a + 3\left(\frac32\right) = 7
+          \implies 3a + \frac92 = 7
+          \implies 3a = \frac52
+          \implies a = \frac56.
+          $$
+          <p>Jadi garis terbaiknya adalah</p>
+          $$
+          y = \frac56 + \frac32 x.
+          $$
+          <p>Vektor proyeksinya:</p>
+          $$
+          p = A\begin{pmatrix} a \\ b \end{pmatrix}
+          =
+          \begin{pmatrix}
+          \frac56 \\[4pt]
+          \frac56 + \frac32 \\[4pt]
+          \frac56 + 3
+          \end{pmatrix}
+          =
+          \begin{pmatrix}
+          \frac56 \\[4pt]
+          \frac73 \\[4pt]
+          \frac{23}{6}
+          \end{pmatrix}.
+          $$
+          <p>Ini adalah proyeksi data ke ruang garis regresi.</p>
+        </li>
+
+        <li>
+          <p><b>Soal 9 (Real Problem) — Fisika.</b> Gaya $\mathbf{F} = (6,8)$ N diproyeksikan
+          secara ortogonal ke arah horizontal $(1,0)$. Tentukan operator proyeksinya, komponen
+          horizontal dan vertikal gaya, serta jelaskan mengapa $L^2 = L$.</p>
+
+          <p><b>Pembahasan.</b> Proyeksi ortogonal ke arah horizontal $(1,0)$ adalah</p>
+          $$
+          L(x,y) = (x,0).
+          $$
+          <p>Operator ini idempoten karena</p>
+          $$
+          L^2(x,y) = L(x,0) = (x,0) = L(x,y).
+          $$
+          <p>Untuk $\mathbf{F} = (6,8)$:</p>
+          $$
+          L(\mathbf{F}) = (6,0).
+          $$
+          <p>Jadi komponen horizontal gaya adalah</p>
+          $$
+          \mathbf{F}_{\parallel} = (6,0)\ \text{N},
+          $$
+          <p>dan komponen vertikalnya adalah</p>
+          $$
+          \mathbf{F}_{\perp} = \mathbf{F} - L(\mathbf{F}) = (0,8)\ \text{N}.
+          $$
+          <p>Dalam fisika, proyeksi semacam ini dipakai untuk memisahkan gaya menjadi komponen
+          yang searah dan tegak lurus terhadap arah gerak.</p>
+        </li>
+
+        <li>
+          <p><b>Soal 10 (Real Problem) — Pemrosesan Sinyal.</b> Sinyal $x = (3,5,7,9)$ ingin
+          dihilangkan komponen DC-nya. Tentukan operator $P$ yang memproyeksikan ke vektor
+          konstan, lalu tentukan $Q = I - P$ dan buktikan $Q$ adalah proyeksi.</p>
+
+          <p><b>Pembahasan.</b> Subruang vektor konstan adalah</p>
+          $$
+          W = \operatorname{Span}\{(1,1,1,1)\}.
+          $$
+          <p>Proyeksi ke $W$ adalah</p>
+          $$
+          P(x) = \bar{x}\mathbf{1}.
+          $$
+          <p>Untuk $x = (3,5,7,9)$:</p>
+          $$
+          \bar{x} = \frac{3+5+7+9}{4} = \frac{24}{4} = 6.
+          $$
+          <p>Maka</p>
+          $$
+          P(x) = (6,6,6,6).
+          $$
+          <p>Operator yang menghilangkan komponen DC adalah</p>
+          $$
+          Q = I - P.
+          $$
+          <p>Jadi</p>
+          $$
+          Q(x) = x - P(x)
+          = (3,5,7,9) - (6,6,6,6)
+          = (-3,-1,1,3).
+          $$
+          <p>Karena $P$ proyeksi, maka</p>
+          $$
+          Q^2 = (I-P)^2 = I - 2P + P^2 = I - 2P + P = I - P = Q.
+          $$
+          <p>Jadi $Q$ juga proyeksi. Image $Q$ adalah subruang vektor-vektor yang jumlah
+          komponennya nol, sedangkan kernel $Q$ adalah subruang vektor konstan. Dalam
+          pemrosesan sinyal, $Q$ berperan seperti <b>high-pass filter</b> yang membuang
+          level rata-rata atau komponen DC.</p>
+		  <br>
+		  <p>
+		  Untuk melihat lebih jauh penggunaan proyeksi pada <b>Kriptograpi</b>: <a href="
+		   https://colab.research.google.com/drive/1olqoTvHYG1NW-pT8YL4OWRDvulj4c2GP?usp=sharing" target="_blank"><b>klik!</a>
+		  </p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+
 
 </div> <!--Akhir Subsection Content 2.7-->
 </div> <!--Akhir Subsection 2.7-->
