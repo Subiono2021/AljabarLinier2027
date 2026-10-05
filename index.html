@@ -22358,32 +22358,110 @@ display(HTML(code_html))
 <details class="accordion-real" open>
   <summary><span><b>Pembahasan Lengkap + Visualisasi</b></span><span class="arrow-real">▼</span></summary>
   <div class="content-real">
-    <p align="justify"><b>Konteks Nyata (Teori 3.1.12 - 3.1.14):</b> Di ML, classifier memisahkan data spam vs bukan spam dengan garis $w\cdot x + b = 0$. Ini adalah hiperbidang $f(x)=c$.</p>
-<p><b>Soal:</b> Di $\mathbb{R}^2$, data positif $(2,2)$ dan negatif $(0,0)$. Tentukan fungsional $f \in V^*$ dan hiperbidang pemisah optimal.</p>
+<p align="justify">
+          <b>Konteks Nyata (Teori 3.1.12 - 3.1.14):</b> Dalam ML, classifier memisahkan
+          data spam vs bukan spam dengan garis $w\cdot x+b=0$. Garis ini adalah
+          hiperbidang afim. Jika $f\in V^*$ adalah fungsional linear dan
+          $c\in\mathbb{R}$, maka hiperbidang tersebut dapat ditulis sebagai $f(x)=c$.
+        </p>
+
+        <p>
+          <b>Soal:</b> Di $\mathbb{R}^2$, data positif spam adalah $(2,2)$ dan data
+          negatif ham adalah $(0,0)$. Tentukan fungsional $f\in V^*$ dan hiperbidang
+          pemisah optimal.
+        </p>
 <details class="accordion" open>
 <summary><b>Pembahasan Lengkap:</b></summary>
 <div class="content">
-<p>Berdasarkan Teorema 3.1.13, setiap hiperruang adalah $\ker f$ untuk $f\neq0 \in V^*$. Ambil $f(x,y)=x+y$ (elemen dari $(\mathbb{R}^2)^* \cong \mathbb{R}_2$ dari Teorema 3.1.5).</p>
-<ul>
-<li>$\ker f = \{(x,y)|x+y=0\}$ adalah hiperruang (garis lewat origin) dimensi 1.</li>
-<li>Hiperbidang klasifikasi: $f(x)=2$ yaitu $x+y=2$. Ini koset $(1,1)+\ker f$.</li>
-<li>Menurut Teorema 3.1.17, evaluasi titik data adalah elemen bidual: $\varphi(v)(f)=f(v)$. Jarak titik ke hiperbidang dihitung via fungsional dual.</li>
-</ul>
-<p><b>Implikasi:</b> Training SVM adalah mencari $f \in V^*$ yang memaksimalkan margin $\min |f(x_i)-c|/||f||$. Inilah dualitas di optimasi.</p>
+            <p>
+              Berdasarkan Teorema 3.1.13, setiap hiperruang, yaitu subruang linear
+              berdimensi $n-1$, adalah $\ker f$ untuk suatu fungsional linear tak nol
+              $f\neq0\in V^*$. Ambil $f(x,y)=x+y$. Karena
+              $(\mathbb{R}^2)^*\cong\mathbb{R}^2$, maka $f$ adalah elemen dual yang sah.
+            </p>
+
+            <ul>
+              <li>
+                $\ker f=\{(x,y)\mid x+y=0\}$ adalah hiperruang berdimensi $1$ di
+                $\mathbb{R}^2$.
+              </li>
+
+              <li>
+                Hiperbidang pemisah optimal untuk dua titik $(0,0)$ dan $(2,2)$ adalah
+                sumbu tegak lurus segmen yang menghubungkan keduanya, yaitu melalui
+                titik tengah $(1,1)$ dengan normal $(1,1)$. Jadi
+                $f(x,y)=f(1,1)=2$, yaitu $x+y=2$. Hiperbidang ini adalah koset
+                $(1,1)+\ker f$.
+              </li>
+
+              <li>
+                Nilai fungsional: $f(2,2)=4>2$ sehingga diklasifikasikan spam, dan
+                $f(0,0)=0<2$ sehingga diklasifikasikan ham.
+              </li>
+
+              <li>
+                Jarak titik ke hiperbidang dihitung dengan rumus dual
+                $$d(x_0,H_c)=\frac{|f(x_0)-c|}{\|f\|}.$$
+                Di sini $\|f\|=\sqrt{1^2+1^2}=\sqrt{2}$, sehingga
+                $$d((2,2),H_2)=\frac{|4-2|}{\sqrt{2}}=\sqrt{2},\qquad
+                d((0,0),H_2)=\frac{|0-2|}{\sqrt{2}}=\sqrt{2}.$$
+                Margin totalnya adalah $2\sqrt{2}$.
+              </li>
+
+              <li>
+                Menurut Teorema 3.1.17, evaluasi titik data adalah elemen bidual:
+                $\varphi(v)(f)=f(v)$. Dengan demikian setiap titik data dapat dipandang
+                sebagai fungsional pada ruang dual $V^*$.
+              </li>
+            </ul>
+
+            <p>
+              <b>Implikasi:</b> Training SVM adalah mencari $f\in V^*$ dan konstanta
+              $c$ yang memaksimalkan margin
+              $$\min_i \frac{|f(x_i)-c|}{\|f\|}$$
+              dengan kendala label. Inilah keterkaitan antara dualitas ruang vektor dan
+              optimasi SVM.
+            </p>
 <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
 <script> sagecell.makeSagecell({inputLocation: "#svm_dual", evalButtonText: "Jalankan"})</script>
 <div id="svm_dual"><textarea>
 import matplotlib.pyplot as plt
 import numpy as np
-# Visualisasi hiperbidang
-x = np.linspace(-1,3,100)
-plt.plot(x, -x, 'r--', label='ker f: x+y=0 (hiperruang)')
-plt.plot(x, 2-x, 'g-', linewidth=2, label='hiperbidang f=2')
-plt.scatter([2,0],[2,0], c=['blue','red'], s=100)
-plt.text(2,2,' spam (2,2) f=4')
-plt.text(0,0,' ham (0,0) f=0')
-plt.legend(); plt.grid(True); plt.axis('equal'); plt.show()
-</textarea></div>
+
+def f(x, y):
+    return x + y
+
+x_pos, y_pos = 2, 2
+x_neg, y_neg = 0, 0
+c = 2
+norm_f = np.sqrt(2)
+d_pos = abs(f(x_pos, y_pos) - c) / norm_f
+d_neg = abs(f(x_neg, y_neg) - c) / norm_f
+
+print("f(x,y) = x + y")
+print("Hiperbidang pemisah: f(x,y) = 2, yaitu x + y = 2")
+print("f(2,2) =", f(x_pos, y_pos))
+print("f(0,0) =", f(x_neg, y_neg))
+print("Jarak spam (2,2) ke hiperbidang = %.6f = sqrt(2)" % d_pos)
+print("Jarak ham (0,0) ke hiperbidang = %.6f = sqrt(2)" % d_neg)
+print("Margin total = %.6f = 2*sqrt(2)" % (d_pos + d_neg))
+
+x = np.linspace(-1, 3, 200)
+plt.figure(figsize=(6, 6))
+plt.plot(x, -x, 'r--', label=r'$\ker f: x+y=0$')
+plt.plot(x, 2 - x, 'g-', linewidth=2, label=r'hiperbidang $f=2$: $x+y=2$')
+plt.plot(x, 4 - x, 'b:', linewidth=2, label=r'margin $f=4$: $x+y=4$')
+plt.scatter([2, 0], [2, 0], c=['blue', 'red'], s=100, zorder=5)
+plt.text(2.05, 2.05, r'spam $(2,2)$, $f=4$')
+plt.text(0.05, -0.25, r'ham $(0,0)$, $f=0$')
+plt.axhline(0, color='black', linewidth=0.5)
+plt.axvline(0, color='black', linewidth=0.5)
+plt.legend()
+plt.grid(True)
+plt.axis('equal')
+plt.title(r'SVM: hiperbidang pemisah $x+y=2$')
+plt.show()
+            </textarea></div>
 </div>
 </details>
 </div>
@@ -22541,7 +22619,6 @@ show(T)
 </details>
 </div>
 </div>
-
 </div>
 
 <!-- PROBLEM 4 & 5 bisa copy pola yang sama -->
@@ -22611,6 +22688,754 @@ pretty_print(html(r"<b>Check: cos²+sin² =</b> %s" % latex((cos(theta)^2 + sin(
 </details>
 </div>
 </div>
+</div>
+
+
+<!-- PROBLEM 3.7.6 -->
+<div class="real-problem-container-fixed">
+<div class="real-problem-header-fixed"><span>REAL PROBLEM 3.7.6 — Observabel Quantum: Spektrum Matriks Self-Adjoint</span><span>Teori 3.6</span></div>
+<div style="padding:18px 22px;">
+<p align="justify"><b>Kasus Nyata:</b> Dalam quantum computing, observabel fisis harus berupa operator self-adjoint. Hamiltonian <i>H</i> menentukan level energi dan hasil pengukuran.</p>
+<details class="accordion-real" open>
+  <summary><span><b>Pembahasan Lengkap + Komputasi Sage</b></span><span class="arrow-real">▼</span></summary>
+  <div class="content-real">
+    <p align="justify"><b>Konteks:</b> Matriks self-adjoint memenuhi <i>H</i> = <i>H</i>*. Teorema spektral menjamin diagonalisasi unitary <i>U</i>*<i>H U</i> = Λ, dengan entri diagonal berupa nilai eigen real.</p>
+    <p><b>Soal:</b> Diberikan Hamiltonian <i>H</i> = [[2,1],[1,2]]. Tentukan spektrum, vektor eigen, diagonalisasi unitary, serta ekspektasi dan variansi untuk state ψ = (1, i)/√2.</p>
+    <div id="quantum_selfadjoint">
+	<textarea>
+H = matrix(SR, [[2, 1], [1, 2]])
+show(html(r"<b>Hamiltonian \(H\):</b>"))
+show(H)
+show(html(r"<b>Apakah \(H\) self-adjoint?</b> " + str(H.conjugate().transpose() == H)))
+
+ev = H.eigenvectors_right()
+show(html(r"<b>Nilai eigen dan vektor eigen:</b>"))
+for val, vecs, mult in ev:
+    show((val, vecs, mult))
+
+V = []
+lambdas = []
+for val, vecs, mult in ev:
+    for v in vecs:
+        v = vector(SR, v)
+        v = v / v.norm()
+        V.append(v)
+        lambdas.append(val)
+
+U = matrix(SR, V).transpose()
+Lambda = diagonal_matrix(SR, lambdas)
+
+show(html(r"<b>\(U\) (kolom = vektor eigen):</b>"))
+show(U)
+show(html(r"<b>\(U^* H U\):</b>"))
+show((U.conjugate().transpose() * H * U).apply_map(lambda x: x.simplify_full()))
+show(html(r"<b>\(\Lambda\):</b>"))
+show(Lambda)
+
+psi = vector(SR, [1, I]) / sqrt(2)
+Hpsi = H * psi
+
+exp_val = psi.conjugate().dot_product(Hpsi).simplify_full()
+var_val = psi.conjugate().dot_product(H * H * psi).simplify_full() - exp_val^2
+
+show(html(r"<b>State \(\psi = (1,i)/\sqrt{2}\):</b>"))
+show(column_matrix(psi))
+show(html(r"<b>Ekspektasi \(\langle H \rangle = \)</b>"))
+show(exp_val)
+show(html(r"<b>Variansi \(\langle H^2 \rangle - \langle H \rangle^2 = \)</b>"))
+show(var_val.simplify_full())
+    </textarea></div>
+    <script> sagecell.makeSagecell({inputLocation: "#quantum_selfadjoint", evalButtonText: "Hitung Spektrum"})</script>
+  </div>
+</details>
+</div>
+</div>
+
+<<!-- PROBLEM 3.7.7 -->
+<div class="real-problem-container-fixed">
+<div class="real-problem-header-fixed"><span>REAL PROBLEM 3.7.7 — PCA: Transpos, SVD, dan Matriks Kovarians</span><span>Teori 3.2 & 3.6</span></div>
+<div style="padding:18px 22px;">
+
+<p align="justify"><b>Kasus Nyata:</b> PCA <i>Principal Component Analysis</i> mereduksi dimensi data dengan mencari arah variansi maksimum. Komputasi intinya adalah matriks kovarians
+\(C = \frac{1}{n-1}X_c^\top X_c\),
+yang bersifat <i>self-adjoint</i> atau simetris, yaitu \(C^\top=C\), dan positif semidefinit, yaitu \(a^\top C a \ge 0\) untuk setiap vektor \(a\).</p>
+
+<details class="accordion-real" open>
+  <summary><span><b>Pembahasan Lengkap + Komputasi Sage</b></span><span class="arrow-real">▼</span></summary>
+  <div class="content-real">
+
+    <p align="justify"><b>Konteks dan notasi:</b> Dataset di bawah berisi \(n=10\) sampel data sintetis dengan \(m=3\) fitur. Misalkan matriks data mentah adalah
+    \(X\in\mathbb{R}^{n\times m}\). Setiap baris menyatakan satu sampel, sedangkan setiap kolom menyatakan satu fitur.</p>
+
+    <p><b>Daftar simbol utama:</b></p>
+    <ul>
+      <li>\(X\): matriks data mentah berukuran \(n\times m\).</li>
+      <li>\(\mu\): vektor rata-rata tiap fitur, \(\mu\in\mathbb{R}^m\).</li>
+      <li>\(X_c\): matriks data setelah pemusatan <i>centering</i>.</li>
+      <li>\(C\): matriks kovarians berukuran \(m\times m\).</li>
+      <li>\(\lambda_k\): nilai eigen ke-\(k\), yang merepresentasikan besar variansi pada PC ke-\(k\).</li>
+      <li>\(v_k\): vektor eigen ke-\(k\), yang menunjukkan arah sumbu utama PC ke-\(k\).</li>
+      <li>\(V_k\): matriks yang kolom-kolomnya adalah \(k\) vektor eigen teratas.</li>
+      <li>\(Z\): skor PCA, yaitu proyeksi data terpusat ke ruang PC.</li>
+      <li>\(U,\Sigma,V\): matriks-matriks dalam dekomposisi SVD \(X_c=U\Sigma V^\top\).</li>
+    </ul>
+
+    <p align="justify"><b>Alur PCA yang digunakan:</b></p>
+    <ol>
+      <li>
+        <b>Pemusatan Data <i>Centering</i>.</b>
+        Setiap nilai fitur dikurangi rata-rata kolomnya:
+        \[
+        \mu_j=\frac{1}{n}\sum_{i=1}^{n}X_{ij},
+        \qquad
+        (X_c)_{ij}=X_{ij}-\mu_j.
+        \]
+        Dalam bentuk matriks:
+        \[
+        X_c=X-\mathbf{1}_n\mu^\top,
+        \]
+        dengan \(\mathbf{1}_n\) adalah vektor kolom berisi \(n\) buah angka satu.
+      </li>
+      <li>
+        <b>Matriks Kovarians \(C\).</b>
+        Matriks kovarians dihitung dengan:
+        \[
+        C=\frac{1}{n-1}X_c^\top X_c.
+        \]
+        Matriks ini bersifat simetris \(C^\top=C\) dan positif semidefinit. Elemen diagonal \(C_{jj}\) menyatakan variansi fitur ke-\(j\), sedangkan elemen di luar diagonal menyatakan kovarians antar fitur.
+      </li>
+      <li>
+        <b>Nilai Eigen dan Vektor Eigen.</b>
+        Kita menyelesaikan persamaan eigen:
+        \[
+        C v_k=\lambda_k v_k,
+        \qquad
+        \lambda_1\ge\lambda_2\ge\cdots\ge\lambda_m\ge 0.
+        \]
+        Nilai eigen \(\lambda_k\) menunjukkan besarnya variansi yang dijelaskan oleh PC ke-\(k\). Vektor eigen \(v_k\) menunjukkan arah orientasi PC ke-\(k\). Vektor eigen biasanya dinormalisasi sehingga \(\|v_k\|_2=1\).
+      </li>
+      <li>
+        <b>Reduksi Dimensi dan Skor PCA.</b>
+        Jika kita mengambil \(k\) komponen utama pertama, bentuk matriks
+        \[
+        V_k=[v_1,\ v_2,\ \ldots,\ v_k].
+        \]
+        Skor PCA dihitung dengan memproyeksikan data terpusat:
+        \[
+        Z=X_cV_k.
+        \]
+        Setiap baris \(Z\) menyatakan koordinat sampel dalam ruang PC yang baru.
+      </li>
+      <li>
+        <b>Persentase Variansi yang Dijelaskan.</b>
+        Persentase variansi untuk PC ke-\(i\) adalah:
+        \[
+        \text{EV}_i=
+        \frac{\lambda_i}{\sum_{j=1}^{m}\lambda_j}\times 100\%.
+        \]
+        Jika digunakan \(k\) PC pertama, maka variansi kumulatifnya adalah:
+        \[
+        \text{EV}_{1,\ldots,k}=
+        \frac{\sum_{i=1}^{k}\lambda_i}{\sum_{j=1}^{m}\lambda_j}\times 100\%.
+        \]
+      </li>
+    </ol>
+
+    <p align="justify"><b>Hubungan transpos, kovarians, dan SVD:</b>
+    Jika \(X_c=U\Sigma V^\top\) adalah SVD dari data terpusat, maka
+    \[
+    C=\frac{1}{n-1}X_c^\top X_c
+    =\frac{1}{n-1}V\Sigma^\top U^\top U\Sigma V^\top
+    =V\frac{\Sigma^2}{n-1}V^\top.
+    \]
+    Karena \(U^\top U=I\), maka vektor singular kanan \(V\) adalah vektor eigen dari matriks kovarians \(C\), sedangkan nilai eigennya memenuhi
+    \[
+    \lambda_i=\frac{\sigma_i^2}{n-1},
+    \]
+    dengan \(\sigma_i\) adalah nilai singular dari \(X_c\). Inilah jembatan antara SVD dan PCA.</p>
+
+    <p><b>Soal:</b> Hitung mean, covariance, eigenvalue, eigenvector, 2 PC pertama, skor PCA, dan persentase variansi yang dijelaskan dengan format presisi 4 digit.</p>
+
+    <p align="justify"><b>Output yang akan ditampilkan:</b> vektor mean berukuran \(3\times 1\), matriks kovarians berukuran \(3\times 3\), nilai eigen dan vektor eigen, matriks \(V_2\) berukuran \(3\times 2\), skor PCA berukuran \(10\times 2\), serta persentase variansi untuk PC1, PC2, dan PC3.</p>
+
+    <div id="pca_transpose_svd"><textarea>
+X = matrix(RDF, [
+[2.5, 2.4, 1.0],
+[0.5, 0.7, 0.2],
+[2.2, 2.9, 1.2],
+[1.9, 2.2, 0.8],
+[3.1, 3.0, 1.5],
+[2.3, 2.7, 1.1],
+[2.0, 1.6, 0.5],
+[1.0, 1.1, 0.3],
+[1.5, 1.6, 0.4],
+[1.1, 0.9, 0.2]
+])
+
+# Ukuran data
+n = X.nrows()   # banyak sampel
+m = X.ncols()   # banyak fitur
+
+# Rata-rata tiap kolom/fitur
+mean_vec = vector(RDF, [sum(X.column(j))/n for j in range(m)])
+
+# Pemusatan data: Xc = X - mean
+Xc = X - matrix(RDF, n, m, lambda i,j: mean_vec[j])
+
+# Matriks kovarians: C = Xc^T Xc / (n-1)
+Cov = Xc.transpose() * Xc / (n-1)
+
+show(html(r"<b>Mean:</b>"))
+show(mean_vec.apply_map(lambda x: x.n(digits=4)))
+
+show(html(r"<b>Covariance \(C = X_c^\top X_c/(n-1)\):</b>"))
+show(Cov.apply_map(lambda x: x.n(digits=4)))
+
+# Eigenvalue dan eigenvector, diurutkan dari variansi terbesar
+ev = Cov.eigenvectors_right()
+ev_sorted = sorted(ev, key=lambda x: x[0], reverse=True)
+
+show(html(r"<b>Eigenvalues (varian PC) dan vectors:</b>"))
+for val, vecs, mult in ev_sorted:
+    formatted_vecs = [vector(RDF, v).apply_map(lambda x: x.n(digits=4)) for v in vecs]
+    show((val.n(digits=4), formatted_vecs, mult))
+
+# Ambil 2 PC pertama
+V_cols = []
+for val, vecs, mult in ev_sorted[:2]:
+    v = vector(RDF, vecs[0])
+    v = v / v.norm()
+    V_cols.append(v)
+
+# V2 berukuran 3x2, kolom-kolomnya adalah PC1 dan PC2
+V2 = matrix(RDF, V_cols).transpose()
+
+# Skor PCA: Z = Xc V2
+scores = Xc * V2
+
+show(html(r"<b>V2 (2 principal components):</b>"))
+show(V2.apply_map(lambda x: x.n(digits=4)))
+
+show(html(r"<b>Skor PCA (10x2):</b>"))
+show(scores.apply_map(lambda x: x.n(digits=4)))
+
+# Persentase variansi yang dijelaskan
+total = sum([val for val, vecs, mult in ev_sorted])
+show(html(r"<b>Varians explained:</b>"))
+for i, (val, vecs, mult) in enumerate(ev_sorted):
+    show(html("PC%d: %.4f (%.2f%%)" % (i+1, val, 100*val/total)))
+    </textarea></div>
+    <script> sagecell.makeSagecell({inputLocation: "#pca_transpose_svd", evalButtonText: "Hitung PCA"})</script>
+
+    <p align="justify"><b>Cara membaca hasil:</b> Nilai eigen terbesar menunjukkan PC yang paling penting. Matriks \(V_2\) memberi arah dua komponen utama pertama. Skor PCA adalah koordinat baru setiap sampel. Persentase variansi menjelaskan seberapa besar informasi awal yang masih dipertahankan setelah reduksi dimensi.</p>
+
+  </div>
+</details>
+</div>
+</div>
+
+<!-- PROBLEM 3.7.8 -->
+<div class="real-problem-container-fixed">
+<div class="real-problem-header-fixed"><span>REAL PROBLEM 3.7.8 — Signature Sylvester dan Bentuk Bilinear Nondegeneratif</span><span>Teori 3.3</span></div>
+<div style="padding:18px 22px;">
+
+<p align="justify"><b>Kasus Nyata:</b> Dalam relativitas dan geometri, bentuk bilinear tidak selalu positif definit. Sebagai contoh, metrik Minkowski memiliki arah positif dan negatif. Signature menentukan jumlah arah positif, negatif, dan nol dari suatu bentuk bilinear.</p>
+
+<details class="accordion-real" open>
+  <summary><span><b>Pembahasan Lengkap + Komputasi Sage</b></span><span class="arrow-real">▼</span></summary>
+  <div class="content-real">
+
+    <p align="justify"><b>Konteks dan Teori:</b> Misalkan \(A\) adalah matriks simetris riil berukuran \(m\times m\). Matriks ini merepresentasikan bentuk bilinear
+    \[
+    B(x,y)=x^\top A y.
+    \]
+    Karena \(A\) simetris, semua nilai eigennya riil. <b>Inertia Sylvester</b> dari \(A\) adalah triplet
+    \[
+    (p,n,z),
+    \]
+    dengan \(p\) adalah jumlah nilai eigen positif, \(n\) jumlah nilai eigen negatif, dan \(z\) jumlah nilai eigen nol. <b>Signature</b> didefinisikan sebagai
+    \[
+    \operatorname{sign}(A)=p-n.
+    \]
+    Bentuk bilinear disebut <b>nondegeneratif</b> jika \(\det(A)\neq 0\), yang ekuivalen dengan \(z=0\).</p>
+
+    <p align="justify">Karena \(A\) simetris, terdapat matriks ortogonal \(Q\) sehingga
+    \[
+    Q^\top A Q = D,
+    \]
+    dengan \(D\) adalah matriks diagonal yang entri diagonalnya adalah nilai eigen \(A\). Kolom-kolom \(Q\) adalah vektor eigen yang saling ortogonal dan telah dinormalisasi.</p>
+
+    <p><b>Soal:</b> Diberikan matriks
+    \[
+    A=\begin{pmatrix}
+    0 & 1 & 2\\
+    1 & 0 & 1\\
+    2 & 1 & 0
+    \end{pmatrix}.
+    \]
+    Hitung polinomial karakteristik, nilai eigen eksak dan numerik, inertia Sylvester, signature, \(\det(A)\), serta diagonalisasi ortogonal \(Q^\top A Q=D\).</p>
+
+    <p><b>Langkah komputasi:</b></p>
+    <ol>
+      <li>Periksa apakah \(A\) simetris.</li>
+      <li>Hitung polinomial karakteristik \(\det(\lambda I-A)\).</li>
+      <li>Tentukan nilai eigen eksak dan numerik.</li>
+      <li>Hitung inertia \((p,n,z)\) dan signature \(p-n\).</li>
+      <li>Hitung \(\det(A)\) untuk memeriksa nondegenerasi.</li>
+      <li>Bentuk matriks ortogonal \(Q\) dari vektor eigen, lalu verifikasi \(Q^\top A Q=D\).</li>
+    </ol>
+
+    <div id="signature_sylvester"><textarea>
+A = matrix(QQ, [[0,1,2],[1,0,1],[2,1,0]])
+show(html(r"<b>Matriks bentuk bilinear \(A\):</b>"))
+show(A)
+show(html(r"<b>Apakah simetris?</b> " + str(A.is_symmetric())))
+
+cp = A.charpoly()
+show(html(r"<b>Polinomial karakteristik \(\det(\lambda I - A)\):</b>"))
+show(cp)
+
+# Nilai eigen eksak dan numerik
+ev_exact = A.change_ring(QQbar).eigenvalues()
+show(html(r"<b>Nilai eigen (eksak):</b>"))
+show(ev_exact)
+
+ev_num = [e.n(20) for e in ev_exact]
+show(html(r"<b>Nilai eigen (numerik):</b>"))
+show(ev_num)
+
+# Inertia dihitung dari nilai eigen eksak
+pos  = sum(1 for x in ev_exact if x > 0)
+neg  = sum(1 for x in ev_exact if x < 0)
+zero = sum(1 for x in ev_exact if x == 0)
+
+show(html(r"<b>Inertia (Sylvester): \((p,n,z) = (%d,%d,%d)\)</b>" % (pos, neg, zero)))
+show(html(r"<b>Signature \(= p - n = %d\)</b>" % (pos - neg)))
+show(html(r"<b>\(\det(A) = %s\), nondegeneratif jika \(\det(A) \neq 0\)</b>" % A.det()))
+
+# Diagonalisasi ortogonal
+evs = A.change_ring(QQbar).eigenvectors_right()
+Q_cols = []
+D_vals = []
+for val, vecs, mult in evs:
+    for v in vecs:
+        v = vector(QQbar, v)
+        v = v / v.norm()
+        Q_cols.append(v)
+        D_vals.append(val)
+
+# Bangun Q dari kolom-kolom vektor eigen
+Q = matrix(QQbar, 3, 3)
+for j, v in enumerate(Q_cols):
+    Q.set_column(j, v)
+
+D = diagonal_matrix(QQbar, D_vals)
+
+show(html(r"<b>Matriks ortogonal \(Q\) (kolom = vektor eigen):</b>"))
+show(Q.apply_map(lambda x: x.radical_expression()))
+
+QTAQ = Q.transpose() * A.change_ring(QQbar) * Q
+show(html(r"<b>\(Q^\top A Q\):</b>"))
+show(QTAQ.apply_map(lambda x: x.radical_expression()))
+
+show(html(r"<b>Matriks diagonal \(D\):</b>"))
+show(D.apply_map(lambda x: x.radical_expression()))
+    </textarea></div>
+    <script> sagecell.makeSagecell({inputLocation: "#signature_sylvester", evalButtonText: "Hitung Signature"})</script>
+
+    <p align="justify"><b>Interpretasi hasil:</b> Dari polinomial karakteristik \(\lambda^3-6\lambda-4=0\), nilai eigennya adalah
+    \[
+    \lambda_1=-2,\qquad
+    \lambda_2=1-\sqrt{3}\approx -0.732,\qquad
+    \lambda_3=1+\sqrt{3}\approx 2.732.
+    \]
+    Jadi \(p=1\), \(n=2\), dan \(z=0\). Inertia Sylvester adalah \((1,2,0)\) dan signature \(=1-2=-1\). Karena \(\det(A)=4\neq 0\), bentuk bilinear ini nondegeneratif. Matriks \(Q\) yang dibentuk dari vektor eigen ternormalisasi memenuhi \(Q^\top A Q=D\), dengan \(D\) diagonal berisi nilai eigen \(A\).</p>
+
+  </div>
+</details>
+</div>
+</div>
+
+<!-- PROBLEM 3.7.9 -->
+<div class="real-problem-container-fixed">
+<div class="real-problem-header-fixed"><span>REAL PROBLEM 3.7.9 — Robotika SO(3): Rumus Rodrigues dan Eksponensial Matriks Skew</span><span>Teori 3.5</span></div>
+<div style="padding:18px 22px;">
+
+<p align="justify"><b>Kasus Nyata:</b> Rotasi 3D pada robotika, grafika komputer, dan <i>computer vision</i> harus berada di grup \(SO(3)\), yaitu himpunan matriks ortogonal berukuran \(3\times 3\) dengan \(\det(R)=1\). Grup ini menjaga panjang vektor, sudut antar vektor, dan orientasi (<i>right-handed</i>).</p>
+
+<details class="accordion-real" open>
+  <summary><span><b>Pembahasan Lengkap + Komputasi Sage</b></span><span class="arrow-real">▼</span></summary>
+  <div class="content-real">
+
+    <p align="justify"><b>Konteks dan Teori:</b> Setiap rotasi di \(\mathbb{R}^3\) dapat dinyatakan oleh sebuah sumbu rotasi \(u\in\mathbb{R}^3\) dengan \(\|u\|=1\) dan sudut rotasi \(\theta\in\mathbb{R}\). Representasi matriksnya diberikan oleh <b>rumus Rodrigues</b>:
+    \[
+    R = I + \sin\theta\,K + (1-\cos\theta)\,K^2,
+    \]
+    dengan \(K=[u]_\times\) adalah matriks skew-simetris yang dibentuk dari \(u\):
+    \[
+    K=[u]_\times=
+    \begin{pmatrix}
+    0 & -u_3 & u_2\\
+    u_3 & 0 & -u_1\\
+    -u_2 & u_1 & 0
+    \end{pmatrix},
+    \qquad
+    u=\begin{pmatrix}u_1\\u_2\\u_3\end{pmatrix}.
+    \]
+    Matriks \(K\) memenuhi \(K^\top=-K\), sehingga \(K\) bersifat skew-simetris. Rumus Rodrigues ini setara dengan eksponensial matriks
+    \[
+    R=\exp(\theta K)=\sum_{k=0}^{\infty}\frac{(\theta K)^k}{k!}.
+    \]
+    Karena \(K^3=-K\) untuk sumbu satuan, deret tak hingga tersebut menyusut menjadi bentuk tertutup di atas.</p>
+
+    <p><b>Sifat-sifat penting yang harus dipenuhi \(R\in SO(3)\):</b></p>
+    <ul>
+      <li><b>Ortogonalitas:</b> \(R^\top R = R R^\top = I\).</li>
+      <li><b>Determinan satu:</b> \(\det(R)=+1\) (bukan \(-1\), karena \(-1\) berarti refleksi).</li>
+      <li><b>Sumbu tetap:</b> \(Ru=u\), yaitu sumbu rotasi tidak berubah oleh rotasi.</li>
+      <li><b>Isometri:</b> \(\|Rv\|=\|v\|\) untuk setiap vektor \(v\).</li>
+    </ul>
+
+    <p><b>Soal:</b> Ambil sumbu rotasi
+    \[
+    u=\frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\\0\end{pmatrix},
+    \qquad
+    \theta=\frac{\pi}{3}.
+    \]
+    Verifikasi bahwa \(R^\top R=I\), \(\det(R)=1\), \(Ru=u\), dan hitung rotasi vektor \(v=(1,0,0)^\top\).</p>
+
+    <p><b>Langkah komputasi:</b></p>
+    <ol>
+      <li>Definisikan \(u\) dan \(\theta\).</li>
+      <li>Bentuk matriks skew \(K=[u]_\times\).</li>
+      <li>Hitung \(R = I + \sin\theta\,K + (1-\cos\theta)\,K^2\).</li>
+      <li>Periksa \(R^\top R = I\) dan \(\det(R)=1\).</li>
+      <li>Periksa \(Ru=u\).</li>
+      <li>Hitung \(Rv\) dan bandingkan norma \(\|v\|\) dengan \(\|Rv\|\).</li>
+    </ol>
+
+    <div id="so3_rodrigues"><textarea>
+theta = pi/3
+u = vector(SR, [1,1,0]) / sqrt(2)
+
+# Matriks skew-simetris K = [u]_x
+K = matrix(SR, [
+    [0, -u[2], u[1]],
+    [u[2], 0, -u[0]],
+    [-u[1], u[0], 0]
+])
+K = K.apply_map(lambda x: x.simplify_full())
+
+# Rumus Rodrigues
+R = identity_matrix(SR,3) + sin(theta)*K + (1-cos(theta))*K*K
+R = R.apply_map(lambda x: x.simplify_full())
+
+show(html(r"<b>Sumbu rotasi \(u\):</b>"))
+show(u.column())
+
+show(html(r"<b>Skew \(K=[u]_\times\):</b>"))
+show(K)
+
+show(html(r"<b>Matriks rotasi \(R = I + \sin\theta\,K + (1-\cos\theta)\,K^2\):</b>"))
+show(R)
+
+# Cek ortogonalitas
+RtR = (R.transpose() * R).apply_map(lambda x: x.simplify_full())
+show(html(r"<b>\(R^\top R\) (harus sama dengan \(I\)):</b>"))
+show(RtR)
+
+# Cek determinan
+show(html(r"<b>\(\det(R) = %s\)</b>" % R.det().simplify_full()))
+
+# Cek sumbu tetap
+Ru = (R*u).apply_map(lambda x: x.simplify_full())
+show(html(r"<b>\(Ru\) (harus sama dengan \(u\)):</b>"))
+show(Ru.column())
+
+# Rotasi vektor v = (1,0,0)
+v = vector(SR, [1,0,0])
+Rv = (R*v).apply_map(lambda x: x.simplify_full())
+show(html(r"<b>Rotasi \(v=(1,0,0)^\top\) menjadi \(Rv\):</b>"))
+show(Rv.column())
+
+show(html(r"<b>\(\|v\| = %s,\quad \|Rv\| = %s\)</b>"
+          % (v.norm().simplify_full(), Rv.norm().simplify_full())))
+    </textarea></div>
+    <script> sagecell.makeSagecell({inputLocation: "#so3_rodrigues", evalButtonText: "Cek SO(3)"})</script>
+
+    <p align="justify"><b>Interpretasi hasil:</b> Dari komputasi diperoleh matriks rotasi
+    \[
+    R=\begin{pmatrix}
+    \tfrac{1}{2} & -\tfrac{1}{2} & \tfrac{1}{\sqrt{2}}\\[2pt]
+    \tfrac{1}{2} & \tfrac{1}{2} & -\tfrac{1}{\sqrt{2}}\\[2pt]
+    \tfrac{1}{\sqrt{2}} & \tfrac{1}{\sqrt{2}} & 0
+    \end{pmatrix}
+    \]
+    yang memenuhi \(R^\top R=I\) dan \(\det(R)=1\), sehingga \(R\in SO(3)\). Vektor sumbu \(u\) tetap tidak berubah oleh rotasi ini, \(Ru=u\). Rotasi vektor \(v=(1,0,0)^\top\) menghasilkan vektor baru dengan norma yang sama, \(\|Rv\|=\|v\|=1\), mengonfirmasi bahwa \(R\) adalah isometri yang mempertahankan panjang.</p>
+
+    <p align="justify"><b>Catatan:</b> Rumus Rodrigues menjadi dasar implementasi rotasi pada robotika (misalnya <i>forward kinematics</i> lengan robot), animasi 3D, dan estimasi pose pada <i>computer vision</i>. Selain itu, eksponensial matriks \(\exp(\theta K)\) menghubungkan aljabar Lie \(\mathfrak{so}(3)\) (matriks skew) dengan grup Lie \(SO(3)\) (matriks rotasi), sebuah konsep sentral di teori kontrol geometris.</p>
+
+  </div>
+</details>
+</div>
+</div>
+
+<!-- PROBLEM 3.7.10 -->
+<div class="real-problem-container-fixed">
+<div class="real-problem-header-fixed"><span>REAL PROBLEM 3.7.10 — Dual Code: Kernel, Transpos, dan Ortogonalitas GF(2)</span><span>Teori 3.2</span></div>
+<div style="padding:18px 22px;">
+
+<p align="justify"><b>Kasus Nyata:</b> <i>Error-correcting code</i> memakai ruang dual untuk mendeteksi dan mengoreksi error pada transmisi data digital. Relasi
+\[
+C=\ker H,
+\qquad
+C^\perp=\operatorname{rowspace}(H)
+\]
+adalah wujud konkret dari dualitas dan operasi transpos pada ruang vektor atas lapangan hingga \(\mathrm{GF}(2)\).</p>
+
+<details class="accordion-real" open>
+  <summary><span><b>Pembahasan Lengkap + Komputasi Sage</b></span><span class="arrow-real">▼</span></summary>
+  <div class="content-real">
+
+    <p align="justify"><b>Konteks dan Teori:</b> Bekerja di lapangan biner \(\mathrm{GF}(2)=\{0,1\}\) dengan operasi penjumlahan modulo 2. Diberikan <i>parity-check matrix</i> \(H\in\mathrm{GF}(2)^{r\times n}\). Kode linear
+    \[
+    C=\ker H=\{c\in\mathrm{GF}(2)^n : Hc^\top=0\}
+    \]
+    adalah himpunan <i>codeword</i> yang valid. <b>Dual code</b> didefinisikan sebagai
+    \[
+    C^\perp=\{d\in\mathrm{GF}(2)^n : c\cdot d=0 \ \forall c\in C\},
+    \]
+    dengan \(c\cdot d=\sum_{i=1}^{n}c_i d_i \pmod 2\). Untuk kode linear, berlaku
+    \[
+    C^\perp=\operatorname{rowspace}(H),
+    \]
+    yaitu ruang baris dari \(H\). Kedua ruang ini ortogonal satu sama lain dalam arti produk titik biner, dan berlaku hubungan dimensi
+    \[
+    \dim C + \dim C^\perp = n.
+    \]
+    Kode \(C\) disebut kode-\((n,k)\) dengan \(k=\dim C\). <b>Bobot Hamming</b> dari vektor \(v\) adalah
+    \[
+    \operatorname{wt}(v)=\#\{i : v_i\neq 0\}.
+    \]
+    <b>Bobot minimum</b> dari sebuah kode adalah bobot terkecil di antara semua <i>codeword</i> tak nol:
+    \[
+    d_{\min}=\min\{\operatorname{wt}(c):c\in C,\ c\neq 0\}.
+    \]
+    Bobot minimum ini menentukan kemampuan koreksi error: sebuah kode dengan \(d_{\min}\) dapat mengoreksi hingga \(\lfloor (d_{\min}-1)/2\rfloor\) error.</p>
+
+    <p><b>Soal:</b> Diberikan matriks <i>parity-check</i>
+    \[
+    H=\begin{pmatrix}
+    1 & 1 & 0 & 1 & 0\\
+    0 & 1 & 1 & 1 & 1
+    \end{pmatrix}
+    \]
+    atas \(\mathrm{GF}(2)\). Hitung basis \(C\), basis \(C^\perp\), verifikasi ortogonalitas \(C\perp C^\perp\), serta bobot minimum kedua kode.</p>
+
+    <p><b>Langkah komputasi:</b></p>
+    <ol>
+      <li>Bentuk matriks \(H\) atas \(\mathrm{GF}(2)\).</li>
+      <li>Hitung \(\ker H\) untuk mendapatkan basis \(C\), lalu bentuk matriks generator \(G\).</li>
+      <li>Ambil ruang baris \(H\) sebagai basis \(C^\perp\).</li>
+      <li>Verifikasi bahwa setiap \(c\in C\) dan \(d\in C^\perp\) memenuhi \(c\cdot d=0\).</li>
+      <li>Bangkitkan seluruh <i>codeword</i> dari \(C\) dan \(C^\perp\) dengan kombinasi linear basis, lalu hitung bobot minimum masing-masing.</li>
+    </ol>
+
+    <div id="dual_code_gf2"><textarea>
+H = matrix(GF(2), [[1,1,0,1,0],[0,1,1,1,1]])
+show(html(r"<b>Parity-check \(H\):</b>"))
+show(H)
+
+# Kernel H sebagai basis kode C
+C_basis = H.right_kernel().basis()
+G = matrix(GF(2), C_basis)
+show(html(r"<b>Generator \(C\) (basis kernel \(H\)):</b>"))
+show(G)
+show(html(r"<b>Dimensi \(C\):</b> " + str(H.right_kernel().dimension())))
+
+# Dual code C^perp = rowspace(H)
+Cdual_basis = H.rows()
+Gdual = matrix(GF(2), Cdual_basis)
+show(html(r"<b>Generator \(C^\perp\) (row space \(H\)):</b>"))
+show(Gdual)
+show(html(r"<b>Dimensi \(C^\perp\):</b> " + str(Gdual.rank())))
+
+# Verifikasi ortogonalitas C terhadap C^perp
+ok = True
+for c in C_basis:
+    for d in Cdual_basis:
+        dot = sum([c[i]*d[i] for i in range(5)]) % 2
+        if dot != 0:
+            ok = False
+show(html(r"<b>Semua produk titik \(C \cdot C^\perp = 0\)? " + str(ok) + "</b>"))
+
+# Fungsi untuk membangkitkan semua codeword dari basis
+def all_codewords(basis):
+    from itertools import product
+    n = len(basis)
+    m = len(basis[0])
+    words = []
+    for coeffs in product([0,1], repeat=n):
+        v = vector(GF(2), [0]*m)
+        for i, c in enumerate(coeffs):
+            if c:
+                v += basis[i]
+        words.append(v)
+    return words
+
+def wt(v):
+    return sum(1 for x in v if x != 0)
+
+C_all = all_codewords(C_basis)
+D_all = all_codewords(Cdual_basis)
+
+min_C = min(wt(v) for v in C_all if wt(v) > 0)
+min_D = min(wt(v) for v in D_all if wt(v) > 0)
+
+show(html(r"<b>Bobot minimum \(d_{\min}(C) = %d\)</b>" % min_C))
+show(html(r"<b>Bobot minimum \(d_{\min}(C^\perp) = %d\)</b>" % min_D))
+    </textarea></div>
+    <script> sagecell.makeSagecell({inputLocation: "#dual_code_gf2", evalButtonText: "Hitung Dual Code"})</script>
+
+    <p align="justify"><b>Interpretasi hasil:</b> Karena \(H\) berukuran \(2\times 5\) dengan rank 2, dimensi kode adalah
+    \[
+    \dim C = n-\operatorname{rank}(H)=5-2=3.
+    \]
+    Jadi \(C\) adalah kode-\((5,3)\) dengan \(2^3=8\) <i>codeword</i>, sedangkan dualnya \(C^\perp\) berdimensi \(2\) dengan \(2^2=4\) <i>codeword</i>. Verifikasi ortogonalitas \(c\cdot d=0\) untuk semua pasangan \((c,d)\) mengonfirmasi hubungan \(C^\perp=\operatorname{rowspace}(H)\). Bobot minimum \(d_{\min}(C)\) menentukan seberapa banyak error yang bisa dikoreksi: sebuah kode dengan \(d_{\min}\) dapat mengoreksi hingga \(\lfloor (d_{\min}-1)/2\rfloor\) bit error. Hubungan transpos dan kernel di sini mencerminkan teorema fundamental aljabar linear:
+    \[
+    (\operatorname{rowspace}(H))^\perp=\ker H,
+    \]
+    yang berlaku umum atas lapangan apa pun, termasuk \(\mathrm{GF}(2)\).</p>
+
+    <p align="justify"><b>Catatan:</b> Konsep dual code ini menjadi inti dari skema koreksi error modern seperti kode Hamming, kode Reed–Solomon, dan kode LDPC yang dipakai pada penyimpanan data, komunikasi satelit, dan jaringan 5G.</p>
+
+  </div>
+</details>
+</div>
+</div>
+
+<!-- PROBLEM 3.7.11 -->
+<div class="real-problem-container-fixed">
+<div class="real-problem-header-fixed"><span>REAL PROBLEM 3.7.11 — Graph Laplacian: Self-Adjoint dan Spectral Clustering</span><span>Teori 3.6</span></div>
+<div style="padding:18px 22px;">
+
+<p align="justify"><b>Kasus Nyata:</b> <i>Spectral clustering</i> memakai nilai eigen dan vektor eigen dari matriks Laplacian graf untuk mempartisi data menjadi beberapa kelompok. Laplacian
+\[
+L=D-A
+\]
+selalu bersifat <i>self-adjoint</i> (\(L^\top=L\)) dan <i>positif semidefinit</i> (\(x^\top L x\ge 0\) untuk semua \(x\)). Sifat ini membuat spektrum \(L\) riil dan tak negatif, sehingga analisisnya stabil dan bermakna secara geometris.</p>
+
+<details class="accordion-real" open>
+  <summary><span><b>Pembahasan Lengkap + Komputasi Sage</b></span><span class="arrow-real">▼</span></summary>
+  <div class="content-real">
+
+    <p align="justify"><b>Konteks dan Teori:</b> Diberikan graf tak berarah \(G=(V,E)\) dengan \(n\) simpul. Misalkan \(A\) adalah matriks <i>adjacency</i>, yaitu \(A_{ij}=1\) jika ada sisi antara simpul \(i\) dan \(j\), dan \(A_{ij}=0\) sebaliknya. Matriks derajat \(D\) adalah matriks diagonal dengan
+    \[
+    D_{ii}=\deg(i)=\sum_{j=1}^{n}A_{ij}.
+    \]
+    <b>Graph Laplacian</b> didefinisikan sebagai
+    \[
+    L=D-A.
+    \]
+    Laplacian memiliki beberapa sifat fundamental:</p>
+    <ul>
+      <li><b>Simetris (self-adjoint):</b> \(L^\top=L\), karena \(D\) dan \(A\) keduanya simetris.</li>
+      <li><b>Positif semidefinit:</b> untuk setiap \(x\in\mathbb{R}^n\),
+      \[
+      x^\top L x=\sum_{(i,j)\in E}(x_i-x_j)^2\ \ge\ 0.
+      \]
+      </li>
+      <li><b>Baris berjumlah nol:</b> \(L\mathbf{1}=0\), sehingga \(\lambda_1=0\) selalu merupakan nilai eigen dengan vektor eigen \(\mathbf{1}=(1,\dots,1)^\top\).</li>
+      <li><b>Multiplisitas nol:</b> banyaknya nilai eigen nol sama dengan banyaknya komponen terhubung pada graf. Untuk graf terhubung, \(\lambda_1=0\) berjumlah satu.</li>
+    </ul>
+
+    <p align="justify">Jika nilai eigen diurutkan
+    \[
+    0=\lambda_1\le\lambda_2\le\cdots\le\lambda_n,
+    \]
+    maka \(\lambda_2\) disebut <b>nilai eigen Fiedler</b> (<i>algebraic connectivity</i>) dan vektor eigen yang bersesuaian disebut <b>Fiedler vector</b>. Vektor ini dapat dipakai untuk <i>spectral bisection</i>: membagi simpul graf menjadi dua kelompok berdasarkan tanda entri Fiedler vector, sehingga diperoleh partisi yang meminimalkan <i>cut</i> antara kedua kelompok.</p>
+
+    <p><b>Soal:</b> Diberikan graf 5 simpul dengan matriks <i>adjacency</i>
+    \[
+    A=\begin{pmatrix}
+    0&1&0&0&1\\
+    1&0&1&0&0\\
+    0&1&0&1&1\\
+    0&0&1&0&1\\
+    1&0&1&1&0
+    \end{pmatrix}.
+    \]
+    Verifikasi bahwa \(L\) self-adjoint, hitung bentuk kuadrat \(x^\top L x\), tentukan nilai eigen dan vektor eigen \(L\), serta hitung Fiedler vector untuk pemotongan graf.</p>
+
+    <p><b>Langkah komputasi:</b></p>
+    <ol>
+      <li>Bentuk matriks \(A\) atas \(\mathbb{Q}\).</li>
+      <li>Hitung matriks derajat \(D\) dari jumlah baris \(A\).</li>
+      <li>Bentuk Laplacian \(L=D-A\), lalu periksa \(L^\top=L\).</li>
+      <li>Hitung bentuk kuadrat \(x^\top L x\) secara simbolik dan cocokkan dengan \(\sum_{(i,j)\in E}(x_i-x_j)^2\).</li>
+      <li>Hitung nilai eigen dan vektor eigen \(L\) atas \(\overline{\mathbb{Q}}\) agar eksak.</li>
+      <li>Ambil vektor eigen kedua sebagai Fiedler vector, normalisasi, dan tampilkan sebagai kolom.</li>
+    </ol>
+
+    <div id="graph_laplacian"><textarea>
+A = matrix(QQ, [
+[0,1,0,0,1],
+[1,0,1,0,0],
+[0,1,0,1,1],
+[0,0,1,0,1],
+[1,0,1,1,0]
+])
+
+n = A.nrows()
+D = diagonal_matrix(QQ, [sum(A.row(i)) for i in range(n)])
+L = D - A
+
+show(html(r"<b>Adjacency \(A\):</b>"))
+show(A)
+show(html(r"<b>Degree \(D\):</b>"))
+show(D)
+show(html(r"<b>Laplacian \(L = D - A\):</b>"))
+show(L)
+show(html(r"<b>Apakah \(L\) self-adjoint? " + str(L.transpose() == L) + "</b>"))
+
+# Bentuk kuadrat x^T L x
+x = vector(SR, [var('x%d' % i) for i in range(n)])
+Q = (x.row() * L.change_ring(SR) * x.column())[0,0].expand()
+show(html(r"<b>Bentuk kuadrat \(x^\top L x\):</b>"))
+show(Q)
+
+# Nilai eigen dan vektor eigen eksak atas QQbar
+Lq = L.change_ring(QQbar)
+ev = Lq.eigenvectors_right()
+ev_sorted = sorted(ev, key=lambda z: z[0])
+
+show(html(r"<b>Eigenvalues dan eigenvectors (urut naik):</b>"))
+for val, vecs, mult in ev_sorted:
+    show((val.n(6), [v.apply_map(lambda z: z.n(6)) for v in vecs], mult))
+
+show(html(r"<b>Eigenvalue terkecil (harus \(0\)): \(%s\)</b>" % ev_sorted[0][0]))
+
+# Fiedler vector = eigenvector kedua, dinormalisasi
+fiedler = vector(QQbar, ev_sorted[1][1][0])
+fiedler = fiedler / fiedler.norm()
+show(html(r"<b>Fiedler vector (eigenvector kedua, ternormalisasi):</b>"))
+show(fiedler.column().apply_map(lambda z: z.n(6)))
+    </textarea></div>
+    <script> sagecell.makeSagecell({inputLocation: "#graph_laplacian", evalButtonText: "Hitung Laplacian"})</script>
+
+    <p align="justify"><b>Interpretasi hasil:</b> Hasil komputasi menunjukkan bahwa \(L\) memang simetris (\(L^\top=L\)) dan bentuk kuadratnya terurai menjadi
+    \[
+    x^\top L x=(x_0-x_1)^2+(x_0-x_4)^2+(x_1-x_2)^2+(x_2-x_3)^2+(x_2-x_4)^2+(x_3-x_4)^2\ \ge\ 0,
+    \]
+    yaitu jumlah kuadrat selisih nilai pada setiap sisi graf. Karena grafnya terhubung, nilai eigen terkecil adalah \(0\) dengan multiplisitas satu dan vektor eigen \(\mathbf{1}\). Fiedler vector memberi arah pemisahan graf yang paling baik: entri positif dan negatifnya menentukan dua kelompok simpul, sedangkan besar \(|x_i|\) menunjukkan seberapa "kuat" simpul \(i\) berada di kelompoknya.</p>
+
+    <p align="justify"><b>Catatan:</b> Metode ini menjadi dasar <i>spectral clustering</i> pada data berdimensi tinggi (misalnya citra, teks, dan jaringan sosial), di mana matriks ketetanggaan dibentuk dari kemiripan antar titik data. Sifat self-adjoint dan positif semidefinit dari \(L\) menjamin bahwa algoritma ini stabil, memiliki solusi riil, dan dapat diselesaikan dengan teknik aljabar linear numerik yang mapan.</p>
+
+  </div>
+</details>
+</div>
+</div>
+
 
 </div>
 </div>
