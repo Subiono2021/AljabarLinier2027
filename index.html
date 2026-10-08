@@ -23719,6 +23719,31 @@ show(fiedler.column().apply_map(lambda z: z.n(6)))
         </p>
       </div>
     </div>
+	
+	<div class="definition-container">
+  <div class="definition-header" onclick="toggleDefinisi(this)">
+    <span>4.2.1b. Definisi Formal: Sifat Universal Hasil Kali Tensor</span>
+    <span class="arrow">▼</span>
+  </div>
+  <center>
+    <div class="definition-box">
+      <p align="justify">
+        <b>Definisi:</b> Pasangan $(V^{\otimes k}, \otimes)$ dengan pemetaan $k$-linear 
+        $\otimes: V^k \to V^{\otimes k},\; (v_1,...,v_k) \mapsto v_1\otimes...\otimes v_k$
+        disebut <b>pangkat tensor ke-$k$</b> jika memenuhi <b>sifat universal</b> berikut:
+        Untuk setiap ruang vektor $W$ dan setiap pemetaan $k$-linear $\mu: V^k \to W$,
+        terdapat tepat satu pemetaan linear $\tilde{\mu}: V^{\otimes k} \to W$ sehingga diagram komutatif:
+        $$ \mu = \tilde{\mu} \circ \otimes $$
+        Secara informal: <em>setiap pemetaan $k$-linear dari $V^k$ memfaktor secara unik melalui pemetaan linear dari $V^{\otimes k}$.</em>
+      </p>
+      <p align="justify">
+        Konsekuensinya: $\mathcal{L}^k(V,W) \cong \mathcal{L}(V^{\otimes k}, W)$. 
+        Untuk bentuk linear: $\mathcal{L}^k(V,\mathbb{F}) \cong (V^{\otimes k})^*$.
+        Inilah yang membuat $V^{\otimes k}$ unik hingga isomorfisma.
+      </p>
+    </div>
+  </center>
+</div>
 
 <!-- Sisipkan setelah 4.2.1 Pendahuluan, sebelum 4.2.2 Definisi tensor murni -->
 
@@ -24241,6 +24266,30 @@ show(fiedler.column().apply_map(lambda z: z.n(6)))
       </div>
     </div>
   </section>
+  
+  <div class="theorem-section">
+  <div class="theorem-container">
+    <div class="theorem-header" onclick="toggleTeorema(this)">
+      <span class="theorem-number">4.2.12b. Korolari: Uji Kemurnian via Rank</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="theorem-box">
+      <p align="justify">
+        Untuk $T \in V \otimes V$ dengan $\dim V = n$, tulis matriks koefisien $[T]_{\mathcal{B}_2} = [c_{ij}]$ terhadap basis $\{e_i\otimes e_j\}$.
+        Maka:
+        <ul>
+          <li>$T$ adalah tensor murni $\iff \operatorname{rank}([c_{ij}]) = 1$</li>
+          <li>$T$ adalah tensor tidak murni $\iff \operatorname{rank}([c_{ij}]) \ge 2$</li>
+        </ul>
+        <b>Bukti ide:</b> Jika $T = u\otimes v$ dengan $u=\sum a_i e_i$, $v=\sum b_j e_j$, maka $c_{ij}=a_i b_j$ yang merupakan matriks rank-1 (outer product $a b^T$). Sebaliknya, dekomposisi SVD dari $[c_{ij}]$ memberikan dekomposisi Schmidt.
+      </p>
+      <p align="justify">
+        <b>Konsekuensi praktis:</b> Untuk $V=\mathbb{R}^2$, $T = \begin{bmatrix}a & b \\ c & d\end{bmatrix}$ murni $\iff \det T = ad-bc = 0$. Ini menjelaskan mengapa $I_2$ tidak murni karena $\det I_2 =1 \neq 0$.
+      </p>
+    </div>
+  </div>
+</div>
+  
 
   <div style="
   border: 2px solid #2c3e50;
@@ -24610,6 +24659,27 @@ background-color: rgba(41, 128, 185, 0.08);
 </p>
 </div> 
 
+<div class="definition-container">
+  <div class="definition-header" onclick="toggleDefinisi(this)">
+    <span>4.2.13b. Isomorfisme: $V^* \otimes V^* \cong \mathcal{L}^2(V,\mathbb{F})$</span>
+    <span class="arrow">▼</span>
+  </div>
+  <center>
+    <div class="definition-box">
+      <p align="justify">
+        Jika $f,g \in V^*$ (fungsional linear), maka pemetaan
+        $$(f\otimes g)(u,v) := f(u)g(v)$$
+        adalah bentuk bilinear. Secara umum:
+        $$V^* \otimes W \cong \mathcal{L}(V,W), \quad (f\otimes w)(v) = f(v)w$$
+        Untuk $V$ berdimensi hingga dengan basis $\{e_i\}$ dan basis dual $\{e^i\}$ dengan $e^i(e_j)=\delta_{ij}$, maka basis untuk $\mathcal{L}^2(V,\mathbb{F})$ adalah $\{e^i \otimes e^j\}$.
+      </p>
+      <p align="justify">
+        <b>Contoh:</b> Di $\mathbb{R}^2$, $e^1(x_1,x_2)=x_1$, $e^2(x_1,x_2)=x_2$. Maka $B_{11}=e^1\otimes e^1$ adalah $B_{11}(x,y)=x_1 y_1$, persis $E_{11}$ di contohmu.
+      </p>
+    </div>
+  </center>
+</div>
+
 <!-- ================= TAMBAHAN: KRONECKER PRODUCT ================= -->
 <div class="example-container">
   <div class="example-header" onclick="this.parentElement.classList.toggle('active')">
@@ -24957,6 +25027,27 @@ background-color: rgba(41, 128, 185, 0.08);
                           </div>
                         </div>
                       </section>
+					  
+<div class="definition-container">
+  <div class="definition-header" onclick="toggleDefinisi(this)">
+    <span>4.2.18b. Tensor Simetris dan Alternating (Persiapan Determinan)</span>
+    <span class="arrow">▼</span>
+  </div>
+  <center>
+    <div class="definition-box">
+      <p align="justify">
+        Sebuah $k$-bentuk $T\in\mathcal{L}^k(V,\mathbb{F})$ disebut:
+        <ul>
+          <li><b>Simetris</b> jika $T(...,v_i,...,v_j,...)=T(...,v_j,...,v_i,...)$ untuk semua pertukaran $i,j$.</li>
+          <li><b>Alternating</b> jika $T(...,v_i,...,v_j,...) = -T(...,v_j,...,v_i,...)$. Akibatnya $T=0$ jika ada dua argumen yang sama.</li>
+        </ul>
+        Ruang bentuk alternating dinotasikan $\Lambda^k(V^*)$. Untuk $k=\dim V=n$, $\dim \Lambda^n(V^*)=1$. Basisnya inilah yang disebut <b>determinan</b>.
+        <br><br>
+        <b>Definisi awal determinan:</b> Untuk $V=\mathbb{F}^n$, determinan adalah satu-satunya bentuk $n$-linear alternating $\det: V^n \to \mathbb{F}$ dengan $\det(e_1,...,e_n)=1$.
+      </p>
+    </div>
+  </center>
+</div>
 
                       <p align="justify">
                         <strong>Vektorisasi.</strong> Operasi vektorisasi \(\operatorname{vec}(X)\) yang menyusun kolom-kolom matriks \(X\) menjadi satu vektor kolom memenuhi hubungan:
@@ -25504,6 +25595,21 @@ background-color: rgba(41, 128, 185, 0.08);
   </div>
 </div>
 
+<div class="example-container">
+  <div class="example-header" onclick="this.parentElement.classList.toggle('active')">
+    <span><b>4.2.20. Kontraksi dan Trace sebagai Operasi Tensor</b></span>
+    <span class="example-arrow">▼</span>
+  </div>
+  <div class="example-box">
+    <p align="justify">
+      Jika $V$ berdimensi hingga, ada isomorfisme $V^* \otimes V \cong \operatorname{End}(V)$. Kontraksi adalah pemetaan linear $c: V^* \otimes V \to \mathbb{F}$ dengan $c(f\otimes v)=f(v)$.
+      Jika $T=\sum f_i \otimes v_i$ berkorespondensi dengan operator $A$, maka $c(T)=\operatorname{trace}(A)$.
+      <br>
+      Secara matriks: Jika $T = \sum_{ij} c_{ij} e_i \otimes e_j \cong \sum_{ij} c_{ij} E_{ij}$, maka kontraksinya adalah $\sum_i c_{ii} = \operatorname{trace}(T)$.
+      Ini menjelaskan mengapa $\operatorname{vec}(AXB) = (B^T\otimes A)\operatorname{vec}(X)$: operasi $\operatorname{vec}$ adalah isomorfisme $V\otimes W \cong \mathcal{L}(V^*,W)$.
+    </p>
+  </div>
+</div>
 
 <hr class="garis-elegan">
 <p align="justify">
@@ -25617,6 +25723,162 @@ analyze_state(psi1, "Masalah 1 (Entangled – diagonal)")
 analyze_state(psi2, "Masalah 2 (Separable)")
 analyze_state(psi3, "Masalah 3 (Entangled – non-diagonal)")
 </script>
+</div>
+
+
+
+<!-- ================= TAMBAHAN 5 REAL PROBLEM KUANTUM ================= -->
+
+<h4 style="margin-top: 30px;"><b>⚛️ TAMBAHAN 5 REAL PROBLEM - KOMPUTASI KUANTUM</b></h4>
+
+<!-- PROBLEM 4 -->
+<div style="background-color: #fff; border-left: 5px solid #2980b9; padding: 10px 15px; margin-bottom: 15px; border-radius: 4px;">
+  <b>Masalah 4 (Pembangkitan Entanglement oleh Gerbang CNOT - Sirkuit Kuantum Dasar):</b><br>
+  Sebuah sistem 2-qubit disiapkan dalam keadaan terpisah 
+  $$|\psi_{in}\rangle = |+\rangle \otimes |0\rangle = \frac{1}{\sqrt{2}}(|0\rangle+|1\rangle)\otimes|0\rangle = \frac{1}{\sqrt{2}}(|00\rangle+|10\rangle)$$
+  Kemudian diterapkan gerbang CNOT dengan qubit pertama sebagai kontrol dan kedua sebagai target: $U_{CNOT}=|0\rangle\langle0|\otimes I + |1\rangle\langle1|\otimes X$.
+  <br>Apakah $|\psi_{out}\rangle = U_{CNOT}|\psi_{in}\rangle$ separable atau entangled? Buktikan dengan matriks koefisien dan hubungkan dengan teorema 4.2.18.
+</div>
+
+<div style="background-color: #f4f6f7; border-left: 5px solid #2980b9; padding: 10px 15px; margin-bottom: 25px; border-radius: 4px;">
+  <b>Pembahasan 4:</b><br>
+  <p align="justify">
+    <b>Langkah 1: Hitung aksi CNOT.</b><br>
+    $U_{CNOT}|00\rangle = |00\rangle$, $U_{CNOT}|10\rangle = |11\rangle$ karena $X|0\rangle=|1\rangle$. Maka:
+    $$|\psi_{out}\rangle = \frac{1}{\sqrt{2}}(U_{CNOT}|00\rangle + U_{CNOT}|10\rangle) = \frac{1}{\sqrt{2}}(|00\rangle+|11\rangle)=|\Phi^+\rangle$$
+    Ini adalah Bell state.
+  </p>
+  <p align="justify">
+    <b>Langkah 2: Matriks Koefisien.</b><br>
+    $$C_{out} = \begin{pmatrix} \frac{1}{\sqrt{2}} & 0 \\ 0 & \frac{1}{\sqrt{2}} \end{pmatrix}$$
+    $\det(C_{out}) = 1/2 \neq 0 \implies \operatorname{rank}=2$.
+  </p>
+  <p align="justify">
+    <b>Langkah 3: Kesimpulan Kuantum.</b><br>
+    Schmidt Rank $r=2>1$ maka <b>entangled</b>. Ini membuktikan Teorema 4.2.18 poin (1): $U_{CNOT}$ tidak dapat difaktorkan menjadi $(A\otimes I)(I\otimes B)$. Jika bisa, maka $U_{CNOT}=A\otimes B$ akan mempertahankan kemurnian (rank 1 tetap rank 1). Karena $U_{CNOT}$ memetakan tensor murni $|\psi_{in}\rangle$ (rank 1) menjadi tensor tidak murni (rank 2), maka $U_{CNOT}$ haruslah penjumlahan $ |0\rangle\langle0|\otimes I + |1\rangle\langle1|\otimes X$, yaitu kombinasi linear dari tensor murni operator. Inilah definisi gerbang <b>entangling gate</b> dalam komputasi kuantum.
+  </p>
+</div>
+
+<!-- PROBLEM 5 -->
+<div style="background-color: #fff; border-left: 5px solid #e67e22; padding: 10px 15px; margin-bottom: 15px; border-radius: 4px;">
+  <b>Masalah 5 (Kronecker Product Gerbang Pauli dan Invariansi Entanglement terhadap Operasi Lokal):</b><br>
+  Diberikan keadaan terjerat $|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle+|11\rangle)$. Terapkan operasi lokal $U = X \otimes Z$ dimana $X=\begin{pmatrix}0&1\\1&0\end{pmatrix}$, $Z=\begin{pmatrix}1&0\\0&-1\end{pmatrix}$.<br>
+  Hitung $|\psi'\rangle = (X\otimes Z)|\Phi^+\rangle$ menggunakan Kronecker product. Apakah $|\psi'\rangle$ tetap terjerat? Hitung Schmidt Rank-nya.
+</div>
+
+<div style="background-color: #f4f6f7; border-left: 5px solid #e67e22; padding: 10px 15px; margin-bottom: 25px; border-radius: 4px;">
+  <b>Pembahasan 5:</b><br>
+  <p align="justify">
+    <b>Langkah 1: Hitung Kronecker $X\otimes Z$.</b><br>
+    $$X\otimes Z = \begin{pmatrix} 0\cdot Z & 1\cdot Z \\ 1\cdot Z & 0\cdot Z \end{pmatrix} = \begin{pmatrix} 0&0&1&0\\0&0&0&-1\\1&0&0&0\\0&-1&0&0 \end{pmatrix}$$
+  </p>
+  <p align="justify">
+    <b>Langkah 2: Aksi pada vektor.</b><br>
+    $|\Phi^+\rangle \equiv \frac{1}{\sqrt{2}}[1,0,0,1]^T$. Maka
+    $$(X\otimes Z)|\Phi^+\rangle = \frac{1}{\sqrt{2}}\begin{pmatrix}0\\-1\\1\\0\end{pmatrix} = \frac{1}{\sqrt{2}}(-|01\rangle+|10\rangle) = -|\Psi^-\rangle$$
+  </p>
+  <p align="justify">
+    <b>Langkah 3: Matriks koefisien $|\psi'\rangle$.</b><br>
+    $$C' = \frac{1}{\sqrt{2}}\begin{pmatrix}0 & -1 \\ 1 & 0\end{pmatrix}$$
+    $\det(C') = 1/2 \neq 0 \implies rank=2$, nilai singular tetap $1/\sqrt{2}, 1/\sqrt{2}$.
+  </p>
+  <p align="justify">
+    <b>Kesimpulan:</b> Schmidt Rank tetap 2, jadi <b>tetap terjerat maksimal</b>. Ini mengilustrasikan teorema penting: <b>Operasi lokal uniter berbentuk $U_A \otimes U_B$ tidak mengubah Schmidt Rank</b>. Karena $(U_A\otimes U_B)(C) = U_A C U_B^T$ (sifat dari Teorema 4.2.18), rank matriks $C$ invarian terhadap perkalian matriks invertible. Secara fisik: entanglement tidak bisa dibuat atau dihancurkan hanya dengan operasi lokal.
+  </p>
+</div>
+
+<!-- PROBLEM 6 -->
+<div style="background-color: #fff; border-left: 5px solid #16a085; padding: 10px 15px; margin-bottom: 15px; border-radius: 4px;">
+  <b>Masalah 6 (GHZ vs W State - Klasifikasi Entanglement 3-Qubit):</b><br>
+  Dua keadaan 3-qubit paling penting dalam komputasi kuantum:
+  $$|GHZ\rangle = \frac{1}{\sqrt{2}}(|000\rangle+|111\rangle)$$
+  $$|W\rangle = \frac{1}{\sqrt{3}}(|001\rangle+|010\rangle+|100\rangle)$$
+  Dengan menggunakan bipartisi $A|BC$ (pisahkan qubit pertama dari dua lainnya), tentukan apakah keduanya separable terhadap partisi tersebut? Hitung matriks koefisien $2\times4$ dan rank-nya.
+</div>
+
+<div style="background-color: #f4f6f7; border-left: 5px solid #16a085; padding: 10px 15px; margin-bottom: 25px; border-radius: 4px;">
+  <b>Pembahasan 6:</b><br>
+  <p align="justify">
+    <b>Langkah 1: Bipartisi $A|BC$.</b> Basis $BC$ adalah $\{|00\rangle,|01\rangle,|10\rangle,|11\rangle\}$. Tulis:
+    $$|GHZ\rangle = \frac{1}{\sqrt{2}}|0\rangle_A|00\rangle_{BC} + 0|0\rangle_A|01\rangle + 0|0\rangle_A|10\rangle + 0|0\rangle_A|11\rangle + 0|1\rangle_A|00\rangle+...+ \frac{1}{\sqrt{2}}|1\rangle_A|11\rangle$$
+    Matriks $2\times4$:
+    $$C_{GHZ} = \begin{pmatrix} \frac{1}{\sqrt{2}} & 0 & 0 & 0 \\ 0 & 0 & 0 & \frac{1}{\sqrt{2}} \end{pmatrix}$$
+    Rank = 2 $\implies$ terjerat pada partisi $A|BC$.
+  </p>
+  <p align="justify">
+    $$|W\rangle = 0|0\rangle_A|00\rangle + \frac{1}{\sqrt{3}}|0\rangle_A|01\rangle + \frac{1}{\sqrt{3}}|0\rangle_A|10\rangle + 0|0\rangle_A|11\rangle + \frac{1}{\sqrt{3}}|1\rangle_A|00\rangle +0+0+0$$
+    $$C_W = \begin{pmatrix} 0 & \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}} & 0 \\ \frac{1}{\sqrt{3}} & 0 & 0 & 0 \end{pmatrix}$$
+    Rank juga 2 $\implies$ terjerat.
+  </p>
+  <p align="justify">
+    <b>Perbedaan mendalam:</b> Jika kita trace-out satu qubit, $\rho_{BC}$ untuk GHZ menjadi campuran $\frac12(|00\rangle\langle00|+|11\rangle\langle11|)$ yang separable (tidak ada entanglement sisa). Untuk W, $\rho_{BC}$ tetap terjerat. Ini sebabnya dalam jaringan kuantum, W lebih robust terhadap kehilangan partikel. Secara tensor, keduanya adalah tensor tidak murni di $V^{\otimes3}$ yang tidak bisa ditulis sebagai $v_1\otimes v_2\otimes v_3$, tetapi termasuk kelas SLOCC yang berbeda.
+  </p>
+</div>
+
+<!-- PROBLEM 7 -->
+<div style="background-color: #fff; border-left: 5px solid #8e44ad; padding: 10px 15px; margin-bottom: 15px; border-radius: 4px;">
+  <b>Masalah 7 (Teleportasi Kuantum dan Identitas Vektorisasi):</b><br>
+  Dalam protokol teleportasi, Alice dan Bob berbagi $|\Phi^+\rangle_{AB}$. Alice memiliki qubit $|\psi\rangle_C = \alpha|0\rangle+\beta|1\rangle$ yang ingin diteleportasi. Keadaan total adalah $|\psi\rangle_C \otimes |\Phi^+\rangle_{AB}$.<br>
+  Gunakan identitas $\operatorname{vec}(AXB) = (B^T\otimes A)\operatorname{vec}(X)$ untuk menunjukkan bahwa pengukuran Bell oleh Alice pada sistem $CA$ dapat ditulis sebagai $( \langle\Phi^+|_{CA} \otimes I_B ) ( |\psi\rangle_C \otimes |\Phi^+\rangle_{AB}) = \frac12 |\psi\rangle_B$.
+</div>
+
+<div style="background-color: #f4f6f7; border-left: 5px solid #8e44ad; padding: 10px 15px; margin-bottom: 25px; border-radius: 4px;">
+  <b>Pembahasan 7:</b><br>
+  <p align="justify">
+    <b>Langkah 1: Representasi vec.</b> Identifikasi $|00\rangle+|11\rangle = \operatorname{vec}(I_2)$. Secara umum $|\Phi^+\rangle = \frac{1}{\sqrt{2}}\operatorname{vec}(I)$.
+    Maka $|\psi\rangle_C \otimes |\Phi^+\rangle_{AB}$ dapat dilihat sebagai matriks.
+  </p>
+  <p align="justify">
+    <b>Langkah 2: Proyeksi Bell.</b> $\langle\Phi^+|_{CA}$ berkorespondensi dengan $\frac{1}{\sqrt{2}}\operatorname{vec}(I)^\dagger$. Menggunakan identitas:
+    $$(\langle\Phi^+|_{CA}\otimes I_B)(|\psi\rangle_C\otimes|\Phi^+\rangle_{AB}) = \frac12 \sum_{ij} \langle i|_C\langle i|_A (|\psi\rangle_C|j\rangle_A|j\rangle_B)$$
+    Hitung langsung:
+    $$= \frac12 \sum_{ij} \alpha_j \delta_{ij} |j\rangle_B = \frac12 (\alpha|0\rangle+\beta|1\rangle)_B = \frac12 |\psi\rangle_B$$
+  </p>
+  <p align="justify">
+    <b>Kesimpulan:</b> Faktor $1/2$ adalah probabilitas keberhasilan $1/4$ untuk setiap hasil Bell. Identitas vektorisasi menjelaskan mengapa teleportasi bekerja: hasil kali tensor $V\otimes V$ isomorfis dengan ruang operator, dan kontraksi tensor (pengukuran Bell) adalah operasi trace yang memindahkan informasi dari $C$ ke $B$ tanpa melanggar no-cloning. Ini adalah aplikasi langsung dari isomorfisme $V\otimes V \cong \mathcal{L}(V^*,V)$.
+  </p>
+</div>
+
+<!-- PROBLEM 8 -->
+<div style="background-color: #fff; border-left: 5px solid #c0392b; padding: 10px 15px; margin-bottom: 15px; border-radius: 4px;">
+  <b>Masalah 8 (Entropi Entanglement - Ukuran Komputasional Keterjeratan):</b><br>
+  Diberikan keadaan non-maksimal $|\psi_\theta\rangle = \cos\theta|00\rangle + \sin\theta|11\rangle$ dengan $0\le\theta\le\pi/4$.<br>
+  (a) Hitung koefisien Schmidt dan Schmidt Rank.<br>
+  (b) Hitung Entropi Entanglement $S = -\sum_i \lambda_i^2 \log_2 \lambda_i^2$ (dimana $\lambda_i$ adalah koefisien Schmidt).<br>
+  (c) Kapan $S$ maksimal dan kapan $S=0$? Hubungkan dengan tensor murni/tidak murni.
+</div>
+
+<div style="background-color: #f4f6f7; border-left: 5px solid #c0392b; padding: 10px 15px; margin-bottom: 25px; border-radius: 4px;">
+  <b>Pembahasan 8:</b><br>
+  <p align="justify">
+    <b>(a) Matriks Koefisien:</b> $C_\theta = \begin{pmatrix} \cos\theta & 0 \\ 0 & \sin\theta \end{pmatrix}$. Nilai singular $\lambda_1=|\cos\theta|$, $\lambda_2=|\sin\theta|$. Normalisasi $\cos^2\theta+\sin^2\theta=1$. Jika $\theta\in(0,\pi/2)$ dan $\theta\neq0,\pi/2$, maka kedua $\lambda_i>0$ jadi Schmidt Rank $r=2$ (entangled). Jika $\theta=0$, $C=\operatorname{diag}(1,0)$, rank 1 separable.
+  </p>
+  <p align="justify">
+    <b>(b) Entropi:</b> 
+    $$S(\theta) = -\cos^2\theta \log_2(\cos^2\theta) - \sin^2\theta \log_2(\sin^2\theta) = H_{bin}(\cos^2\theta)$$
+    Ini adalah entropi biner.
+  </p>
+  <p align="justify">
+    <b>(c) Analisis:</b>
+    <ul>
+      <li>$\theta=0$: $|\psi\rangle=|00\rangle$, $\lambda=(1,0)$, $S=0$. Tensor murni / separable / tidak ada entanglement, tidak berguna untuk komputasi kuantum.</li>
+      <li>$\theta=\pi/4$: $\cos=\sin=1/\sqrt{2}$, $\lambda=(1/\sqrt{2},1/\sqrt{2})$, $S=1$ bit maksimal. Ini Bell state $|\Phi^+\rangle$, tensor tidak murni dengan entanglement maksimal, sumber daya paling berharga untuk teleportasi dan superdense coding.</li>
+      <li>$\theta$ kecil: $S\approx 0$, entanglement lemah.</li>
+    </ul>
+    Secara komputasional, $S$ mengukur berapa banyak Bell pair yang dapat diekstrak dari banyak salinan $|\psi_\theta\rangle$ melalui LOCC (distilasi entanglement). Rank menentukan <i>apakah</i> terjerat, entropi menentukan <i>seberapa</i> terjerat.
+  </p>
+</div>
+
+<div style="border: 2px solid #2c3e50; border-left: 8px solid #16a085; padding: 15px 20px; border-radius: 12px; background: linear-gradient(135deg, #f9f9f9, #e8f8f5); margin-top: 20px;">
+  <h4 style="margin-top:0;"><b>📊 Ringkasan 5 Problem Kuantum</b></h4>
+  <table style="width:100%; border-collapse:collapse; font-size:14px;">
+    <tr style="background:#2c3e50;color:white;"><th style="padding:6px;">No</th><th>Topik Tensor</th><th>Konsep Kuantum</th><th>Status</th></tr>
+    <tr><td style="padding:6px;border:1px solid #ddd;text-align:center;">4</td><td style="padding:6px;border:1px solid #ddd;">$U_{CNOT}\neq A\otimes B$</td><td style="padding:6px;border:1px solid #ddd;">Gerbang entangling</td><td style="padding:6px;border:1px solid #ddd;color:#e74c3c;">Entangled dibuat</td></tr>
+    <tr style="background:#eafaf1;"><td style="padding:6px;border:1px solid #ddd;text-align:center;">5</td><td style="padding:6px;border:1px solid #ddd;">$(A\otimes B)C = A C B^T$</td><td style="padding:6px;border:1px solid #ddd;">Invariansi entanglement oleh operasi lokal</td><td style="padding:6px;border:1px solid #ddd;color:#e74c3c;">Tetap entangled</td></tr>
+    <tr><td style="padding:6px;border:1px solid #ddd;text-align:center;">6</td><td style="padding:6px;border:1px solid #ddd;">$V^{\otimes3}$ bipartisi</td><td style="padding:6px;border:1px solid #ddd;">GHZ vs W classification</td><td style="padding:6px;border:1px solid #ddd;color:#e74c3c;">Keduanya entangled</td></tr>
+    <tr style="background:#eafaf1;"><td style="padding:6px;border:1px solid #ddd;text-align:center;">7</td><td style="padding:6px;border:1px solid #ddd;">$\operatorname{vec}(AXB)=(B^T\otimes A)\operatorname{vec}(X)$</td><td style="padding:6px;border:1px solid #ddd;">Teleportasi kuantum</td><td style="padding:6px;border:1px solid #ddd;">Aplikasi kontraksi</td></tr>
+    <tr><td style="padding:6px;border:1px solid #ddd;text-align:center;">8</td><td style="padding:6px;border:1px solid #ddd;">Schmidt coefficients $\lambda_i$</td><td style="padding:6px;border:1px solid #ddd;">Entropi entanglement $S$</td><td style="padding:6px;border:1px solid #ddd;">Ukuran sumber daya</td></tr>
+  </table>
 </div>
 
 
