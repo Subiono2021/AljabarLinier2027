@@ -24267,7 +24267,7 @@ show(fiedler.column().apply_map(lambda z: z.n(6)))
     </div>
   </section>
   
-  <div class="theorem-section">
+ <div class="theorem-section">
   <div class="theorem-container">
     <div class="theorem-header" onclick="toggleTeorema(this)">
       <span class="theorem-number">4.2.12b. Korolari: Uji Kemurnian via Rank</span>
@@ -24281,12 +24281,86 @@ show(fiedler.column().apply_map(lambda z: z.n(6)))
           <li>$T$ adalah tensor murni $\iff \operatorname{rank}([c_{ij}]) = 1$</li>
           <li>$T$ adalah tensor tidak murni $\iff \operatorname{rank}([c_{ij}]) \ge 2$</li>
         </ul>
-        <b>Bukti ide:</b> Jika $T = u\otimes v$ dengan $u=\sum a_i e_i$, $v=\sum b_j e_j$, maka $c_{ij}=a_i b_j$ yang merupakan matriks rank-1 (outer product $a b^T$). Sebaliknya, dekomposisi SVD dari $[c_{ij}]$ memberikan dekomposisi Schmidt.
       </p>
+      
       <p align="justify">
-        <b>Konsekuensi praktis:</b> Untuk $V=\mathbb{R}^2$, $T = \begin{bmatrix}a & b \\ c & d\end{bmatrix}$ murni $\iff \det T = ad-bc = 0$. Ini menjelaskan mengapa $I_2$ tidak murni karena $\det I_2 =1 \neq 0$.
+        <b>Bukti:</b>
+        <br>
+        Kita akan membuktikan dua arah implikasi.
+        <br><br>
+        <b>($\Rightarrow$) Jika $T$ tensor murni, maka rank matriks koefisiennya adalah 1.</b>
+        <br>
+        Misalkan $T = u \otimes v$ dengan $u = \sum_{i=1}^n a_i e_i$ dan $v = \sum_{j=1}^n b_j e_j$. 
+        Dengan sifat bilinearitas produk tensor, kita dapat menuliskan:
+        $$T = \left(\sum_{i=1}^n a_i e_i\right) \otimes \left(\sum_{j=1}^n b_j e_j\right) = \sum_{i=1}^n \sum_{j=1}^n (a_i b_j) (e_i \otimes e_j)$$
+        Dari sini, koefisien matriksnya adalah $c_{ij} = a_i b_j$. Matriks $[c_{ij}]$ dapat ditulis sebagai hasil kali luar (outer product) dari vektor kolom $\mathbf{a} = (a_1, \dots, a_n)^T$ dan vektor baris $\mathbf{b}^T = (b_1, \dots, b_n)$, yaitu $[c_{ij}] = \mathbf{a}\mathbf{b}^T$. 
+        Karena setiap baris dari matriks ini merupakan kelipatan skalar dari vektor $\mathbf{b}^T$ (yaitu baris ke-$i$ adalah $a_i \mathbf{b}^T$), maka semua barisnya bergantung linear. Akibatnya, rank dari matriks ini adalah 1 (dengan asumsi $u, v \neq 0$).
+        <br><br>
+        
+        <b>($\Leftarrow$) Jika rank matriks koefisien adalah 1, maka $T$ adalah tensor murni.</b>
+        <br>
+        Jika $\operatorname{rank}([c_{ij}]) = 1$, maka semua baris matriks tersebut bergantung linear. Artinya, terdapat suatu vektor baris $\mathbf{b}^T = (b_1, \dots, b_n)$ dan skalar $a_1, \dots, a_n$ sedemikian sehingga baris ke-$i$ dari matriks adalah $a_i \mathbf{b}^T$. Dengan kata lain, elemen matriksnya dapat difaktorkan menjadi $c_{ij} = a_i b_j$.
+        Substitusikan kembali ke bentuk tensor:
+        $$T = \sum_{i,j} c_{ij} (e_i \otimes e_j) = \sum_{i,j} (a_i b_j) (e_i \otimes e_j) = \left(\sum_i a_i e_i\right) \otimes \left(\sum_j b_j e_j\right)$$
+        Bentuk terakhir tidak lain adalah $u \otimes v$, yang merupakan tensor murni.
+        <br><br>
+        
+        <b>Koneksi dengan SVD dan Rank Schmidt:</b>
+        Secara umum, rank dari matriks koefisien $[c_{ij}]$ sama dengan banyaknya nilai singular tak-nol dari matriks tersebut (via Singular Value Decomposition/SVD). Dalam konteks tensor, banyaknya nilai singular tak-nol ini disebut sebagai <b>Rank Schmidt</b>. Dekomposisi Schmidt pada dasarnya adalah penulisan ulang SVD ke dalam basis tensor, sehingga rank matriks = rank Schmidt. Tensor murni memiliki rank Schmidt = 1.
+      </p>
+      
+      <p align="justify">
+        <b>Konsekuensi praktis:</b> 
+        Untuk ruang $V=\mathbb{R}^2$ (sehingga $T$ direpresentasikan sebagai matriks $2 \times 2$), $T = \begin{bmatrix}a & b \\ c & d\end{bmatrix}$ adalah tensor murni $\iff \operatorname{rank}(T) = 1$. 
+        Dalam aljabar linear, syarat rank matriks $2 \times 2$ bernilai 1 adalah determinannya nol. Jadi, $T$ murni $\iff \det T = ad-bc = 0$. 
+        Hal ini menjelaskan mengapa matriks identitas $I_2 = \begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix}$ <b>bukan</b> tensor murni: karena $\det I_2 = 1 \neq 0$, maka rank-nya adalah 2. Sesuai korolari, rank $\ge 2$ berarti tensor tersebut tidak murni (terjerat/entangled).
       </p>
     </div>
+  </div>
+</div>
+
+<div class="example-container">
+  <div class="example-header" onclick="this.parentElement.classList.toggle('active')">
+    <span><b>Contoh Tensor Murni dan Tidak Murni dalam \(\mathbb{R}^2 \otimes \mathbb{R}^2\)</b></span>
+    <span class="example-arrow">▼</span>
+  </div>
+  <div class="example-box">
+    <p align="justify">
+      Berdasarkan korolari uji kemurnian, suatu tensor \(T \in \mathbb{R}^2 \otimes \mathbb{R}^2\) dapat direpresentasikan sebagai matriks koefisien \(2 \times 2\). Tensor tersebut merupakan <b>tensor murni</b> jika dan hanya jika rank matriks koefisiennya adalah 1 (determinan = 0). Sebaliknya, tensor tersebut <b>tidak murni</b> (terjerat) jika rank matriks koefisiennya \(\ge 2\) (determinan \(\neq 0\)). Berikut adalah contoh untuk masing-masing kasus.
+    </p>
+
+    <!-- CONTOH TENSOR MURNI -->
+    <p align="justify">
+      <strong>Contoh 1: Tensor Murni</strong><br>
+      Misalkan kita memiliki dua vektor di \(\mathbb{R}^2\), yaitu \(u = \begin{bmatrix} 1 \\ 2 \end{bmatrix}\) dan \(v = \begin{bmatrix} 3 \\ 4 \end{bmatrix}\). 
+      Kita bentuk tensor \(T = u \otimes v\). Dalam basis terurut \(\{e_1 \otimes e_1, e_1 \otimes e_2, e_2 \otimes e_1, e_2 \otimes e_2\}\), vektor tensor ini direpresentasikan sebagai:
+      \[
+      T = \begin{bmatrix} 1 \\ 2 \end{bmatrix} \otimes \begin{bmatrix} 3 \\ 4 \end{bmatrix} = \begin{bmatrix} 1 \cdot 3 \\ 1 \cdot 4 \\ 2 \cdot 3 \\ 2 \cdot 4 \end{bmatrix} = \begin{bmatrix} 3 \\ 4 \\ 6 \\ 8 \end{bmatrix}
+      \]
+      Matriks koefisiennya adalah \([c_{ij}] = \begin{bmatrix} 3 & 4 \\ 6 & 8 \end{bmatrix}\). 
+      Determinan matriks ini adalah \(\det([c_{ij}]) = (3)(8) - (4)(6) = 24 - 24 = 0\). 
+      Karena determinannya nol, maka rank matriks koefisiennya adalah 1. Sesuai korolari, \(T\) adalah <b>tensor murni</b>. Hal ini terlihat jelas karena baris kedua matriks hanyalah kelipatan 2 dari baris pertama.
+    </p>
+
+    <!-- CONTOH TENSOR TIDAK MURNI -->
+    <p align="justify">
+      <strong>Contoh 2: Tensor Tidak Murni</strong><br>
+      Sekarang, tinjau sebuah vektor tensor sembarang di \(\mathbb{R}^2 \otimes \mathbb{R}^2\), misalnya:
+      \[
+      T = \begin{bmatrix} 1 \\ 2 \\ 3 \\ 4 \end{bmatrix}
+      \]
+      Matriks koefisien yang bersesuaian dengan vektor ini adalah \([c_{ij}] = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\). 
+      Determinan matriks ini adalah \(\det([c_{ij}]) = (1)(4) - (2)(3) = 4 - 6 = -2 \neq 0\). 
+      Karena determinannya tidak nol, maka rank matriks koefisiennya adalah 2. Sesuai korolari, \(T\) adalah <b>tensor tidak murni</b> (terjerat).
+      <br><br>
+      <i>Bukti tambahan (Reductio ad absurdum):</i> Andaikan \(T\) adalah tensor murni, maka harus ada \(u = \begin{bmatrix} a \\ b \end{bmatrix}\) dan \(v = \begin{bmatrix} c \\ d \end{bmatrix}\) sedemikian sehingga \(T = u \otimes v\). Ini berarti:
+      \[
+      \begin{bmatrix} ac \\ ad \\ bc \\ bd \end{bmatrix} = \begin{bmatrix} 1 \\ 2 \\ 3 \\ 4 \end{bmatrix}
+      \]
+      Dari \(ac = 1\) dan \(ad = 2\), kita peroleh \(d/c = 2\). 
+      Dari \(bc = 3\) dan \(bd = 4\), kita peroleh \(d/c = 4/3\). 
+      Terjadi kontradiksi (\(2 \neq 4/3\)), sehingga tidak mungkin ada vektor \(u\) dan \(v\) yang memenuhi. Dengan demikian, \(T\) terbukti bukan tensor murni.
+    </p>
   </div>
 </div>
   
