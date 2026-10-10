@@ -23441,7 +23441,8 @@ show(fiedler.column().apply_map(lambda z: z.n(6)))
 </div>
 
 
-</section> <!--Akhir Section 3-->
+</section> 
+<!-- AkhirSection 3 -->
 	
 <!---================Batas Section===========================---->	
 
@@ -23717,8 +23718,2371 @@ show(fiedler.column().apply_map(lambda z: z.n(6)))
           Tujuan kita pada bagian ini dan tiga bagian berikutnya adalah meletakkan fondasi
           untuk memahami hasil kali tensor suatu bentuk multilinear.
         </p>
+		
+		<p align="justify">
+      Dunia kuantum sering disebut “aneh” karena aturannya berbeda dari pengalaman klasik.
+      Tidak ada daftar baku yang menetapkan tepat tujuh keanehan kuantum, tetapi tujuh topik berikut
+      mewakili fenomena dan persoalan konseptual yang paling sering dibahas. Dalam bagian ini,
+      setiap keajaiban dihubungkan dengan struktur tensor dan komputasi kuantum.
+    </p>
+		
       </div>
     </div>
+
+    <hr class="garis-elegan">
+	
+<div class="definition-container">
+  <div class="definition-header" onclick="toggleDefinisi(this)">
+    <span><b>1. Dualitas Gelombang–Partikel</b></span>
+    <span class="arrow">▼</span>
+  </div>
+
+  <center>
+    <div class="definition-box">
+
+      <p align="justify">
+        <b>Apa itu dualitas gelombang–partikel?</b>
+        Dualitas gelombang–partikel merupakan salah satu ciri mendasar
+        mekanika kuantum. Objek kuantum, seperti elektron dan foton,
+        dapat memperlihatkan sifat yang berkaitan dengan gelombang
+        maupun partikel, bergantung pada jenis pengukuran dan susunan
+        eksperimen yang digunakan.
+      </p>
+
+      <p align="justify">
+        Dalam eksperimen celah ganda, misalnya, elektron yang dikirimkan
+        satu per satu dapat menghasilkan pola interferensi setelah
+        banyak peristiwa deteksi dikumpulkan. Akan tetapi, ketika
+        informasi mengenai celah yang dilalui elektron tersedia,
+        interferensi dapat berkurang atau hilang, bergantung pada
+        bagaimana informasi lintasan tersebut diperoleh.
+        Hasil ini tidak berarti elektron secara sederhana berubah
+        dari gelombang menjadi partikel. Perilakunya dijelaskan oleh
+        keadaan kuantum dan interaksi sistem dengan alat ukur.
+      </p>
+
+      <p align="justify">
+        <b>Matematika kunci: amplitudo probabilitas.</b>
+        Keadaan kuantum suatu partikel dapat direpresentasikan oleh
+        fungsi gelombang kompleks
+        \( \psi(x,t) \). Untuk pengukuran posisi, kuadrat modulus
+        fungsi gelombang memberikan rapat probabilitas:
+      </p>
+
+      \[
+        \rho(x,t)=|\psi(x,t)|^2.
+      \]
+
+      <p align="justify">
+        Jika terdapat dua jalur yang tidak dapat dibedakan oleh
+        pengukuran dan menghasilkan amplitudo
+        \( \psi_1 \) dan \( \psi_2 \), amplitudo totalnya adalah
+        \( \psi=\psi_1+\psi_2 \). Oleh karena itu,
+        rapat probabilitasnya menjadi
+      </p>
+
+      \[
+        \begin{aligned}
+        |\psi_1+\psi_2|^2
+        &=|\psi_1|^2+|\psi_2|^2\\
+        &\quad+2\operatorname{Re}(\psi_1^*\psi_2).
+        \end{aligned}
+      \]
+
+      <p align="justify">
+        Suku terakhir disebut suku interferensi. Nilainya dapat
+        positif atau negatif, bergantung pada fase relatif kedua
+        amplitudo. Inilah sebabnya probabilitas pada mekanika kuantum
+        tidak selalu diperoleh dengan langsung menjumlahkan
+        probabilitas setiap jalur. Amplitudo harus digabungkan terlebih
+        dahulu ketika jalur-jalur tersebut berkontribusi secara
+        koheren pada hasil pengukuran yang sama.
+      </p>
+
+      <p align="justify">
+        <b>Kaitan dengan ruang Hilbert dan tensor.</b>
+        Secara matematis, keadaan kuantum direpresentasikan oleh
+        vektor pada ruang Hilbert kompleks
+        \( \mathcal{H} \). Untuk sistem dua tingkat, seperti
+        idealisasi sebuah qubit, keadaan murninya dapat ditulis sebagai
+      </p>
+
+      \[
+        |\psi\rangle=\alpha|0\rangle+\beta|1\rangle,
+        \qquad |\alpha|^2+|\beta|^2=1.
+      \]
+
+      <p align="justify">
+        Di sini, \( \alpha,\beta\in\mathbb{C} \) adalah amplitudo
+        probabilitas, sedangkan \( |0\rangle \) dan \( |1\rangle \)
+        merupakan vektor basis ortonormal. Jika dilakukan pengukuran
+        dalam basis tersebut, probabilitas memperoleh hasil
+        \(0\) adalah \( |\alpha|^2 \), sedangkan probabilitas
+        memperoleh hasil \(1\) adalah \( |\beta|^2 \).
+        Superposisi bukan sekadar ketidaktahuan klasik tentang
+        nilai yang sudah pasti, karena fase relatif antaramplitudo
+        dapat memengaruhi hasil eksperimen interferensi.
+      </p>
+
+      <p align="justify">
+        Untuk dua sistem kuantum, ruang keadaan gabungannya
+        direpresentasikan oleh hasil kali tensor:
+      </p>
+
+      \[
+        \mathcal{H}_{AB}=\mathcal{H}_A\otimes\mathcal{H}_B.
+      \]
+
+      <p align="justify">
+        Hasil kali tensor memungkinkan kita membangun keadaan sistem
+        gabungan. Tidak semua keadaan gabungan dapat ditulis sebagai
+        satu hasil kali tensor dari dua keadaan masing-masing.
+        Keadaan yang tidak dapat difaktorkan seperti itu disebut
+        keadaan terbelit (entangled). Dengan demikian, ruang tensor
+        merupakan bagian penting untuk memahami hubungan antara
+        superposisi, interferensi, dan keterkaitan kuantum.
+      </p>
+
+      <p align="justify">
+        <b>Kaitan dengan komputasi kuantum.</b>
+        Dalam komputasi kuantum, qubit dapat berada dalam superposisi
+        dan amplitudonya dapat diubah melalui gerbang kuantum.
+        Contohnya, gerbang Hadamard \(H\) bekerja pada basis komputasi
+        sebagai berikut:
+      </p>
+
+      \[
+        H|0\rangle=\frac{|0\rangle+|1\rangle}{\sqrt{2}},
+        \qquad
+        H|1\rangle=\frac{|0\rangle-|1\rangle}{\sqrt{2}}.
+      \]
+
+      <p align="justify">
+        Perhatikan bahwa tanda relatif pada kedua amplitudo berbeda.
+        Jika gerbang Hadamard diterapkan dua kali pada
+        \( |0\rangle \), hasilnya adalah
+      </p>
+
+      \[
+        H^2|0\rangle=|0\rangle.
+      \]
+
+      <p align="justify">
+        Hasil ini memperlihatkan bahwa amplitudo tidak cukup dipahami
+        hanya melalui besar probabilitasnya. Fase dan tanda relatif
+        berperan dalam interferensi: amplitudo pada suatu hasil dapat
+        saling menguatkan, sedangkan amplitudo pada hasil lain dapat
+        saling meniadakan.
+      </p>
+
+      <p align="justify">
+        Prinsip tersebut dimanfaatkan dalam algoritma kuantum.
+        Namun, superposisi saja tidak otomatis membuat komputasi
+        kuantum lebih cepat. Algoritma harus merancang rangkaian
+        operasi yang menghasilkan interferensi sesuai struktur
+        masalah, sehingga probabilitas hasil yang diinginkan dapat
+        diperbesar. Contohnya adalah algoritma pencarian Grover,
+        yang secara bertahap meningkatkan amplitudo keadaan target
+        melalui operasi yang dirancang secara khusus.
+      </p>
+
+      <p align="justify">
+        <b>Contoh sederhana: interferensi pada satu qubit.</b>
+        Mulailah dengan keadaan \( |0\rangle \), lalu terapkan
+        gerbang Hadamard dua kali:
+      </p>
+
+      \[
+        |0\rangle
+        \xrightarrow{H}
+        \frac{|0\rangle+|1\rangle}{\sqrt{2}}
+        \xrightarrow{H}
+        |0\rangle.
+      \]
+
+      <p align="justify">
+        Setelah gerbang Hadamard pertama, pengukuran menghasilkan
+        \(0\) atau \(1\), masing-masing dengan probabilitas
+        \(1/2\). Namun, apabila gerbang kedua diterapkan sebelum
+        pengukuran, amplitudo dari kedua komponen superposisi
+        bergabung kembali. Kontribusi pada keadaan \( |1\rangle \)
+        saling meniadakan, sedangkan kontribusi pada keadaan
+        \( |0\rangle \) saling menguatkan. Akibatnya, hasil akhirnya
+        adalah \( |0\rangle \) dengan probabilitas \(1\).
+      </p>
+
+      <p align="justify">
+        <b>Inti gagasan.</b>
+        Dualitas gelombang–partikel menunjukkan bahwa fenomena
+        kuantum tidak selalu dapat dijelaskan dengan intuisi klasik.
+        Fungsi gelombang, amplitudo kompleks, ruang Hilbert, dan
+        hasil kali tensor menyediakan bahasa matematis untuk
+        memodelkan fenomena tersebut. Dalam komputasi kuantum,
+        pemahaman terhadap amplitudo dan interferensi menjadi dasar
+        untuk merancang operasi yang mengendalikan probabilitas
+        hasil pengukuran.
+      </p>
+
+    </div>
+  </center>
+</div>
+
+
+<!-- 2 -->
+<div class="definition-container">
+  <div class="definition-header" onclick="toggleDefinisi(this)">
+    <span><b>2. Superposisi Kuantum</b></span>
+    <span class="arrow">▼</span>
+  </div>
+
+  <center>
+    <div class="definition-box">
+
+      <p align="justify">
+        <b>Apa itu superposisi kuantum?</b>
+        Superposisi kuantum adalah keadaan ketika suatu sistem kuantum
+        direpresentasikan sebagai kombinasi linear dari beberapa
+        keadaan dasar. Berbeda dari intuisi klasik, keadaan kuantum
+        tidak harus direpresentasikan sebagai satu keadaan basis saja.
+        Koefisien kompleks pada kombinasi tersebut disebut
+        <em>amplitudo probabilitas</em>, yang menentukan probabilitas
+        hasil pengukuran sekaligus memungkinkan terjadinya interferensi.
+      </p>
+
+      <p align="justify">
+        Sebagai ilustrasi, sebuah koin klasik yang belum kita lihat
+        mungkin hanya belum diketahui apakah menunjukkan angka atau
+        gambar. Sebaliknya, superposisi kuantum bukan sekadar
+        ketidaktahuan seperti itu. Fase relatif antaramplitudo dalam
+        superposisi dapat menghasilkan efek interferensi yang
+        tidak dijelaskan hanya dengan model campuran klasik.
+        Analogi koin berguna sebagai pengantar, tetapi tidak
+        menggambarkan seluruh sifat keadaan kuantum.
+      </p>
+
+      <p align="justify">
+        <b>Matematika kunci: superposisi satu qubit.</b>
+        Qubit adalah sistem kuantum dua tingkat. Keadaan murni
+        satu qubit dapat ditulis sebagai
+      </p>
+
+      \[
+        |\psi\rangle=\alpha|0\rangle+\beta|1\rangle,
+      \]
+
+      <p align="justify">
+        dengan \(\alpha,\beta\in\mathbb{C}\), sedangkan
+        \(|0\rangle\) dan \(|1\rangle\) adalah vektor basis
+        ortonormal. Agar keadaan ternormalisasi, berlaku
+      </p>
+
+      \[
+        |\alpha|^2+|\beta|^2=1.
+      \]
+
+      <p align="justify">
+        Jika dilakukan pengukuran dalam basis komputasi
+        \(\{|0\rangle,|1\rangle\}\), probabilitas memperoleh
+        hasil \(0\) adalah \( |\alpha|^2 \), sedangkan probabilitas
+        memperoleh hasil \(1\) adalah \( |\beta|^2 \).
+        Jadi, amplitudo bukan probabilitas itu sendiri:
+        probabilitas diperoleh dari kuadrat modulus amplitudo.
+      </p>
+
+      <p align="justify">
+        <b>Contoh sederhana.</b>
+        Perhatikan keadaan
+      </p>
+
+      \[
+        |+\rangle=\frac{|0\rangle+|1\rangle}{\sqrt{2}}.
+      \]
+
+      <p align="justify">
+        Pada pengukuran dalam basis komputasi, hasil \(0\) dan \(1\)
+        masing-masing memiliki probabilitas \(1/2\). Namun,
+        keadaan ini berbeda dari keadaan
+        \[
+          |-\rangle=\frac{|0\rangle-|1\rangle}{\sqrt{2}}.
+        \]
+        Kedua keadaan tersebut memberikan probabilitas yang sama
+        dalam pengukuran basis komputasi, tetapi memiliki fase relatif
+        berbeda. Perbedaan ini dapat diamati melalui operasi kuantum
+        yang sesuai, misalnya dengan menerapkan gerbang Hadamard.
+      </p>
+
+      <p align="justify">
+        <b>Superposisi pada banyak qubit.</b>
+        Untuk sistem yang terdiri atas \(n\) qubit, keadaan murni
+        umumnya dapat dinyatakan sebagai
+      </p>
+
+      \[
+        |\psi\rangle=
+        \sum_{x\in\{0,1\}^{n}}c_x|x\rangle,
+        \qquad
+        \sum_{x\in\{0,1\}^{n}}|c_x|^2=1.
+      \]
+
+      <p align="justify">
+        Di sini, \(x\) menyatakan string biner sepanjang \(n\) bit,
+        sedangkan \(|x\rangle\) adalah keadaan basis yang bersesuaian.
+        Karena terdapat \(2^n\) string biner sepanjang \(n\) bit,
+        ruang keadaan memiliki \(2^n\) vektor basis.
+        Ketika diukur dalam basis komputasi, probabilitas memperoleh
+        string \(x\) adalah \( |c_x|^2 \).
+      </p>
+
+      <p align="justify">
+        Sebagai contoh, untuk dua qubit terdapat empat keadaan basis:
+      </p>
+
+      \[
+        |00\rangle,\quad |01\rangle,\quad
+        |10\rangle,\quad |11\rangle.
+      \]
+
+      <p align="justify">
+        Salah satu superposisi yang mungkin adalah
+      </p>
+
+      \[
+        |\psi\rangle=
+        \frac{|00\rangle+|01\rangle+|10\rangle+|11\rangle}{2}.
+      \]
+
+      <p align="justify">
+        Keempat hasil memiliki probabilitas \(1/4\) apabila diukur
+        dalam basis komputasi. Akan tetapi, keadaan ini tidak berarti
+        kita dapat membaca keempat hasil tersebut sekaligus dari
+        satu kali pengukuran. Satu kali pengukuran menghasilkan
+        satu string dua bit.
+      </p>
+
+      <p align="justify">
+        <b>Kaitan dengan ruang Hilbert dan tensor.</b>
+        Ruang keadaan satu qubit adalah
+        \(\mathcal{H}\cong\mathbb{C}^{2}\). Untuk \(n\) qubit,
+        ruang keadaan gabungannya adalah
+      </p>
+
+      \[
+        \mathcal{H}^{\otimes n}
+        =
+        \underbrace{
+          \mathcal{H}\otimes\cdots\otimes\mathcal{H}
+        }_{n\text{ faktor}},
+      \]
+
+      \[
+        \dim\left(\mathcal{H}^{\otimes n}\right)=2^n.
+      \]
+
+      <p align="justify">
+        Hasil kali tensor bukan sekadar cara menuliskan banyak qubit
+        secara berdampingan. Operasi ini membangun ruang keadaan
+        gabungan dari ruang keadaan masing-masing qubit.
+        Sebagian keadaan gabungan dapat ditulis sebagai hasil kali
+        tensor keadaan tiap qubit, sedangkan sebagian lainnya tidak.
+        Keadaan yang tidak dapat difaktorkan menjadi hasil kali
+        tensor keadaan masing-masing subsistem disebut
+        <em>entangled state</em> atau keadaan terbelit.
+        Dengan demikian, superposisi dan keterbelitan merupakan
+        konsep yang berkaitan, tetapi tidak sama.
+      </p>
+
+      <p align="justify">
+        <b>Kaitan dengan komputasi kuantum: quantum parallelism.</b>
+        Superposisi memungkinkan suatu rangkaian kuantum memproses
+        amplitudo dari banyak keadaan basis melalui operasi yang sama.
+        Fenomena ini sering disebut <em>quantum parallelism</em>.
+        Misalnya, untuk fungsi Boolean
+        \(f:\{0,1\}^{n}\rightarrow\{0,1\}\), sebuah rangkaian
+        kuantum yang merealisasikan fungsi tersebut dapat bekerja
+        pada superposisi masukan.
+      </p>
+
+      <p align="justify">
+        Dengan menerapkan gerbang Hadamard pada setiap qubit,
+        keadaan awal seluruhnya nol dapat diubah menjadi
+        superposisi seragam:
+      </p>
+
+      \[
+        H^{\otimes n}|0\rangle^{\otimes n}
+        =
+        \frac{1}{\sqrt{2^n}}
+        \sum_{x\in\{0,1\}^{n}}|x\rangle.
+      \]
+
+      <p align="justify">
+        Persamaan tersebut menunjukkan bahwa semua \(2^n\)
+        keadaan basis memiliki amplitudo yang sama, yaitu
+        \(1/\sqrt{2^n}\). Operasi kuantum berikutnya dapat mengubah
+        amplitudo-amplitudo itu sesuai struktur masalah yang dihitung.
+        Namun, keberadaan banyak komponen superposisi tidak dengan
+        sendirinya memberikan seluruh nilai \(f(x)\) sebagai keluaran
+        yang dapat dibaca secara bersamaan.
+      </p>
+
+      <p align="justify">
+        <b>Mengapa interferensi diperlukan?</b>
+        Pengukuran menghasilkan satu hasil sesuai distribusi
+        probabilitas keadaan akhir. Oleh karena itu, algoritma
+        kuantum perlu merancang operasi yang mengatur fase dan
+        amplitudo agar hasil yang diinginkan memiliki probabilitas
+        lebih besar. Amplitudo dapat saling menguatkan pada hasil
+        tertentu dan saling meniadakan pada hasil lainnya.
+        Mekanisme ini disebut interferensi kuantum.
+      </p>
+
+      <p align="justify">
+        Contohnya, algoritma pencarian Grover menggunakan operasi
+        yang dirancang khusus untuk meningkatkan amplitudo keadaan
+        target di antara banyak kemungkinan. Keunggulan algoritma
+        tersebut bukan semata-mata karena semua masukan berada
+        dalam superposisi, melainkan karena superposisi, operasi
+        kuantum, interferensi, dan pengukuran disusun menjadi
+        prosedur komputasi yang terarah.
+      </p>
+
+      <p align="justify">
+        <b>Inti gagasan.</b>
+        Superposisi adalah cara matematis untuk merepresentasikan
+        keadaan kuantum sebagai kombinasi linear keadaan basis.
+        Koefisien kompleksnya menentukan probabilitas pengukuran
+        sekaligus membawa informasi fase yang penting bagi
+        interferensi. Dalam komputasi kuantum, ruang tensor
+        menyediakan struktur matematis bagi sistem banyak qubit,
+        sedangkan pengaturan amplitudo melalui operasi kuantum
+        memungkinkan algoritma memanfaatkan sifat-sifat tersebut.
+        Superposisi bukan berarti semua jawaban dapat dibaca
+        sekaligus, dan tidak setiap masalah otomatis memperoleh
+        percepatan kuantum.
+      </p>
+
+    </div>
+  </center>
+</div>
+
+<!-- 3 -->
+<div class="definition-container">
+  <div class="definition-header" onclick="toggleDefinisi(this)">
+    <span><b>3. Keterikatan Kuantum (Entanglement)</b></span>
+    <span class="arrow">▼</span>
+  </div>
+
+  <center>
+    <div class="definition-box">
+
+      <p align="justify">
+        <b>Apa itu keterikatan kuantum?</b>
+        Keterikatan kuantum (<em>quantum entanglement</em>) adalah
+        fenomena ketika keadaan bersama beberapa sistem kuantum
+        tidak dapat dinyatakan sebagai hasil kali tensor dari
+        keadaan masing-masing sistem. Dengan kata lain, sistem
+        gabungan memiliki struktur keadaan yang tidak dapat
+        dijelaskan sepenuhnya dengan memberikan keadaan kuantum
+        mandiri kepada setiap subsistem.
+      </p>
+
+      <p align="justify">
+        Untuk memahami gagasan ini, bayangkan dua qubit, yaitu
+        sistem kuantum A dan B. Jika keadaan gabungannya dapat
+        ditulis sebagai
+        \[
+          |\psi\rangle_{AB}=|a\rangle_A\otimes|b\rangle_B,
+        \]
+        keadaan tersebut disebut keadaan produk
+        (<em>product state</em>). Jika keadaan murni gabungan
+        tidak dapat ditulis dalam bentuk tersebut, kedua qubit
+        berada dalam keadaan terbelit.
+      </p>
+
+      <p align="justify">
+        Hal penting yang perlu dipahami adalah bahwa keterikatan
+        bukan sekadar berarti kedua sistem memiliki hasil pengukuran
+        yang sama. Keterikatan merupakan sifat matematis keadaan
+        bersama dan dapat menghasilkan korelasi kuantum yang tidak
+        dapat dijelaskan oleh model variabel tersembunyi lokal
+        dalam kerangka ketaksamaan Bell. Namun, korelasi tersebut
+        tidak memungkinkan pengiriman informasi secara instan
+        dengan mengendalikan hasil pengukuran.
+      </p>
+
+      <p align="justify">
+        <b>Matematika kunci: keadaan Bell.</b>
+        Salah satu contoh paling terkenal adalah keadaan Bell
+        \(|\Phi^+\rangle\), yang didefinisikan sebagai
+      </p>
+
+      \[
+        |\Phi^+\rangle
+        =\frac{|00\rangle+|11\rangle}{\sqrt{2}}.
+      \]
+
+      <p align="justify">
+        Di sini, \(|00\rangle=|0\rangle\otimes|0\rangle\)
+        dan \(|11\rangle=|1\rangle\otimes|1\rangle\).
+        Keadaan tersebut merupakan superposisi dua keadaan basis
+        dengan amplitudo yang sama. Jika kedua qubit diukur dalam
+        basis komputasi, hasil yang mungkin adalah \(00\) dan
+        \(11\), masing-masing dengan probabilitas \(1/2\).
+        Hasil \(01\) dan \(10\) memiliki probabilitas nol.
+      </p>
+
+      <p align="justify">
+        <b>Mengapa keadaan Bell terbelit?</b>
+        Kita dapat membuktikannya dengan asumsi bahwa keadaan
+        tersebut merupakan keadaan produk dari dua qubit:
+      </p>
+
+      \[
+        |a\rangle=\alpha|0\rangle+\beta|1\rangle,
+        \qquad
+        |b\rangle=\gamma|0\rangle+\delta|1\rangle.
+      \]
+
+      <p align="justify">
+        Hasil kali tensor kedua keadaan itu adalah
+      </p>
+
+      \[
+        \begin{aligned}
+        |a\rangle\otimes|b\rangle
+        ={}&\alpha\gamma|00\rangle
+        +\alpha\delta|01\rangle\\
+        &+\beta\gamma|10\rangle
+        +\beta\delta|11\rangle.
+        \end{aligned}
+      \]
+
+      <p align="justify">
+        Agar sama dengan keadaan Bell \(|\Phi^+\rangle\),
+        koefisien-koefisiennya harus memenuhi
+      </p>
+
+      \[
+        \begin{aligned}
+        \alpha\gamma&=\frac{1}{\sqrt{2}},&
+        \alpha\delta&=0,\\
+        \beta\gamma&=0,&
+        \beta\delta&=\frac{1}{\sqrt{2}}.
+        \end{aligned}
+      \]
+
+      <p align="justify">
+        Persamaan pertama dan keempat mengharuskan
+        \(\alpha,\beta,\gamma,\delta\) semuanya tidak nol.
+        Akan tetapi, persamaan kedua dan ketiga mengharuskan
+        \(\alpha\delta=0\) dan \(\beta\gamma=0\).
+        Kedua syarat ini bertentangan dengan syarat sebelumnya.
+        Jadi, tidak ada pilihan koefisien yang dapat menghasilkan
+        faktorisasi tersebut. Dengan demikian,
+      </p>
+
+      \[
+        \boxed{
+          |\Phi^+\rangle\neq |a\rangle\otimes|b\rangle
+        }
+      \]
+
+      <p align="justify">
+        untuk setiap pasangan keadaan murni satu qubit
+        \(|a\rangle\) dan \(|b\rangle\). Oleh sebab itu,
+        \(|\Phi^+\rangle\) merupakan keadaan terbelit.
+      </p>
+
+      <p align="justify">
+        <b>Bagaimana entanglement dibuat?</b>
+        Dalam komputasi kuantum, keadaan Bell dapat dibuat
+        menggunakan gerbang Hadamard \(H\) dan gerbang CNOT.
+        Mulailah dari dua qubit dalam keadaan \(|00\rangle\).
+        Gerbang Hadamard diterapkan pada qubit pertama,
+        sedangkan qubit kedua tidak diubah:
+      </p>
+
+      \[
+        |00\rangle
+        \xrightarrow{H\otimes I}
+        \frac{|00\rangle+|10\rangle}{\sqrt{2}}.
+      \]
+
+      <p align="justify">
+        Selanjutnya, terapkan gerbang CNOT dengan qubit pertama
+        sebagai qubit kontrol dan qubit kedua sebagai target.
+        CNOT membalik qubit target jika qubit kontrol bernilai
+        \(1\). Akibatnya,
+      </p>
+
+      \[
+        \frac{|00\rangle+|10\rangle}{\sqrt{2}}
+        \xrightarrow{\mathrm{CNOT}}
+        \frac{|00\rangle+|11\rangle}{\sqrt{2}}.
+      \]
+
+      <p align="justify">
+        Hasil akhirnya adalah keadaan Bell \(|\Phi^+\rangle\).
+        Contoh ini memperlihatkan hubungan antara superposisi
+        dan keterikatan: Hadamard membentuk superposisi pada
+        qubit pertama, kemudian CNOT menghubungkan kedua qubit
+        sehingga keadaan gabungannya tidak lagi dapat
+        difaktorkan menjadi dua keadaan murni yang mandiri.
+      </p>
+
+      <p align="justify">
+        <b>Kaitan dengan tensor dan ruang keadaan.</b>
+        Dua qubit memiliki ruang keadaan gabungan
+      </p>
+
+      \[
+        \mathcal{H}_{AB}
+        =\mathcal{H}_A\otimes\mathcal{H}_B
+        \cong\mathbb{C}^{2}\otimes\mathbb{C}^{2}
+        \cong\mathbb{C}^{4}.
+      \]
+
+      <p align="justify">
+        Dalam basis komputasi, keadaan dua qubit dapat ditulis
+        sebagai
+      </p>
+
+      \[
+        |\psi\rangle
+        =c_{00}|00\rangle+c_{01}|01\rangle
+        +c_{10}|10\rangle+c_{11}|11\rangle,
+      \]
+
+      <p align="justify">
+        dengan syarat normalisasi
+      </p>
+
+      \[
+        |c_{00}|^2+|c_{01}|^2+
+        |c_{10}|^2+|c_{11}|^2=1.
+      \]
+
+      <p align="justify">
+        Koefisien-koefisien ini dapat disusun menjadi matriks
+        koefisien
+      </p>
+
+      \[
+        C=
+        \begin{pmatrix}
+          c_{00}&c_{01}\\
+          c_{10}&c_{11}
+        \end{pmatrix}.
+      \]
+
+      <p align="justify">
+        Jika keadaan dapat difaktorkan sebagai
+        \(|a\rangle\otimes|b\rangle\), dengan
+        \(|a\rangle=(\alpha,\beta)^{T}\) dan
+        \(|b\rangle=(\gamma,\delta)^{T}\), maka
+      </p>
+
+      \[
+        C=
+        \begin{pmatrix}\alpha\\\beta\end{pmatrix}
+        \begin{pmatrix}\gamma&\delta\end{pmatrix}.
+      \]
+
+      <p align="justify">
+        Matriks ini memiliki rank satu. Sebaliknya, untuk
+        keadaan murni dua qubit, matriks koefisien yang memiliki
+        rank lebih dari satu menunjukkan bahwa keadaan tersebut
+        tidak dapat difaktorkan menjadi hasil kali tensor dua
+        keadaan murni.
+      </p>
+
+      \[
+        \boxed{
+        \begin{aligned}
+          \operatorname{rank}(C)=1
+          &\iff \text{keadaan produk},\\
+          \operatorname{rank}(C)>1
+          &\iff \text{keadaan terbelit}.
+        \end{aligned}
+        }
+      \]
+
+      <p align="justify">
+        Untuk keadaan Bell, matriks koefisiennya adalah
+      </p>
+
+      \[
+        C_{\Phi^+}
+        =\frac{1}{\sqrt{2}}
+        \begin{pmatrix}
+          1&0\\
+          0&1
+        \end{pmatrix}.
+      \]
+
+      <p align="justify">
+        Matriks tersebut memiliki rank dua, sehingga keadaan
+        Bell memang terbelit. Secara lebih umum, dekomposisi
+        Schmidt menyatakan bahwa setiap keadaan murni dua sistem
+        dapat ditulis sebagai
+      </p>
+
+      \[
+        |\psi\rangle_{AB}
+        =\sum_{k=1}^{r}s_k
+        |u_k\rangle_A\otimes|v_k\rangle_B,
+      \]
+
+      <p align="justify">
+        dengan \(s_k>0\), \(\sum_k s_k^2=1\), dan
+        \(r\) adalah rank Schmidt. Keadaan murni tersebut
+        merupakan keadaan produk tepat ketika \(r=1\);
+        jika \(r>1\), keadaan tersebut terbelit.
+        Untuk dua qubit, rank Schmidt sama dengan rank matriks
+        koefisien \(C\).
+      </p>
+
+      <p align="justify">
+        <b>Perbedaan keadaan murni dan keadaan campuran.</b>
+        Istilah "keadaan murni" memiliki arti khusus dalam
+        mekanika kuantum. Keadaan Bell di atas adalah keadaan
+        murni, meskipun tidak dapat difaktorkan menjadi keadaan
+        murni masing-masing qubit. Jika salah satu qubit saja
+        diamati dan qubit lainnya diabaikan, keadaan lokalnya
+        menjadi keadaan campuran maksimal:
+      </p>
+
+      \[
+        \rho_A=\rho_B=\frac{I_2}{2}.
+      \]
+
+      <p align="justify">
+        Hasil ini dapat diperoleh dari matriks kerapatan keadaan
+        gabungan dengan melakukan <em>partial trace</em> terhadap
+        subsistem lainnya. Jadi, keadaan gabungan dapat murni
+        sementara keadaan masing-masing subsistemnya campuran.
+        Karena itu, keterikatan tidak tepat didefinisikan sebagai
+        "tensor tidak murni". Istilah yang lebih tepat untuk
+        keadaan murni adalah "keadaan gabungan yang tidak dapat
+        difaktorkan menjadi hasil kali tensor keadaan murni
+        masing-masing subsistem".
+      </p>
+
+      <p align="justify">
+        <b>Bagaimana keterikatan dipahami melalui pengukuran?</b>
+        Pada keadaan \(|\Phi^+\rangle\), pengukuran kedua qubit
+        dalam basis komputasi menghasilkan pasangan \(00\) atau
+        \(11\). Jika hasil pengukuran qubit A adalah \(0\),
+        hasil pengukuran qubit B dalam basis yang sama juga
+        \(0\); jika hasil A adalah \(1\), hasil B juga \(1\).
+        Namun, sebelum pengukuran, keadaan gabungan tidak boleh
+        disamakan begitu saja dengan pilihan klasik yang telah
+        ditetapkan sebelumnya, yaitu "keduanya pasti 0" atau
+        "keduanya pasti 1". Pengujian Bell dengan pilihan
+        pengukuran yang berbeda dapat membedakan prediksi
+        mekanika kuantum dari kelas teori variabel tersembunyi
+        lokal.
+      </p>
+
+      <p align="justify">
+        Korelasi kuantum tersebut tidak berarti satu qubit dapat
+        digunakan untuk mengirim pesan seketika kepada qubit
+        lainnya. Hasil pengukuran lokal tetap tidak dapat
+        dikendalikan untuk mengodekan pesan. Untuk membandingkan
+        hasil pengukuran, para pengamat tetap memerlukan
+        komunikasi klasik.
+      </p>
+
+      <p align="justify">
+        <b>Kaitan dengan komputasi dan teknologi kuantum.</b>
+        Keterikatan kuantum berperan penting dalam beberapa
+        protokol dan arsitektur komputasi kuantum, antara lain:
+      </p>
+
+      <ul>
+        <li>
+          <b>Teleportasi kuantum:</b>
+          memindahkan keadaan kuantum yang tidak diketahui
+          menggunakan keterikatan bersama, pengukuran, dan
+          komunikasi klasik. Protokol ini tidak memindahkan
+          materi secara fisik dan tidak mengirim informasi
+          melebihi batas kecepatan cahaya.
+        </li>
+        <li>
+          <b>Superdense coding:</b>
+          memungkinkan dua bit informasi klasik dikirim melalui
+          satu qubit yang dikirimkan, dengan syarat pengirim
+          dan penerima sebelumnya berbagi sepasang qubit terbelit.
+        </li>
+        <li>
+          <b>Algoritma kuantum:</b>
+          keterikatan dapat muncul ketika operasi kuantum
+          menghubungkan banyak qubit. Namun, tidak semua
+          algoritma kuantum membutuhkan atau memanfaatkan
+          keterikatan dengan cara yang sama.
+        </li>
+        <li>
+          <b>Koreksi galat kuantum:</b>
+          kode kuantum menggunakan keadaan gabungan banyak qubit
+          untuk menyandikan informasi logis dan mendeteksi atau
+          mengoreksi kelas galat tertentu. Keterikatan berperan
+          penting dalam banyak kode dan prosedur koreksi galat,
+          tetapi tidak berarti setiap kode kuantum identik
+          dengan satu keadaan Bell.
+        </li>
+      </ul>
+
+      <p align="justify">
+        <b>Inti gagasan.</b>
+        Keterikatan kuantum menunjukkan bahwa keadaan gabungan
+        beberapa sistem kuantum dapat memiliki struktur yang
+        tidak dapat direduksi menjadi keadaan murni masing-masing
+        subsistem. Hasil kali tensor menyediakan ruang matematis
+        untuk merepresentasikan sistem gabungan, sedangkan rank
+        matriks koefisien dan dekomposisi Schmidt memberikan
+        cara untuk menguji keterfaktoran pada keadaan murni.
+        Keterikatan menghasilkan korelasi kuantum yang penting
+        bagi teleportasi kuantum, superdense coding, dan berbagai
+        teknologi kuantum, tanpa memungkinkan komunikasi
+        seketika.
+      </p>
+
+    </div>
+  </center>
+</div>
+
+
+<!-- 4 -->
+<div class="definition-container">
+  <div class="definition-header" onclick="toggleDefinisi(this)">
+    <span><b>4. Terowongan Kuantum (Quantum Tunneling)</b></span>
+    <span class="arrow">▼</span>
+  </div>
+
+  <center>
+    <div class="definition-box">
+
+      <p align="justify">
+        <b>Apa itu terowongan kuantum?</b>
+        Terowongan kuantum (<em>quantum tunneling</em>) adalah
+        fenomena ketika suatu partikel memiliki probabilitas untuk
+        melewati daerah penghalang potensial, meskipun energi
+        totalnya lebih rendah daripada tinggi penghalang tersebut.
+        Fenomena ini berbeda dari gambaran mekanika klasik.
+        Dalam mekanika klasik, partikel tidak dapat melewati
+        penghalang potensial jika energi totalnya lebih rendah
+        daripada energi potensial penghalang dan tidak tersedia
+        jalur klasik lain.
+      </p>
+
+      <p align="justify">
+        Dalam mekanika kuantum, keadaan partikel dijelaskan oleh
+        fungsi gelombang. Ketika fungsi gelombang mencapai
+        penghalang potensial, amplitudonya dapat menembus daerah
+        penghalang dan tetap tidak nol di sisi lainnya.
+        Akibatnya, terdapat probabilitas untuk mendeteksi partikel
+        di sisi seberang. Hal ini tidak berarti partikel harus
+        memperoleh energi tambahan untuk melompati penghalang.
+        Pada penghalang yang tidak bergantung pada waktu,
+        energi total tetap dipertahankan; tunneling muncul dari
+        solusi persamaan kuantum yang memungkinkan transmisi
+        melalui daerah terlarang secara klasik.
+      </p>
+
+      <p align="justify">
+        <b>Analogi sederhana.</b>
+        Bayangkan sebuah bola yang bergerak menuju bukit.
+        Dalam gambaran klasik, bola yang energinya tidak cukup
+        untuk mencapai puncak akan berbalik. Namun, partikel
+        kuantum tidak selalu dapat dipahami sebagai bola kecil
+        yang memiliki lintasan klasik tertentu. Fungsi gelombangnya
+        dapat menembus penghalang sehingga pengukuran di sisi
+        seberang menghasilkan probabilitas yang tidak nol.
+        Analogi ini hanya membantu membedakan prediksi klasik
+        dan kuantum, bukan menggambarkan mekanisme mikroskopis
+        secara harfiah.
+      </p>
+
+      <p align="justify">
+        <b>Matematika kunci: persamaan Schrödinger.</b>
+        Untuk partikel bermassa \(m\) yang bergerak dalam
+        potensial satu dimensi \(V(x)\), persamaan Schrödinger
+        tak bergantung waktu adalah
+      </p>
+
+      \[
+        -\frac{\hbar^2}{2m}\frac{d^2\psi(x)}{dx^2}
+        +V(x)\psi(x)=E\psi(x),
+      \]
+
+      <p align="justify">
+        dengan \(\hbar\) adalah konstanta Planck tereduksi,
+        \(E\) adalah energi partikel, dan \(\psi(x)\) adalah
+        fungsi gelombangnya. Di daerah ketika \(E>V(x)\),
+        solusi untuk potensial konstan umumnya bersifat
+        berosilasi. Sebaliknya, ketika \(E<V(x)\), solusi
+        dapat berbentuk eksponensial.
+      </p>
+
+      <p align="justify">
+        Misalkan terdapat penghalang potensial persegi dengan
+        tinggi \(V_0\) dan lebar \(L\):
+      </p>
+
+      \[
+        V(x)=
+        \begin{cases}
+          0, & x<0,\\
+          V_0, & 0\leq x\leq L,\\
+          0, & x>L.
+        \end{cases}
+      \]
+
+      <p align="justify">
+        Untuk kasus \(E<V_0\), persamaan Schrödinger di dalam
+        penghalang menjadi
+      </p>
+
+      \[
+        \frac{d^2\psi}{dx^2}=\kappa^2\psi,
+        \qquad
+        \kappa=\frac{\sqrt{2m(V_0-E)}}{\hbar}.
+      \]
+
+      <p align="justify">
+        Solusi umumnya berbentuk
+      </p>
+
+      \[
+        \psi(x)=A e^{\kappa x}+B e^{-\kappa x}.
+      \]
+
+      <p align="justify">
+        Fungsi gelombang di dalam penghalang bukan gelombang
+        berosilasi seperti di daerah yang secara klasik diizinkan.
+        Amplitudonya memiliki perilaku eksponensial. Dengan
+        mencocokkan fungsi gelombang dan turunannya pada kedua
+        batas penghalang, kita dapat menentukan amplitudo
+        transmisi dan refleksi.
+      </p>
+
+      <p align="justify">
+        <b>Probabilitas transmisi.</b>
+        Jika \(t\) adalah amplitudo transmisi, maka probabilitas
+        transmisi ditentukan oleh
+      </p>
+
+      \[
+        T=|t|^2,
+      \]
+
+      <p align="justify">
+        untuk kasus hamburan satu dimensi dengan potensial yang
+        sama di kedua sisi penghalang. Secara lebih umum,
+        probabilitas arus transmisi memenuhi
+      </p>
+
+      \[
+        T=\frac{j_{\mathrm{trans}}}{j_{\mathrm{in}}},
+      \]
+
+      <p align="justify">
+        dengan \(j_{\mathrm{trans}}\) adalah arus probabilitas
+        yang ditransmisikan dan \(j_{\mathrm{in}}\) adalah
+        arus probabilitas datang. Jika bilangan gelombang di
+        kedua sisi berbeda, faktor kecepatan atau bilangan
+        gelombang perlu diperhitungkan; karena itu, \(T\)
+        tidak selalu cukup dinyatakan sebagai \(|t|^2\) untuk
+        setiap pilihan normalisasi amplitudo.
+      </p>
+
+      <p align="justify">
+        Untuk penghalang persegi, salah satu hasil eksaknya
+        adalah
+      </p>
+
+      \[
+        T=
+        \left[
+          1+
+          \frac{V_0^2\sinh^2(\kappa L)}
+          {4E(V_0-E)}
+        \right]^{-1},
+        \qquad 0<E<V_0.
+      \]
+
+      <p align="justify">
+        Persamaan tersebut berlaku untuk partikel dengan energi
+        positif yang datang dari daerah berpotensial nol pada
+        kedua sisi penghalang persegi di atas. Persamaan ini
+        menunjukkan bahwa transmisi bergantung pada energi
+        partikel, tinggi penghalang, lebar penghalang, massa
+        partikel, dan konstanta Planck tereduksi.
+      </p>
+
+      <p align="justify">
+        Untuk penghalang yang cukup lebar atau tinggi,
+        pendekatan WKB memberikan gambaran sederhana:
+      </p>
+
+      \[
+        T\approx
+        \exp\left[
+          -2\int_{x_1}^{x_2}
+          \frac{\sqrt{2m(V(x)-E)}}{\hbar}\,dx
+        \right],
+      \]
+
+      <p align="justify">
+        dengan \(x_1\) dan \(x_2\) merupakan titik balik klasik
+        yang membatasi daerah \(V(x)>E\). Untuk penghalang
+        persegi, pendekatan ini menjadi
+      </p>
+
+      \[
+        T\approx e^{-2\kappa L}.
+      \]
+
+      <p align="justify">
+        Pendekatan tersebut memperlihatkan bahwa probabilitas
+        tunneling umumnya menurun secara eksponensial ketika
+        lebar penghalang atau massa partikel bertambah.
+        Penghalang yang lebih tinggi juga umumnya menekan
+        transmisi pada energi datang yang tetap.
+        Rumus eksponensial ini merupakan pendekatan, bukan
+        rumus eksak untuk semua penghalang.
+      </p>
+
+      <p align="justify">
+        <b>Contoh interpretasi.</b>
+        Jika dalam suatu model diperoleh \(T=0{,}01\),
+        artinya probabilitas transmisi adalah \(1\%\) untuk
+        kondisi awal dan pengukuran yang sesuai dengan model
+        tersebut. Dalam banyak percobaan identik, sekitar
+        satu dari seratus partikel yang disiapkan dengan
+        kondisi sama diperkirakan ditransmisikan, jika
+        statistik percobaan mengikuti probabilitas tersebut.
+        Angka ini bukan nilai universal; nilai sebenarnya
+        harus dihitung dari parameter sistem yang diteliti.
+      </p>
+
+      <p align="justify">
+        <b>Kaitan dengan ruang Hilbert dan tensor.</b>
+        Keadaan kuantum merupakan vektor dalam ruang Hilbert,
+        sedangkan evolusi sistem tertutup dinyatakan oleh
+        operator evolusi \(U(t)\). Untuk Hamiltonian
+        \(H(t)\) yang mungkin bergantung pada waktu,
+        evolusinya memenuhi
+      </p>
+
+      \[
+        i\hbar\frac{d}{dt}|\psi(t)\rangle
+        =H(t)|\psi(t)\rangle.
+      \]
+
+      <p align="justify">
+        Jika Hamiltonian tidak bergantung pada waktu, operator
+        evolusinya adalah
+      </p>
+
+      \[
+        U(t)=e^{-iHt/\hbar}.
+      \]
+
+      <p align="justify">
+        Untuk sistem yang terdiri atas beberapa subsistem,
+        ruang keadaan gabungannya dapat ditulis sebagai
+      </p>
+
+      \[
+        \mathcal{H}_{\mathrm{total}}
+        =\mathcal{H}_1\otimes\mathcal{H}_2
+        \otimes\cdots\otimes\mathcal{H}_n.
+      \]
+
+      <p align="justify">
+        Dalam sistem seperti ini, tunneling dapat muncul sebagai
+        transisi kuantum yang melibatkan beberapa keadaan atau
+        konfigurasi. Namun, tunneling bukan semata-mata akibat
+        penggunaan tensor. Hasil kali tensor menyediakan
+        representasi matematis bagi sistem gabungan, sedangkan
+        kemungkinan tunneling ditentukan oleh Hamiltonian,
+        struktur potensial, dan dinamika kuantumnya.
+      </p>
+
+      <p align="justify">
+        <b>Kaitan dengan quantum annealing.</b>
+        Dalam <em>quantum annealing</em>, sistem dirancang agar
+        keadaan energinya berkembang menuju konfigurasi yang
+        diharapkan menyelesaikan masalah optimisasi. Salah satu
+        model Hamiltonian yang sering digunakan adalah
+      </p>
+
+      \[
+        H(s)=(1-s)H_0+sH_P,
+        \qquad 0\leq s\leq 1,
+      \]
+
+      <p align="justify">
+        dengan \(s=t/\tau\) sebagai parameter waktu ternormalisasi,
+        \(\tau\) adalah durasi proses, \(H_0\) adalah Hamiltonian
+        awal yang relatif mudah disiapkan, dan \(H_P\) adalah
+        Hamiltonian masalah yang energi minimumnya mewakili
+        solusi yang dicari.
+      </p>
+
+      <p align="justify">
+        Pada model tertentu, Hamiltonian awal mengandung
+        suku-suku yang memungkinkan transisi antara konfigurasi
+        basis. Transisi ini dapat berkaitan dengan tunneling
+        kuantum. Dalam masalah optimisasi, tunneling berpotensi
+        membantu sistem berpindah di antara konfigurasi yang
+        dipisahkan penghalang energi, termasuk dalam situasi
+        tertentu ketika pendekatan klasik sulit berpindah
+        di antara konfigurasi tersebut.
+      </p>
+
+      <p align="justify">
+        Namun, tunneling tidak selalu membuat pencarian
+        optimisasi lebih cepat atau menjamin sistem keluar
+        dari setiap minimum lokal. Kinerja quantum annealing
+        bergantung pada bentuk lanskap energi, celah energi,
+        laju annealing, suhu, derau, dan rincian implementasi.
+        Komputasi adiabatik juga berkaitan dengan gagasan
+        mempertahankan sistem dekat keadaan dasar ketika
+        Hamiltonian berubah cukup lambat; hal ini merupakan
+        prinsip yang berhubungan, tetapi tidak identik dengan
+        setiap mekanisme quantum annealing.
+      </p>
+
+      <p align="justify">
+        <b>Contoh penerapan di dunia nyata.</b>
+      </p>
+
+      <ul>
+        <li>
+          <b>Peluruhan alfa:</b>
+          dalam model inti atom, partikel alfa dapat menembus
+          penghalang potensial inti. Tunneling membantu
+          menjelaskan probabilitas dan karakteristik waktu
+          peluruhan radioaktif.
+        </li>
+        <li>
+          <b>Mikroskop penerowongan payaran (STM):</b>
+          arus tunneling antara ujung probe dan permukaan
+          sampel sangat peka terhadap jarak, sehingga dapat
+          digunakan untuk memetakan permukaan pada skala atom.
+        </li>
+        <li>
+          <b>Sambungan Josephson:</b>
+          tunneling pasangan Cooper melalui penghalang tipis
+          merupakan dasar penting bagi sejumlah rangkaian
+          superkonduktor, termasuk jenis qubit tertentu.
+        </li>
+        <li>
+          <b>Elektronika semikonduktor:</b>
+          tunneling dimanfaatkan atau perlu diperhitungkan
+          pada perangkat seperti dioda tunneling dan struktur
+          penghalang tipis berskala nanometer.
+        </li>
+      </ul>
+
+      <p align="justify">
+        <b>Inti gagasan.</b>
+        Terowongan kuantum menunjukkan bahwa kemungkinan
+        suatu partikel melewati penghalang tidak hanya
+        ditentukan oleh gambaran lintasan klasik. Persamaan
+        Schrödinger memungkinkan fungsi gelombang menembus
+        daerah yang terlarang secara klasik, sehingga
+        probabilitas transmisi dapat bernilai tidak nol.
+        Fenomena ini memiliki peran penting dalam fisika atom,
+        teknologi nano, rangkaian kuantum, dan beberapa
+        pendekatan optimisasi kuantum.
+      </p>
+
+    </div>
+  </center>
+</div>
+
+
+<!-- 5 -->
+<div class="definition-container">
+  <div class="definition-header" onclick="toggleDefinisi(this)">
+    <span><b>5. Kucing Schrödinger</b></span>
+    <span class="arrow">▼</span>
+  </div>
+  <center>
+    <div class="definition-box">
+
+      <p align="justify">
+        <b>Apa itu Kucing Schrödinger?</b>
+      </p>
+
+      <p align="justify">
+        Kucing Schrödinger (<em>Schrödinger's cat</em>) adalah eksperimen
+        pikiran yang diperkenalkan oleh fisikawan Erwin Schrödinger pada
+        tahun 1935. Eksperimen ini digunakan untuk menunjukkan persoalan
+        konseptual ketika prinsip superposisi kuantum diterapkan pada
+        benda-benda berukuran besar yang kita jumpai dalam kehidupan
+        sehari-hari.
+      </p>
+
+      <p align="justify">
+        Bayangkan seekor kucing berada di dalam sebuah kotak tertutup.
+        Di dalam kotak tersebut terdapat suatu mekanisme yang terdiri
+        atas atom radioaktif, detektor, dan alat yang dapat melepaskan
+        racun. Jika atom meluruh, detektor mengaktifkan mekanisme
+        tersebut sehingga kucing mati. Jika atom tidak meluruh, mekanisme
+        tidak aktif sehingga kucing tetap hidup.
+      </p>
+
+      <p align="justify">
+        Menurut model kuantum sederhana, sebelum pengukuran dilakukan,
+        keadaan atom dapat dinyatakan sebagai superposisi antara keadaan
+        belum meluruh dan sudah meluruh. Karena keadaan kucing bergantung
+        pada keadaan atom melalui mekanisme di dalam kotak, interaksi
+        tersebut dapat menghasilkan keadaan gabungan atom dan kucing
+        yang saling terikat secara kuantum.
+      </p>
+
+      <p align="justify">
+        Dalam eksperimen pikiran ini, kita dapat menggambarkan keadaan
+        gabungan tersebut secara ideal sebagai
+        \[
+        |\Psi\rangle
+        =
+        \alpha |{\text{belum meluruh}}\rangle
+        |{\text{hidup}}\rangle
+        +
+        \beta |{\text{sudah meluruh}}\rangle
+        |{\text{mati}}\rangle,
+        \]
+        dengan
+        \[
+        |\alpha|^2+|\beta|^2=1.
+        \]
+        Persamaan ini menunjukkan superposisi dua kemungkinan yang
+        berkorelasi: atom belum meluruh dengan kucing hidup, serta atom
+        sudah meluruh dengan kucing mati. Bentuk tersebut merupakan
+        model ideal, bukan pernyataan bahwa kucing sehari-hari pasti
+        dapat diamati berada dalam superposisi makroskopik yang stabil.
+      </p>
+
+      <p align="justify">
+        <b>Apa makna eksperimen ini?</b>
+      </p>
+
+      <p align="justify">
+        Kucing Schrödinger bukan eksperimen yang membuktikan bahwa kucing
+        secara harfiah selalu hidup dan mati sekaligus. Tujuan utamanya
+        adalah mempertanyakan bagaimana superposisi kuantum, yang
+        berlaku pada sistem mikroskopik, berhubungan dengan hasil
+        pengamatan pada sistem makroskopik.
+      </p>
+
+      <p align="justify">
+        Perlu dibedakan tiga hal. Pertama, <em>superposisi kuantum</em>
+        adalah keadaan yang merupakan kombinasi linear beberapa keadaan
+        dasar. Kedua, <em>ketidaktahuan klasik</em> berarti kita tidak
+        mengetahui keadaan yang sebenarnya sudah tertentu. Ketiga,
+        <em>dekoherensi</em> adalah proses ketika keterkaitan fase kuantum
+        antara alternatif-alternatif keadaan menjadi tidak dapat diakses
+        secara efektif karena interaksi dengan lingkungan.
+        Ketiganya tidak memiliki makna yang sama.
+      </p>
+
+      <p align="justify">
+        <b>Matematika kunci: matriks kerapatan.</b>
+      </p>
+
+      <p align="justify">
+        Untuk mendeskripsikan keadaan kuantum, kita dapat menggunakan
+        matriks kerapatan (<em>density matrix</em>) yang ditulis
+        \(\rho\). Jika sistem berada dalam keadaan murni
+        \(|\psi\rangle\), matriks kerapatannya adalah
+        \[
+        \rho=|\psi\rangle\langle\psi|.
+        \]
+        Jika sistem merupakan campuran statistik beberapa keadaan
+        \(|\psi_i\rangle\), dengan probabilitas \(p_i\), maka
+        \[
+        \rho=\sum_i p_i|\psi_i\rangle\langle\psi_i|,
+        \qquad
+        p_i\geq 0,\qquad \sum_i p_i=1.
+        \]
+        Persamaan kedua menyatakan campuran statistik, bukan bentuk
+        umum untuk setiap keadaan superposisi murni. Perbedaan ini
+        penting karena superposisi murni dapat memiliki koherensi
+        kuantum yang tidak terdapat pada campuran statistik dengan
+        komponen-komponen yang sama.
+      </p>
+
+      <p align="justify">
+        Sebagai contoh sederhana, misalkan atom dimodelkan sebagai
+        sistem dua keadaan, yaitu \(|0\rangle\) untuk belum meluruh
+        dan \(|1\rangle\) untuk sudah meluruh. Superposisi murninya
+        dapat ditulis
+        \[
+        |\psi\rangle=\alpha|0\rangle+\beta|1\rangle.
+        \]
+        Matriks kerapatannya menjadi
+        \[
+        \rho=|\psi\rangle\langle\psi|
+        =
+        \begin{pmatrix}
+        |\alpha|^2 & \alpha\overline{\beta}\\
+        \overline{\alpha}\beta & |\beta|^2
+        \end{pmatrix}.
+        \]
+        Elemen di luar diagonal, seperti
+        \(\alpha\overline{\beta}\), memuat informasi tentang koherensi
+        antara kedua keadaan. Jika koherensi tersebut hilang dalam
+        deskripsi efektif akibat dekoherensi, matriksnya dapat mendekati
+        bentuk diagonal
+        \[
+        \rho\approx
+        \begin{pmatrix}
+        |\alpha|^2 & 0\\
+        0 & |\beta|^2
+        \end{pmatrix}.
+        \]
+        Bentuk diagonal ini sendiri tidak cukup untuk menentukan apakah
+        sistem semula berada dalam keadaan murni atau campuran:
+        informasi mengenai bagaimana keadaan itu disiapkan juga penting.
+      </p>
+
+      <p align="justify">
+        <b>Kaitan tensor: sistem dan lingkungan.</b>
+      </p>
+
+      <p align="justify">
+        Dalam mekanika kuantum, sistem yang dikaji dan lingkungannya
+        dideskripsikan menggunakan ruang Hilbert gabungan
+        \[
+        \mathcal{H}_{\text{total}}
+        =
+        \mathcal{H}_S\otimes\mathcal{H}_E,
+        \]
+        dengan \(\mathcal{H}_S\) sebagai ruang keadaan sistem dan
+        \(\mathcal{H}_E\) sebagai ruang keadaan lingkungan.
+        Simbol \(\otimes\) menyatakan hasil kali tensor, yaitu cara
+        matematis untuk membangun ruang keadaan gabungan.
+      </p>
+
+      <p align="justify">
+        Misalkan keadaan gabungan sistem dan lingkungan adalah
+        \(\rho_{\text{total}}\). Jika kita hanya mengamati sistem dan
+        tidak mengukur secara lengkap lingkungan, keadaan efektif
+        sistem diperoleh melalui <em>partial trace</em>:
+        \[
+        \rho_S
+        =
+        \operatorname{Tr}_E(\rho_{\text{total}}).
+        \]
+        Operasi ini menjumlahkan kontribusi terhadap derajat kebebasan
+        lingkungan sehingga kita memperoleh deskripsi sistem saja.
+        Secara matematis, operasi tersebut berkaitan dengan kontraksi
+        indeks tensor pada bagian lingkungan.
+      </p>
+
+      <p align="justify">
+        Ketika sistem berinteraksi dengan lingkungan, informasi tentang
+        fase relatif dapat tersebar ke banyak derajat kebebasan
+        lingkungan. Akibatnya, interferensi antara alternatif keadaan
+        sistem menjadi sangat sulit diamati. Inilah inti dekoherensi
+        dalam konteks ini. Dekoherensi tidak selalu berarti bahwa
+        lingkungan telah diukur oleh manusia, dan tidak dengan
+        sendirinya menjawab seluruh persoalan filosofis tentang
+        pengukuran kuantum.
+      </p>
+
+      <p align="justify">
+        <b>Mengapa kucing tidak mudah memperlihatkan superposisi?</b>
+      </p>
+
+      <p align="justify">
+        Kucing adalah sistem makroskopik yang terus berinteraksi dengan
+        udara, radiasi, cahaya, dan lingkungan lainnya. Interaksi ini
+        membuat koherensi antara keadaan makroskopik yang berbeda
+        umumnya hilang dengan sangat cepat dalam deskripsi sistem
+        yang dapat diamati. Karena itu, superposisi makroskopik jauh
+        lebih sulit dipertahankan daripada superposisi pada sistem
+        mikroskopik yang terisolasi dengan baik.
+      </p>
+
+      <p align="justify">
+        Namun, dekoherensi perlu dipahami secara tepat. Secara umum,
+        dekoherensi menjelaskan mengapa interferensi antara alternatif
+        tertentu menjadi tidak tampak pada sistem yang diamati.
+        Dekoherensi tidak sama dengan sekadar memilih salah satu hasil
+        pengukuran, dan penjelasan lengkap mengenai hasil tunggal
+        pengukuran berkaitan dengan persoalan interpretasi mekanika
+        kuantum.
+      </p>
+
+      <p align="justify">
+        <b>Kaitan dengan komputasi kuantum.</b>
+      </p>
+
+      <p align="justify">
+        Komputer kuantum menggunakan qubit yang dapat disiapkan dalam
+        superposisi. Akan tetapi, interaksi yang tidak terkendali dengan
+        lingkungan dapat mengganggu keadaan tersebut, merusak fase
+        relatif, dan menimbulkan galat pada perhitungan. Oleh sebab itu,
+        perangkat kuantum perlu dirancang agar koherensi dapat
+        dipertahankan selama operasi yang diperlukan.
+      </p>
+
+      <p align="justify">
+        Dua skala waktu yang sering digunakan untuk menggambarkan
+        perilaku qubit adalah \(T_1\) dan \(T_2\). Secara umum,
+        \(T_1\) menyatakan skala waktu relaksasi energi, misalnya
+        transisi dari keadaan tereksitasi ke keadaan berenergi lebih
+        rendah. Sementara itu, \(T_2\) menyatakan skala waktu
+        peluruhan koherensi fase. Dalam model sederhana tanpa
+        mekanisme tambahan, waktu dekoherensi fase murni \(T_\phi\)
+        berkaitan dengan keduanya melalui
+        \[
+        \frac{1}{T_2}
+        =
+        \frac{1}{2T_1}+\frac{1}{T_\phi}.
+        \]
+        Hubungan ini merupakan model umum untuk pemisahan kontribusi
+        relaksasi energi dan dekoherensi fase, bukan rumus universal
+        yang mengabaikan seluruh detail perangkat.
+      </p>
+
+      <p align="justify">
+        Untuk menghadapi galat, komputasi kuantum menggunakan
+        <em>quantum error correction</em> (QEC). Informasi logis
+        disimpan secara tersebar pada beberapa qubit fisik, sehingga
+        jenis galat tertentu dapat dideteksi dan dikoreksi tanpa
+        mengukur langsung informasi kuantum logis. Contoh pendekatan
+        yang banyak dipelajari adalah <em>stabilizer codes</em> dan
+        <em>surface codes</em>. Keberhasilannya bergantung pada jenis
+        galat, kualitas perangkat, rancangan kode, serta kemampuan
+        melakukan operasi dan pengukuran yang diperlukan.
+      </p>
+
+      <p align="justify">
+        <b>Kesimpulan.</b>
+      </p>
+
+      <p align="justify">
+        Kucing Schrödinger membantu kita memahami bahwa superposisi,
+        pengukuran, keterikatan kuantum, dan dekoherensi merupakan
+        konsep yang saling berkaitan tetapi tidak identik. Eksperimen
+        pikiran ini bukan sekadar cerita tentang kucing yang hidup
+        sekaligus mati, melainkan sarana untuk menguji cara kita
+        menghubungkan hukum kuantum dengan dunia makroskopik.
+        Dalam komputasi kuantum, pelajaran praktisnya jelas:
+        koherensi merupakan sumber daya yang perlu dijaga, sedangkan
+        dekoherensi dan galat harus dikelola melalui rekayasa perangkat
+        serta teknik koreksi galat kuantum.
+      </p>
+
+    </div>
+  </center>
+</div>
+
+   
+<!-- 6 -->
+<div class="definition-container">
+  <div class="definition-header" onclick="toggleDefinisi(this)">
+    <span><b>6. Prinsip Ketidakpastian Heisenberg</b></span>
+    <span class="arrow">▼</span>
+  </div>
+  <center>
+    <div class="definition-box">
+
+      <p align="justify">
+        <b>Apa itu Prinsip Ketidakpastian Heisenberg?</b>
+      </p>
+
+      <p align="justify">
+        Prinsip Ketidakpastian Heisenberg (<em>Heisenberg Uncertainty
+        Principle</em>) merupakan salah satu prinsip dasar mekanika
+        kuantum yang menyatakan bahwa terdapat batas fundamental
+        terhadap ketepatan bersama dari pasangan observabel tertentu.
+        Contoh yang paling terkenal adalah posisi dan momentum sebuah
+        partikel. Ketidakpastian keduanya tidak dapat dibuat
+        sembarang kecil secara bersamaan dalam keadaan kuantum yang
+        sama.
+      </p>
+
+      <p align="justify">
+        Prinsip ini bukan sekadar menyatakan bahwa alat ukur kita
+        kurang canggih atau bahwa pengukuran selalu mengganggu
+        partikel. Ketidakpastian tersebut merupakan sifat matematis
+        keadaan kuantum itu sendiri. Bahkan dengan alat ukur ideal,
+        batas ini tetap berlaku.
+      </p>
+
+      <p align="justify">
+        <b>Contoh intuitif: posisi dan momentum.</b>
+      </p>
+
+      <p align="justify">
+        Posisi menyatakan di mana partikel berada, sedangkan momentum
+        menyatakan besaran gerak yang dalam mekanika klasik ditulis
+        sebagai hasil kali massa dan kecepatan,
+        \(p=mv\). Dalam mekanika kuantum, posisi dan momentum
+        direpresentasikan oleh operator yang bekerja pada fungsi
+        gelombang atau vektor keadaan.
+      </p>
+
+      <p align="justify">
+        Jika keadaan kuantum dibuat sangat terlokalisasi sehingga
+        posisi partikel diketahui dengan ketidakpastian kecil,
+        distribusi momentumnya harus memiliki sebaran tertentu yang
+        lebih besar. Sebaliknya, keadaan dengan sebaran momentum yang
+        sangat kecil umumnya menyebar lebih luas dalam ruang posisi.
+        Ini bukan berarti posisi dan momentum tidak dapat diukur sama
+        sekali, melainkan bahwa ketidakpastian statistik keduanya
+        dibatasi oleh hubungan matematis tertentu.
+      </p>
+
+      <p align="justify">
+        <b>Matematika kunci: hubungan ketidakpastian.</b>
+      </p>
+
+      <p align="justify">
+        Untuk posisi \(x\) dan momentum \(p\) pada satu dimensi,
+        prinsip ketidakpastian dinyatakan sebagai
+        \[
+        \boxed{\Delta x\,\Delta p\geq\frac{\hbar}{2}},
+        \]
+        dengan:
+        <ul>
+          <li>\(\Delta x\) adalah simpangan baku hasil pengukuran posisi;</li>
+          <li>\(\Delta p\) adalah simpangan baku hasil pengukuran momentum;</li>
+          <li>\(\hbar=h/(2\pi)\) adalah konstanta Planck tereduksi.</li>
+        </ul>
+        Simpangan baku menggambarkan sebaran hasil pengukuran apabila
+        pengukuran yang sama dilakukan pada banyak sistem yang
+        disiapkan dalam keadaan kuantum identik.
+      </p>
+
+      <p align="justify">
+        Sebagai ilustrasi, jika ketidakpastian posisi suatu partikel
+        adalah \(\Delta x=1.0\times10^{-10}\,\text{m}\), maka
+        ketidakpastian momentumnya memenuhi
+        \[
+        \Delta p\geq
+        \frac{1.054\times10^{-34}\,\text{J\,s}}
+        {2(1.0\times10^{-10}\,\text{m})}.
+        \]
+        Dengan demikian,
+        \[
+        \Delta p\gtrsim5.27\times10^{-25}\,
+        \text{kg\,m/s}.
+        \]
+        Angka ini merupakan batas bawah, bukan nilai momentum yang
+        pasti. Ketidakpastian momentum sebenarnya dapat lebih besar.
+      </p>
+
+      <p align="justify">
+        <b>Mengapa konstanta Planck muncul?</b>
+      </p>
+
+      <p align="justify">
+        Konstanta Planck tereduksi \(\hbar\) menetapkan skala
+        fundamental efek kuantum. Dalam batas ketidakpastian posisi
+        dan momentum, konstanta ini menghubungkan sebaran dua besaran
+        tersebut. Karena itu, hubungan ini berbeda dari ketidakpastian
+        dalam pengukuran klasik yang pada prinsipnya dapat diperkecil
+        dengan memperbaiki alat atau prosedur pengukuran.
+      </p>
+
+      <p align="justify">
+        <b>Bentuk umum: observabel dan komutator.</b>
+      </p>
+
+      <p align="justify">
+        Dalam mekanika kuantum, besaran yang dapat diukur disebut
+        <em>observabel</em> dan direpresentasikan oleh operator
+        Hermitian pada ruang Hilbert. Untuk dua observabel \(A\)
+        dan \(B\), berlaku hubungan ketidakpastian Robertson:
+        \[
+        \boxed{
+        \Delta A\,\Delta B
+        \geq
+        \frac{1}{2}
+        \left|\langle[A,B]\rangle\right|
+        }.
+        \]
+        Di sini, komutator didefinisikan sebagai
+        \[
+        [A,B]=AB-BA,
+        \]
+        sedangkan \(\langle[A,B]\rangle\) adalah nilai harapan
+        komutator dalam keadaan yang sedang dikaji.
+      </p>
+
+      <p align="justify">
+        Ketidakpastian setiap observabel dihitung melalui
+        \[
+        \Delta A=
+        \sqrt{\langle A^2\rangle-\langle A\rangle^2},
+        \qquad
+        \Delta B=
+        \sqrt{\langle B^2\rangle-\langle B\rangle^2}.
+        \]
+        Rumus ini menunjukkan bahwa ketidakpastian kuantum berkaitan
+        dengan sebaran hasil pengukuran, bukan hanya dengan satu
+        hasil pengukuran tertentu.
+      </p>
+
+      <p align="justify">
+        <b>Apa arti komutator?</b>
+      </p>
+
+      <p align="justify">
+        Komutator menunjukkan apakah urutan penerapan dua operator
+        memberikan hasil yang sama. Jika \([A,B]=0\), kedua operator
+        saling komutatif. Jika komutatornya tidak nol, urutan
+        penerapan operator secara umum berpengaruh.
+      </p>
+
+      <p align="justify">
+        Untuk posisi dan momentum pada satu dimensi,
+        \[
+        [\hat{x},\hat{p}]=i\hbar.
+        \]
+        Oleh karena itu,
+        \[
+        \Delta x\,\Delta p
+        \geq\frac{1}{2}|i\hbar|
+        =\frac{\hbar}{2}.
+        \]
+        Inilah bentuk khusus hubungan ketidakpastian posisi dan
+        momentum yang paling dikenal.
+      </p>
+
+      <p align="justify">
+        Perlu dicatat bahwa jika nilai harapan komutator dua
+        observabel adalah nol, bentuk batas Robertson di atas hanya
+        memberikan batas bawah nol. Hal itu tidak otomatis berarti
+        kedua ketidakpastian dapat sekaligus dibuat nol. Untuk
+        menilai batas yang lebih kuat, dapat diperlukan hubungan
+        ketidakpastian yang lebih lengkap, misalnya hubungan
+        Schrödinger yang juga memperhitungkan korelasi antara
+        observabel.
+      </p>
+
+      <p align="justify">
+        <b>Hubungan dengan ruang Hilbert dan hasil kali dalam.</b>
+      </p>
+
+      <p align="justify">
+        Keadaan kuantum dinyatakan sebagai vektor
+        \(|\psi\rangle\) dalam ruang Hilbert. Hasil kali dalam
+        memungkinkan kita menghitung nilai harapan suatu observabel:
+        \[
+        \langle A\rangle
+        =\langle\psi|\hat{A}|\psi\rangle.
+        \]
+        Untuk keadaan ternormalisasi, berlaku
+        \(\langle\psi|\psi\rangle=1\).
+        Dengan menggunakan nilai harapan dan hasil kali dalam,
+        kita dapat menentukan simpangan baku observabel serta
+        menurunkan hubungan ketidakpastian.
+      </p>
+
+      <p align="justify">
+        Dalam konteks ini, tensor bukan penyebab langsung
+        ketidakpastian Heisenberg. Untuk sistem yang terdiri atas
+        beberapa subsistem, ruang keadaan gabungan dibentuk melalui
+        hasil kali tensor:
+        \[
+        \mathcal{H}
+        =
+        \mathcal{H}_1\otimes\mathcal{H}_2.
+        \]
+        Operator pada subsistem pertama, misalnya, dapat ditulis
+        \(\hat{A}\otimes I\), sedangkan operator pada subsistem
+        kedua dapat ditulis \(I\otimes\hat{B}\). Struktur ini
+        membantu kita menganalisis observabel lokal, korelasi, dan
+        keterikatan kuantum. Ketidakpastian tetap berasal dari
+        keadaan kuantum dan sifat operator yang dikaji.
+      </p>
+
+      <p align="justify">
+        <b>Apakah prinsip ini berarti semua pasangan besaran tidak
+        dapat diketahui secara tepat?</b>
+      </p>
+
+      <p align="justify">
+        Tidak. Prinsip ketidakpastian tidak menyatakan bahwa setiap
+        pasangan observabel selalu memiliki batas ketidakpastian
+        positif. Pasangan observabel yang saling komutatif dapat
+        memiliki keadaan-keadaan bersama yang merupakan keadaan
+        eigen keduanya, sehingga hasil pengukurannya dapat diketahui
+        secara pasti dalam keadaan tersebut. Contohnya, dua operator
+        spin pada sumbu yang sama dapat memiliki keadaan eigen
+        bersama.
+      </p>
+
+      <p align="justify">
+        Sebaliknya, komponen spin pada sumbu berbeda, misalnya
+        \(\hat{S}_x\) dan \(\hat{S}_z\), tidak saling komutatif.
+        Untuk partikel spin-\(\tfrac12\),
+        \[
+        [\hat{S}_x,\hat{S}_z]
+        =-i\hbar\hat{S}_y.
+        \]
+        Dengan demikian,
+        \[
+        \Delta S_x\,\Delta S_z
+        \geq\frac{\hbar}{2}
+        |\langle\hat{S}_y\rangle|.
+        \]
+        Batas ini bergantung pada keadaan kuantum. Persamaan tersebut
+        memperlihatkan bahwa hubungan ketidakpastian tidak hanya
+        berlaku pada posisi dan momentum, tetapi juga pada observabel
+        lain yang sesuai.
+      </p>
+
+      <p align="justify">
+        <b>Kaitan dengan komputasi kuantum.</b>
+      </p>
+
+      <p align="justify">
+        Prinsip ketidakpastian memiliki beberapa implikasi dalam
+        komputasi dan pengukuran kuantum.
+      </p>
+
+      <ul>
+        <li>
+          <b>Pengukuran qubit:</b> pengukuran dalam basis yang berbeda
+          dapat memberikan informasi yang berbeda. Keadaan yang pasti
+          pada satu basis belum tentu pasti pada basis lain.
+        </li>
+        <li>
+          <b>Estimasi fase:</b> algoritma kuantum yang mengestimasi fase
+          harus memperhitungkan jumlah pengulangan, keadaan yang
+          disiapkan, dan statistik hasil pengukuran.
+        </li>
+        <li>
+          <b>Metrologi kuantum:</b> batas ketidakpastian membantu
+          menganalisis ketelitian pengukuran besaran fisik. Keadaan
+          kuantum dan keterikatan tertentu dapat meningkatkan
+          sensitivitas, tetapi hasilnya bergantung pada model dan
+          sumber daya yang digunakan.
+        </li>
+        <li>
+          <b>Persiapan keadaan:</b> ketelitian dalam menyiapkan satu
+          sifat kuantum dapat berhubungan dengan sebaran sifat lain
+          yang tidak kompatibel. Karena itu, rancangan eksperimen
+          perlu mempertimbangkan observabel yang menjadi sasaran.
+        </li>
+        <li>
+          <b>Informasi kuantum:</b> perbedaan sifat pengukuran pada
+          basis yang tidak kompatibel berperan dalam protokol tertentu,
+          termasuk beberapa pendekatan distribusi kunci kuantum.
+          Namun, keamanan protokol tidak hanya ditentukan oleh prinsip
+          ketidakpastian; analisis keamanan lengkap tetap diperlukan.
+        </li>
+      </ul>
+
+      <p align="justify">
+        Prinsip ketidakpastian juga perlu dibedakan dari galat teknis
+        perangkat. Derau elektronik, kalibrasi yang kurang tepat,
+        kehilangan sinyal, dan dekoherensi merupakan persoalan
+        eksperimen yang dapat menambah ketidakpastian atau merusak
+        pengukuran. Prinsip Heisenberg sendiri adalah batas fundamental
+        yang berasal dari struktur teori kuantum.
+      </p>
+
+      <p align="justify">
+        <b>Kesimpulan.</b>
+      </p>
+
+      <p align="justify">
+        Prinsip Ketidakpastian Heisenberg mengajarkan bahwa tidak semua
+        sifat kuantum dapat memiliki sebaran hasil pengukuran yang
+        sekecil apa pun secara bersamaan. Hubungan
+        \(\Delta x\,\Delta p\geq\hbar/2\) merupakan contoh utamanya,
+        sedangkan bentuk umum melalui komutator menjelaskan hubungan
+        antara ketidakpastian dan struktur operator.
+      </p>
+
+      <p align="justify">
+        Dalam komputasi kuantum, prinsip ini bukan sekadar hambatan,
+        melainkan bagian dari aturan dasar yang harus diperhitungkan
+        saat merancang pengukuran, estimasi parameter, dan protokol
+        informasi kuantum. Memahaminya membantu kita membedakan
+        batas fundamental teori kuantum dari keterbatasan alat ukur
+        yang masih dapat diperbaiki melalui rekayasa teknologi.
+      </p>
+
+    </div>
+  </center>
+</div>
+
+
+<!-- 7 -->
+<div class="definition-container">
+  <div class="definition-header" onclick="toggleDefinisi(this)">
+    <span><b>7. Masalah Pengukuran Kuantum</b></span>
+    <span class="arrow">▼</span>
+  </div>
+  <center>
+    <div class="definition-box">
+
+      <p align="justify">
+        <b>Apa itu Masalah Pengukuran Kuantum?</b>
+      </p>
+
+      <p align="justify">
+        Masalah pengukuran kuantum (<em>Quantum Measurement Problem</em>)
+        merupakan salah satu persoalan mendasar dalam mekanika kuantum.
+        Teori kuantum menyediakan aturan matematis untuk menghitung
+        probabilitas hasil pengukuran. Namun, muncul pertanyaan:
+        bagaimana kita memahami hubungan antara keadaan kuantum yang
+        dapat berupa superposisi dan satu hasil konkret yang tercatat
+        pada alat ukur?
+      </p>
+
+      <p align="justify">
+        Untuk memahami persoalan ini, bayangkan sebuah qubit yang
+        disiapkan dalam keadaan
+        \[
+        |\psi\rangle=\alpha|0\rangle+\beta|1\rangle,
+        \qquad
+        |\alpha|^2+|\beta|^2=1.
+        \]
+        Simbol \(|0\rangle\) dan \(|1\rangle\) menyatakan dua keadaan
+        dasar yang dapat dibedakan melalui pengukuran tertentu.
+        Koefisien kompleks \(\alpha\) dan \(\beta\) disebut amplitudo
+        probabilitas.
+      </p>
+
+      <p align="justify">
+        Jika qubit diukur dalam basis \(\{|0\rangle,|1\rangle\}\),
+        hasil pengukuran yang diperoleh adalah \(0\) atau \(1\).
+        Aturan kuantum memberikan probabilitas
+        \[
+        P(0)=|\alpha|^2,
+        \qquad
+        P(1)=|\beta|^2.
+        \]
+        Jika keadaan tersebut disiapkan dan diukur berulang kali
+        dengan kondisi yang sama, frekuensi relatif hasil pengukuran
+        akan mendekati probabilitas teoretisnya dalam batas banyak
+        pengulangan.
+      </p>
+
+      <p align="justify">
+        Persoalan mendasarnya bukan bahwa teori kuantum tidak dapat
+        menghitung probabilitas. Justru, prediksi probabilitasnya
+        sangat berhasil dalam banyak eksperimen. Pertanyaan yang
+        lebih mendalam adalah bagaimana memahami munculnya satu hasil
+        tertentu dalam setiap pelaksanaan pengukuran, serta bagaimana
+        proses pengukuran berkaitan dengan evolusi keadaan kuantum.
+        Pertanyaan ini menjadi dasar bagi berbagai interpretasi
+        mekanika kuantum.
+      </p>
+
+      <p align="justify">
+        <b>Matematika kunci 1: Aturan Born.</b>
+      </p>
+
+      <p align="justify">
+        Aturan Born menghubungkan keadaan kuantum dengan probabilitas
+        hasil pengukuran. Dalam bentuk umum, misalkan \(M_m\) adalah
+        operator pengukuran yang berkaitan dengan hasil \(m\).
+        Untuk keadaan murni \(|\psi\rangle\), probabilitas memperoleh
+        hasil tersebut adalah
+        \[
+        \boxed{
+        P(m)=\langle\psi|M_m^\dagger M_m|\psi\rangle
+        }.
+        \]
+        Di sini, \(M_m^\dagger\) adalah operator adjoint dari
+        \(M_m\). Operator
+        \[
+        E_m=M_m^\dagger M_m
+        \]
+        disebut efek pengukuran. Efek-efek tersebut memenuhi
+        \[
+        E_m\geq 0,
+        \qquad
+        \sum_m E_m=I,
+        \]
+        untuk suatu pengukuran lengkap dengan seluruh kemungkinan
+        hasil \(m\).
+      </p>
+
+      <p align="justify">
+        Jika keadaan sistem dinyatakan dengan matriks kerapatan
+        \(\rho\), aturan Born dapat ditulis sebagai
+        \[
+        \boxed{P(m)=\operatorname{Tr}(E_m\rho)}.
+        \]
+        Bentuk ini mencakup keadaan murni maupun campuran statistik.
+        Untuk keadaan murni,
+        \(\rho=|\psi\rangle\langle\psi|\), rumus tersebut kembali
+        memberikan probabilitas yang sama dengan bentuk sebelumnya.
+      </p>
+
+      <p align="justify">
+        <b>Matematika kunci 2: Pengukuran proyektif.</b>
+      </p>
+
+      <p align="justify">
+        Salah satu bentuk pengukuran yang penting adalah pengukuran
+        proyektif. Jika hasil pengukuran \(m\) berkaitan dengan
+        proyektor \(P_m\), maka
+        \[
+        P(m)=\langle\psi|P_m|\psi\rangle.
+        \]
+        Untuk hasil yang bersifat nondegenerat dengan keadaan dasar
+        \(|m\rangle\), proyektornya adalah
+        \(P_m=|m\rangle\langle m|\), sehingga
+        \[
+        \boxed{P(m)=|\langle m|\psi\rangle|^2}.
+        \]
+        Persamaan ini menyatakan bahwa probabilitas hasil \(m\)
+        diperoleh dari kuadrat modulus amplitudo proyeksi keadaan
+        pada keadaan yang bersesuaian dengan hasil pengukuran.
+      </p>
+
+      <p align="justify">
+        Sebagai contoh, misalkan
+        \[
+        |\psi\rangle
+        =\frac{\sqrt{3}}{2}|0\rangle+\frac{1}{2}|1\rangle.
+        \]
+        Jika diukur dalam basis standar, probabilitas mendapatkan
+        hasil \(0\) adalah
+        \[
+        P(0)=\left|\frac{\sqrt{3}}{2}\right|^2
+        =\frac{3}{4},
+        \]
+        sedangkan probabilitas mendapatkan hasil \(1\) adalah
+        \[
+        P(1)=\left|\frac{1}{2}\right|^2
+        =\frac{1}{4}.
+        \]
+        Jadi, probabilitas hasil \(0\) adalah 75% dan hasil \(1\)
+        adalah 25%. Namun, untuk satu kali pengukuran, hasil yang
+        diperoleh tetap salah satu dari kedua kemungkinan tersebut.
+      </p>
+
+      <p align="justify">
+        <b>Matematika kunci 3: Keadaan setelah pengukuran.</b>
+      </p>
+
+      <p align="justify">
+        Dalam model pengukuran kuantum yang menggunakan operator
+        \(M_m\), jika hasil \(m\) telah diketahui dan
+        \(P(m)>0\), keadaan sistem setelah pengukuran diberikan oleh
+        \[
+        \boxed{
+        |\psi'\rangle
+        =
+        \frac{M_m|\psi\rangle}{\sqrt{P(m)}}
+        }.
+        \]
+        Penyebut berfungsi menormalisasi keadaan sehingga panjang
+        vektornya kembali sama dengan satu.
+      </p>
+
+      <p align="justify">
+        Untuk pengukuran proyektif, rumus tersebut menjadi
+        \[
+        |\psi'\rangle
+        =
+        \frac{P_m|\psi\rangle}
+        {\sqrt{\langle\psi|P_m|\psi\rangle}}.
+        \]
+        Dalam pengukuran proyektif nondegenerat pada basis
+        \(\{|0\rangle,|1\rangle\}\), hasil \(0\) menyiapkan keadaan
+        menjadi \(|0\rangle\), sedangkan hasil \(1\) menyiapkannya
+        menjadi \(|1\rangle\).
+      </p>
+
+      <p align="justify">
+        Perlu diperhatikan bahwa rumus perubahan keadaan bergantung
+        pada model pengukurannya. Pengukuran umum tidak selalu
+        menghasilkan keadaan eigen murni dari suatu observabel.
+        Bahkan, jika informasi yang dicatat hanya berupa hasil
+        pengukuran dan keadaan akhir perangkat tidak diketahui secara
+        lengkap, keadaan setelah pengukuran perlu dijelaskan dengan
+        model instrumen kuantum yang sesuai.
+      </p>
+
+      <p align="justify">
+        <b>Mengapa pengukuran menimbulkan persoalan konseptual?</b>
+      </p>
+
+      <p align="justify">
+        Dalam mekanika kuantum, evolusi suatu sistem yang terisolasi
+        dijelaskan oleh persamaan Schrödinger. Untuk Hamiltonian
+        \(\hat{H}\) yang tidak bergantung pada waktu,
+        \[
+        i\hbar\frac{d}{dt}|\psi(t)\rangle
+        =
+        \hat{H}|\psi(t)\rangle,
+        \]
+        dengan solusi
+        \[
+        |\psi(t)\rangle
+        =
+        e^{-i\hat{H}t/\hbar}|\psi(0)\rangle.
+        \]
+        Evolusi ini bersifat uniter: jika keadaan awal merupakan
+        superposisi, evolusi tersebut secara umum mempertahankan
+        superposisi dalam keadaan gabungan yang sesuai.
+      </p>
+
+      <p align="justify">
+        Sekarang, bayangkan alat ukur juga diperlakukan sebagai
+        sistem kuantum. Jika qubit mula-mula berada dalam keadaan
+        \[
+        |\psi\rangle=\alpha|0\rangle+\beta|1\rangle
+        \]
+        dan alat ukur berada dalam keadaan awal \(|A_{\mathrm{awal}}\rangle\),
+        interaksi ideal antara keduanya dapat menghasilkan
+        \[
+        |\Psi\rangle
+        =
+        \alpha|0\rangle|A_0\rangle
+        +
+        \beta|1\rangle|A_1\rangle.
+        \]
+        Keadaan \(|A_0\rangle\) dan \(|A_1\rangle\) mewakili
+        keadaan alat ukur yang berkorelasi dengan hasil \(0\) dan
+        \(1\). Secara umum, keadaan gabungan ini merupakan keadaan
+        terikat atau terentang antara sistem dan alat ukur.
+      </p>
+
+      <p align="justify">
+        Deskripsi tersebut menunjukkan bahwa interaksi pengukuran
+        dapat menghubungkan keadaan sistem dengan catatan pada alat
+        ukur. Namun, jika evolusi uniter diterapkan pada keseluruhan
+        sistem gabungan, kita masih perlu menjelaskan bagaimana
+        hasil konkret yang dialami dalam suatu pengukuran dipahami.
+        Ketegangan konseptual antara evolusi uniter dan aturan
+        probabilitas hasil pengukuran inilah yang dikenal sebagai
+        masalah pengukuran kuantum.
+      </p>
+
+      <p align="justify">
+        <b>Kaitan tensor: sistem, alat ukur, dan lingkungan.</b>
+      </p>
+
+      <p align="justify">
+        Jika ruang Hilbert sistem, alat ukur, dan lingkungan masing-masing
+        adalah \(\mathcal{H}_S\), \(\mathcal{H}_A\), dan
+        \(\mathcal{H}_E\), ruang keadaan gabungannya ditulis
+        \[
+        \mathcal{H}_{\mathrm{total}}
+        =
+        \mathcal{H}_S\otimes
+        \mathcal{H}_A\otimes
+        \mathcal{H}_E.
+        \]
+        Hasil kali tensor memungkinkan kita mendeskripsikan keadaan
+        gabungan serta korelasi antara subsistem-subsistem tersebut.
+      </p>
+
+      <p align="justify">
+        Ketika alat ukur berinteraksi dengan lingkungan, keadaan
+        gabungan dapat mengambil bentuk skematis
+        \[
+        |\Psi\rangle
+        =
+        \alpha|0\rangle|A_0\rangle|E_0\rangle
+        +
+        \beta|1\rangle|A_1\rangle|E_1\rangle.
+        \]
+        Jika keadaan lingkungan \(|E_0\rangle\) dan
+        \(|E_1\rangle\) menjadi sangat mudah dibedakan, informasi
+        mengenai alternatif hasil pengukuran tersebar ke lingkungan.
+        Bagi pengamat yang tidak mengakses lingkungan secara lengkap,
+        interferensi antara kedua alternatif tersebut dapat menjadi
+        tidak teramati.
+      </p>
+
+      <p align="justify">
+        Keadaan efektif sistem dan alat ukur diperoleh dengan
+        menelusuri derajat kebebasan lingkungan:
+        \[
+        \rho_{SA}
+        =
+        \operatorname{Tr}_E
+        \bigl(|\Psi\rangle\langle\Psi|\bigr).
+        \]
+        Proses ini berkaitan dengan dekoherensi. Dekoherensi
+        membantu menjelaskan mengapa hasil-hasil makroskopik yang
+        berbeda tidak mudah memperlihatkan interferensi satu sama
+        lain. Namun, dekoherensi saja tidak otomatis memilih satu
+        hasil individual dan tidak dengan sendirinya menyelesaikan
+        seluruh masalah pengukuran.
+      </p>
+
+      <p align="justify">
+        <b>Beberapa pendekatan untuk memahami masalah pengukuran.</b>
+      </p>
+
+      <ul>
+        <li>
+          <b>Interpretasi Kopenhagen:</b> dalam berbagai versi
+          pendekatan ini, hasil pengukuran dijelaskan menggunakan
+          aturan probabilitas kuantum dan suatu pemisahan antara
+          sistem kuantum dengan perangkat atau konteks pengukuran.
+          Rincian interpretasinya berbeda-beda.
+        </li>
+        <li>
+          <b>Interpretasi banyak dunia:</b> evolusi kuantum dianggap
+          tetap uniter, sedangkan alternatif hasil pengukuran
+          berkaitan dengan cabang-cabang keadaan universal yang
+          berbeda. Pendekatan ini tidak menggunakan keruntuhan
+          keadaan sebagai proses fisik fundamental dengan cara yang
+          sama seperti interpretasi keruntuhan.
+        </li>
+        <li>
+          <b>Teori keruntuhan objektif:</b> mengusulkan bahwa
+          keruntuhan keadaan merupakan proses fisik yang nyata,
+          bukan hanya aturan pembaruan informasi. Model-modelnya
+          perlu dinyatakan secara matematis dan dapat diuji secara
+          eksperimen.
+        </li>
+        <li>
+          <b>Pendekatan Bohmian:</b> melengkapi deskripsi kuantum
+          dengan konfigurasi atau posisi partikel yang memiliki
+          nilai tertentu, sementara dinamika gelombang kuantum
+          berperan dalam menentukan evolusinya.
+        </li>
+        <li>
+          <b>Pendekatan informasi kuantum:</b> menekankan bagaimana
+          keadaan kuantum, probabilitas, korelasi, dan operasi
+          pengukuran digunakan untuk memproses serta memperoleh
+          informasi. Pendekatan ini dapat digunakan tanpa harus
+          menganggap satu interpretasi filosofis sebagai satu-satunya
+          yang benar.
+        </li>
+      </ul>
+
+      <p align="justify">
+        Daftar tersebut bukan daftar lengkap, dan beberapa pendekatan
+        dapat memiliki versi yang berbeda. Penting pula untuk
+        membedakan prediksi matematis teori, interpretasi tentang
+        makna keadaan kuantum, dan teori alternatif yang mengubah
+        dinamika fisiknya. Berbagai interpretasi dapat memberikan
+        prediksi yang sama untuk eksperimen tertentu, meskipun
+        penjelasan konseptualnya berbeda.
+      </p>
+
+      <p align="justify">
+        <b>Kaitan dengan komputasi kuantum.</b>
+      </p>
+
+      <p align="justify">
+        Pengukuran merupakan tahap penting dalam komputasi kuantum
+        karena hasil akhirnya harus diterjemahkan menjadi data yang
+        dapat dibaca secara klasik. Dalam banyak algoritma, rangkaian
+        gerbang kuantum terlebih dahulu mengubah keadaan qubit,
+        kemudian pengukuran dilakukan untuk memperoleh keluaran.
+        Karena pengukuran bersifat probabilistik, algoritma sering
+        dijalankan berulang kali agar distribusi hasilnya dapat
+        diperkirakan.
+      </p>
+
+      <p align="justify">
+        Sebagai contoh, algoritma dapat menyiapkan keadaan
+        \[
+        |\psi\rangle
+        =
+        \alpha|0\rangle+\beta|1\rangle.
+        \]
+        Pengukuran dalam basis standar menghasilkan data klasik
+        \(0\) atau \(1\), bukan salinan lengkap dari amplitudo
+        \(\alpha\) dan \(\beta\). Untuk memperkirakan probabilitas,
+        pengukuran dilakukan pada banyak persiapan yang identik.
+        Untuk memperoleh informasi tentang fase relatif, biasanya
+        diperlukan pengukuran dalam basis lain atau rangkaian
+        operasi yang mengubah fase menjadi perbedaan probabilitas
+        hasil pengukuran.
+      </p>
+
+      <p align="justify">
+        Ada pula <em>measurement-based quantum computing</em>,
+        yaitu model komputasi kuantum yang menggunakan keadaan
+        sumber daya yang telah dipersiapkan, biasanya keadaan
+        terentang, lalu menjalankan komputasi melalui rangkaian
+        pengukuran pada subsistem-subsistemnya. Pilihan basis
+        pengukuran dan, dalam banyak skema, hasil pengukuran
+        sebelumnya menentukan langkah berikutnya. Dengan demikian,
+        pengukuran tidak hanya berfungsi membaca jawaban, tetapi
+        juga menjadi bagian utama dari proses komputasi.
+      </p>
+
+      <p align="justify">
+        Pengukuran juga berkaitan dengan pembacaan qubit fisik,
+        kalibrasi perangkat, derau, dan koreksi galat kuantum.
+        Hasil pengukuran yang tidak sempurna dapat mengurangi
+        keandalan komputasi. Karena itu, perangkat perlu memiliki
+        prosedur readout dan pemrosesan hasil yang sesuai.
+      </p>
+
+      <p align="justify">
+        <b>Kesimpulan.</b>
+      </p>
+
+      <p align="justify">
+        Masalah Pengukuran Kuantum berpusat pada hubungan antara
+        evolusi keadaan kuantum, probabilitas hasil pengukuran,
+        dan munculnya catatan konkret pada alat ukur. Aturan Born
+        memberikan probabilitas hasil, sedangkan model pengukuran
+        menjelaskan bagaimana keadaan sistem berubah setelah hasil
+        tertentu diperoleh. Ketika alat ukur dan lingkungan turut
+        diperhitungkan, hasil kali tensor, keterikatan kuantum,
+        dan dekoherensi menjadi bagian penting dari analisis.
+      </p>
+
+      <p align="justify">
+        Dalam komputasi kuantum, pengukuran adalah jembatan antara
+        pemrosesan informasi kuantum dan keluaran klasik. Memahami
+        prinsip-prinsipnya membantu kita merancang algoritma,
+        menafsirkan hasil eksperimen, dan membedakan prediksi
+        matematis dari pertanyaan konseptual yang masih menjadi
+        bahan kajian dalam fondasi mekanika kuantum.
+      </p>
+
+    </div>
+  </center>
+</div>
+
+    <hr class="garis-elegan">
+
+    <!-- TABEL RINGKAS -->
+    <div style="
+      border: 2px solid #2c3e50;
+      border-left: 8px solid #2980b9;
+      padding: 18px 22px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #f9f9f9, #eef6ff);
+      box-shadow: 3px 3px 12px rgba(0,0,0,0.15);
+      font-family: 'Segoe UI', sans-serif;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    ">
+      <h3 style="
+        margin-top: 0px;
+        color: #1f2d3d;
+        font-size: 22px;
+        border-bottom: 2px dashed #2980b9;
+        padding-bottom: 6px;
+      ">
+        <b>📊 Tabel Ringkas: Keajaiban Kuantum → Tensor → Komputasi Kuantum</b>
+      </h3>
+
+      <table style="width:100%; border-collapse:collapse; font-size:15px; margin-top:10px;">
+        <thead>
+          <tr style="background-color:#2c3e50; color:white;">
+            <th style="padding:8px 12px; border:1px solid #ddd; text-align:center;">Keajaiban</th>
+            <th style="padding:8px 12px; border:1px solid #ddd; text-align:center;">Matematika Kunci</th>
+            <th style="padding:8px 12px; border:1px solid #ddd; text-align:center;">Kaitan Tensor</th>
+            <th style="padding:8px 12px; border:1px solid #ddd; text-align:center;">Peran di Komputasi Kuantum</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Dualitas</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Amplitudo kompleks, interferensi</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Ruang Hilbert, operator linear</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Gerbang Hadamard, interferensi algoritma</td>
+          </tr>
+          <tr style="background:#f4f6f7;">
+            <td style="padding:8px 12px; border:1px solid #ddd;">Superposisi</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Vektor kompleks, tensor product</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">\(\mathcal{H}^{\otimes n}\), dimensi \(2^n\)</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Quantum parallelism</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Entanglement</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Bell state, Schmidt rank</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Tensor tidak murni</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Teleportasi, algoritma, koreksi galat</td>
+          </tr>
+          <tr style="background:#f4f6f7;">
+            <td style="padding:8px 12px; border:1px solid #ddd;">Tunneling</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Amplitudo transmisi \(T=|t|^2\)</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Evolusi operator pada ruang keadaan</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Quantum annealing</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Kucing Schrödinger</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Matriks kerapatan, dekoherensi</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Trace parsial \(\operatorname{Tr}_E\)</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Noise, error correction</td>
+          </tr>
+          <tr style="background:#f4f6f7;">
+            <td style="padding:8px 12px; border:1px solid #ddd;">Ketidakpastian</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Komutator, \(\Delta A\Delta B\)</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Operator pada ruang Hilbert</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Batas pengukuran dan metrologi</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Pengukuran</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Aturan Born, POVM</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Kontraksi tensor</td>
+            <td style="padding:8px 12px; border:1px solid #ddd;">Readout, measurement-based QC</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- KESIMPULAN -->
+    <div style="
+      border: 2px solid #2c3e50;
+      border-left: 8px solid #8e44ad;
+      padding: 12px 18px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #f9f9f9, #f4ecf7);
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+      font-family: 'Segoe UI', sans-serif;
+      margin-top: 10px;
+    ">
+      <h4 style="
+        margin-top: 0px;
+        color: #1f2d3d;
+        font-size: 18px;
+        border-bottom: 2px dashed #8e44ad;
+        padding-bottom: 4px;
+      ">
+        <b>💡 Kesimpulan: Tiga Lapisan Keanehan Kuantum</b>
+      </h4>
+      <p align="justify" style="font-size: 16px; line-height: 1.6; color: #2c3e50;">
+        Tujuh keajaiban kuantum dapat dikelompokkan menjadi tiga lapisan:
+      </p>
+      <ol align="justify" style="font-size: 16px; line-height: 1.6; color: #2c3e50;">
+        <li>
+          <b>Fenomena fisik:</b> dualitas, superposisi, keterikatan, dan terowongan kuantum.
+        </li>
+        <li>
+          <b>Batas dan struktur matematis:</b> ketidakpastian serta probabilitas pengukuran.
+        </li>
+        <li>
+          <b>Persoalan konseptual:</b> kucing Schrödinger dan hubungan antara deskripsi kuantum
+          dengan realitas makroskopis.
+        </li>
+      </ol>
+      <p align="justify" style="font-size: 16px; line-height: 1.6; color: #2c3e50;">
+        Benang merahnya adalah bahwa matematika kuantum bukan sekadar kumpulan rumus.
+        Struktur tensor dan ruang Hilbert menghasilkan prediksi yang dapat diuji, sementara
+        interpretasi tentang makna fisiknya menuntut penalaran yang cermat. Dalam komputasi kuantum,
+        keanehan-keanehan ini menjadi sumber daya: superposisi memberi ruang keadaan besar,
+        entanglement memberi korelasi nonklasik, interferensi memperkuat jawaban benar,
+        pengukuran mengekstrak hasil, dan koreksi galat menjaga informasi tetap hidup.
+      </p>
+    </div>
+
+<!-- ================= AKHIR 4.2.21 ================= -->
+	
 	
 	<div class="definition-container">
   <div class="definition-header" onclick="toggleDefinisi(this)">
@@ -24051,7 +26415,7 @@ show(fiedler.column().apply_map(lambda z: z.n(6)))
         Pemetaan-pemetaan yang dibahas berdomain \(V^{k}\), tetapi kita mengatakan bahwa
         pemetaan-pemetaan tersebut bersifat \(k\)-linear pada \(V\).
         Pemetaan \(1\)-linear adalah pemetaan linear \(V \to W\).
-        Pemetaan \(2\)-linear adalah pemetaan bilinear \(V \times V \to W\).
+        Pemetaan \(2\)-linear adalah pemetaan bilinear \(V \times V \to W\). hasil kali tensor
         Pemetaan \(3\)-linear disebut <em>trilinear</em>.
         Istilah <em>pemetaan multilinear</em> merujuk pada pemetaan \(k\)-linear,
         baik ketika \(k\) tidak dispesifikasikan maupun ketika ada lebih dari satu bilangan bulat 
@@ -25684,6 +28048,7 @@ background-color: rgba(41, 128, 185, 0.08);
     </p>
   </div>
 </div>
+
 
 <hr class="garis-elegan">
 <p align="justify">
