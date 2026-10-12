@@ -45921,6 +45921,36 @@ Bagian ini menyajikan kumpulan soal dan pembahasan mendalam yang melintasi evolu
 </div>
 </div>
 
+<div class="example-container">
+<div class="example-header" onclick="this.parentElement.classList.toggle('active')">
+<span id="Soal-11"><b>8.1.11 (Topik: Subruang Vektor dan Basis)</b></span>
+<span class="example-arrow">▼</span>
+</div>
+<div class="example-box">
+  <p align="justify">
+  Diberikan himpunan $W = \{(a, b, c)^t \in \mathbb{R}^3 \mid 2a - 3b + c = 0, a, b, c \in \mathbb{R}\}\subset\mathbb{R}^3$.<br>
+  (a) Buktikan bahwa $W$ subruang dari ruang vektor $\mathbb{R}^3$ atas $\mathbb{R}$<br>
+  (b) Berikan contoh salah satu basis dari $W$.</p>
+  
+  <p align="justify"><b>Pembahasan:</b><br>
+  <b>(a)</b> Ambil sembarang $w, v \in W$ dengan
+  $$w = \begin{pmatrix} w_1 \\ w_2 \\ w_3 \end{pmatrix}, \quad v = \begin{pmatrix} v_1 \\ v_2 \\ v_3 \end{pmatrix}, \quad w_i, v_i \in \mathbb{R}$$
+  untuk $i = 1, 2, 3$ yang memenuhi $2w_1 - 3w_2 + w_3 = 0$ dan $2v_1 - 3v_2 + v_3 = 0$.
+  Perhatikan bahwa
+  $$w + v = \begin{pmatrix} w_1 + v_1 \\ w_2 + v_2 \\ w_3 + v_3 \end{pmatrix}$$
+  dimana $2(w_1 + v_1) - 3(w_2 + v_2) + (w_3 + v_3) = (2w_1 - 3w_2 + w_3) + (2v_1 - 3v_2 + v_3) = 0 + 0 = 0$. Dengan demikian $w + v \in W$. Ambil $\alpha \in \mathbb{R}$, didapat
+  $$\alpha w = \begin{pmatrix} \alpha w_1 \\ \alpha w_2 \\ \alpha w_3 \end{pmatrix}$$
+  dimana $2\alpha w_1 - 3\alpha w_2 + \alpha w_3 = \alpha(2w_1 - 3w_2 + w_3) = \alpha \cdot 0 = 0$. Jadi $\alpha w \in W$.
+  Terbukti bahwa $W$ subruang di $\mathbb{R}^3$.
+  <br>
+  <br>
+  <b>(b)</b> Ambil $w = (a, b, c)^t \in W$, perhatikan bahwa $2a - 3b + c = 0 \implies c = 3b - 2a$. Sehingga
+  $$(a, b, c)^t = (a, b, 3b - 2a)^t = a(1, 0, -2)^t + b(0, 1, 3)^t.$$
+  Dapat dilihat bahwa $W = \text{Span}\{(1, 0, -2)^t, (0, 1, 3)^t\}$ dan juga $\{(1, 0, -2)^t, (0, 1, 3)^t\}$ bebas linier, sehingga $\{(1, 0, -2)^t, (0, 1, 3)^t\}$ basis dari $W$.
+  </p>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -46275,6 +46305,88 @@ Bagian ini menyajikan soal dan pembahasan tentang transformasi linier, mulai dar
 </div>
 </div>
 
+<div class="example-container">
+<div class="example-header" onclick="this.parentElement.classList.toggle('active')">
+<span id="Soal-11"><b>8.2.11 (Topik: Transformasi Linier, Kernel, dan Image)</b></span>
+<span class="example-arrow">▼</span>
+</div>
+<div class="example-box">
+  <p align="justify">
+  Diberikan pemetaan $T : \mathcal{M}_{2\times2}(\mathbb{R}) \rightarrow \mathbb{P}_3(\mathbb{R})$ dengan
+  $$T\left(\begin{bmatrix} a & b \\ c & d \end{bmatrix}\right) = (a+d)x^3 + (a-b)x^2 + (c-d)x + (b+c)$$
+  (a) Tunjukkan bahwa $T$ adalah transformasi linier.<br>
+  (b) Tentukan basis dari $\text{Ker}(T)$ dan $N(T)$.<br>
+  (c) Tentukan basis dari $\text{Im}(T)$ dan $\text{Rank}(T)$.</p>
+  
+  <p align="justify"><b>Pembahasan:</b><br>
+  <b>(a) Menunjukkan $T$ adalah transformasi linier</b><br>
+  Ambil sembarang matriks $A, B \in \mathcal{M}_{2\times2}(\mathbb{R})$ dan skalar $k \in \mathbb{R}$.
+  Misalkan $A = \begin{pmatrix} a_1 & b_1 \\ c_1 & d_1 \end{pmatrix}$ dan $B = \begin{pmatrix} a_2 & b_2 \\ c_2 & d_2 \end{pmatrix}$.
+  <br><br>
+  <i>Syarat 1: Aditivitas</i> (\(T(A+B) = T(A) + T(B):\))
+   
+\[
+\begin{aligned}
+T(A+B)
+&= T\left(
+\begin{pmatrix}
+a_1+a_2 & b_1+b_2 \\
+c_1+c_2 & d_1+d_2
+\end{pmatrix}
+\right) \\[6pt]
+&= ((a_1+a_2)+(d_1+d_2))x^3 \\
+&\quad + ((a_1+a_2)-(b_1+b_2))x^2 \\
+&\quad + ((c_1+c_2)-(d_1+d_2))x \\
+&\quad + ((b_1+b_2)+(c_1+c_2)) \\[6pt]
+&= \big[(a_1+d_1)x^3 + (a_1-b_1)x^2
+      + (c_1-d_1)x + (b_1+c_1)\big] \\
+&\quad + \big[(a_2+d_2)x^3 + (a_2-b_2)x^2
+      + (c_2-d_2)x + (b_2+c_2)\big] \\[6pt]
+&= T(A)+T(B).
+\end{aligned}
+\]
+
+  <br>
+  <i>Syarat 2: Homogenitas</i> (\(T(kA) = kT(A)\))
+  $$T(kA) = T\left(\begin{pmatrix} ka_1 & kb_1 \\ kc_1 & kd_1 \end{pmatrix}\right)$$
+  $$= (ka_1+kd_1)x^3 + (ka_1-kb_1)x^2 + (kc_1-kd_1)x + (kb_1+kc_1)$$
+  $$= k[(a_1+d_1)x^3 + (a_1-b_1)x^2 + (c_1-d_1)x + (b_1+c_1)]$$
+  $$= kT(A)$$
+  Karena kedua syarat terpenuhi, maka $T$ adalah transformasi linier.<br><br>
+  
+  <b>(b) Basis dari $\text{Ker}(T)$ dan $N(T)$</b><br>
+  $\text{Ker}(T) = \{ A \in \mathcal{M}_{2\times2} \mid T(A) = 0 \}$.
+  Polinomial nol di $\mathbb{P}_3$ adalah $0x^3 + 0x^2 + 0x + 0$.
+  Maka dari definisi $T$, kita peroleh sistem persamaan:
+  \begin{align*}
+  a + d &= 0 \implies d = -a \\
+  a - b &= 0 \implies b = a \\
+  c - d &= 0 \implies c = d = -a \\
+  b + c &= 0 \implies c = -b = -a \quad \text{(konsisten)}
+  \end{align*}
+  Sehingga matriks $A$ dapat ditulis sebagai:
+  $$A = \begin{pmatrix} a & a \\ -a & -a \end{pmatrix} = a \begin{pmatrix} 1 & 1 \\ -1 & -1 \end{pmatrix}$$
+  Jadi, basis dari $\text{Ker}(T)$ adalah $\left\{ \begin{pmatrix} 1 & 1 \\ -1 & -1 \end{pmatrix} \right\}$.
+  Nullity $N(T) = \dim(\text{Ker}(T)) = 1$.<br><br>
+  
+  <b>(c) Basis dari $\text{Im}(T)$ dan $\text{Rank}(T)$</b><br>
+  Kita gunakan basis standar untuk $\mathcal{M}_{2\times2}(\mathbb{R})$, yaitu $E_{11}, E_{12}, E_{21}, E_{22}$.
+  $$T(E_{11}) = T\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} = (1+0)x^3 + (1-0)x^2 + (0-0)x + (0+0) = x^3 + x^2$$
+  $$T(E_{12}) = T\begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix} = (0+0)x^3 + (0-1)x^2 + (0-0)x + (1+0) = -x^2 + 1$$
+  $$T(E_{21}) = T\begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix} = (0+0)x^3 + (0-0)x^2 + (1-0)x + (0+0) = x$$
+  $$T(E_{22}) = T\begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix} = (0+1)x^3 + (0-0)x^2 + (0-1)x + (0+1) = x^3 - x + 1$$
+  
+  Perhatikan bahwa $T(E_{22}) = T(E_{11}) + T(E_{12}) - T(E_{21})$, sehingga vektor $T(E_{22})$ bergantung linier terhadap vektor lainnya.
+  Jadi, $\text{Im}(T) = \text{Span}\{x^3+x^2, -x^2+1, x\}$.
+  Untuk mengecek kebebasan linier, misalkan $c_1(x^3+x^2) + c_2(-x^2+1) + c_3(x) = 0$.
+  $$c_1 x^3 + (c_1 - c_2)x^2 + c_3 x + c_2 = 0$$
+  Maka $c_1 = 0$, $c_2 = 0$, dan $c_3 = 0$. Jadi himpunan ini bebas linier.
+  Basis dari $\text{Im}(T)$ adalah $\{x^3 + x^2, -x^2 + 1, x\}$.
+  Rank $T = \dim(\text{Im}(T)) = 3$.
+  </p>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -46624,6 +46736,61 @@ Bagian ini menyajikan soal dan pembahasan mendalam mengenai aljabar Ruang Dual (
 </div>
 </div>
 
+<div class="example-container">
+<div class="example-header" onclick="this.parentElement.classList.toggle('active')">
+<span id="Soal-12"><b>8.3.11 (Topik: Ruang Dual dan Basis Dual)</b></span>
+<span class="example-arrow">▼</span>
+</div>
+<div class="example-box">
+  <p align="justify">
+  Diberikan $V = \mathbb{R}^2$ dengan basis $B = \{(1,1), (1,2)\}$. Tentukan basis dual $B^* = \{f_1, f_2\}$ dari ruang dual $V$.</p>
+  
+  <p align="justify"><b>Pembahasan:</b><br>
+  Basis dual $B^* = \{f_1, f_2\}$ dari basis $B = \{v_1, v_2\}$ dengan $v_1 = (1,1)$ dan $v_2 = (1,2)$ harus memenuhi kondisi:
+  $$f_i(v_j) = \delta_{ij} = \begin{cases} 1, & \text{jika } i = j \\ 0, & \text{jika } i \neq j \end{cases}$$
+  Secara eksplisit, kondisi tersebut adalah:
+  <ul>
+    <li>$f_1(v_1) = 1$ dan $f_1(v_2) = 0$</li>
+    <li>$f_2(v_1) = 0$ dan $f_2(v_2) = 1$</li>
+  </ul>
+  
+  Misalkan fungsional linier umum di $V^*$ dinyatakan sebagai $f(x,y) = ax + by$ dengan $a, b \in \mathbb{R}$.<br><br>
+  
+  <b>1. Mencari $f_1(x,y)$</b><br>
+  Misalkan $f_1(x,y) = a_1 x + b_1 y$. Berdasarkan kondisi basis dual:
+  \begin{align*}
+  f_1(1,1) &= a_1(1) + b_1(1) = 1 \implies a_1 + b_1 = 1 \\
+  f_1(1,2) &= a_1(1) + b_1(2) = 0 \implies a_1 + 2b_1 = 0
+  \end{align*}
+  Kurangi persamaan kedua dengan persamaan pertama:
+  $$(a_1 + 2b_1) - (a_1 + b_1) = 0 - 1 \implies b_1 = -1$$
+  Substitusikan $b_1 = -1$ ke persamaan pertama:
+  $$a_1 + (-1) = 1 \implies a_1 = 2$$
+  Jadi, $f_1(x,y) = 2x - y$.<br><br>
+  
+  <b>2. Mencari $f_2(x,y)$</b><br>
+  Misalkan $f_2(x,y) = a_2 x + b_2 y$. Berdasarkan kondisi basis dual:
+  \begin{align*}
+  f_2(1,1) &= a_2(1) + b_2(1) = 0 \implies a_2 + b_2 = 0 \\
+  f_2(1,2) &= a_2(1) + b_2(2) = 1 \implies a_2 + 2b_2 = 1
+  \end{align*}
+  Kurangi persamaan kedua dengan persamaan pertama:
+  $$(a_2 + 2b_2) - (a_2 + b_2) = 1 - 0 \implies b_2 = 1$$
+  Substitusikan $b_2 = 1$ ke persamaan pertama:
+  $$a_2 + 1 = 0 \implies a_2 = -1$$
+  Jadi, $f_2(x,y) = -x + y$.<br><br>
+  
+  <b>Verifikasi:</b><br>
+  $f_1(1,1) = 2(1) - 1 = 1$ dan $f_1(1,2) = 2(1) - 2 = 0$. (Benar)<br>
+  $f_2(1,1) = -1 + 1 = 0$ dan $f_2(1,2) = -1 + 2 = 1$. (Benar)<br><br>
+  
+  <b>Kesimpulan:</b><br>
+  Basis dual dari $B$ adalah $B^* = \{f_1, f_2\}$ dengan 
+  $$f_1(x,y) = 2x - y \quad \text{dan} \quad f_2(x,y) = -x + y$$
+  </p>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -46872,6 +47039,63 @@ Bagian ini menyajikan soal dan pembahasan mendalam mengenai <b>Pemetaan Multilin
   $$\omega(v_1,...,v_n) = \omega(e_1,...,e_n) \sum_{\sigma} \text{sgn}(\sigma) \prod a_{\sigma(j)j} = \omega(e_1,...,e_n) \det[v_1 \mid ... \mid v_n]$$
   Jadi setiap $\omega$ adalah kelipatan skalar dari $\det$. Maka $\dim \text{Alt}^n(V)=1$.<br><br>
   <b>Akibat:</b> Determinan adalah (sampai skalar) satu-satunya bentuk volume berorientasi di $\mathbb{R}^n$. Inilah alasan mengapa determinan muncul sebagai Jacobian dalam perubahan variabel integral lipat.
+  </p>
+</div>
+</div>
+
+<div class="example-container">
+<div class="example-header" onclick="this.parentElement.classList.toggle('active')">
+<span id="Soal-10"><b>8.4.11. Topik Tensor Murni dan Tensor Tidak Murni dalam Notasi Ket</b></span>
+<span class="example-arrow">▼</span>
+</div>
+<div class="example-box">
+  <p align="justify"><b>Soal:</b><br>
+  Diberikan dua vektor dalam ruang hasil tensor $\mathcal{H}_A\otimes \mathcal{H}_B$ dengan $\dim \mathcal{H}_A=\dim \mathcal{H}_B=2$:
+  $$|\psi_1\rangle = \frac12\bigl(|00\rangle+|01\rangle+|10\rangle+|11\rangle\bigr),$$
+  dan
+  $$|\psi_2\rangle = \frac1{\sqrt2}\bigl(|00\rangle+|11\rangle\bigr).$$
+  Tentukan manakah yang merupakan tensor murni (dapat dipisah menjadi product state) dan manakah yang bukan tensor murni (terbelit/entangled). Tuliskan representasi ket untuk masing-masing.
+  </p>
+
+  <p align="justify"><b>Pembahasan:</b><br>
+  Suatu vektor dua-partikel disebut tensor murni jika dapat ditulis sebagai
+  $$|\psi\rangle = |a\rangle_A \otimes |b\rangle_B.$$
+  Misalkan
+  $$|a\rangle = \alpha|0\rangle+\beta|1\rangle,\qquad |b\rangle=\gamma|0\rangle+\delta|1\rangle.$$
+  Maka
+  $$|a\rangle\otimes |b\rangle
+  = \alpha\gamma|00\rangle+\alpha\delta|01\rangle+\beta\gamma|10\rangle+\beta\delta|11\rangle.$$
+  Dalam basis $\{|00\rangle,|01\rangle,|10\rangle,|11\rangle\}$, koefisiennya dapat disusun sebagai matriks
+  $$M=\begin{pmatrix}\alpha\gamma & \alpha\delta\\ \beta\gamma & \beta\delta\end{pmatrix}
+  =\begin{pmatrix}\alpha\\ \beta\end{pmatrix}\begin{pmatrix}\gamma & \delta\end{pmatrix}.$$
+  Jadi $M$ selalu ber-rank $1$ untuk tensor murni. Sebaliknya, jika rank matriks koefisien lebih dari $1$, vektor tersebut bukan tensor murni.
+
+  <br><br>
+  <b>Untuk $|\psi_1\rangle$:</b>
+  $$|\psi_1\rangle = \frac12\bigl(|00\rangle+|01\rangle+|10\rangle+|11\rangle\bigr).$$
+  Matriks koefisiennya adalah
+  $$M_1=\frac12\begin{pmatrix}1&1\\1&1\end{pmatrix}.$$
+  Karena $M_1$ ber-rank $1$, maka $|\psi_1\rangle$ adalah tensor murni. Representasi ket sebagai hasil tensor adalah
+  $$|\psi_1\rangle
+  =\left(\frac{|0\rangle+|1\rangle}{\sqrt2}\right)_A
+  \otimes
+  \left(\frac{|0\rangle+|1\rangle}{\sqrt2}\right)_B
+  = |+\rangle_A |+\rangle_B.$$
+
+  <br>
+  <b>Untuk $|\psi_2\rangle$:</b>
+  $$|\psi_2\rangle = \frac1{\sqrt2}\bigl(|00\rangle+|11\rangle\bigr).$$
+  Matriks koefisiennya adalah
+  $$M_2=\frac1{\sqrt2}\begin{pmatrix}1&0\\0&1\end{pmatrix}.$$
+  Karena $M_2$ ber-rank $2$, maka $|\psi_2\rangle$ bukan tensor murni. Secara eksplisit, andaikan
+  $$|\psi_2\rangle=|a\rangle_A\otimes |b\rangle_B,$$
+  maka harus berlaku
+  $$\alpha\gamma=\frac1{\sqrt2},\quad \alpha\delta=0,\quad \beta\gamma=0,\quad \beta\delta=\frac1{\sqrt2}.$$
+  Dari $\alpha\delta=0$ diperoleh $\alpha=0$ atau $\delta=0$. Jika $\alpha=0$, maka $\alpha\gamma=0\neq \frac1{\sqrt2}$. Jika $\delta=0$, maka $\beta\delta=0\neq \frac1{\sqrt2}$. Keduanya kontradiksi. Jadi $|\psi_2\rangle$ tidak dapat ditulis sebagai hasil tensor dua keadaan satu-partikel. Ini adalah keadaan Bell yang entangled:
+  $$|\psi_2\rangle=\frac1{\sqrt2}\bigl(|00\rangle+|11\rangle\bigr).$$
+
+  <br>
+  <b>Kesimpulan:</b> $|\psi_1\rangle$ adalah tensor murni karena dapat difaktorkan menjadi $|+\rangle_A|+\rangle_B$. $|\psi_2\rangle$ bukan tensor murni karena matriks koefisiennya ber-rank $2$ dan tidak dapat dipisahkan menjadi $|a\rangle_A\otimes |b\rangle_B$. Kriteria praktisnya: tensor murni jika rank matriks koefisien $2\times 2$ sama dengan $1$; bukan tensor murni jika ranknya lebih dari $1$.
   </p>
 </div>
 </div>
