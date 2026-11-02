@@ -36708,56 +36708,416 @@ pretty_print(html(r"Nilai $p_1(4) = %s$"%latex(p1(4))))
 </div>
 
 <div class="subsection">
- <div class="subsection-header">
+<div class="subsection-header">
    <h3>6.2. Polinomial Minimal<span class="dropdown-icon">▼</span></h3>
- </div>
+</div>
+
 <div class="subsection-content">
+
 <p align="justify">
-  Sebuah polinomial menggabungkan operasi-operasi yang mendefinisikan suatu aljabar: penjumlahan, perkalian skalar, 
-  dan perkalian. Diberikan $p(t) \in F[t]$ dan $a$ dalam suatu $F$-aljabar asosiatif dengan elemen identitas $A$, 
-  maka $p(a)$ merupakan elemen yang terdefinisi dengan baik di dalam $A$. Kita dapat mengatakan bahwa $p(a)$ adalah 
-  sebuah polinomial dalam $a$. Pada bagian ini, kita mempelajari polinomial-polimomial dalam operator linear dan dalam 
-  matriks persegi. Kita mulai dengan formalitas dan beberapa pengamatan umum mengenai $F$-aljabar asosiatif dengan 
-  identitas.
+  Polinomial tidak hanya digunakan untuk menyatakan fungsi dalam variabel
+  skalar, tetapi juga dapat digunakan untuk membangun ekspresi aljabar
+  yang melibatkan suatu elemen dalam aljabar atau suatu operator linear.
+  Melalui konsep ini, operasi penjumlahan, perkalian skalar, dan
+  perkalian dapat dikombinasikan untuk membentuk suatu ekspresi polinomial.
+  Konsep tersebut menjadi sangat penting dalam mempelajari operator linear
+  dan matriks persegi karena memungkinkan kita menyatakan sifat-sifat
+  suatu operator melalui persamaan polinomial.
 </p>
+
 <p align="justify">
-  Misalkan $A$ adalah $F$-aljabar asosiatif dengan elemen identitas $\iota$. Diberikan $a \in A$, kita 
-  dapat mendefinisikan suatu transformasi linear
-  $$F[t] \to A$$ dengan memperluas secara linear aturan
-  $$1 \mapsto \iota = a^0,\quad t^k \mapsto a^k,\ \forall k \in \mathbb{Z}^+.$$
-  Kita menotasikan image $p(t)$ di bawah pemetaan ini dengan $p(a)$. Jelas bahwa pemetaan $p(t) \mapsto p(a)$ 
-  adalah suatu homomorfisma $F$-aljabar. Citra pemetaan ini adalah $F[a] \subseteq A$, yaitu ruang polinomial 
-  dalam $a$. Karena pangkat-pangkat $a$ saling komutatif, sebagaimana telah diketahui bahwa $F[a]$ adalah subaljabar 
-  komutatif dari $A$ dengan identitas. Kernel dari pemetaan ini disebut annihilator dari $a$ dalam $F[t]$. 
-  Setiap $p(t)$ di annihilator $a$ memiliki sifat $p(a) = 0_A$; kita mengatakan bahwa $p(t)$ meniadakan 
-  (annihilates) $a$.
+  Misalkan $F$ adalah suatu lapangan, $F[t]$ adalah ring polinomial
+  dalam variabel $t$ dengan koefisien di $F$, dan $A$ adalah suatu
+  $F$-aljabar asosiatif dengan elemen identitas $\iota$.
+  Untuk setiap $a \in A$, kita dapat mengevaluasi polinomial
+  $p(t) \in F[t]$ pada elemen $a$ dengan mengganti variabel $t$
+  oleh elemen $a$. Jika
+  $$p(t)=c_0+c_1t+c_2t^2+\cdots+c_nt^n,$$
+  maka didefinisikan
+  $$p(a)=c_0\iota+c_1a+c_2a^2+\cdots+c_na^n.$$
+  Dengan demikian, $p(a)$ merupakan elemen yang terdefinisi dengan
+  baik di dalam $A$. Kita mengatakan bahwa $p(a)$ adalah suatu
+  polinomial dalam $a$. Perlu diperhatikan bahwa konstanta $c_0$
+  dalam ekspresi tersebut diartikan sebagai $c_0\iota$, sehingga
+  setiap suku dalam penjumlahan merupakan elemen dari aljabar yang sama.
 </p>
+
 <p align="justify">
-  Ketika kita mendefinisikan sebuah proyeksi sebagai operator linear tak sederhana $L$ pada ruang vektor $V$ sedemikian 
-  sehingga $L^2 = L$, kita sebenarnya mendefinisikan proyeksi sebagai pemetaan yang dianihilasi oleh $p(t) = t^2 - t$.
+  Pada bagian ini, perhatian utama diarahkan pada polinomial dalam
+  operator linear dan matriks persegi. Sebelum membahas polinomial
+  minimal secara khusus, kita terlebih dahulu membangun landasan
+  aljabar yang diperlukan. Landasan ini menjelaskan bagaimana
+  polinomial dapat dievaluasi pada elemen suatu aljabar, serta
+  bagaimana hubungan antara polinomial dan elemen tersebut dapat
+  dinyatakan melalui suatu homomorfisma.
 </p>
+
+<p align="justify">
+  Misalkan $A$ adalah $F$-aljabar asosiatif dengan elemen identitas
+  $\iota$. Diberikan $a \in A$, kita dapat mendefinisikan suatu
+  pemetaan linear
+  $$\varphi_a:F[t]\longrightarrow A$$
+  dengan memperluas secara linear aturan
+  $$1\longmapsto\iota=a^0,\qquad
+  t^k\longmapsto a^k,\quad k\in\mathbb{Z}^+.$$
+  Secara lebih umum, untuk setiap polinomial
+  $$p(t)=\sum_{k=0}^{n}c_kt^k,$$
+  pemetaan tersebut diberikan oleh
+  $$\varphi_a(p(t))=\sum_{k=0}^{n}c_ka^k=p(a).$$
+  Notasi $a^0=\iota$ digunakan agar aturan evaluasi ini juga berlaku
+  untuk suku konstanta.
+</p>
+
+<p align="justify">
+  Pemetaan $\varphi_a$ bukan hanya transformasi linear, melainkan
+  juga suatu homomorfisma $F$-aljabar. Artinya, pemetaan ini
+  mempertahankan penjumlahan, perkalian skalar, perkalian, dan
+  elemen identitas. Secara khusus, untuk setiap
+  $p(t),q(t)\in F[t]$ berlaku
+  $$\varphi_a(p(t)+q(t))
+  =\varphi_a(p(t))+\varphi_a(q(t)),$$
+  $$\varphi_a(p(t)q(t))
+  =\varphi_a(p(t))\varphi_a(q(t)),$$
+  dan
+  $$\varphi_a(1)=\iota.$$
+  Sifat perkalian tersebut berlaku karena semua pangkat dari
+  elemen yang sama, yaitu $a$, saling komutatif:
+  $$a^i a^j=a^{i+j}=a^j a^i.$$
+  Dengan demikian, meskipun aljabar $A$ sendiri tidak harus
+  komutatif, subaljabar yang dibangkitkan oleh satu elemen $a$
+  selalu bersifat komutatif.
+</p>
+
+<p align="justify">
+  Citra (image) dari pemetaan $\varphi_a$ dinotasikan dengan
+  $$F[a]=\operatorname{Im}(\varphi_a)
+  =\{p(a)\mid p(t)\in F[t]\}.$$
+  Himpunan $F[a]$ merupakan subaljabar dari $A$ yang dibangkitkan
+  oleh elemen $a$. Dengan kata lain, $F[a]$ memuat semua kombinasi
+  linear dari pangkat-pangkat $a$, termasuk elemen identitas
+  $\iota$. Karena setiap dua pangkat dari $a$ saling komutatif,
+  maka $F[a]$ merupakan subaljabar komutatif dengan elemen identitas,
+  meskipun $A$ secara keseluruhan mungkin tidak komutatif.
+</p>
+
+<p align="justify">
+  Selanjutnya, kernel dari pemetaan $\varphi_a$ didefinisikan sebagai
+  $$\ker(\varphi_a)
+  =\{p(t)\in F[t]\mid p(a)=0_A\}.$$
+  Kernel ini disebut annihilator dari $a$ dalam $F[t]$.
+  Setiap polinomial $p(t)$ yang termasuk di dalamnya memenuhi
+  $p(a)=0_A$. Dalam keadaan ini, kita mengatakan bahwa polinomial
+  $p(t)$ meniadakan (annihilates) elemen $a$.
+  Karena $\varphi_a$ merupakan homomorfisma aljabar, kernel-nya
+  merupakan ideal dari ring $F[t]$.
+</p>
+
+<p align="justify">
+  Salah satu sifat penting dari ring polinomial $F[t]$ adalah bahwa
+  setiap idealnya dibangkitkan oleh satu polinomial, karena $F[t]$
+  merupakan daerah ideal utama (principal ideal domain).
+  Oleh sebab itu, apabila terdapat polinomial tak nol yang
+  meniadakan $a$, maka kernel $\varphi_a$ dapat dibangkitkan
+  oleh tepat satu polinomial monik yang berderajat paling kecil.
+  Polinomial inilah yang disebut polinomial minimal dari $a$,
+  dan biasanya dinotasikan dengan $m_a(t)$.
+  Dengan demikian,
+  $$\ker(\varphi_a)=\langle m_a(t)\rangle.$$
+  Sifat monik berarti koefisien suku dengan pangkat tertinggi
+  adalah $1$. Syarat ini membuat polinomial minimal bersifat
+  tunggal, sehingga tidak terjadi ambiguitas akibat perkalian
+  dengan konstanta tak nol.
+</p>
+
+<p align="justify">
+  Perlu diperhatikan bahwa keberadaan polinomial minimal tidak
+  selalu dapat dijamin untuk setiap elemen dalam sembarang
+  $F$-aljabar. Polinomial minimal ada apabila terdapat suatu
+  polinomial tak nol $p(t)\in F[t]$ yang memenuhi $p(a)=0_A$.
+  Kondisi ini selalu terpenuhi apabila $A$ berdimensi hingga
+  sebagai ruang vektor atas $F$. Sebab, dalam keadaan tersebut,
+  pangkat-pangkat
+  $$\iota,a,a^2,a^3,\ldots$$
+  merupakan kumpulan vektor dalam ruang berdimensi hingga,
+  sehingga pasti terdapat suatu hubungan linear tak trivial
+  di antara sejumlah pangkat tersebut. Hubungan linear ini
+  menghasilkan polinomial tak nol yang meniadakan $a$.
+</p>
+
+<p align="justify">
+  Sebagai ilustrasi sederhana, misalkan $A=M_2(\mathbb{R})$
+  dan diberikan matriks
+  $$A=\begin{pmatrix}
+  1&0\\
+  0&2
+  \end{pmatrix}.$$
+  Untuk polinomial $p(t)=t^2-3t+2$, evaluasi polinomial pada
+  matriks tersebut menghasilkan
+  $$p(A)=A^2-3A+2I$$
+  $$=\begin{pmatrix}1&0\\0&4\end{pmatrix}
+  -\begin{pmatrix}3&0\\0&6\end{pmatrix}
+  +\begin{pmatrix}2&0\\0&2\end{pmatrix}
+  =\begin{pmatrix}0&0\\0&0\end{pmatrix}.$$
+  Jadi, polinomial $p(t)=t^2-3t+2$ meniadakan matriks $A$.
+  Bahkan, karena $A$ mempunyai dua nilai eigen yang berbeda,
+  polinomial minimalnya adalah
+  $$m_A(t)=(t-1)(t-2)=t^2-3t+2.$$
+  Contoh ini memperlihatkan bahwa suatu persamaan polinomial
+  dapat digunakan untuk menyatakan sifat aljabar suatu matriks.
+</p>
+
+<p align="justify">
+  Konsep yang sama juga berlaku untuk operator linear. Misalkan
+  $V$ adalah ruang vektor atas $F$ dan $L:V\to V$ merupakan
+  operator linear. Kita dapat membentuk polinomial dalam $L$
+  melalui
+  $$p(L)=c_0I+c_1L+c_2L^2+\cdots+c_nL^n,$$
+  dengan $I$ menyatakan operator identitas pada $V$.
+  Jika $p(L)=0$, maka polinomial $p(t)$ dikatakan meniadakan
+  operator $L$. Dalam hal ini, polinomial minimal $m_L(t)$
+  merupakan polinomial monik berderajat terkecil yang memenuhi
+  $$m_L(L)=0.$$
+  Polinomial minimal memberikan informasi penting mengenai
+  struktur operator, termasuk hubungan antara nilai eigen,
+  diagonalitas, dan dekomposisi ruang vektor.
+</p>
+
+<p align="justify">
+  Sebagai contoh khusus, misalkan $L:V\to V$ merupakan suatu
+  operator proyeksi, yaitu operator linear yang memenuhi
+  $$L^2=L.$$
+  Persamaan tersebut dapat ditulis kembali sebagai
+  $$L^2-L=0,$$
+  atau
+  $$(L^2-L)=0.$$
+  Dengan demikian,
+  $$p(L)=0,\qquad p(t)=t^2-t=t(t-1).$$
+  Artinya, operator proyeksi selalu ditiadakan oleh polinomial
+  $t(t-1)$. Apabila $L$ bukan operator identitas nol maupun
+  operator identitas, polinomial minimalnya adalah
+  $$m_L(t)=t(t-1).$$
+  Hal ini juga menunjukkan bahwa nilai eigen yang mungkin
+  dimiliki operator proyeksi hanya $0$ dan $1$.
+</p>
+
+<p align="justify">
+  Dengan demikian, konsep annihilator merupakan jembatan
+  penting untuk memahami polinomial minimal. Polinomial
+  minimal bukan sekadar polinomial yang menghasilkan nol
+  ketika dievaluasi pada suatu operator atau matriks, melainkan
+  polinomial monik dengan derajat terkecil yang memiliki sifat
+  tersebut. Sifat minimalitas inilah yang membuatnya menjadi
+  alat penting untuk mengungkap struktur aljabar operator
+  linear dan matriks persegi. Pada pembahasan selanjutnya,
+  konsep ini akan digunakan untuk menghubungkan polinomial
+  minimal dengan polinomial karakteristik serta sifat-sifat
+  spektral suatu operator linear.
+</p>
+
+
 <hr class="garis-elegan">                    
+
 <div class="example-container">
 <div class="example-header" onclick="this.parentElement.classList.toggle('active')">
 <span id="Contoh1521"><b>6.2.1. Contoh</b></span>
 <span class="example-arrow">▼</span>
 </div>
+
 <div class="example-box">
+
 <p align="justify">
-      Pertimbangkan
-      $$A=\begin{bmatrix}0 & 1\\0 & 0\end{bmatrix}$$
-      dalam $M_2(\mathbb{R})$. Jika $c \in \mathbb{R}$ dan $p(t) = t - c$, maka
-      $$
-      p(A) = A - cI =
-      \begin{bmatrix}
-      -c & 1\\
-      0 & -c
-      \end{bmatrix}
-      $$
-      tidak pernah sama dengan matriks nol. Di sisi lain, $A^2$ adalah matriks nol. Faktanya, annihilator 
-      dari $A$ adalah
-      $$\{\, t^2 q(t) \mid q(t) \in \mathbb{R}[t] \,\}.$$
-    </p>
+  Pertimbangkan matriks
+  $$A=\begin{bmatrix}0 & 1\\0 & 0\end{bmatrix}$$
+  dalam aljabar matriks $M_2(\mathbb{R})$. Kita akan menentukan
+  polinomial-polinomial yang meniadakan matriks $A$, kemudian
+  menentukan polinomial minimalnya.
+</p>
+
+<p align="justify">
+  <b>Langkah 1. Memeriksa apakah terdapat polinomial linear
+  yang meniadakan $A$.</b>
+</p>
+
+<p align="justify">
+  Misalkan $c\in\mathbb{R}$ dan dipilih polinomial
+  $$p(t)=t-c.$$
+  Berdasarkan definisi evaluasi polinomial pada matriks,
+  diperoleh
+  $$p(A)=A-cI,$$
+  dengan $I$ adalah matriks identitas berukuran $2\times 2$.
+  Oleh karena itu,
+  $$p(A)=
+  \begin{bmatrix}0&1\\0&0\end{bmatrix}
+  -
+  \begin{bmatrix}c&0\\0&c\end{bmatrix}
+  =
+  \begin{bmatrix}-c&1\\0&-c\end{bmatrix}.$$
+  Matriks tersebut tidak mungkin merupakan matriks nol
+  untuk setiap $c\in\mathbb{R}$, sebab elemen pada posisi
+  baris pertama dan kolom kedua selalu bernilai $1$.
+  Jadi, tidak ada polinomial berbentuk $t-c$ yang meniadakan $A$.
+</p>
+
+<p align="justify">
+  <b>Makna hasil ini:</b> Tidak ada polinomial linear monik
+  yang menghasilkan matriks nol ketika dievaluasi pada $A$.
+  Dengan kata lain, tidak terdapat suatu bilangan real $c$
+  yang memenuhi $A=cI$. Hal ini menunjukkan bahwa kita perlu
+  mempertimbangkan polinomial dengan derajat yang lebih tinggi.
+</p>
+
+<p align="justify">
+  <b>Langkah 2. Menghitung pangkat-pangkat matriks $A$.</b>
+</p>
+
+<p align="justify">
+  Kita mulai dengan menghitung kuadrat matriks $A$:
+  $$A^2=A\cdot A
+  =
+  \begin{bmatrix}0&1\\0&0\end{bmatrix}
+  \begin{bmatrix}0&1\\0&0\end{bmatrix}
+  =
+  \begin{bmatrix}0&0\\0&0\end{bmatrix}.$$
+  Dengan demikian,
+  $$A^2=0.$$
+  Karena $A^2=0$, maka untuk setiap bilangan bulat $k\geq 2$
+  berlaku
+  $$A^k=0.$$
+  Matriks tak nol yang mempunyai suatu pangkat bernilai nol
+  disebut matriks nilpoten (nilpotent matrix). Jadi, $A$
+  merupakan matriks nilpoten dengan indeks nilpotensi $2$.
+</p>
+
+<p align="justify">
+  <b>Langkah 3. Menentukan semua polinomial yang meniadakan $A$.</b>
+</p>
+
+<p align="justify">
+  Misalkan suatu polinomial sebarang dalam $\mathbb{R}[t]$
+  diberikan oleh
+  $$p(t)=a_0+a_1t+a_2t^2+\cdots+a_nt^n.$$
+  Dengan mengevaluasi polinomial tersebut pada matriks $A$,
+  diperoleh
+  $$p(A)=a_0I+a_1A+a_2A^2+\cdots+a_nA^n.$$
+  Karena $A^2=0$ dan semua pangkat $A$ yang lebih tinggi
+  juga bernilai nol, persamaan tersebut menyederhana menjadi
+  $$p(A)=a_0I+a_1A.$$
+  Selanjutnya,
+  $$p(A)=
+  a_0\begin{bmatrix}1&0\\0&1\end{bmatrix}
+  +a_1\begin{bmatrix}0&1\\0&0\end{bmatrix}$$
+  $$=
+  \begin{bmatrix}
+  a_0&a_1\\
+  0&a_0
+  \end{bmatrix}.$$
+  Agar $p(A)$ merupakan matriks nol, semua elemennya harus
+  bernilai nol. Dengan demikian,
+  $$a_0=0,\qquad a_1=0.$$
+  Tidak ada persyaratan tambahan terhadap koefisien
+  $a_2,a_3,\ldots,a_n$.
+</p>
+
+<p align="justify">
+  Jadi, polinomial $p(t)$ meniadakan $A$ jika dan hanya jika
+  dua koefisien pertamanya bernilai nol. Artinya,
+  $$p(t)=a_2t^2+a_3t^3+\cdots+a_nt^n.$$
+  Kita dapat memfaktorkan $t^2$ sehingga
+  $$p(t)=t^2q(t),\qquad q(t)\in\mathbb{R}[t].$$
+  Oleh karena itu, annihilator dari $A$ adalah
+  $$\operatorname{Ann}(A)
+  =\{t^2q(t)\mid q(t)\in\mathbb{R}[t]\}.$$
+  Dalam notasi ideal,
+  $$\operatorname{Ann}(A)=\langle t^2\rangle.$$
+</p>
+
+<p align="justify">
+  <b>Langkah 4. Menentukan polinomial minimal dari $A$.</b>
+</p>
+
+<p align="justify">
+  Berdasarkan definisi, polinomial minimal adalah polinomial
+  monik tak nol dengan derajat terkecil yang meniadakan
+  matriks $A$. Dari hasil sebelumnya, setiap polinomial
+  yang meniadakan $A$ harus berbentuk
+  $$p(t)=t^2q(t).$$
+  Karena itu, setiap polinomial tak nol dalam annihilator
+  mempunyai derajat sekurang-kurangnya $2$.
+  Di sisi lain, polinomial
+  $$m_A(t)=t^2$$
+  memenuhi
+  $$m_A(A)=A^2=0.$$
+  Jadi, polinomial monik dengan derajat terkecil yang
+  meniadakan $A$ adalah
+  $$\boxed{m_A(t)=t^2.}$$
+  Dengan demikian, polinomial minimal matriks $A$
+  berderajat $2$.
+</p>
+
+<p align="justify">
+  <b>Langkah 5. Memahami hubungan dengan nilai eigen.</b>
+</p>
+
+<p align="justify">
+  Untuk matriks $A$, polinomial karakteristiknya adalah
+  $$\chi_A(t)=\det(tI-A).$$
+  Dalam contoh ini,
+  $$tI-A=
+  \begin{bmatrix}t&-1\\0&t\end{bmatrix},$$
+  sehingga
+  $$\chi_A(t)=
+  \det\begin{bmatrix}t&-1\\0&t\end{bmatrix}
+  =t^2.$$
+  Jadi,
+  $$\chi_A(t)=m_A(t)=t^2.$$
+  Satu-satunya nilai eigen matriks $A$ adalah $\lambda=0$,
+  tetapi akar tersebut mempunyai multiplisitas aljabar $2$.
+  Hal ini konsisten dengan sifat matriks nilpoten yang
+  seluruh nilai eigennya bernilai nol.
+</p>
+
+<p align="justify">
+  Menariknya, meskipun hanya mempunyai satu nilai eigen,
+  matriks $A$ tidak dapat didiagonalkan. Untuk melihat hal ini,
+  perhatikan bahwa
+  $$\ker(A)=
+  \left\{
+  \begin{bmatrix}x\\0\end{bmatrix}
+  \mid x\in\mathbb{R}
+  \right\}.$$
+  Dengan demikian,
+  $$\dim\ker(A)=1.$$
+  Padahal, jika $A$ dapat didiagonalkan, karena satu-satunya
+  nilai eigennya adalah $0$ dengan multiplisitas aljabar $2$,
+  matriks tersebut harus serupa dengan matriks nol berukuran
+  $2\times2$. Hal ini bertentangan dengan $A\neq0$.
+  Jadi, $A$ tidak dapat didiagonalkan.
+</p>
+
+<p align="justify">
+  <b>Kesimpulan.</b>
+</p>
+
+<p align="justify">
+  Contoh ini memperlihatkan bahwa matriks yang tidak nol
+  dapat memiliki suatu pangkat yang bernilai nol. Untuk
+  matriks yang diberikan, yaitu
+  $$A=\begin{bmatrix}0&1\\0&0\end{bmatrix},$$
+  berlaku
+  $$A\neq0,\qquad A^2=0.$$
+  Seluruh polinomial yang meniadakan $A$ berbentuk
+  $t^2q(t)$, sehingga annihilator-nya adalah ideal
+  $\langle t^2\rangle$. Akibatnya, polinomial minimalnya
+  adalah
+  $$\boxed{m_A(t)=t^2.}$$
+  Contoh ini juga menunjukkan bahwa polinomial minimal
+  memberikan informasi yang tidak selalu dapat diperoleh
+  hanya dengan mengetahui nilai eigen. Khususnya, pangkat
+  faktor linear dalam polinomial minimal dapat menunjukkan
+  adanya struktur nilpoten yang menyebabkan suatu matriks
+  tidak dapat didiagonalkan.
+</p>
+
 </div>
 </div>
 
@@ -36769,13 +37129,20 @@ pretty_print(html(r"Nilai $p_1(4) = %s$"%latex(p1(4))))
         <span class="theorem-number" id="Lemma1521">6.2.2. Lema</span>
         <span class="arrow">▼</span>
     </div>
+
 <div class="theorem-box">
+
 <p align="justify">
-       Misalkan $A$ adalah $F$-aljabar asosiatif dengan identitas, dan $f$ adalah homomorfisma aljabar yang 
-       terdefinisi pada $A$. Jika $p(t) \in F[t]$, maka
-       $$f(p(a)) = p(f(a))$$
-       untuk semua $a \in A$.
-    </p>
+  Misalkan $A$ dan $B$ adalah dua $F$-aljabar asosiatif dengan
+  elemen identitas, dan $f:A\to B$ adalah suatu homomorfisma
+  $F$-aljabar. Jika $p(t)\in F[t]$, maka berlaku
+  $$f(p(a))=p(f(a))$$
+  untuk setiap $a\in A$.
+  Dalam persamaan tersebut, $p(a)$ merupakan evaluasi polinomial
+  pada elemen $a$ di dalam $A$, sedangkan $p(f(a))$ merupakan
+  evaluasi polinomial yang sama pada elemen $f(a)$ di dalam $B$.
+</p>
+
 <!-- PROOF DI DALAM TEOREMA -->
 <div class="proof-container">
   <div class="proof-header" onclick="toggleProof(this, event)">
@@ -36784,12 +37151,73 @@ pretty_print(html(r"Nilai $p_1(4) = %s$"%latex(p1(4))))
   </div>
 
 <div class="proof-box">
+
 <p align="justify">
-      Bukti langsung karena homomorfisma aljabar mempertahankan perkalian skalar, penjumlahan, dan perkalian. 
-    </p>
-<p>
-✅ <b>Q.E.D.</b> $\qquad\qquad\qquad\blacksquare$
+  Misalkan polinomial $p(t)\in F[t]$ diberikan dalam bentuk
+  umum
+  $$p(t)=c_0+c_1t+c_2t^2+\cdots+c_nt^n,$$
+  dengan $c_0,c_1,\ldots,c_n\in F$.
+  Berdasarkan definisi evaluasi polinomial pada elemen $a\in A$,
+  diperoleh
+  $$p(a)=c_0\iota_A+c_1a+c_2a^2+\cdots+c_na^n,$$
+  dengan $\iota_A$ menyatakan elemen identitas dalam $A$.
 </p>
+
+<p align="justify">
+  Selanjutnya, karena $f:A\to B$ merupakan homomorfisma
+  $F$-aljabar, maka $f$ mempertahankan penjumlahan,
+  perkalian skalar, dan perkalian. Selain itu, homomorfisma
+  aljabar yang mempertahankan identitas memenuhi
+  $$f(\iota_A)=\iota_B,$$
+  dengan $\iota_B$ merupakan elemen identitas dalam $B$.
+  Dengan menerapkan $f$ pada kedua ruas ekspresi $p(a)$,
+  diperoleh
+  $$\begin{aligned}
+  f(p(a))
+  &=f(c_0\iota_A+c_1a+c_2a^2+\cdots+c_na^n)\\
+  &=c_0f(\iota_A)+c_1f(a)+c_2f(a^2)
+    +\cdots+c_nf(a^n).
+  \end{aligned}$$
+</p>
+
+<p align="justify">
+  Karena $f$ mempertahankan perkalian, untuk setiap
+  bilangan bulat $k\geq 1$ berlaku
+  $$f(a^k)=f(a\cdot a\cdots a)
+  =f(a)f(a)\cdots f(a)
+  =[f(a)]^k.$$
+  Sementara itu, untuk $k=0$ berlaku
+  $$f(a^0)=f(\iota_A)=\iota_B=[f(a)]^0.$$
+  Dengan demikian, secara umum
+  $$f(a^k)=[f(a)]^k,\qquad k\geq0.$$
+</p>
+
+<p align="justify">
+  Substitusi hasil tersebut ke dalam persamaan sebelumnya
+  memberikan
+  $$\begin{aligned}
+  f(p(a))
+  &=c_0\iota_B+c_1f(a)+c_2[f(a)]^2\\
+  &\quad+\cdots+c_n[f(a)]^n\\
+  &=p(f(a)).
+  \end{aligned}$$
+  Jadi, terbukti bahwa
+  $$\boxed{f(p(a))=p(f(a)).}$$
+</p>
+
+<p align="justify">
+  Dengan demikian, homomorfisma aljabar mempertahankan
+  evaluasi polinomial. Hasil ini menunjukkan bahwa penerapan
+  homomorfisma terhadap suatu polinomial dalam elemen aljabar
+  memberikan hasil yang sama dengan mengevaluasi polinomial
+  tersebut pada citra elemen yang bersangkutan.
+</p>
+
+<p>
+  <b>Q.E.D.</b>
+  $\qquad\qquad\qquad\blacksquare$
+</p>
+
 </div>
 </div>
 </div>
@@ -36797,61 +37225,448 @@ pretty_print(html(r"Nilai $p_1(4) = %s$"%latex(p1(4))))
 </section>
 
 <hr class="garis-elegan">
+
 <div class="example-container">
 <div class="example-header" onclick="this.parentElement.classList.toggle('active')">
 <span id="Contoh1522"><b>6.2.3. Contoh</b></span>
 <span class="example-arrow">▼</span>
 </div>
+
 <div class="example-box">
+
 <p align="justify">
-       Pertimbangkan $L \in L(\mathbb{R}^2)$ yang didefinisikan oleh
-       $$L(x,y) = (y,0).$$
-       Representasi matriks standar dari $L$ adalah $A$ seperti pada <a href="#Contoh1521">Contoh 6.2.1.</a> Karena pemetaan 
-       $L \mapsto [L]_B$ 
-       adalah isomorfisma $F$-aljabar, lemma menjamin bahwa
-       $$[p(L)]_B = p([L]_B)$$
-       untuk semua $p(t) \in \mathbb{R}[t]$. Maka, $p(A)$ adalah matriks nol di $M_2(\mathbb{R})$ jika dan hanya 
-       jika $p(L)$ adalah pemetaan nol pada $\mathbb{R}^2$. Dengan demikian, $A$ dan $L$ memiliki annihilator yang 
-       sama dalam $\mathbb{R}[t]$. Perhatikan bahwa
-       $$L^2(x,y) = L(y,0) = (0,0).$$
-    </p>
+  Pertimbangkan operator linear $L\in L(\mathbb{R}^2)$ yang
+  didefinisikan oleh
+  $$L(x,y)=(y,0).$$
+  Kita akan memperlihatkan bagaimana hubungan antara operator
+  linear dan representasi matriksnya dapat digunakan untuk
+  menentukan polinomial-polinomial yang meniadakan operator
+  tersebut.
+</p>
+
+<p align="justify">
+  <b>Langkah 1. Menentukan representasi matriks dari $L$.</b>
+</p>
+
+<p align="justify">
+  Misalkan $B=\{e_1,e_2\}$ merupakan basis standar dari
+  $\mathbb{R}^2$, dengan
+  $$e_1=(1,0),\qquad e_2=(0,1).$$
+  Berdasarkan definisi operator $L$, diperoleh
+  $$L(e_1)=L(1,0)=(0,0),$$
+  dan
+  $$L(e_2)=L(0,1)=(1,0).$$
+  Representasi matriks suatu operator linear terhadap basis
+  standar diperoleh dengan menempatkan koordinat citra setiap
+  vektor basis sebagai kolom matriks. Oleh karena itu,
+  $$[L]_B=
+  \begin{bmatrix}
+  0&1\\
+  0&0
+  \end{bmatrix}=A.$$
+  Matriks ini tepat sama dengan matriks yang diberikan pada
+  <a href="#Contoh1521">Contoh 6.2.1.</a>
+</p>
+
+<p align="justify">
+  <b>Langkah 2. Memahami hubungan antara operator dan matriksnya.</b>
+</p>
+
+<p align="justify">
+  Pemetaan representasi matriks
+  $$\Phi_B:L(\mathbb{R}^2)\longrightarrow M_2(\mathbb{R}),$$
+  yang diberikan oleh
+  $$\Phi_B(L)=[L]_B,$$
+  merupakan suatu isomorfisma $\mathbb{R}$-aljabar.
+  Artinya, pemetaan ini bersifat bijektif dan mempertahankan
+  operasi penjumlahan, perkalian skalar, perkalian operator,
+  serta elemen identitas.
+  Secara khusus, untuk setiap operator $L$ dan setiap
+  polinomial $p(t)\in\mathbb{R}[t]$, berdasarkan
+  Lema 6.2.2 berlaku
+  $$\Phi_B(p(L))=p(\Phi_B(L)).$$
+  Dengan menggunakan notasi representasi matriks, hubungan
+  tersebut dapat ditulis sebagai
+  $$\boxed{[p(L)]_B=p([L]_B)=p(A).}$$
+  Persamaan ini merupakan inti dari contoh tersebut.
+  Persamaan tersebut menyatakan bahwa mengevaluasi polinomial
+  pada operator linear kemudian mengambil representasi
+  matriksnya memberikan hasil yang sama dengan langsung
+  mengevaluasi polinomial pada matriks representasi operator.
+</p>
+
+<p align="justify">
+  <b>Langkah 3. Menunjukkan bahwa annihilator $L$ dan $A$ sama.</b>
+</p>
+
+<p align="justify">
+  Berdasarkan hasil sebelumnya,
+  $$[p(L)]_B=p(A).$$
+  Karena representasi matriks terhadap suatu basis merupakan
+  pemetaan bijektif, suatu operator linear merupakan operator
+  nol jika dan hanya jika matriks representasinya merupakan
+  matriks nol. Dengan demikian,
+  $$p(L)=0
+  \iff [p(L)]_B=0
+  \iff p(A)=0.$$
+  Jadi, suatu polinomial meniadakan operator $L$ jika dan
+  hanya jika polinomial yang sama meniadakan matriks $A$.
+  Akibatnya,
+  $$\boxed{\operatorname{Ann}(L)
+  =\operatorname{Ann}(A).}$$
+  Dengan kata lain, kedua objek tersebut mempunyai
+  annihilator yang sama dalam $\mathbb{R}[t]$.
+</p>
+
+<p align="justify">
+  <b>Langkah 4. Memeriksa secara langsung bahwa $L^2=0$.</b>
+</p>
+
+<p align="justify">
+  Untuk memahami hasil tersebut secara konkret, kita dapat
+  menghitung komposisi operator $L$ dengan dirinya sendiri.
+  Berdasarkan definisi,
+  $$L(x,y)=(y,0).$$
+  Oleh karena itu,
+  $$\begin{aligned}
+  L^2(x,y)
+  &=L(L(x,y))\\
+  &=L(y,0)\\
+  &=(0,0).
+  \end{aligned}$$
+  Jadi,
+  $$\boxed{L^2=0.}$$
+  Artinya, setelah operator $L$ diterapkan satu kali,
+  komponen kedua dari vektor berubah menjadi nol.
+  Ketika operator yang sama diterapkan untuk kedua kalinya,
+  hasilnya selalu berupa vektor nol.
+</p>
+
+<p align="justify">
+  <b>Langkah 5. Menentukan annihilator dan polinomial minimal $L$.</b>
+</p>
+
+<p align="justify">
+  Karena $L^2=0$, maka polinomial
+  $$p(t)=t^2$$
+  meniadakan operator $L$. Namun, untuk memastikan bahwa
+  polinomial tersebut merupakan polinomial minimal, kita
+  perlu menunjukkan bahwa tidak ada polinomial monik
+  berderajat lebih kecil yang meniadakan $L$.
+  Misalkan
+  $$q(t)=a_0+a_1t.$$
+  Jika $q(L)=0$, maka
+  $$a_0I+a_1L=0.$$
+  Dengan menerapkan kedua ruas pada vektor $(x,y)$,
+  diperoleh
+  $$a_0(x,y)+a_1(y,0)=(0,0).$$
+  Sehingga
+  $$(a_0x+a_1y,a_0y)=(0,0)$$
+  untuk setiap $x,y\in\mathbb{R}$.
+  Dari komponen kedua, dengan memilih $y=1$, diperoleh
+  $$a_0=0.$$
+  Selanjutnya, dari komponen pertama dengan memilih $y=1$,
+  diperoleh
+  $$a_1=0.$$
+  Jadi, tidak ada polinomial tak nol berderajat paling tinggi
+  satu yang meniadakan $L$.
+  Oleh karena itu, polinomial monik berderajat terkecil
+  yang meniadakan $L$ adalah
+  $$\boxed{m_L(t)=t^2.}$$
+  Berdasarkan kesamaan annihilator yang telah dibuktikan,
+  diperoleh pula
+  $$m_A(t)=m_L(t)=t^2.$$
+</p>
+
+<p align="justify">
+  <b>Kesimpulan.</b>
+</p>
+
+<p align="justify">
+  Contoh ini memperlihatkan bahwa operator linear dan
+  representasi matriksnya merupakan dua cara berbeda untuk
+  menyatakan objek aljabar yang sama. Isomorfisma aljabar
+  menjamin bahwa hubungan polinomial yang berlaku pada
+  operator linear juga berlaku pada matriks representasinya,
+  dan sebaliknya.
+  Untuk operator
+  $$L(x,y)=(y,0),$$
+  diperoleh
+  $$L^2=0,\qquad A^2=0,$$
+  dengan
+  $$A=\begin{bmatrix}0&1\\0&0\end{bmatrix}.$$
+  Keduanya mempunyai annihilator yang sama, yaitu
+  $$\operatorname{Ann}(L)
+  =\operatorname{Ann}(A)
+  =\langle t^2\rangle,$$
+  sehingga polinomial minimalnya juga sama:
+  $$\boxed{m_L(t)=m_A(t)=t^2.}$$
+  Hasil ini menegaskan bahwa polinomial minimal tidak
+  bergantung pada pilihan representasi matriks, melainkan
+  merupakan sifat intrinsik dari operator linear tersebut.
+</p>
+
 </div>
 </div>
 
 <p align="justify">
-  Kita tidak perlu membatasi diri pada ruang berdimensi hingga.
+  Pembahasan mengenai polinomial dalam operator linear tidak
+  terbatas pada ruang vektor berdimensi hingga. Konsep yang sama
+  juga dapat diterapkan pada ruang vektor berdimensi tak hingga.
+  Dalam keadaan ini, operator linear tidak harus direpresentasikan
+  oleh matriks berukuran hingga. Salah satu contoh yang menarik
+  adalah operator diferensiasi pada ruang fungsi terdiferensialkan
+  tak hingga kali.
 </p>
+
 <hr class="garis-elegan">
+
 <div class="example-container">
 <div class="example-header" onclick="this.parentElement.classList.toggle('active')">
 <span id="Contoh1523"><b>6.2.4. Contoh</b></span>
 <span class="example-arrow">▼</span>
 </div>
+
 <div class="example-box">
- <p align="justify">
-      Pertimbangkan operator diferensiasi $D$ pada $V = C^\infty(\mathbb{R})$. Perhatikan bahwa $D^n$ memetakan 
-      suatu fungsi ke turunan ke-$n$-nya. Jika $p(t) = t^2 - 5t + 6 \in \mathbb{R}[t]$, maka
-      $$p(D) = D^2 - 5D + 6I \in \mathbb{R}[D].$$
-      Sebagai contoh, $p(D)(e^{-t}) = 12 e^{-t}$ dan $p(D)(e^{2t}) = 0$.
-    </p>
+
+<p align="justify">
+  Pertimbangkan operator diferensiasi
+  $$D:V\longrightarrow V,$$
+  pada ruang vektor
+  $$V=C^\infty(\mathbb{R}),$$
+  yaitu ruang semua fungsi bernilai real yang mempunyai turunan
+  kontinu untuk setiap tingkat. Operator $D$ didefinisikan oleh
+  $$D(f)=f',$$
+  untuk setiap $f\in V$. Karena turunan dari fungsi
+  $C^\infty$ juga merupakan fungsi $C^\infty$, maka $D$
+  merupakan operator linear dari $V$ ke dirinya sendiri.
+  Linearitas tersebut berarti bahwa untuk setiap
+  $f,g\in V$ dan $\alpha,\beta\in\mathbb{R}$ berlaku
+  $$D(\alpha f+\beta g)=\alpha D(f)+\beta D(g).$$
+</p>
+
+<p align="justify">
+  Penerapan operator $D$ secara berulang menghasilkan turunan
+  dengan tingkat yang semakin tinggi. Secara khusus,
+  $$D^2(f)=f'',\qquad D^3(f)=f''',$$
+  dan secara umum
+  $$D^n(f)=f^{(n)}.$$
+  Dengan demikian, pangkat operator diferensiasi menyatakan
+  proses diferensiasi berulang terhadap suatu fungsi.
+</p>
+
+<p align="justify">
+  Misalkan diberikan polinomial
+  $$p(t)=t^2-5t+6\in\mathbb{R}[t].$$
+  Berdasarkan definisi evaluasi polinomial pada operator linear,
+  diperoleh
+  $$p(D)=D^2-5D+6I,$$
+  dengan $I$ merupakan operator identitas pada $V$.
+  Jika operator tersebut diterapkan pada fungsi $f\in V$,
+  maka
+  $$p(D)(f)=f''-5f'+6f.$$
+  Jadi, polinomial dalam operator diferensiasi menghasilkan
+  suatu operator diferensial orde dua.
+</p>
+
+<p align="justify">
+  <b>Langkah 1. Menghitung hasil penerapan $p(D)$ pada
+  fungsi $f(t)=e^{-t}$.</b>
+</p>
+
+<p align="justify">
+  Untuk fungsi $f(t)=e^{-t}$, turunan pertama dan kedua adalah
+  $$f'(t)=-e^{-t},\qquad f''(t)=e^{-t}.$$
+  Dengan menggunakan definisi operator $p(D)$, diperoleh
+  $$\begin{aligned}
+  p(D)(e^{-t})
+  &=D^2(e^{-t})-5D(e^{-t})+6e^{-t}\\
+  &=e^{-t}-5(-e^{-t})+6e^{-t}\\
+  &=12e^{-t}.
+  \end{aligned}$$
+  Jadi,
+  $$\boxed{p(D)(e^{-t})=12e^{-t}.}$$
+  Hasil ini menunjukkan bahwa fungsi $e^{-t}$ merupakan
+  vektor eigen dari operator $p(D)$ dengan nilai eigen $12$.
+</p>
+
+<p align="justify">
+  <b>Langkah 2. Menghitung hasil penerapan $p(D)$ pada
+  fungsi $g(t)=e^{2t}$.</b>
+</p>
+
+<p align="justify">
+  Untuk fungsi $g(t)=e^{2t}$, berlaku
+  $$g'(t)=2e^{2t},\qquad g''(t)=4e^{2t}.$$
+  Oleh karena itu,
+  $$\begin{aligned}
+  p(D)(e^{2t})
+  &=D^2(e^{2t})-5D(e^{2t})+6e^{2t}\\
+  &=4e^{2t}-5(2e^{2t})+6e^{2t}\\
+  &=(4-10+6)e^{2t}\\
+  &=0.
+  \end{aligned}$$
+  Dengan demikian,
+  $$\boxed{p(D)(e^{2t})=0.}$$
+  Artinya, fungsi $e^{2t}$ termasuk dalam kernel operator
+  $p(D)$.
+</p>
+
+<p align="justify">
+  <b>Langkah 3. Memahami hasil melalui faktorisasi polinomial.</b>
+</p>
+
+<p align="justify">
+  Polinomial yang diberikan dapat difaktorkan menjadi
+  $$p(t)=t^2-5t+6=(t-2)(t-3).$$
+  Dengan demikian,
+  $$p(D)=(D-2I)(D-3I).$$
+  Karena kedua faktor merupakan polinomial dalam operator
+  yang sama, keduanya saling komutatif. Persamaan ini juga
+  menunjukkan bahwa operator $p(D)$ dapat dipandang sebagai
+  komposisi dua operator diferensial orde satu.
+</p>
+
+<p align="justify">
+  Untuk memahami mengapa $e^{2t}$ menghasilkan nol, perhatikan
+  bahwa
+  $$D(e^{2t})=2e^{2t}.$$
+  Jadi,
+  $$(D-2I)(e^{2t})=0.$$
+  Akibatnya,
+  $$(D-2I)(D-3I)(e^{2t})=0.$$
+  Hal ini menjelaskan secara langsung mengapa
+  $$p(D)(e^{2t})=0.$$
+</p>
+
+<p align="justify">
+  <b>Langkah 4. Menentukan seluruh fungsi dalam kernel
+  operator $p(D)$.</b>
+</p>
+
+<p align="justify">
+  Persamaan
+  $$p(D)(f)=0$$
+  ekuivalen dengan persamaan diferensial linear homogen
+  $$f''-5f'+6f=0.$$
+  Persamaan karakteristiknya adalah
+  $$r^2-5r+6=0,$$
+  yang dapat difaktorkan menjadi
+  $$(r-2)(r-3)=0.$$
+  Dengan demikian, akar-akarnya adalah $r=2$ dan $r=3$.
+  Solusi umum persamaan diferensial tersebut adalah
+  $$f(t)=c_1e^{2t}+c_2e^{3t},$$
+  dengan $c_1,c_2\in\mathbb{R}$.
+  Jadi, kernel operator $p(D)$ diberikan oleh
+  $$\boxed{
+  \ker p(D)=
+  \operatorname{span}\{e^{2t},e^{3t}\}.
+  }$$
+  Artinya, bukan hanya $e^{2t}$ yang ditiadakan oleh
+  $p(D)$, melainkan setiap kombinasi linear dari
+  $e^{2t}$ dan $e^{3t}$.
+</p>
+
+<p align="justify">
+  <b>Langkah 5. Memahami hubungan dengan polinomial minimal.</b>
+</p>
+
+<p align="justify">
+  Contoh ini juga memberikan kesempatan untuk membedakan
+  polinomial yang meniadakan suatu fungsi dengan polinomial
+  yang meniadakan seluruh operator. Walaupun
+  $$p(D)(e^{2t})=0,$$
+  hal tersebut tidak berarti bahwa $p(D)$ merupakan
+  operator nol pada seluruh ruang $C^\infty(\mathbb{R})$.
+  Sebagai bukti, telah diperoleh bahwa
+  $$p(D)(e^{-t})=12e^{-t}\neq0.$$
+  Jadi, $p(t)=t^2-5t+6$ meniadakan fungsi tertentu, tetapi
+  tidak meniadakan operator $D$ secara keseluruhan.
+</p>
+
+<p align="justify">
+  Bahkan, operator diferensiasi $D$ pada
+  $C^\infty(\mathbb{R})$ tidak mempunyai polinomial minimal.
+  Untuk melihat alasannya, misalkan terdapat polinomial tak nol
+  $$q(t)=a_0+a_1t+\cdots+a_nt^n$$
+  yang memenuhi $q(D)=0$ sebagai operator pada seluruh
+  $C^\infty(\mathbb{R})$.
+  Jika operator tersebut diterapkan pada fungsi $e^{\lambda t}$,
+  untuk setiap $\lambda\in\mathbb{R}$, diperoleh
+  $$\begin{aligned}
+  q(D)(e^{\lambda t})
+  &=a_0e^{\lambda t}
+  +a_1\lambda e^{\lambda t}
+  +\cdots+a_n\lambda^ne^{\lambda t}\\
+  &=q(\lambda)e^{\lambda t}.
+  \end{aligned}$$
+  Karena $q(D)=0$, maka
+  $$q(\lambda)e^{\lambda t}=0$$
+  untuk setiap $\lambda\in\mathbb{R}$.
+  Karena $e^{\lambda t}$ tidak pernah bernilai nol, haruslah
+  $$q(\lambda)=0$$
+  untuk setiap $\lambda\in\mathbb{R}$.
+  Namun, suatu polinomial tak nol tidak mungkin mempunyai
+  tak hingga banyak akar yang berbeda. Kontradiksi ini
+  menunjukkan bahwa tidak terdapat polinomial tak nol
+  yang meniadakan operator $D$ pada seluruh ruang
+  $C^\infty(\mathbb{R})$.
+</p>
+
+<p align="justify">
+  <b>Kesimpulan.</b>
+</p>
+
+<p align="justify">
+  Contoh ini memperlihatkan bahwa konsep polinomial dalam
+  operator linear dapat diterapkan pada ruang vektor
+  berdimensi tak hingga. Operator diferensiasi $D$ dapat
+  dikombinasikan melalui suatu polinomial untuk menghasilkan
+  operator diferensial yang lebih kompleks. Untuk polinomial
+  $$p(t)=t^2-5t+6,$$
+  diperoleh
+  $$p(D)=D^2-5D+6I,$$
+  dengan
+  $$p(D)(e^{-t})=12e^{-t},\qquad
+  p(D)(e^{2t})=0.$$
+  Kernel operator tersebut adalah
+  $$\ker p(D)=
+  \operatorname{span}\{e^{2t},e^{3t}\}.$$
+  Hal yang juga penting adalah bahwa meskipun $p(t)$
+  meniadakan fungsi-fungsi tertentu, polinomial tersebut
+  tidak meniadakan operator diferensiasi $D$ secara
+  keseluruhan. Bahkan, pada ruang $C^\infty(\mathbb{R})$,
+  operator $D$ tidak mempunyai polinomial minimal.
+  Dengan demikian, contoh ini menegaskan bahwa keberadaan
+  polinomial minimal tidak dapat dijamin hanya berdasarkan
+  fakta bahwa suatu operator linear merupakan operator
+  yang terdefinisi dengan baik.
+</p>
+
 </div>
 </div>
 
 <hr class="garis-elegan">
-
 <section class="theorem-section">
 <div class="theorem-container">
     <div class="theorem-header" onclick="toggleTeorema(this)">
         <span class="theorem-number" id="Lemma1523">6.2.5. Lema</span>
         <span class="arrow">▼</span>
     </div>
+
 <div class="theorem-box">
+
 <p align="justify">
-      Jika $A$ adalah aljabar asosiatif dengan identitas dan $a \in A$ invertibel, maka pemetaan
-      $$x \mapsto a x a^{-1}$$
-      adalah automorfisma aljabar pada $A$.
-   </p>
-<!-- PROOF DI DALAM TEOREMA -->
+  Misalkan $A$ adalah suatu $F$-aljabar asosiatif dengan
+  elemen identitas $1_A$, dan $a\in A$ merupakan elemen
+  invertibel. Maka pemetaan
+  $$\varphi:A\longrightarrow A,\qquad
+  \varphi(x)=axa^{-1}$$
+  merupakan suatu automorfisma $F$-aljabar pada $A$.
+  Pemetaan ini disebut automorfisma dalam (inner automorphism)
+  atau konjugasi oleh $a$.
+</p>
+
 <div class="proof-container">
   <div class="proof-header" onclick="toggleProof(this, event)">
      <span>Bukti</span>
@@ -36859,60 +37674,114 @@ pretty_print(html(r"Nilai $p_1(4) = %s$"%latex(p1(4))))
   </div>
 
 <div class="proof-box">
+
 <p align="justify">
-       Definisikan pemetaan $\varphi: A \to A$ dengan $\varphi(x) = a x a^{-1}$ untuk setiap $x \in A$. Karena $a$ invertibel, maka $a^{-1} \in A$ dan berlaku $aa^{-1}=a^{-1}a=1$ (dengan $1$ adalah elemen identitas di $A$). Kita akan membuktikan bahwa $\varphi$ adalah automorfisma aljabar, yaitu dengan menunjukkan bahwa $\varphi$ merupakan homomorfisma aljabar yang bijektif.
+  Definisikan pemetaan
+  $$\varphi:A\longrightarrow A,\qquad
+  \varphi(x)=axa^{-1}$$
+  untuk setiap $x\in A$. Karena $a$ invertibel, terdapat
+  $a^{-1}\in A$ yang memenuhi
+  $$aa^{-1}=a^{-1}a=1_A.$$
+  Kita akan menunjukkan bahwa $\varphi$ merupakan
+  homomorfisma $F$-aljabar yang bijektif.
 </p>
+
 <p align="justify">
-       <b>(i) Homomorfisma aljabar.</b> Ambil sembarang $x, y \in A$ dan skalar $\lambda$ (dalam lapangan/ring dasar). Karena perkalian di $A$ bersifat bilinear dan asosiatif, maka:
-       <br>
-       Untuk penjumlahan:
-	   \begin{aligned}
-       \varphi(x+y) &= a(x+y)a^{-1}\\
-	   &= (ax + ay)a^{-1}\\
-	   &= axa^{-1} + aya^{-1}\\
-	   &= \varphi(x) + \varphi(y).
-       \end{aligned}
-       Untuk perkalian skalar (kesesuaian dengan struktur ruang vektor):
-       $$ 
-	   \varphi(\lambda x) = a(\lambda x)a^{-1} = \lambda (a x a^{-1}) = \lambda \varphi(x). 
-	   $$
-       Untuk perkalian unsur (preservasi operasi perkalian aljabar), dengan menyisipkan $a^{-1}a = 1$ di tengah, diperoleh:
-	   \begin{aligned}
-       \varphi(xy) &= a(xy)a^{-1}\\
-	   &= (ax)1(ya^{-1})\\
-	   &= (ax)(a^{-1}a)(ya^{-1})\\
-	   &= (a x a^{-1})(a y a^{-1})\\
-	   &= \varphi(x)\varphi(y). 
-       \end{aligned}
-       Terakhir, untuk elemen identitas:
-       $$ 
-	   \varphi(1) = a \cdot 1 \cdot a^{-1} = a a^{-1} = 1. 
-	   $$
-       Dengan demikian, $\varphi$ adalah homomorfisma aljabar yang mempertahankan identitas.
+  <b>(i) Mempertahankan operasi aljabar.</b>
+  Ambil sembarang $x,y\in A$ dan $\lambda\in F$.
+  Kita periksa sifat-sifat berikut.
 </p>
+
 <p align="justify">
-       <b>(ii) Bijektif.</b> Kita cari invers dari $\varphi$. Definisikan pemetaan $\psi: A \to A$ dengan $\psi(y) = a^{-1} y a$ untuk setiap $y \in A$. Selanjutnya, perhatikan komposisi kedua pemetaan tersebut. Untuk setiap $x \in A$,
-       \begin{aligned}
-	   (\psi \circ \varphi)(x) &= \psi(a x a^{-1})\\
-	   &= a^{-1} (a x a^{-1}) a\\
-	   &= (a^{-1}a) x (a^{-1}a)\\
-	   &= 1 \cdot x \cdot 1 = x. 
-	   \end{aligned}
-       Serupa dengan itu, untuk setiap $y \in A$,
-       \begin{aligned}
-	   (\varphi \circ \psi)(y) &= \varphi(a^{-1} y a)\\
-	   &= a (a^{-1} y a) a^{-1}\\
-	   &= (aa^{-1}) y (a a^{-1})\\
-	   &= 1 \cdot y \cdot 1 = y. 
-	   \end{aligned}
-       Karena $\psi \circ \varphi = \text{id}_A$ dan $\varphi \circ \psi = \text{id}_A$, maka $\psi$ adalah invers dari $\varphi$. Keberadaan invers ini membuktikan bahwa $\varphi$ adalah pemetaan bijektif.
+  <b>Penjumlahan.</b> Dengan menggunakan sifat distributif
+  perkalian dalam aljabar, diperoleh
+  $$\begin{aligned}
+  \varphi(x+y)
+  &=a(x+y)a^{-1}\\
+  &=axa^{-1}+aya^{-1}\\
+  &=\varphi(x)+\varphi(y).
+  \end{aligned}$$
 </p>
+
 <p align="justify">
-       Karena $\varphi$ merupakan homomorfisma aljabar yang bijektif, maka berdasarkan definisi, $\varphi$ adalah automorfisma aljabar pada $A$. Terbukti.
+  <b>Perkalian skalar.</b> Karena perkalian skalar kompatibel
+  dengan perkalian dalam $F$-aljabar, diperoleh
+  $$\begin{aligned}
+  \varphi(\lambda x)
+  &=a(\lambda x)a^{-1}\\
+  &=\lambda(axa^{-1})\\
+  &=\lambda\varphi(x).
+  \end{aligned}$$
 </p>
+
+<p align="justify">
+  <b>Perkalian unsur aljabar.</b> Dengan menggunakan sifat
+  asosiatif dan hubungan $a^{-1}a=1_A$, diperoleh
+  $$\begin{aligned}
+  \varphi(xy)
+  &=a(xy)a^{-1}\\
+  &=(ax)a^{-1}a(ya^{-1})\\
+  &=(axa^{-1})(aya^{-1})\\
+  &=\varphi(x)\varphi(y).
+  \end{aligned}$$
+  Jadi, $\varphi$ juga mempertahankan operasi perkalian.
+</p>
+
+<p align="justify">
+  <b>Elemen identitas.</b> Terakhir,
+  $$\begin{aligned}
+  \varphi(1_A)
+  &=a1_Aa^{-1}\\
+  &=aa^{-1}\\
+  &=1_A.
+  \end{aligned}$$
+  Dengan demikian, $\varphi$ merupakan homomorfisma
+  $F$-aljabar yang mempertahankan identitas.
+</p>
+
+<p align="justify">
+  <b>(ii) Membuktikan bahwa $\varphi$ bijektif.</b>
+  Untuk membuktikan bijektivitas, kita konstruksi suatu
+  pemetaan yang menjadi invers dari $\varphi$.
+  Definisikan
+  $$\psi:A\longrightarrow A,\qquad
+  \psi(y)=a^{-1}ya.$$
+  Untuk setiap $x\in A$, diperoleh
+  $$\begin{aligned}
+  (\psi\circ\varphi)(x)
+  &=a^{-1}(axa^{-1})a\\
+  &=(a^{-1}a)x(a^{-1}a)\\
+  &=1_Ax1_A\\
+  &=x.
+  \end{aligned}$$
+  Sebaliknya, untuk setiap $y\in A$,
+  $$\begin{aligned}
+  (\varphi\circ\psi)(y)
+  &=a(a^{-1}ya)a^{-1}\\
+  &=(aa^{-1})y(aa^{-1})\\
+  &=1_Ay1_A\\
+  &=y.
+  \end{aligned}$$
+  Jadi,
+  $$\psi\circ\varphi
+  =\varphi\circ\psi
+  =\operatorname{id}_A.$$
+  Artinya, $\psi=\varphi^{-1}$ sehingga $\varphi$
+  merupakan pemetaan bijektif.
+</p>
+
+<p align="justify">
+  Karena $\varphi$ merupakan homomorfisma $F$-aljabar
+  yang bijektif dan mempertahankan identitas, maka
+  berdasarkan definisi, $\varphi$ adalah automorfisma
+  $F$-aljabar pada $A$.
+</p>
+
 <p>
-✅ <b>Q.E.D.</b> $\qquad\qquad\qquad\blacksquare$
+  <b>Q.E.D.</b>
+  $\qquad\qquad\qquad\blacksquare$
 </p>
+
 </div>
 </div>
 </div>
@@ -36920,27 +37789,68 @@ pretty_print(html(r"Nilai $p_1(4) = %s$"%latex(p1(4))))
 </section>
 
 <p align="justify">
-  Pemetaan pada <a href="#Lemma1523">Lema 6.2.5.</a> disebut <b>konjugasi</b> oleh $a$. Dengan menggabungkannya dengan 
-  <a href="#Lemma1521">Lema 6.2.2.</a>, kita melihat bahwa jika $A \sim_s B$ untuk $A,B \in M_n(F)$, maka $A$ dan 
-  $B$ memiliki annihilator yang sama dalam $F[t]$. Teorema berikut menyatakan hal lebih lanjut namun masih mengikuti dari 
-   <a href="#Lemma1521">Lema 6.2.2.</a> dan  <a href="#Lemma1523">6.2.5.</a>
+  Pemetaan pada <a href="#Lemma1523">Lema 6.2.5</a> disebut
+  konjugasi oleh elemen invertibel $a$. Lema ini menyatakan
+  bahwa konjugasi tidak mengubah struktur aljabar, karena
+  penjumlahan, perkalian skalar, perkalian, dan elemen
+  identitas tetap dipertahankan.
+</p>
+
+<p align="justify">
+  Selanjutnya, dengan menggunakan
+  <a href="#Lemma1521">Lema 6.2.2</a>, kita memperoleh
+  bahwa setiap polinomial dalam suatu elemen aljabar
+  juga dipertahankan oleh automorfisma tersebut.
+  Secara khusus, untuk setiap $x\in A$ dan
+  $p(t)\in F[t]$ berlaku
+  $$\begin{aligned}
+  \varphi(p(x))
+  &=p(\varphi(x))\\
+  &=p(axa^{-1}).
+  \end{aligned}$$
+  Karena $\varphi$ injektif, maka
+  $$p(x)=0_A
+  \iff p(axa^{-1})=0_A.$$
+  Jadi, elemen $x$ dan konjugatnya $axa^{-1}$
+  mempunyai annihilator yang sama dalam $F[t]$.
+</p>
+
+<p align="justify">
+  Khusus untuk aljabar matriks $M_n(F)$, dua matriks
+  $A,B\in M_n(F)$ dikatakan similar jika terdapat
+  matriks invertibel $P\in M_n(F)$ sehingga
+  $$B=PAP^{-1}.$$
+  Dengan menerapkan hasil di atas, diperoleh
+  $$p(B)=Pp(A)P^{-1}.$$
+  Oleh karena itu,
+  $$p(A)=0\iff p(B)=0.$$
+  Artinya, dua matriks yang similar mempunyai
+  annihilator yang sama. Hasil ini selanjutnya
+  diperluas pada operator linear dalam teorema berikut.
 </p>
 
 <hr class="garis-elegan">
+
 <section class="theorem-section">
 <div class="theorem-container">
     <div class="theorem-header" onclick="toggleTeorema(this)">
         <span class="theorem-number" id="Teorema1521">6.2.6. Teorema</span>
         <span class="arrow">▼</span>
     </div>
+
 <div class="theorem-box">
-    <p align="justify">
-        Misalkan $V$ adalah ruang vektor atas $F$. Jika $L \in \mathcal{L}(V)$, maka annihilatornya dalam $F[t]$ adalah 
-        annihilator bagi setiap operator linear dalam kelas similaritas (similarity class) yang ditentukan oleh 
-        $L$ dalam $\mathcal{L}(V)$. Jika $V \cong F^n$, maka $L$ dan setiap representasi matriks dari $L$ memiliki 
-       annihilator yang sama dalam $F[t]$.
-   </p>
-<!-- PROOF DI DALAM TEOREMA -->
+
+<p align="justify">
+  Misalkan $V$ adalah ruang vektor atas $F$ dan
+  $L\in\mathcal{L}(V)$. Maka annihilator $L$ dalam
+  $F[t]$ sama dengan annihilator setiap operator linear
+  yang similar dengan $L$ dalam $\mathcal{L}(V)$.
+  Selain itu, jika $V$ berdimensi hingga dengan
+  $\dim V=n$, maka $L$ dan setiap representasi
+  matriksnya terhadap suatu basis memiliki annihilator
+  yang sama dalam $F[t]$.
+</p>
+
 <div class="proof-container">
   <div class="proof-header" onclick="toggleProof(this, event)">
      <span>Bukti</span>
@@ -36948,38 +37858,139 @@ pretty_print(html(r"Nilai $p_1(4) = %s$"%latex(p1(4))))
   </div>
 
 <div class="proof-box">
-<ol align="justify">
-      <li> <b>Annihilator terpelihara oleh konjugasi (keserupaan pada ruang operator).</b><br>
-           Misalkan $S\in \mathcal{L}(V)$ adalah operator yang similar dengan $L$. Maka ada invertibel $T\in \mathcal{L}(V)$ sehingga
-           $$S = T L T^{-1}.$$
-           Ambil sembarang polinomial $p(t)\in F[t]$. Karena substitusi polinomial kompatibel dengan operasi 
-           perkalian dan penjumlahan, kita dapat mengangkat hubungan di atas ke polinomial:
-           $$p(S) = p(TLT^{-1}) = T\,p(L)\,T^{-1}.$$
-           (Langkah ini jelas karena $p(t)=\sum_{j=0}^r a_j t^j$ sehingga $p(S)=\sum a_j S^j=\sum a_j (T L T^{-1})^j 
-           =T\big(\sum a_j L^j\big)T^{-1}=T p(L) T^{-1}$.) Dari identitas $p(S)=T p(L) T^{-1}$ mengikuti langsung:
-           $$p(S)=0 \iff T p(L) T^{-1}=0 \iff p(L)=0,$$
-           karena kongugasi oleh invertibel memetakan matriks/operasi nol hanya ke nol dan sebaliknya. Jadi 
-           setiap polinomial yang menganihilasi $L$ juga menganihilasi setiap operator yang similar dengan $L$, 
-           dan sebaliknya. Dengan itu annihilator $L$ sama untuk seluruh kelas keserupaan $L$.
-       </li>
-       <li> <b>Kasus representasi matriks (ketika $V\cong F^n$).</b><br>
-            Jika $V\cong F^n$, pilih basis $B$ sehingga representasi matriks $[L]_B\in M_n(F)$ memenuhi
-            $$[L]_B = P^{-1} A P$$
-            untuk beberapa matriks invertibel $P$ (di mana $A$ adalah representasi matriks lain dari $L$). Dengan 
-            argumen yang sama seperti di atas, untuk semua $p(t)\in F[t]$ kita punya
-            $$p([L]_B) = P^{-1} p(A) P.$$
-            Jadi $p([L]_B)=0$ jika dan hanya jika $p(A)=0$. Karena representasi matriks dari suatu operator adalah 
-            saling serupa, semua representasi matriks memiliki annihilator yang sama dengan operator $L$ itu sendiri.
-       </li>
-       <li> <b>Penutup.</b><br>
-            Kedua bagian di atas menunjukkan invariansi annihilator terhadap keserupaan baik pada level operator 
-            linear (konjugasi oleh invertibel di $\mathcal{L}(V)$) maupun pada level matriks (konjugasi oleh invertibel di $M_n(F)$). 
-            Oleh karena itu teorema terbukti.
-       </li>
-    </ol>
-<p>
-✅ <b>Q.E.D.</b> $\qquad\qquad\qquad\blacksquare$
+
+<p align="justify">
+  <b>(i) Annihilator terpelihara oleh keserupaan
+  (similarity) operator linear.</b>
 </p>
+
+<p align="justify">
+  Misalkan $S\in\mathcal{L}(V)$ similar dengan
+  $L\in\mathcal{L}(V)$. Berdasarkan definisi similarity,
+  terdapat operator invertibel $T\in\mathcal{L}(V)$
+  sehingga
+  $$S=TLT^{-1}.$$
+  Perhatikan bahwa $\mathcal{L}(V)$ merupakan
+  $F$-aljabar asosiatif dengan elemen identitas
+  berupa operator identitas $I_V$.
+  Berdasarkan <a href="#Lemma1523">Lema 6.2.5</a>,
+  pemetaan konjugasi
+  $$\varphi_T(X)=TXT^{-1}$$
+  merupakan automorfisma $F$-aljabar pada
+  $\mathcal{L}(V)$.
+</p>
+
+<p align="justify">
+  Selanjutnya, berdasarkan
+  <a href="#Lemma1521">Lema 6.2.2</a>, untuk setiap
+  polinomial $p(t)\in F[t]$ berlaku
+  $$\begin{aligned}
+  p(S)
+  &=p(\varphi_T(L))\\
+  &=\varphi_T(p(L))\\
+  &=Tp(L)T^{-1}.
+  \end{aligned}$$
+  Dengan demikian,
+  $$\boxed{p(S)=Tp(L)T^{-1}.}$$
+</p>
+
+<p align="justify">
+  Karena $T$ invertibel, maka
+  $$\begin{aligned}
+  p(S)=0
+  &\iff Tp(L)T^{-1}=0\\
+  &\iff p(L)=0.
+  \end{aligned}$$
+  Jadi, setiap polinomial yang meniadakan $L$ juga
+  meniadakan $S$, dan sebaliknya. Akibatnya,
+  $$\boxed{
+  \operatorname{Ann}(L)=\operatorname{Ann}(S).
+  }$$
+  Dengan demikian, annihilator merupakan invariant
+  terhadap similarity operator linear.
+</p>
+
+<p align="justify">
+  <b>(ii) Annihilator operator linear dan representasi
+  matriksnya.</b>
+</p>
+
+<p align="justify">
+  Sekarang misalkan $\dim V=n$ dan $B$ merupakan
+  suatu basis dari $V$. Pemetaan representasi matriks
+  terhadap basis $B$ diberikan oleh
+  $$\Phi_B:\mathcal{L}(V)\longrightarrow M_n(F),$$
+  $$\Phi_B(L)=[L]_B.$$
+  Pemetaan ini merupakan isomorfisma $F$-aljabar.
+  Berdasarkan <a href="#Lemma1521">Lema 6.2.2</a>,
+  diperoleh
+  $$\begin{aligned}
+  \Phi_B(p(L))
+  &=p(\Phi_B(L))\\
+  &=[p(L)]_B\\
+  &=p([L]_B).
+  \end{aligned}$$
+  Karena $\Phi_B$ merupakan isomorfisma, khususnya
+  injektif, maka
+  $$p(L)=0
+  \iff [p(L)]_B=0
+  \iff p([L]_B)=0.$$
+  Jadi,
+  $$\boxed{
+  \operatorname{Ann}(L)
+  =\operatorname{Ann}([L]_B).
+  }$$
+  Artinya, operator linear dan representasi matriksnya
+  mempunyai annihilator yang sama.
+</p>
+
+<p align="justify">
+  <b>(iii) Kesamaan annihilator untuk berbagai
+  representasi matriks.</b>
+</p>
+
+<p align="justify">
+  Misalkan $B$ dan $C$ adalah dua basis berbeda dari
+  $V$. Matriks representasi $L$ terhadap kedua basis
+  tersebut saling similar. Jadi, terdapat matriks
+  invertibel $P\in M_n(F)$ sehingga
+  $$[L]_C=P^{-1}[L]_B P,$$
+  dengan $P$ merupakan matriks perubahan koordinat
+  yang sesuai.
+  Berdasarkan bagian (i), kedua matriks tersebut
+  mempunyai annihilator yang sama. Oleh karena itu,
+  $$\operatorname{Ann}([L]_B)
+  =\operatorname{Ann}([L]_C).$$
+  Jika digabungkan dengan hasil bagian (ii),
+  diperoleh
+  $$\boxed{
+  \operatorname{Ann}(L)
+  =\operatorname{Ann}([L]_B)
+  =\operatorname{Ann}([L]_C).
+  }$$
+</p>
+
+<p align="justify">
+  Dengan demikian, annihilator suatu operator linear
+  tidak bergantung pada pilihan basis yang digunakan
+  untuk merepresentasikannya. Hasil ini berlaku untuk
+  setiap representasi matriks operator tersebut.
+</p>
+
+<p align="justify">
+  <b>Kesimpulan.</b> Berdasarkan ketiga bagian
+  pembuktian di atas, annihilator suatu operator linear
+  dipertahankan oleh similarity dan juga tidak berubah
+  ketika operator tersebut dinyatakan dalam bentuk
+  matriks terhadap basis yang berbeda. Dengan demikian,
+  pernyataan teorema terbukti.
+</p>
+
+<p>
+  <b>Q.E.D.</b>
+  $\qquad\qquad\qquad\blacksquare$
+</p>
+
 </div>
 </div>
 </div>
@@ -36989,8 +38000,9 @@ pretty_print(html(r"Nilai $p_1(4) = %s$"%latex(p1(4))))
 <hr class="garis-elegan">
 
 <p align="justify">
-  Kita menotasikan pemetaan nol di $\mathcal{L}(V)$ maupun $M_n(F)$ dengan $O$. Konteks akan menjelaskan apakah yang 
-  dimaksud adalah operator linear atau matriks nol.
+  Kita menotasikan pemetaan nol di $\mathcal{L}(V)$ maupun $M_n(F)$ dengan
+  $O$. Konteks akan menjelaskan apakah yang dimaksud adalah operator linear
+  atau matriks nol.
 </p>
 
 <div class="example-container">
@@ -36999,52 +38011,249 @@ pretty_print(html(r"Nilai $p_1(4) = %s$"%latex(p1(4))))
 <span class="example-arrow">▼</span>
 </div>
 <div class="example-box">
- <p align="justify">
-      Misalkan $L \in L(\mathbb{R}^3)$ didefinisikan oleh
-      $$L(x,y,z) = (-x,\, x - y,\, -z).$$
-      Kita hitung
-      $$L^2(x,y,z) = L(-x, x - y, -z) = (x,\,-2x + y,\, z)$$
-      sehingga
+
+   <p align="justify">
+      Misalkan $L \in \mathcal{L}(\mathbb{R}^3)$ didefinisikan oleh
+      $$L(x,y,z)=(-x,\,x-y,\,-z).$$
+      Kita akan menentukan polinomial yang menganihilasi $L$, sekaligus
+      polinomial minimal dan annihilatornya.
+   </p>
+
+   <p align="justify">
+      <b>Langkah 1. Menghitung kuadrat operator $L$.</b>
+      Dengan menerapkan $L$ dua kali, diperoleh
       $$
-      (L^2 + 2L + I)(x,y,z)
-      = (x,-2x+y,z) + (-2x,2x-2y,-2z) + (x,y,z)
-      = (0,0,0).
+      \begin{aligned}
+      L^2(x,y,z)
+      &=L(-x,x-y,-z)\\
+      &=(x,-2x+y,z).
+      \end{aligned}
+      $$
+      Selanjutnya,
+      $$
+      \begin{aligned}
+      &(L^2+2L+I)(x,y,z)\\
+      &=(x,-2x+y,z)
+      +(-2x,2x-2y,-2z)
+      +(x,y,z)\\
+      &=(0,0,0).
+      \end{aligned}
+      $$
+      Karena kesamaan tersebut berlaku untuk setiap
+      $(x,y,z)\in\mathbb{R}^3$, maka
+      $$
+      L^2+2L+I=O.
+      $$
+      Dengan demikian, polinomial
+      $$
+      p(t)=t^2+2t+1=(t+1)^2
+      $$
+      menganihilasi $L$, atau dengan kata lain,
+      $p(L)=O$.
+   </p>
+
+   <p align="justify">
+      <b>Langkah 2. Menentukan polinomial minimal.</b>
+      Kita perlu memastikan bahwa tidak ada polinomial tak nol berderajat
+      lebih rendah yang juga menganihilasi $L$. Untuk itu, perhatikan
+      operator $N=L+I$. Berdasarkan definisi $L$, diperoleh
+      $$
+      \begin{aligned}
+      N(x,y,z)
+      &=(L+I)(x,y,z)\\
+      &=(-x,x-y,-z)+(x,y,z)\\
+      &=(0,x,0).
+      \end{aligned}
+      $$
+      Akibatnya,
+      $$
+      N^2(x,y,z)=N(0,x,0)=(0,0,0).
       $$
       Jadi,
-      $$L^2 + 2L + I = O$$
-      dan $p(t) = t^2 + 2t + 1$ menganihilasi $L$, setiap operator yang similar dengan $L$, dan setiap representasi 
-      matriksnya. Kita dapat memeriksanya pada representasi matriks standar
       $$
-      A =
+      (L+I)^2=O,\qquad L+I\ne O.
+      $$
+      Artinya, $L+I$ merupakan operator nilpoten tak nol dengan indeks
+      nilpotensi $2$.
+   </p>
+
+   <p align="justify">
+      Sekarang, misalkan $q(t)$ adalah polinomial tak nol yang
+      menganihilasi $L$. Berdasarkan algoritma pembagian polinomial,
+      terdapat polinomial $s(t)$ dan konstanta $a,b\in\mathbb{R}$
+      sehingga
+      $$
+      q(t)=(t+1)^2s(t)+a(t+1)+b.
+      $$
+      Karena $(L+I)^2=O$ dan $q(L)=O$, substitusi $t=L$ memberikan
+      $$
+      a(L+I)+bI=O.
+      $$
+      Jika persamaan ini diterapkan pada vektor $(0,1,0)$, kita peroleh
+      $$
+      a(0,1,0)+b(0,1,0)=(0,0,0)
+      $$
+      setelah menggunakan $ (L+I)(0,1,0)=(0,1,0)$.
+      Namun, untuk membedakan kedua koefisien secara tepat, kita juga
+      dapat menerapkannya pada $(1,0,0)$, sehingga
+      $$
+      a(0,1,0)+b(1,0,0)=(0,0,0).
+      $$
+      Kedua vektor $(0,1,0)$ dan $(1,0,0)$ bebas linear. Oleh karena itu,
+      $a=b=0$.
+   </p>
+
+   <p align="justify">
+      Dengan demikian, setiap polinomial yang menganihilasi $L$ harus
+      merupakan kelipatan dari $(t+1)^2$. Jadi,
+      annihilator $L$ adalah
+      $$
+      \operatorname{Ann}(L)
+      =\{q(t)\in\mathbb{R}[t]:q(L)=O\}
+      =\langle(t+1)^2\rangle.
+      $$
+      Karena polinomial pembangkitnya monik dan berderajat terkecil,
+      polinomial minimal $L$ adalah
+      $$
+      \boxed{m_L(t)=(t+1)^2.}
+      $$
+   </p>
+
+   <p align="justify">
+      <b>Langkah 3. Memeriksa representasi matriks.</b>
+      Terhadap basis standar
+      $B=\{e_1,e_2,e_3\}$, dengan
+      $e_1=(1,0,0)$, $e_2=(0,1,0)$, dan $e_3=(0,0,1)$,
+      representasi matriks operator $L$ adalah
+      $$
+      A=[L]_B=
       \begin{bmatrix}
-      -1 & 0 & 0\\
-      1 & -1 & 0\\
-      0 & 0 & -1
+      -1&0&0\\
+      1&-1&0\\
+      0&0&-1
       \end{bmatrix}.
       $$
-      Perhitungan menunjukkan
-      $$A^2 + 2A + I_3 = O,$$
-      sesuai dengan <a href="#Teorema1521">Teorema 6.2.6.</a>
+      Kuadrat matriks tersebut adalah
+      $$
+      A^2=
+      \begin{bmatrix}
+      1&0&0\\
+      -2&1&0\\
+      0&0&1
+      \end{bmatrix}.
+      $$
+      Oleh karena itu,
+      $$
+      \begin{aligned}
+      A^2+2A+I_3
+      &=
+      \begin{bmatrix}
+      1&0&0\\
+      -2&1&0\\
+      0&0&1
+      \end{bmatrix}
+      +
+      \begin{bmatrix}
+      -2&0&0\\
+      2&-2&0\\
+      0&0&-2
+      \end{bmatrix}
+      +
+      \begin{bmatrix}
+      1&0&0\\
+      0&1&0\\
+      0&0&1
+      \end{bmatrix}\\
+      &=O.
+      \end{aligned}
+      $$
+      Dengan demikian,
+      $$
+      p(A)=A^2+2A+I_3=O.
+      $$
+      Bahkan, karena $A+I_3\ne O$ tetapi
+      $(A+I_3)^2=O$, diperoleh
+      $$
+      \operatorname{Ann}(A)=\langle(t+1)^2\rangle,
+      \qquad
+      m_A(t)=(t+1)^2.
+      $$
    </p>
+
+   <p align="justify">
+      <b>Langkah 4. Menghubungkan dengan Teorema 6.2.6.</b>
+      Kesamaan polinomial minimal antara $L$ dan matriks representasinya
+      bukan sekadar hasil perhitungan pada basis standar. Berdasarkan
+      Teorema 6.2.6, setiap operator yang similar dengan $L$ dan setiap
+      representasi matriks $L$ terhadap basis lain mempunyai annihilator
+      yang sama. Secara khusus, jika $S$ similar dengan $L$, maka
+      $$
+      \operatorname{Ann}(S)=\operatorname{Ann}(L)
+      =\langle(t+1)^2\rangle.
+      $$
+      Akibatnya,
+      $$
+      \boxed{m_S(t)=m_L(t)=(t+1)^2.}
+      $$
+      Demikian pula, setiap representasi matriks $L$ mempunyai polinomial
+      minimal yang sama, meskipun bentuk entri matriksnya dapat berbeda
+      bergantung pada basis yang digunakan.
+   </p>
+
+   <p align="justify">
+      <b>Kesimpulan.</b>
+      Contoh ini memperlihatkan bahwa polinomial minimal tidak hanya
+      memberikan polinomial yang menganihilasi suatu operator, tetapi
+      juga mengidentifikasi polinomial monik berderajat terkecil yang
+      memiliki sifat tersebut. Dalam contoh ini, operator $L+I$ tidak
+      nol, tetapi kuadratnya nol. Struktur nilpoten inilah yang
+      menyebabkan polinomial minimalnya berderajat dua, yaitu
+      $m_L(t)=(t+1)^2$. Berdasarkan invariansi terhadap similarity,
+      informasi ini tetap berlaku untuk semua operator yang similar
+      dengan $L$ dan semua representasi matriksnya.
+   </p>
+
 </div>
 </div>
+
 
 <hr class="garis-elegan">
 
 <p align="justify">
-  Misalkan $V \cong F^n$ sehingga $\dim \mathcal{L}(V) = n^2$. Sebagai subruang dari $\mathcal{L}(V)$, $F[L]$ berdimensi kurang dari 
-  atau sama dengan $n^2$. Ini berarti ada bilangan bulat positif $k$ sehingga
-  $$\{ I, L, L^2, \dots, L^k \}$$
-  menjadi himpunan yang saling bergantung linear. Ambil $k$ minimal dengan koefisien $a_i \in F$, tidak semuanya nol, 
-  sehingga
-  $$a_0 I + a_1 L + \cdots + a_{k-1} L^{k-1} + L^k = O.$$
+  Misalkan $V$ berdimensi hingga, yaitu $\dim_F V=n$. Karena
+  $\dim_F\mathcal{L}(V)=n^2$, subruang $F[L]$ dari $\mathcal{L}(V)$
+  juga berdimensi paling banyak $n^2$. Di sini, $F[L]$ adalah
+  subaljabar yang dibangkitkan oleh operator $L$, yaitu rentangan
+  linear dari
+  $$
+  I,L,L^2,L^3,\ldots.
+  $$
+  Oleh karena itu, terdapat bilangan bulat positif $k$ sehingga
+  himpunan
+  $$
+  \{I,L,L^2,\ldots,L^k\}
+  $$
+  saling bergantung linear. Ambil $k$ terkecil yang memenuhi
+  ketergantungan linear tersebut. Maka terdapat skalar
+  $a_0,a_1,\ldots,a_k\in F$, tidak semuanya nol, sehingga
+  $$
+  a_0I+a_1L+\cdots+a_kL^k=O.
+  $$
+  Karena $k$ dipilih sekecil mungkin, haruslah $a_k\ne0$.
+  Jika $a_k=0$, akan diperoleh ketergantungan linear di antara
+  $I,L,\ldots,L^{k-1}$, yang bertentangan dengan minimalitas $k$.
+  Dengan membagi persamaan tersebut dengan $a_k$, kita dapat
+  mengasumsikan bahwa $a_k=1$. Jadi,
+  $$
+  a_0I+a_1L+\cdots+a_{k-1}L^{k-1}+L^k=O.
+  $$
 </p>
+
 <p align="justify">
-  Lemma berikut membenarkan penyebutan
-  $$
-  q(t) = a_0 + a_1 t + \cdots + a_{k-1} t^{k-1} + t^k
-  $$
-  sebagai <b>polinomial minimal</b> bagi $L$. Kita mendefinisikan polinomial minimal sebagai polinomial monik.
+  Persamaan ini menunjukkan bahwa terdapat polinomial monik tak nol
+  yang menganihilasi $L$. Lema berikut menjamin bahwa polinomial monik
+  berderajat terkecil yang menganihilasi $L$ bersifat tunggal.
+  Polinomial tersebut disebut <b>polinomial minimal</b> dari $L$.
 </p>
 
 <section class="theorem-section">
@@ -37055,9 +38264,10 @@ pretty_print(html(r"Nilai $p_1(4) = %s$"%latex(p1(4))))
     </div>
 <div class="theorem-box">
    <p align="justify">
-      Jika $V$ berdimensi hingga dan $L \in \mathcal{L}(V)$, maka polinomial minimal dari $L$ adalah tunggal.
-    </p>
-<!-- PROOF DI DALAM TEOREMA -->
+      Jika $V$ berdimensi hingga dan $L\in\mathcal{L}(V)$, maka
+      polinomial minimal dari $L$ adalah tunggal.
+   </p>
+
 <div class="proof-container">
   <div class="proof-header" onclick="toggleProof(this, event)">
      <span>Bukti</span>
@@ -37066,13 +38276,47 @@ pretty_print(html(r"Nilai $p_1(4) = %s$"%latex(p1(4))))
 
 <div class="proof-box">
     <p align="justify">
-      Misalkan $q_1(t)$ dan $q_2(t)$ keduanya polinomial minimal dari $L$. Jika $\deg q_1(t) \neq \deg q_2(t)$, 
-      maka salah satunya berderajat lebih kecil, bertentangan dengan definisi polinomial minimal. Maka $\deg q_1(t) 
-      = \deg q_2(t)$. Jika $q_1(t) \neq q_2(t)$, keduanya monik sehingga $q_1(t)-q_2(t)$ tak nol dengan 
-      $\deg < \deg q_i(t)$ dan tetap meniadakan $L$, kontradiksi. Jadi $q_1(t) = q_2(t)$. 
+      Misalkan $q_1(t)$ dan $q_2(t)$ adalah dua polinomial minimal
+      dari $L$. Berdasarkan definisinya, keduanya merupakan polinomial
+      monik tak nol yang menganihilasi $L$ dan mempunyai derajat
+      terkecil.
     </p>
+
+    <p align="justify">
+      Jika $\deg q_1(t)\ne\deg q_2(t)$, salah satunya mempunyai
+      derajat lebih kecil daripada yang lain. Hal ini bertentangan
+      dengan definisi polinomial minimal. Jadi,
+      $$
+      \deg q_1(t)=\deg q_2(t).
+      $$
+    </p>
+
+    <p align="justify">
+      Selanjutnya, andaikan $q_1(t)\ne q_2(t)$. Karena keduanya
+      monik dan berderajat sama, selisihnya merupakan polinomial
+      tak nol dengan derajat lebih kecil:
+      $$
+      \deg(q_1-q_2) < \deg q_1.
+      $$
+      Akan tetapi, karena $q_1(L)=O$ dan $q_2(L)=O$, diperoleh
+      $$
+      (q_1-q_2)(L)=q_1(L)-q_2(L)=O.
+      $$
+      Dengan demikian, terdapat polinomial tak nol berderajat
+      lebih kecil yang juga menganihilasi $L$. Ini bertentangan
+      dengan minimalitas derajat $q_1$ dan $q_2$.
+    </p>
+
+    <p align="justify">
+      Jadi, haruslah
+      $$
+      \boxed{q_1(t)=q_2(t).}
+      $$
+      Dengan demikian, polinomial minimal dari $L$ tunggal.
+    </p>
+
 <p>
-✅ <b>Q.E.D.</b> $\qquad\qquad\qquad\blacksquare$
+  <b>Q.E.D.</b> $\qquad\qquad\qquad\blacksquare$
 </p>
 </div>
 </div>
@@ -37081,16 +38325,69 @@ pretty_print(html(r"Nilai $p_1(4) = %s$"%latex(p1(4))))
 </section>
 
 <p align="justify">
-  Pertimbangkan $L$ pada <a href="#Contoh1524">Contoh 6.2.7.</a> Karena $p(t) = t^2 + 2t + 1 = (t+1)^2$ meniadakan 
-  $L$, polinomial minimal untuk $L$ berderajat dua atau kurang. Polinomial monik derajat satu berbentuk $t - c$ untuk 
-  suatu skalar $c$. Operator $L$ yang dianihilasi oleh $t - c$ memenuhi $L - cI = O$, sehingga $L = cI$, yaitu pemetaan 
-  skalar. Karena $L$ bukan pemetaan skalar, ketunggalan menuntut bahwa polinomial minimalnya adalah $t^2 + 2t + 1$.
+  Selain tunggal, polinomial minimal mempunyai sifat penting berikut:
+  setiap polinomial yang menganihilasi $L$ habis dibagi oleh polinomial
+  minimalnya. Untuk melihat hal ini, misalkan $m_L(t)$ adalah polinomial
+  minimal dan $q(t)\in F[t]$ memenuhi $q(L)=O$. Berdasarkan algoritma
+  pembagian polinomial, terdapat polinomial $s(t)$ dan $r(t)$ sehingga
+  $$
+  q(t)=s(t)m_L(t)+r(t),
+  $$
+  dengan $r(t)=0$ atau $\deg r < \deg m_L$. Dengan mengevaluasi pada $L$,
+  diperoleh
+  $$
+  O=q(L)=s(L)m_L(L)+r(L)=r(L).
+  $$
+  Jika $r(t)$ tidak nol, maka $r(t)$ merupakan polinomial berderajat
+  lebih kecil yang menganihilasi $L$. Hal ini bertentangan dengan
+  definisi polinomial minimal. Jadi, $r(t)=0$, sehingga
+  $$
+  \boxed{m_L(t)\mid q(t).}
+  $$
+  Sifat ini akan digunakan dalam pembahasan berikutnya.
 </p>
+
 <p align="justify">
-  Hasil berikut langsung dari <a href="#Teorema1521">Teorema 6.2.6.</a>
+  Pertimbangkan kembali operator $L$ pada
+  <a href="#Contoh1524">Contoh 6.2.7.</a> Kita telah memperoleh
+  bahwa
+  $$
+  p(t)=t^2+2t+1=(t+1)^2
+  $$
+  menganihilasi $L$. Karena itu, derajat polinomial minimal $m_L(t)$
+  paling tinggi dua. Polinomial monik berderajat satu berbentuk
+  $t-c$, untuk suatu $c\in\mathbb{R}$. Jika polinomial tersebut
+  menganihilasi $L$, maka
+  $$
+  (L-cI)=O,
+  $$
+  sehingga $L=cI$. Akan tetapi, $L$ bukan pemetaan skalar.
+  Sebagai contoh,
+  $$
+  L(1,0,0)=(-1,1,0)
+  $$
+  bukan kelipatan skalar dari $(1,0,0)$. Jadi, tidak ada polinomial
+  monik berderajat satu yang menganihilasi $L$.
+</p>
+
+<p align="justify">
+  Dengan demikian, polinomial minimal $L$ harus berderajat dua.
+  Karena $p(t)=(t+1)^2$ merupakan polinomial monik berderajat dua
+  yang menganihilasi $L$, berdasarkan ketunggalan pada
+  <a href="#Lemma1524">Lema 6.2.8</a>, diperoleh
+  $$
+  \boxed{m_L(t)=(t+1)^2.}
+  $$
+</p>
+
+<p align="justify">
+  Hasil berikut merupakan konsekuensi langsung dari
+  <a href="#Teorema1521">Teorema 6.2.6</a>, yaitu invariansi
+  annihilator terhadap similarity dan representasi matriks.
 </p>
 
 <hr class="garis-elegan">
+
 <section class="theorem-section">
 <div class="theorem-container">
     <div class="theorem-header" onclick="toggleTeorema(this)">
@@ -37099,11 +38396,14 @@ pretty_print(html(r"Nilai $p_1(4) = %s$"%latex(p1(4))))
     </div>
 <div class="theorem-box">
     <p align="justify">
-      Polinomial minimal dari $L \in \mathcal{L}(V)$ adalah polinomial minimal dari setiap operator linear pada $V$ yang 
-      <b>similar</b>  dengan $L$ dan, bila $V$ berdimensi hingga, juga sama dengan polinomial minimal dari setiap 
-      representasi matriks dari $L$.
-   </p>
-<!-- PROOF DI DALAM TEOREMA -->
+      Misalkan $L\in\mathcal{L}(V)$ mempunyai polinomial minimal.
+      Maka polinomial minimal $L$ sama dengan polinomial minimal
+      setiap operator linear pada $V$ yang <b>similar</b> dengan $L$.
+      Jika $V$ berdimensi hingga, polinomial minimal tersebut juga
+      sama dengan polinomial minimal dari setiap representasi matriks
+      $L$ terhadap suatu basis.
+    </p>
+
 <div class="proof-container">
   <div class="proof-header" onclick="toggleProof(this, event)">
      <span>Bukti</span>
@@ -37111,63 +38411,117 @@ pretty_print(html(r"Nilai $p_1(4) = %s$"%latex(p1(4))))
   </div>
 
 <div class="proof-box">
-<h3><b> Langkah 1. Definisi Polinomial Minimal </b></h3>
     <p align="justify">
-       Misalkan $F$ adalah lapangan dasar dan $V$ ruang vektor hingga dimensi atas $F$.
-       Untuk operator linear $L \in \mathcal{L}(V)$, **polinomial minimal** $m_L(t)$ didefinisikan sebagai polinomial 
-       monik tak-nol dengan derajat sekecil mungkin yang memenuhi
-       $$m_L(L) = 0,$$
-       dengan evaluasi polinomial pada operator linear dilakukan seperti biasa:
-       $$p(L)=a_0 I + a_1 L + \dots + a_k L^k.$$
-       Ketunggalan polinomial minimal memastikan bahwa setiap polinomial $p(t)\in F[t]$ yang memenuhi $p(L)=0$ 
-       <b>habis dibagi</b> oleh $m_L(t)$.
-   </p>
-   <h3><b>Langkah 2. Kasus Operator Linear yang <i>Similar</i></b></h3>
-   <p align="justify">
-      Dua operator linear $L, M \in \mathcal{L}(V)$ disebut *similar* jika terdapat isomorfisma $S: V \to V$ sehingga
-      $$M = S L S^{-1}.$$
-      Ambil sembarang polinomial $p(t) \in F[t]$. Perhatikan hubungan:
-      $$p(M) = p(S L S^{-1}) = S p(L) S^{-1}.$$
-      Sebab setiap suku $L^k$ berpindah menurut aturan $ (SLS^{-1})^k = S L^k S^{-1}$.
-   </p>
-   <p align="justify">
-      Sekarang misalkan $m_L(t)$ adalah polinomial minimal dari $L$. Maka
-      $$m_L(M) = S m_L(L) S^{-1} = S 0 S^{-1} = 0.$$
-      Artinya $m_L(t)$ juga meniadakan $M$.
-   </p>
-   <p align="justify">
-      Karena polinomial minimal adalah **yang monik dan berderajat paling kecil** yang meniadakan operator,
-      $$m_M(t) \mid m_L(t).$$
-      Dengan menukar peran $L$ dan $M$, kita juga memperoleh
-      $$m_L(t) \mid m_M(t).$$
-      Kedua pembagian ini memaksa
-      $$m_L(t) = m_M(t).$$
-   </p>
-   <p align="justify">
-      <b>Kesimpulan 1:</b> Polinomial minimal <b>invarian terhadap kesimilaran operator</b>.
+      <b>Langkah 1. Hubungan antara annihilator dan polinomial minimal.</b>
+      Misalkan
+      $$
+      \operatorname{Ann}(L)
+      =\{p(t)\in F[t]:p(L)=O\}.
+      $$
+      Karena $L$ mempunyai polinomial minimal, annihilatornya
+      bukan ideal nol. Dari pembahasan sebelumnya, polinomial
+      minimal $m_L(t)$ merupakan generator monik tunggal dari
+      ideal tersebut:
+      $$
+      \operatorname{Ann}(L)=\langle m_L(t)\rangle.
+      $$
+      Dengan kata lain, setiap polinomial yang menganihilasi
+      $L$ merupakan kelipatan dari $m_L(t)$.
     </p>
-    <h3><b> Langkah 3. Representasi Matriks </b></h3>
-   <p align="justify">
-      Jika $V$ berdimensi hingga $n$, setiap operator $L \in \mathcal{L}(V)$ dapat direpresentasikan oleh sebuah matriks 
-      $A \in M_n(F)$ relatif terhadap suatu basis. Bila kita memilih basis lain, matriksnya berubah menjadi
-      $$B = P A P^{-1}$$
-      untuk suatu matriks inversibel $P$. Tetapi keserupaan matriks adalah kasus khusus keserupaan operator, 
-      karena pemilihan basis hanyalah isomorfisma $S$. Dari <b>Kesimpulan 1</b>, polinomial minimal $m_A(t)$ 
-      tidak bergantung pada basis, dan sama dengan $m_L(t)$.
-   </p>
-   <p align="justify">
-      <b>Kesimpulan 2:</b> Polinomial minimal dari $L$ <b>sama</b> dengan polinomial minimal dari <b>setiap</b> 
-      matriks yang merepresentasikan $L$.
-   </p>
-   <p align="justify">
-      Gabungan kedua kesimpulan memberi
-      $$m_L(t) = m_M(t) = m_A(t)$$
-      untuk setiap operator $M$ yang similar dengan $L$ dan setiap representasi matriks $A$ dari $L$. Dengan demikian, 
-      <b>Korolari 15.2.1 terbukti</b>:
-      $$\boxed{m_L(t)\ \text{invarian terhadap keserupaan operator maupun matriks.}}$$
+
+    <p align="justify">
+      <b>Langkah 2. Kasus operator linear yang similar.</b>
+      Misalkan $M\in\mathcal{L}(V)$ similar dengan $L$. Artinya,
+      terdapat operator invertibel $S:V\to V$ sehingga
+      $$
+      M=SLS^{-1}.
+      $$
+      Berdasarkan sifat konjugasi dan evaluasi polinomial,
+      untuk setiap $p(t)\in F[t]$ berlaku
+      $$
+      p(M)=p(SLS^{-1})=Sp(L)S^{-1}.
+      $$
+      Karena $S$ invertibel, diperoleh
+      $$
+      p(M)=O\iff p(L)=O.
+      $$
+      Jadi,
+      $$
+      \operatorname{Ann}(M)=\operatorname{Ann}(L).
+      $$
     </p>
+
+    <p align="justify">
+      Karena kedua annihilator tersebut sama dan masing-masing
+      mempunyai generator monik tunggal, diperoleh
+      $$
+      \boxed{m_M(t)=m_L(t).}
+      $$
+      Dengan demikian, polinomial minimal invarian terhadap
+      similarity operator.
+    </p>
+
+    <p align="justify">
+      <b>Langkah 3. Kasus representasi matriks.</b>
+      Sekarang misalkan $V$ berdimensi hingga, yaitu
+      $\dim_F V=n$. Untuk suatu basis $B$ dari $V$, representasi
+      matriks operator $L$ adalah
+      $$
+      A=[L]_B\in M_n(F).
+      $$
+      Pemetaan representasi matriks
+      $$
+      \Phi_B:\mathcal{L}(V)\longrightarrow M_n(F),
+      \qquad \Phi_B(T)=[T]_B,
+      $$
+      merupakan isomorfisma aljabar. Berdasarkan sifat
+      homomorfisma aljabar pada Lema 6.2.2, untuk setiap
+      $p(t)\in F[t]$ berlaku
+      $$
+      [p(L)]_B=p([L]_B)=p(A).
+      $$
+      Akibatnya,
+      $$
+      p(L)=O\iff p(A)=O.
+      $$
+      Jadi,
+      $$
+      \operatorname{Ann}(L)=\operatorname{Ann}(A),
+      $$
+      dengan pengertian annihilator matriks didefinisikan
+      sebagai
+      $$
+      \operatorname{Ann}(A)
+      =\{p(t)\in F[t]:p(A)=O\}.
+      $$
+      Karena generator monik dari annihilator tersebut tunggal,
+      diperoleh
+      $$
+      \boxed{m_A(t)=m_L(t).}
+      $$
+    </p>
+
+    <p align="justify">
+      Jika digunakan basis lain, representasi matriksnya akan
+      similar dengan $A$. Oleh karena itu, polinomial minimalnya
+      tetap sama.
+    </p>
+
+    <p align="justify">
+      <b>Kesimpulan.</b> Polinomial minimal suatu operator linear
+      sama dengan polinomial minimal setiap operator yang similar
+      dengannya. Dalam ruang berdimensi hingga, polinomial minimal
+      tersebut juga sama dengan polinomial minimal setiap
+      representasi matriksnya. Jadi,
+      $$
+      \boxed{m_L(t)=m_M(t)=m_A(t),}
+      $$
+      dengan $M$ similar dengan $L$ dan $A$ merupakan representasi
+      matriks dari $L$.
+    </p>
+
 <p>
-✅ <b>Q.E.D.</b> $\qquad\qquad\qquad\blacksquare$
+  <b>Q.E.D.</b> $\qquad\qquad\qquad\blacksquare$
 </p>
 </div>
 </div>
@@ -37178,7 +38532,10 @@ pretty_print(html(r"Nilai $p_1(4) = %s$"%latex(p1(4))))
 <hr class="garis-elegan">
 
 <p align="justify">
-  Meskipun matriks-matriks yang similar harus memiliki polinomial minimal yang sama, kebalikannya tidak berlaku.
+  Meskipun dua matriks yang similar harus mempunyai polinomial
+  minimal yang sama, kebalikannya tidak berlaku. Artinya, kesamaan
+  polinomial minimal tidak cukup untuk menjamin bahwa dua matriks
+  similar.
 </p>
 
 <div class="example-container">
@@ -37189,61 +38546,140 @@ pretty_print(html(r"Nilai $p_1(4) = %s$"%latex(p1(4))))
 <div class="example-box">
    <p align="justify">
       Misalkan
-      $$ 
-      A =
+      $$
+      A=
       \begin{bmatrix}
-      0 & 1 & 0 & 0\\ 
-      0 & 0 & 0 & 0\\
-      0 & 0 & 0 & 0\\
-      0 & 0 & 0 & 0
+      0&1&0&0\\
+      0&0&0&0\\
+      0&0&0&0\\
+      0&0&0&0
       \end{bmatrix}.
       $$
-      Mudah dilihat bahwa $t^2$ adalah polinomial minimal dari $A$. Misalkan
+      Perhitungan langsung menunjukkan bahwa
       $$
-      B =
+      A^2=O,\qquad A\ne O.
+      $$
+      Jadi, $t^2$ menganihilasi $A$, sedangkan $t$ tidak
+      menganihilasi $A$. Dengan demikian,
+      $$
+      m_A(t)=t^2.
+      $$
+   </p>
+
+   <p align="justify">
+      Sekarang, misalkan
+      $$
+      B=
       \begin{bmatrix}
-      0 & 1 & 0 & 0\\
-      0 & 0 & 0 & 0\\
-      0 & 0 & 0 & 1\\
-      0 & 0 & 0 & 0
+      0&1&0&0\\
+      0&0&0&0\\
+      0&0&0&1\\
+      0&0&0&0
       \end{bmatrix}.
       $$
-      Seperti $A$, $B$ memiliki polinomial minimal $t^2$. Kita dapat melihat bahwa $A$ dan $B$ tidak similar dengan 
-      mencatat bahwa $\operatorname{rank} A = 1$ sedangkan $\operatorname{rank} B = 2$.
+      Dengan cara yang sama, diperoleh
+      $$
+      B^2=O,\qquad B\ne O,
+      $$
+      sehingga
+      $$
+      m_B(t)=t^2.
+      $$
+      Jadi, kedua matriks mempunyai polinomial minimal yang sama:
+      $$
+      m_A(t)=m_B(t)=t^2.
+      $$
+   </p>
+
+   <p align="justify">
+      Meskipun demikian, $A$ dan $B$ tidak similar. Hal ini dapat
+      dilihat dari rank kedua matriks:
+      $$
+      \operatorname{rank}(A)=1,\qquad
+      \operatorname{rank}(B)=2.
+      $$
+      Karena rank merupakan invarian terhadap similarity, dua
+      matriks yang similar harus mempunyai rank yang sama.
+      Oleh karena rank $A$ dan $B$ berbeda, keduanya tidak similar.
+   </p>
+
+   <p align="justify">
+      Contoh ini menunjukkan bahwa polinomial minimal merupakan
+      salah satu invarian similarity, tetapi bukan satu-satunya
+      informasi yang menentukan kelas similarity suatu matriks.
    </p>
 </div>
 </div>
 
 <p align="justify">
-  Pada bagian berikut kita akan melihat bahwa terdapat subruang $V \cong F^n$ yang terkait dengan setiap akar 
-  polinomial minimal bagi $L \in \mathcal{L}(V)$. Karena kita tidak selalu dapat mengharapkan $F$ mengandung akar-akar 
-  polinomial tertentu (kecuali $F$ tertutup secara aljabar), kita ingin memahami bagaimana hal ini memengaruhi 
-  $V$ dan $L$ bila kita memperluas lapangan skalar.
+  Pada bagian berikut, kita akan melihat bahwa terdapat subruang
+  yang berkaitan dengan setiap akar polinomial minimal dari
+  $L\in\mathcal{L}(V)$. Namun, kita tidak selalu dapat mengharapkan
+  lapangan $F$ memuat semua akar polinomial tersebut. Hal ini
+  mendorong kita untuk mempelajari pengaruh perluasan lapangan
+  terhadap ruang vektor dan operator linear.
 </p>
+
 <p align="justify">
-   Misalkan $V$ didefinisikan atas $F$ dan $\hat{F}$ adalah lapangan yang memuat $F$ sebagai sublapangan. Kita definisikan 
-   $\hat{V}$ sebagai rentangan (span) $V$ atas $\hat{F}$. Misalnya, jika $V = \mathbb{Q}^2$ dan $\hat{\mathbb{Q}} = 
-   \mathbb{R}$, maka $\hat{V} = \mathbb{R}^2$. Sementara $(\sqrt{2},0)$ berada di $\hat{V}$ tetapi tidak di $V$, 
-   $\hat{V}$ dan $V$ memiliki dimensi yang sama atas lapangan masing-masing. Yang satu bukan subruang dari yang lain, 
-   tetapi kita dapat menggunakan basis $V$ atas $F$ untuk mendefinisikan basis $\hat{V}$ atas $\hat{F}$. Kita dapat 
-   mengambil pendekatan serupa untuk mendefinisikan $\hat{L}$ dalam $L(\hat{V})$. Diberikan $L \in \mathcal{L}(V)$, kita 
-   mendefinisikan $\hat{L}$ dalam $L(\hat{V})$ dengan memperluas secara linear aksi $L(v)$ ke atas $\hat{F}$ untuk 
-   $v \in V$. Proses berpindah dari $V$ ke $\hat{V}$, dan dari $L$ ke $\hat{L}$, disebut <b>perluasan lapangan skalar</b>.
+  Misalkan $V$ adalah ruang vektor atas $F$ dan $\hat F$ adalah
+  lapangan yang memuat $F$ sebagai sublapangan. Perluasan ruang
+  vektor dari $F$ ke $\hat F$ menghasilkan ruang vektor
+  $\hat V=\hat F\otimes_F V$, yang dapat dipandang sebagai
+  perluasan skalar dari $V$. Jika $V$ berdimensi hingga dengan
+  basis $B=\{v_1,\ldots,v_n\}$, maka basis yang sama dapat
+  digunakan untuk membangun basis $\hat V$ atas $\hat F$.
 </p>
+
 <p align="justify">
-  Sebagai contoh, kita dapat memandang
+  Sebagai contoh, jika $V=\mathbb{Q}^2$ dan
+  $\hat F=\mathbb{R}$, maka perluasan skalarnya dapat
+  diidentifikasi dengan $\hat V=\mathbb{R}^2$. Vektor
+  $(\sqrt{2},0)$ berada di $\hat V$, tetapi tidak berada di
+  $V$. Walaupun demikian, kedua ruang tersebut mempunyai
+  dimensi yang sama atas lapangan masing-masing.
+</p>
+
+<p align="justify">
+  Diberikan $L\in\mathcal{L}(V)$, kita dapat memperluas aksi
+  $L$ secara linear terhadap skalar dari $\hat F$ untuk
+  memperoleh operator
+  $\hat L\in\mathcal{L}(\hat V)$. Operator $\hat L$ merupakan
+  perluasan skalar dari $L$, yang pada elemen-elemen sederhana
+  didefinisikan oleh
   $$
-  A =
+  \hat L(\alpha\otimes v)=\alpha\otimes L(v),
+  \qquad \alpha\in\hat F,\quad v\in V.
+  $$
+  Proses berpindah dari $V$ ke $\hat V$ dan dari $L$ ke
+  $\hat L$ disebut <b>perluasan lapangan skalar</b>.
+</p>
+
+<p align="justify">
+  Sebagai contoh, kita dapat memandang matriks
+  $$
+  A=
   \begin{bmatrix}
-  1 & -3\\
-  1 & 1
+  1&-3\\
+  1&1
   \end{bmatrix}
   $$
-  sebagai mendefinisikan suatu transformasi linear pada $\mathbb{Q}^2$, $\mathbb{R}^2$, atau $\mathbb{C}^2$. Apapun 
-  lapngan dasarnya, polinomial minimal dari $A$ adalah $t^2 - 2t + 4$.
+  sebagai matriks yang merepresentasikan operator linear pada
+  $\mathbb{Q}^2$, $\mathbb{R}^2$, maupun $\mathbb{C}^2$.
+  Polinomial minimalnya, yang dihitung terhadap masing-masing
+  lapangan dasar tersebut, adalah
+  $$
+  m_A(t)=t^2-2t+4.
+  $$
+  Contoh ini memperlihatkan bahwa polinomial minimal dapat tetap
+  sama ketika lapangan dasar diperluas, meskipun faktorisasi
+  polinomial tersebut mungkin berubah.
 </p>
+
 <p align="justify">
-  Teorema berikut menunjukkan bahwa annihilator $L$ dalam $F[t]$ selalu sama dengan annihilator $\hat{L}$ dalam $F[t]$.
+  Teorema berikut menyatakan bahwa perluasan lapangan skalar
+  tidak mengubah polinomial dari $F[t]$ yang menganihilasi
+  operator. Dengan kata lain, annihilator $L$ dalam $F[t]$
+  sama dengan annihilator $\hat L$ dalam $F[t]$.
 </p>
 
 <hr class="garis-elegan">
@@ -37256,12 +38692,17 @@ pretty_print(html(r"Nilai $p_1(4) = %s$"%latex(p1(4))))
     </div>
 <div class="theorem-box">
     <p align="justify">
-      Misalkan $V$ adalah ruang vektor atas $F$ dan $L \in \mathcal{L}(V)$. Misalkan $\hat{F}$ adalah lapangan yang memuat $F$ 
-      sebagai submedan. Perluas lapangan skalar untuk mendefinisikan $\hat{V}$ dan $\hat{L}$ atas $\hat{F}$. Jika 
-      $p(t) \in F[t]$, maka
-      $$p(L) = O \ \Leftrightarrow\ p(\hat{L}) = O.$$
+      Misalkan $V$ adalah ruang vektor atas $F$ dan
+      $L\in\mathcal{L}(V)$. Misalkan $\hat F$ adalah lapangan
+      yang memuat $F$ sebagai sublapangan. Perluas lapangan
+      skalar untuk memperoleh $\hat V$ dan
+      $\hat L\in\mathcal{L}(\hat V)$. Untuk setiap
+      $p(t)\in F[t]$, berlaku
+      $$
+      \boxed{p(L)=O\iff p(\hat L)=O.}
+      $$
    </p>
-<!-- PROOF DI DALAM TEOREMA -->
+
 <div class="proof-container">
   <div class="proof-header" onclick="toggleProof(this, event)">
      <span>Bukti</span>
@@ -37269,18 +38710,70 @@ pretty_print(html(r"Nilai $p_1(4) = %s$"%latex(p1(4))))
   </div>
 
 <div class="proof-box">
-  <p align="justify"> 
-      Dengan notasi seperti hipotesis, diberikan $p(t) = a_0 + a_1 t + \cdots + a_r t^r \in F[t]$,
-      $$p(L) = O \ \Leftrightarrow\ p(L)(v) = a_0 v + a_1 L(v) + \cdots + a_r L^r(v) = 0_V$$
-      untuk semua $v \in V$. Karena $V$ membentang $\hat{V}$ atas $\hat{F}$ dan
-      $$\hat{L}^j(v) = L^j(v)$$
-      untuk semua $v \in V$ dan $j \ge 0$, kesetaraan ini berlaku untuk semua $v \in V$ jika dan hanya jika
-      $$p(\hat{L})(x) = 0_{\hat{V}}$$
-      untuk semua $x \in \hat{V}$. Jadi
-      $$p(L) = O \iff p(\hat{L}) = O.$$ 
+   <p align="justify">
+      Misalkan
+      $$
+      p(t)=a_0+a_1t+\cdots+a_rt^r\in F[t].
+      $$
+      Berdasarkan definisi evaluasi polinomial pada operator,
+      $$
+      p(L)=a_0I+a_1L+\cdots+a_rL^r.
+      $$
+      Jika $p(L)=O$, maka
+      $$
+      a_0v+a_1L(v)+\cdots+a_rL^r(v)=0_V
+      $$
+      untuk setiap $v\in V$.
    </p>
+
+   <p align="justify">
+      Karena $\hat L$ merupakan perluasan skalar dari $L$,
+      untuk setiap $v\in V$ berlaku
+      $$
+      \hat L^j(1\otimes v)=1\otimes L^j(v),
+      \qquad j\geq0.
+      $$
+      Oleh karena itu,
+      $$
+      p(\hat L)(1\otimes v)
+      =1\otimes p(L)(v)=0.
+      $$
+      Setiap elemen $\hat V$ merupakan jumlah hingga elemen
+      berbentuk $\alpha\otimes v$, dengan
+      $\alpha\in\hat F$ dan $v\in V$. Karena $p(\hat L)$
+      linear terhadap skalar dari $\hat F$, maka
+      $$
+      p(\hat L)(\alpha\otimes v)
+      =\alpha\otimes p(L)(v)=0.
+      $$
+      Dengan demikian, $p(\hat L)$ merupakan operator nol
+      pada seluruh $\hat V$.
+   </p>
+
+   <p align="justify">
+      Sebaliknya, jika $p(\hat L)=O$, maka khususnya
+      $p(\hat L)(1\otimes v)=0$ untuk setiap $v\in V$.
+      Jadi,
+      $$
+      1\otimes p(L)(v)=0.
+      $$
+      Karena pemetaan kanonik $v\mapsto1\otimes v$ bersifat
+      injektif, diperoleh $p(L)(v)=0$ untuk setiap $v\in V$.
+      Artinya, $p(L)=O$.
+   </p>
+
+   <p align="justify">
+      Jadi, kedua arah telah dibuktikan:
+      $$
+      \boxed{p(L)=O\iff p(\hat L)=O.}
+      $$
+      Dengan demikian, annihilator $L$ dan annihilator
+      $\hat L$, jika keduanya dipandang sebagai himpunan
+      polinomial dalam $F[t]$, adalah sama.
+   </p>
+
 <p>
-✅ <b>Q.E.D.</b> $\qquad\qquad\qquad\blacksquare$
+  <b>Q.E.D.</b> $\qquad\qquad\qquad\blacksquare$
 </p>
 </div>
 </div>
@@ -37289,8 +38782,21 @@ pretty_print(html(r"Nilai $p_1(4) = %s$"%latex(p1(4))))
 </section>
 
 <p align="justify">
-  <a href="#Teorema1522">Teorema 6.2.11.</a> menunjukkan bahwa dalam memperluas lapangan dasar dari \( F \), 
-  kita tidak kehilangan maupun memperoleh polinomial atas \( F \) yang menganihilasi suatu operator tertentu.
+  <a href="#Teorema1522">Teorema 6.2.11</a> menunjukkan bahwa
+  ketika lapangan dasar diperluas dari $F$ ke $\hat F$, kita
+  tidak kehilangan maupun memperoleh polinomial dari $F[t]$
+  yang menganihilasi operator. Dengan demikian,
+  $$
+  \operatorname{Ann}_{F[t]}(L)
+  =
+  \operatorname{Ann}_{F[t]}(\hat L).
+  $$
+  Khususnya, jika $L$ mempunyai polinomial minimal atas $F$,
+  maka polinomial minimal $\hat L$ yang dihitung terhadap
+  polinomial dalam $F[t]$ tetap sama. Perluasan lapangan dapat
+  mengubah faktorisasi polinomial minimal, tetapi tidak
+  mengubah polinomial minimal itu sendiri sebagai elemen
+  $F[t]$.
 </p>
 
 </div>
