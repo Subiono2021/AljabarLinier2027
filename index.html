@@ -38805,69 +38805,429 @@ pretty_print(html(r"Nilai $p_1(4) = %s$"%latex(p1(4))))
 <!-- Batas SubSECTION -->
 
 <div class="subsection">
- <div class="subsection-header">
+
+<div class="subsection-header">
    <h3>6.3. Nilai-Eigen<span class="dropdown-icon">▼</span></h3>
- </div>
+</div>
+
 <div class="subsection-content">
 
-<p style='margin-left:5px;margin-right:5px;'>
-Sebelum membahas pengertian nilai eigen dan vektor eigen, kita berikan suatu pembahasan betapa penting peranan nilai eigen dan vektor eigen dalam masalah real sebagaimana pembahasan berikut. Pertimbangkan sistem pegas-massa yang digambarkan di bawah ini.
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Sebelum memperkenalkan pengertian formal nilai eigen dan vektor eigen,
+kita akan melihat terlebih dahulu mengapa kedua konsep ini penting
+dalam memahami berbagai fenomena nyata. Salah satu motivasi yang menarik
+dapat ditemukan dalam mekanika, khususnya pada sistem pegas-massa.
+Contoh ini memperlihatkan bagaimana aljabar linear dapat digunakan
+untuk mengungkap pola gerakan suatu sistem yang terdiri atas beberapa
+komponen yang saling berinteraksi.
 </p>
 
 <center>
-    <img src="https://raw.githubusercontent.com/Subiono2021/Gambar/main/Mekanika_2023.jpg" 
-         alt="Mekanika" width="300" height="90">
-  </center>
+    <img src="https://raw.githubusercontent.com/Subiono2021/Gambar/main/Mekanika_2023.jpg"
+         alt="Sistem mekanika pegas-massa" width="300" height="90">
+</center>
 
-<p style='margin-left:5px;margin-right:5px;'>
-Asumsikan bahwa massanya identik dan dihubungkan ke pegas identik dengan konstanta pegas \(k\). Kita menyatakan perpindahan kesetimbangan dengan \(x_1\) dan \(x_2\) dengan perpindahan positif ke kanan. Kita ingin menentukan bagaimana menggambarkan gerakan massa yang akan dihasilkan dari massa yang dipindahkan dan kemudian dilepaskan. Menurut <b>Hukum Hooke</b>, gaya total yang bekerja pada massa pertama adalah:
-    $$
-    -kx_1 + k(x_2 - x_1)
-    $$
-dan gaya total yang bekerja pada massa kedua adalah
+<h4>Motivasi: Sistem Dua Pegas-Massa</h4>
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Pertimbangkan dua benda bermassa identik, masing-masing bermassa
+\(m\), yang dihubungkan dengan tiga pegas identik dengan konstanta
+pegas \(k\). Kedua massa dapat bergerak secara horizontal tanpa
+gesekan, sedangkan kedua ujung sistem terikat pada dinding.
+Kita menyatakan perpindahan massa pertama dan kedua dari posisi
+kesetimbangannya masing-masing dengan \(x_1(t)\) dan \(x_2(t)\).
+Arah positif perpindahan ditetapkan ke kanan.
+</p>
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Pertanyaan yang ingin kita jawab adalah:
+<b>Bagaimana pola gerakan kedua massa apabila sistem diberi
+simpangan awal kemudian dilepaskan?</b>
+Apakah kedua massa selalu bergerak dengan pola yang sama,
+atau terdapat pola gerakan tertentu yang secara alami dimiliki
+oleh sistem tersebut?
+</p>
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Untuk menjawab pertanyaan ini, kita menggunakan dua prinsip
+dasar mekanika, yaitu <b>Hukum Hooke</b> dan
+<b>Hukum Kedua Newton</b>.
+Menurut Hukum Hooke, gaya pegas sebanding dengan pertambahan
+atau pengurangan panjang pegas, dengan arah berlawanan terhadap
+perpindahannya.
+</p>
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Dengan memperhatikan seluruh gaya yang bekerja pada masing-masing
+massa, gaya total pada massa pertama adalah
+</p>
+
 $$
--k(x_2 - x_1) - kx_2.
+F_1=-kx_1+k(x_2-x_1)
+    =-2kx_1+kx_2,
 $$
-    Menurut hukum <b>kedua Newton</b>, gaya total yang bekerja pada massa juga sama dengan
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+sedangkan gaya total pada massa kedua adalah
+</p>
+
 $$
-F = ma = m\frac{d^2x}{dt^2}
+F_2=-k(x_2-x_1)-kx_2
+    =kx_1-2kx_2.
 $$
-Dengan demikian, kita memiliki
-\begin{eqnarray*}
- −kx_1 + k(x_2 − x_1) &=& m\frac{d^2x_1}{dt^2}\\
-−k(x_2 − x_1) − kx_2 &=& m\frac{d^2x_2}{dt^2}
-\end{eqnarray*}
-Pengalaman memberitahu kita bahwa perpindahan \(x_1\) dan \(x_2\) harus mengalami peluruhan eksponensial. Jadi, kita ambil \(x_1 = ae^{pt}\) dan \(x_2 = be^{pt}\). Mensubstitusikan ini ke dalam dua persamaan terakhir di atas dan mengatur ulang, kita bisa mendapatkan    
-\begin{eqnarray*}
-−2a + b &=& m\frac{p^2}{k}a\\
-a - 2b &=& m\frac{p^2}{k}b
-\end{eqnarray*}
-Kita mendefinisikan \(\lambda = m\dfrac{p^2}{k}\) dan menulis ulang sistem dalam bentuk matriks memberikan
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Berdasarkan Hukum Kedua Newton,
+</p>
+
+$$
+F_i=m\frac{d^2x_i}{dt^2},
+$$
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+kita memperoleh sistem persamaan diferensial
+</p>
+
+$$
+\begin{aligned}
+m\frac{d^2x_1}{dt^2}
+   &=-2kx_1+kx_2,\\
+m\frac{d^2x_2}{dt^2}
+   &=kx_1-2kx_2.
+\end{aligned}
+$$
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Dengan menggunakan notasi matriks, sistem tersebut dapat ditulis
+sebagai
+</p>
+
+$$
+m\frac{d^2}{dt^2}
+\begin{bmatrix}
+x_1\\x_2
+\end{bmatrix}
+=
+-k
+\begin{bmatrix}
+2&-1\\
+-1&2
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\x_2
+\end{bmatrix}.
+$$
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Sampai di sini, kita menghadapi sistem persamaan diferensial
+yang melibatkan dua variabel yang saling berinteraksi.
+Akan tetapi, terdapat cara yang lebih sederhana untuk memahami
+gerakan sistem tersebut. Kita mencari pola gerakan khusus ketika
+kedua massa bergerak secara harmonik dengan frekuensi sudut
+yang sama. Oleh karena itu, kita mencoba bentuk solusi
+</p>
+
+$$
+x_1(t)=a\cos(\omega t+\phi),
+\qquad
+x_2(t)=b\cos(\omega t+\phi).
+$$
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Di sini, \(a\) dan \(b\) menyatakan amplitudo bertanda,
+\(\omega\) adalah frekuensi sudut, dan \(\phi\) adalah fase.
+Karena turunan kedua fungsi kosinus menghasilkan
+\(-\omega^2\) kali fungsi semula, substitusi ke dalam sistem
+persamaan diferensial memberikan
+</p>
+
+$$
+\begin{aligned}
+(2k-m\omega^2)a-kb&=0,\\
+-ka+(2k-m\omega^2)b&=0.
+\end{aligned}
+$$
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Dengan mendefinisikan
+\(\lambda=\dfrac{m\omega^2}{k}\), sistem tersebut dapat
+ditulis dalam bentuk
+</p>
+
 $$
 \begin{bmatrix}
--2 & 1\\
-1 & -2
-\end{bmatrix}\begin{bmatrix}
-a\\
-b
-\end{bmatrix}=\lambda \begin{bmatrix}
-a\\
-b
+2&-1\\
+-1&2
 \end{bmatrix}
+\begin{bmatrix}
+a\\b
+\end{bmatrix}
+=
+\lambda
+\begin{bmatrix}
+a\\b
+\end{bmatrix}.
 $$
-Menyelesaikan sistem persamaan ini untuk \(\lambda\) memberi kita nilai \(p\), yang memberi tahu kita tentang frekuensi osilasi.<br>
-<br>    
-Banyak masalah dalam sains dan teknik mengharuskan kita untuk menyelesaikan sistem persamaan linear berbentuk
-$$
-A\pmb{x}=\lambda\pmb{x}.
-$$
-Ini sering disebut sebagai <b>masalah nilai eigen</b>.  <br> 
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Perhatikan bahwa kita sekarang memperoleh persamaan matriks
+yang bentuknya sangat khusus, yaitu
+\(A\mathbf{v}=\lambda\mathbf{v}\), dengan
 </p>
 
-<p align="justify">
-   Subruang-subruang <b>$L$-invarian</b> dari $V$ mengungkapkan informasi penting tentang $L \in \mathcal{L}(V)$.
-   Subruang $L$-invarian yang paling sederhana dijangkau (spanned) oleh sebuah <b>$L$-vektoreigen</b>.
+$$
+A=
+\begin{bmatrix}
+2&-1\\
+-1&2
+\end{bmatrix},
+\qquad
+\mathbf{v}=
+\begin{bmatrix}
+a\\b
+\end{bmatrix}.
+$$
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Persamaan tersebut bukan sekadar sistem persamaan linear biasa.
+Kita mencari suatu bilangan \(\lambda\) dan vektor tak nol
+\(\mathbf{v}\) sehingga hasil transformasi matriks \(A\)
+terhadap \(\mathbf{v}\) menghasilkan kelipatan skalar
+dari vektor itu sendiri.
+Bilangan \(\lambda\) disebut <b>nilai eigen</b>,
+sedangkan vektor tak nol \(\mathbf{v}\) yang memenuhi
+persamaan tersebut disebut <b>vektor eigen</b> yang
+bersesuaian dengan \(\lambda\).
 </p>
+
+<h4>Makna Fisis Nilai Eigen dan Vektor Eigen</h4>
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Untuk memahami maknanya, kita dapat menentukan nilai eigen
+matriks di atas dengan menyelesaikan
+</p>
+
+$$
+\det(A-\lambda I)=0.
+$$
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Secara khusus,
+</p>
+
+$$
+\begin{aligned}
+\det
+\begin{bmatrix}
+2-\lambda&-1\\
+-1&2-\lambda
+\end{bmatrix}
+&=(2-\lambda)^2-1\\
+&=(\lambda-1)(\lambda-3)=0.
+\end{aligned}
+$$
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Dengan demikian, diperoleh dua nilai eigen,
+yaitu \(\lambda_1=1\) dan \(\lambda_2=3\).
+Vektor eigen yang bersesuaian dapat dipilih sebagai
+</p>
+
+$$
+\lambda_1=1:
+\qquad
+\mathbf{v}_1=
+\begin{bmatrix}
+1\\1
+\end{bmatrix},
+$$
+
+$$
+\lambda_2=3:
+\qquad
+\mathbf{v}_2=
+\begin{bmatrix}
+1\\-1
+\end{bmatrix}.
+$$
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Kedua vektor eigen tersebut mengungkapkan dua pola gerakan
+khusus yang berbeda:
+</p>
+
+<ul align="justify" style="margin-left:5px;margin-right:150px;">
+<li>
+<b>Mode pertama (gerakan sefase).</b>
+Untuk \(\mathbf{v}_1=(1,1)^T\), kedua massa bergerak
+dengan arah dan amplitudo yang sama. Ketika massa pertama
+bergerak ke kanan, massa kedua juga bergerak ke kanan.
+Frekuensi sudutnya adalah
+\(\omega_1=\sqrt{k/m}\).
+</li>
+<li>
+<b>Mode kedua (gerakan berlawanan fase).</b>
+Untuk \(\mathbf{v}_2=(1,-1)^T\), kedua massa bergerak
+dengan amplitudo yang sama tetapi berlawanan arah.
+Ketika massa pertama bergerak ke kanan, massa kedua bergerak
+ke kiri. Frekuensi sudutnya adalah
+\(\omega_2=\sqrt{3k/m}\).
+</li>
+</ul>
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Dengan demikian, nilai eigen menentukan kuadrat frekuensi
+sudut relatif terhadap faktor \(k/m\), sedangkan vektor eigen
+menentukan pola relatif gerakan kedua massa.
+Kedua pola ini dikenal sebagai <b>mode normal</b>
+(normal modes) dalam mekanika.
+</p>
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Hasil ini memberikan wawasan penting: meskipun kedua massa
+saling berinteraksi dan gerakannya tampak rumit, gerakan
+keseluruhan sistem dapat dibangun dari kombinasi dua pola
+gerakan khusus tersebut. Untuk sistem linear tanpa redaman,
+setiap gerakan dapat dinyatakan sebagai superposisi kedua
+mode normal dengan amplitudo dan fase yang ditentukan oleh
+kondisi awal.
+</p>
+
+<h4>Dari Fenomena Fisis Menuju Abstraksi Aljabar Linear</h4>
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Contoh sistem pegas-massa memperlihatkan bahwa terdapat
+arah-arah tertentu yang mempunyai sifat khusus terhadap
+suatu transformasi linear. Jika suatu vektor berada pada
+arah tersebut, transformasi tidak mengubah arahnya,
+melainkan hanya mengalikan vektor itu dengan suatu skalar.
+Inilah gagasan mendasar di balik konsep nilai eigen dan
+vektor eigen.
+</p>
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Gagasan yang sama ternyata tidak terbatas pada persoalan
+mekanika. Dalam berbagai bidang, nilai eigen dan vektor
+eigen berperan penting, misalnya:
+</p>
+
+<ul align="justify" style="margin-left:5px;margin-right:150px;">
+<li>
+<b>Getaran dan mekanika struktur:</b> menentukan frekuensi
+alami dan pola getaran bangunan, jembatan, serta mesin.
+</li>
+<li>
+<b>Persamaan diferensial:</b> membantu menguraikan perilaku
+sistem dinamis menjadi mode-mode yang lebih sederhana.
+</li>
+<li>
+<b>Analisis data:</b> digunakan dalam Principal Component
+Analysis (PCA) untuk menemukan arah variasi utama data.
+</li>
+<li>
+<b>Fisika kuantum:</b> nilai eigen suatu operator merepresentasikan
+kemungkinan hasil pengukuran besaran fisis tertentu,
+sedangkan vektor eigennya menggambarkan keadaan yang
+bersesuaian.
+</li>
+<li>
+<b>Jaringan dan sistem kompleks:</b> digunakan untuk
+menganalisis struktur, kestabilan, dan perilaku sistem
+yang saling terhubung.
+</li>
+</ul>
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Dengan demikian, masalah nilai eigen merupakan salah satu
+konsep sentral dalam aljabar linear karena menghubungkan
+struktur suatu transformasi linear dengan perilaku sistem
+yang dimodelkannya.
+Kita tidak hanya ingin mengetahui bagaimana suatu vektor
+berubah setelah dikenai transformasi, tetapi juga ingin
+menemukan arah-arah khusus yang mempertahankan arah
+semula di bawah transformasi tersebut.
+</p>
+
+<h4>Hubungan dengan Subruang Invarian</h4>
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Sekarang kita hubungkan motivasi tersebut dengan konsep
+transformasi linear yang telah dibahas sebelumnya.
+Misalkan \(L\in\mathcal{L}(V)\), dengan \(V\) suatu ruang
+vektor atas lapangan \(F\).
+Suatu subruang \(W\subseteq V\) disebut
+<b>\(L\)-invarian</b> apabila
+</p>
+
+$$
+L(W)\subseteq W.
+$$
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Artinya, setiap vektor yang berasal dari \(W\), setelah
+ditransformasikan oleh \(L\), tetap berada di dalam
+subruang \(W\). Dengan kata lain, transformasi \(L\)
+tidak membawa vektor-vektor dari \(W\) keluar dari
+subruang tersebut.
+</p>
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Jika \(v\neq 0\) merupakan vektor eigen dari \(L\)
+dengan nilai eigen \(\lambda\), maka
+</p>
+
+$$
+L(v)=\lambda v.
+$$
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Akibatnya, untuk setiap skalar \(c\in F\),
+</p>
+
+$$
+L(cv)=cL(v)=c\lambda v
+     =\lambda(cv).
+$$
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Jadi, setiap kelipatan skalar dari \(v\) juga tetap
+berada dalam subruang yang direntang oleh \(v\).
+Dengan demikian,
+</p>
+
+$$
+\operatorname{span}\{v\}
+$$
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+merupakan subruang \(L\)-invarian.
+Hal ini menunjukkan bahwa subruang berdimensi satu
+yang direntang oleh sebuah vektor eigen merupakan
+contoh paling sederhana dari subruang invariant
+tak nol yang muncul dari suatu transformasi linear.
+</p>
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Perlu diperhatikan bahwa subruang nol \(\{0\}\) juga
+selalu \(L\)-invarian, tetapi tidak direntang oleh
+vektor eigen tak nol. Oleh karena itu, ketika kita
+membicarakan subruang invariant paling sederhana
+yang berasal dari vektor eigen, yang dimaksud adalah
+subruang berdimensi satu.
+</p>
+
+<p align="justify" style="margin-left:5px;margin-right:5px;">
+Pembahasan ini membawa kita pada pertanyaan mendasar:
+<b>Bagaimana menentukan semua nilai eigen dan vektor
+eigen suatu transformasi linear, dan bagaimana
+keduanya berkaitan dengan struktur transformasi
+tersebut?</b>
+Untuk menjawabnya, kita akan memulai dengan
+pengertian formal nilai eigen dan vektor eigen,
+kemudian mengembangkan metode untuk menentukannya
+serta mempelajari sifat-sifat aljabarnya.
+</p>
+
 <hr class="garis-elegan">
 
  <div class="definition-container">
@@ -39765,52 +40125,364 @@ Gambar 6.3.3: Suatu refleksi non-ortogonal pada $\mathbb{R}^2$ yang ditentukan o
     Sering kali $\lambda$ berperan ganda sebagai nilai eigen dan peubah bebas, sehingga umum pula menulis 
     polinomial karakteristik sebagai $\det(L - \lambda I)$ atau $\det(\lambda I - L)$.
 </p>
+
 <section class="theorem-section">
 <div class="theorem-container">
+
     <div class="theorem-header" onclick="toggleTeorema(this)">
-        <span class="theorem-number" id="Teorema1542">6.4.4. Teorema (Cayley-Hamilton)</span>
+        <span class="theorem-number" id="Teorema1542">
+            6.4.4. Teorema (Cayley-Hamilton)
+        </span>
         <span class="arrow">▼</span>
     </div>
+
 <div class="theorem-box">
-  <p align="justify">
-      Jika $L\in \mathcal{L}(V)$ dan $p(t)=\det(L-tI)$ adalah polinomial karakteristiknya, maka $p(L)=O$.
-   </p>
+
+<p align="justify">
+Misalkan \(V\) adalah ruang vektor berdimensi hingga atas
+lapangan \(F\), dan \(L\in\mathcal{L}(V)\).
+Jika
+</p>
+
+$$
+p(t)=\det(L-tI)
+$$
+
+<p align="justify">
+adalah polinomial karakteristik dari \(L\), maka
+</p>
+
+$$
+\boxed{p(L)=O.}
+$$
+
+<p align="justify">
+Artinya, setiap operator linear berdimensi hingga memenuhi
+persamaan polinomial karakteristiknya sendiri.
+Pernyataan ini dikenal sebagai <b>Teorema Cayley-Hamilton</b>.
+</p>
+
 <!-- PROOF DI DALAM TEOREMA -->
 <div class="proof-container">
+
   <div class="proof-header" onclick="toggleProof(this, event)">
      <span>Bukti</span>
      <span class="arrow">▼</span>
   </div>
 
 <div class="proof-box">
- <p align="justify">
-      Pilih basis terurut $B$ dari $V$ dan tulis matriks representasi $A=[L]_B$. Cukup menunjukkan $p(A)=0$ 
-      (karena $p(L)=0$ ekivalen dengan $p(A)=0$ pada representasi matriks di basis apa pun).
-  </p>
-  <p align="justify">
-      Definisikan polinomial karakteristik sebagai
-      $$p(t)=\det(A-tI_n)\in F[t].$$
-      Untuk matriks umum $M$ berdimensi $n$ berlaku <b>identitas adjugate:</b>
-      $$\operatorname{adj}(M)\,M=\det(M)\,I_n,$$
-      di mana $\operatorname{adj}(M)$ adalah matriks adjungat (adjugate). Terapkan identitas ini pada matriks 
-      berentri polinomial $M=A-tI_n$. Karena entri $A-tI_n$ adalah elemen dari $F[t]$, $\operatorname{adj}(A-tI_n)$ 
-      juga mempunyai entri di $F[t]$. Dengan demikian kita punya identitas di $M_n(F[t])$:
-      $$\operatorname{adj}(A-tI_n)\,(A-tI_n)=\det(A-tI_n)\,I_n = p(t)\,I_n.$$
-      Perhatikan bahwa persamaan di atas adalah identitas polinomial, kedua sisi adalah matriks yang entri-entri nya 
-      polinomial dalam $t$, dan identitas berlaku untuk semua nilai $t$.
-   </p>
-   <p align="justify">
-      Sekarang lakukan substitusi formal $t\mapsto A$. Karena $\operatorname{adj}(A-tI_n)$ mempunyai entri polinomial, 
-      substitusi ini bermakna: ganti setiap <b>monomial</b> $t^k$ dengan $A^k$. Setelah substitusi kita mendapat
-      $$\operatorname{adj}(A-AI_n)\,(A-AI_n)=p(A)\,I_n.$$
-      Tetapi jelas $A-AI_n=0$, sehingga sisi kiri sama dengan nol matriks. Maka
-      $$0 = p(A)\,I_n,$$
-      dan karenanya $p(A)=0$. Karena $A$ adalah representasi $L$ pada basis $B$, ini ekivalen dengan $p(L)=O$. 
-      Hal itu menyelesaikan bukti.
-   </p>
-<p>
-✅ <b>Q.E.D.</b> $\qquad\qquad\qquad\blacksquare$
+
+<h4>Langkah 1. Mengubah persoalan operator menjadi persoalan matriks</h4>
+
+<p align="justify">
+Pilih suatu basis terurut \(B\) dari \(V\), dan misalkan
+\(A=[L]_B\) adalah matriks representasi operator \(L\)
+terhadap basis tersebut. Karena
+\(\dim V=n\), maka \(A\in M_n(F)\).
 </p>
+
+<p align="justify">
+Polinomial karakteristik operator \(L\) dapat dihitung
+menggunakan matriks representasinya, yaitu
+</p>
+
+$$
+p(t)=\det(A-tI_n).
+$$
+
+<p align="justify">
+Selain itu, representasi matriks mempertahankan operasi
+penjumlahan, perkalian, dan perkalian skalar. Oleh karena itu,
+untuk setiap polinomial \(p(t)\in F[t]\), berlaku
+</p>
+
+$$
+[p(L)]_B=p(A).
+$$
+
+<p align="justify">
+Dengan demikian, cukup dibuktikan bahwa
+</p>
+
+$$
+p(A)=O_n.
+$$
+
+<p align="justify">
+Selanjutnya, seluruh pembuktian dilakukan dalam
+aljabar matriks \(M_n(F)\).
+</p>
+
+<h4>Langkah 2. Menggunakan identitas matriks adjugat</h4>
+
+<p align="justify">
+Kita ingat kembali bahwa untuk setiap matriks persegi
+\(M\in M_n(F)\), berlaku identitas
+</p>
+
+$$
+\operatorname{adj}(M)M=\det(M)I_n,
+$$
+
+<p align="justify">
+dengan \(\operatorname{adj}(M)\) menyatakan matriks
+<b>adjugat</b> (adjugate), yaitu transpose dari matriks
+kofaktor \(M\).
+Identitas ini tetap berlaku apabila entri-entri matriks
+merupakan polinomial dalam \(t\), karena \(F[t]\)
+merupakan ring komutatif.
+</p>
+
+<p align="justify">
+Sekarang kita terapkan identitas tersebut pada matriks
+\(M=A-tI_n\). Kita memperoleh
+</p>
+
+$$
+\boxed{
+\operatorname{adj}(A-tI_n)(A-tI_n)
+=p(t)I_n.
+}
+\tag{1}
+$$
+
+<p align="justify">
+Perhatikan bahwa setiap entri dari
+\(\operatorname{adj}(A-tI_n)\) merupakan polinomial
+dalam \(t\). Karena setiap entri adjugat merupakan
+determinan submatriks berukuran \((n-1)\times(n-1)\),
+derajat polinomialnya paling tinggi \(n-1\).
+Dengan demikian, kita dapat menuliskan
+</p>
+
+$$
+\operatorname{adj}(A-tI_n)
+=B_0+B_1t+\cdots+B_{n-1}t^{n-1},
+$$
+
+<p align="justify">
+dengan \(B_0,B_1,\ldots,B_{n-1}\in M_n(F)\)
+merupakan matriks-matriks yang tidak bergantung pada \(t\).
+</p>
+
+<p align="justify">
+Di sisi lain, karena \(p(t)\) merupakan polinomial
+berderajat \(n\), kita tuliskan
+</p>
+
+$$
+p(t)=c_0+c_1t+\cdots+c_nt^n,
+$$
+
+<p align="justify">
+dengan \(c_0,c_1,\ldots,c_n\in F\).
+Bahkan, berdasarkan definisi \(p(t)=\det(A-tI_n)\),
+koefisien tertingginya adalah
+\(c_n=(-1)^n\).
+</p>
+
+<h4>Langkah 3. Mengembangkan identitas dan membandingkan koefisien</h4>
+
+<p align="justify">
+Substitusikan kedua bentuk polinomial tersebut ke dalam
+persamaan (1). Kita mendapatkan
+</p>
+
+$$
+\begin{aligned}
+&(B_0+B_1t+\cdots+B_{n-1}t^{n-1})
+(A-tI_n)\\
+&\qquad=(c_0+c_1t+\cdots+c_nt^n)I_n.
+\end{aligned}
+$$
+
+<p align="justify">
+Dengan menggunakan sifat distributif perkalian matriks,
+ruas kiri dapat dikembangkan menjadi
+</p>
+
+$$
+\begin{aligned}
+&B_0A\\
+&+(B_1A-B_0)t\\
+&+(B_2A-B_1)t^2\\
+&+\cdots\\
+&+(B_{n-1}A-B_{n-2})t^{n-1}\\
+&-B_{n-1}t^n.
+\end{aligned}
+$$
+
+<p align="justify">
+Karena kedua ruas merupakan polinomial matriks yang sama,
+maka koefisien untuk setiap pangkat \(t\) harus sama.
+Kita memperoleh hubungan
+</p>
+
+$$
+\begin{aligned}
+B_0A&=c_0I_n,\\
+B_1A-B_0&=c_1I_n,\\
+B_2A-B_1&=c_2I_n,\\
+&\ \vdots\\
+B_{n-1}A-B_{n-2}&=c_{n-1}I_n,\\
+-B_{n-1}&=c_nI_n.
+\end{aligned}
+\tag{2}
+$$
+
+<p align="justify">
+Hubungan (2) merupakan inti dari pembuktian.
+Kita akan menggunakan hubungan-hubungan tersebut untuk
+memperoleh \(p(A)=O_n\), tanpa melakukan substitusi
+matriks secara langsung ke dalam identitas polinomial.
+</p>
+
+<h4>Langkah 4. Mengalikan dengan pangkat matriks dan menjumlahkan</h4>
+
+<p align="justify">
+Persamaan pertama pada (2) memberikan
+</p>
+
+$$
+c_0I_n=B_0A.
+$$
+
+<p align="justify">
+Persamaan kedua memberikan
+</p>
+
+$$
+B_1A-B_0=c_1I_n.
+$$
+
+<p align="justify">
+Kalikan persamaan ini di sebelah kanan dengan \(A\).
+Hasilnya adalah
+</p>
+
+$$
+c_1A=B_1A^2-B_0A.
+$$
+
+<p align="justify">
+Dengan cara yang sama, persamaan ketiga pada (2),
+setelah dikalikan di sebelah kanan dengan \(A^2\),
+menghasilkan
+</p>
+
+$$
+c_2A^2=B_2A^3-B_1A^2.
+$$
+
+<p align="justify">
+Secara umum, untuk \(j=1,2,\ldots,n-1\),
+kita memperoleh
+</p>
+
+$$
+\boxed{
+c_jA^j=B_jA^{j+1}-B_{j-1}A^j.
+}
+\tag{3}
+$$
+
+<p align="justify">
+Sementara itu, persamaan terakhir pada (2) adalah
+</p>
+
+$$
+-B_{n-1}=c_nI_n.
+$$
+
+<p align="justify">
+Kalikan persamaan tersebut di sebelah kanan dengan
+\(A^n\), sehingga
+</p>
+
+$$
+c_nA^n=-B_{n-1}A^n.
+$$
+
+<p align="justify">
+Sekarang kita jumlahkan seluruh persamaan, yaitu
+persamaan pertama, persamaan (3) untuk
+\(j=1,2,\ldots,n-1\), dan persamaan terakhir.
+Kita mendapatkan
+</p>
+
+$$
+\begin{aligned}
+&c_0I_n+c_1A+c_2A^2+\cdots+c_nA^n\\
+&=B_0A\\
+&\quad +(B_1A^2-B_0A)\\
+&\quad +(B_2A^3-B_1A^2)\\
+&\quad+\cdots\\
+&\quad +(B_{n-1}A^n-B_{n-2}A^{n-1})\\
+&\quad-B_{n-1}A^n.
+\end{aligned}
+$$
+
+<p align="justify">
+Perhatikan bahwa ruas kanan mengalami
+<b>pembatalan berpasangan (telescoping cancellation)</b>.
+Setiap suku positif saling menghilangkan dengan
+suku negatif pada baris berikutnya. Sebagai contoh,
+\(B_0A\) dan \(-B_0A\) saling menghilangkan,
+demikian pula \(B_1A^2\) dan \(-B_1A^2\),
+dan seterusnya hingga suku terakhir.
+Oleh karena itu, seluruh ruas kanan sama dengan
+matriks nol.
+</p>
+
+$$
+c_0I_n+c_1A+c_2A^2+\cdots+c_nA^n=O_n.
+$$
+
+<p align="justify">
+Namun, berdasarkan definisi polinomial
+\(p(t)=c_0+c_1t+\cdots+c_nt^n\), ruas kiri
+tidak lain adalah \(p(A)\). Jadi,
+</p>
+
+$$
+\boxed{p(A)=O_n.}
+$$
+
+<h4>Langkah 5. Kembali ke operator linear</h4>
+
+<p align="justify">
+Karena \(A=[L]_B\), dan representasi matriks
+mempertahankan evaluasi polinomial pada operator,
+maka
+</p>
+
+$$
+[p(L)]_B=p([L]_B)=p(A)=O_n.
+$$
+
+<p align="justify">
+Matriks representasi suatu operator linear terhadap
+suatu basis adalah matriks nol jika dan hanya jika
+operator tersebut merupakan operator nol.
+Dengan demikian,
+</p>
+
+$$
+\boxed{p(L)=O.}
+$$
+
+<p align="justify">
+Jadi, setiap operator linear pada ruang vektor
+berdimensi hingga memenuhi polinomial
+karakteristiknya sendiri. Hal ini membuktikan
+Teorema Cayley-Hamilton.
+</p>
+
+<p>
+<b>Q.E.D.</b>
+\(\qquad\qquad\qquad\blacksquare\)
+</p>
+
 </div>
 </div>
 </div>
@@ -39828,39 +40500,334 @@ Gambar 6.3.3: Suatu refleksi non-ortogonal pada $\mathbb{R}^2$ yang ditentukan o
 </p>
 
 <hr class="garis-elegan">
+
 <section class="theorem-section">
 <div class="theorem-container">
+
     <div class="theorem-header" onclick="toggleTeorema(this)">
-        <span class="theorem-number" id="Korolari1541">6.4.5. Korolari</span>
+        <span class="theorem-number" id="Korolari1541">
+            6.4.5. Korolari
+        </span>
         <span class="arrow">▼</span>
     </div>
+
 <div class="theorem-box">
-  <p align="justify">
-      Jika $L \in \mathcal{L}(V)$ dengan $V \cong F^n$, maka <b>polinomial minimal</b> dari $L$ membagi polinomial karakteristiknya.
-  </p>
+
+<p align="justify">
+Jika \(L\in\mathcal{L}(V)\), dengan \(V\) suatu ruang
+vektor berdimensi hingga atas lapangan \(F\), maka
+<b>polinomial minimal</b> dari \(L\) membagi
+polinomial karakteristiknya.
+</p>
+
+<p align="justify">
+Dengan kata lain, jika \(m(t)\) adalah polinomial
+minimal dari \(L\), sedangkan \(p(t)\) adalah
+polinomial karakteristiknya, maka
+</p>
+
+$$
+\boxed{m(t)\mid p(t).}
+$$
+
 <!-- PROOF DI DALAM TEOREMA -->
 <div class="proof-container">
+
   <div class="proof-header" onclick="toggleProof(this, event)">
      <span>Bukti</span>
      <span class="arrow">▼</span>
   </div>
 
 <div class="proof-box">
- <p align="justify">
-      Definisikan himpunan
-      $$I=\{f(t)\in F[t]\mid f(L)=0\}.$$
-      Karena ada polinomial tak nol yang mengannihilasi $L$ (mis. polinomial minimal), $I$ bukan ideal nol. 
-      Karena $F[t]$ adalah domain Euclidean (sehingga PID), setiap ideal non-nol bersifat utama; oleh karena 
-      itu ada polinomial monik berderajat minimal $m(t)$ dengan
-      $$I=\langle m(t)\rangle,$$
-      yaitu $m(t)$ adalah <b>polinomial minimal</b> dari $L$.
-      Menurut Teorema Cayley-Hamilton, polinomial karakteristik $p(t)=\det(L-tI)$ memenuhi $p(L)=0$. 
-      Jadi $p(t)\in I$. Karena $I=\langle m(t)\rangle$, kita harus mempunyai $m(t)\mid p(t)$ di $F[t]$. 
-      Ini membuktikan korolari: polinomial minimal membagi polinomial karakteristik.
-   </p>
-<p>
-✅ <b>Q.E.D.</b> $\qquad\qquad\qquad\blacksquare$
+
+<h4>Langkah 1. Membentuk himpunan polinomial yang mengannihilasi operator</h4>
+
+<p align="justify">
+Kita mulai dengan memperhatikan himpunan semua polinomial
+di \(F[t]\) yang apabila dievaluasi pada operator \(L\)
+menghasilkan operator nol. Himpunan tersebut didefinisikan
+sebagai
 </p>
+
+$$
+I=\{f(t)\in F[t]\mid f(L)=O\}.
+$$
+
+<p align="justify">
+Himpunan \(I\) disebut himpunan polinomial
+<b>pengannihilasi</b> (annihilating polynomials)
+dari operator \(L\).
+Artinya, setiap polinomial yang menjadi anggota \(I\)
+mempunyai sifat bahwa evaluasinya pada \(L\)
+menghasilkan operator nol.
+</p>
+
+<p align="justify">
+Sebagai contoh, jika
+</p>
+
+$$
+f(t)=a_0+a_1t+\cdots+a_rt^r,
+$$
+
+<p align="justify">
+maka evaluasi polinomial tersebut pada \(L\)
+didefinisikan sebagai
+</p>
+
+$$
+f(L)=a_0I+a_1L+\cdots+a_rL^r.
+$$
+
+<p align="justify">
+Dengan demikian, \(f(t)\in I\) jika dan hanya jika
+</p>
+
+$$
+a_0I+a_1L+\cdots+a_rL^r=O.
+$$
+
+<h4>Langkah 2. Membuktikan bahwa \(I\) merupakan ideal di \(F[t]\)</h4>
+
+<p align="justify">
+Kita akan menunjukkan bahwa \(I\) merupakan ideal
+dari ring polinomial \(F[t]\).
+Untuk itu, cukup diperiksa tiga sifat berikut.
+</p>
+
+<p align="justify">
+<b>(a) Memuat polinomial nol.</b>
+</p>
+
+<p align="justify">
+Jelas bahwa polinomial nol memenuhi
+\(0(L)=O\). Jadi,
+</p>
+
+$$
+0\in I.
+$$
+
+<p align="justify">
+<b>(b) Tertutup terhadap pengurangan.</b>
+</p>
+
+<p align="justify">
+Misalkan \(f(t),g(t)\in I\). Berdasarkan definisi \(I\),
+</p>
+
+$$
+f(L)=O,\qquad g(L)=O.
+$$
+
+<p align="justify">
+Karena evaluasi polinomial mempertahankan operasi
+penjumlahan dan pengurangan, diperoleh
+</p>
+
+$$
+\begin{aligned}
+(f-g)(L)
+&=f(L)-g(L)\\
+&=O-O\\
+&=O.
+\end{aligned}
+$$
+
+<p align="justify">
+Dengan demikian, \(f(t)-g(t)\in I\).
+</p>
+
+<p align="justify">
+<b>(c) Tertutup terhadap perkalian dengan polinomial
+sembarang.</b>
+</p>
+
+<p align="justify">
+Ambil \(f(t)\in I\) dan \(h(t)\in F[t]\).
+Karena \(f(L)=O\), maka
+</p>
+
+$$
+\begin{aligned}
+(hf)(L)
+&=h(L)f(L)\\
+&=h(L)O\\
+&=O.
+\end{aligned}
+$$
+
+<p align="justify">
+Pada langkah ini kita menggunakan sifat bahwa
+evaluasi polinomial mempertahankan perkalian:
+\((hf)(L)=h(L)f(L)\). Hal ini berlaku karena
+semua polinomial yang dievaluasi merupakan polinomial
+dalam operator yang sama, yaitu \(L\).
+</p>
+
+<p align="justify">
+Jadi, \(h(t)f(t)\in I\).
+Ketiga sifat tersebut menunjukkan bahwa
+</p>
+
+$$
+\boxed{I\text{ merupakan ideal dari }F[t].}
+$$
+
+<h4>Langkah 3. Menunjukkan bahwa ideal \(I\) tidak nol</h4>
+
+<p align="justify">
+Karena \(V\) berdimensi hingga, kita dapat menggunakan
+Teorema Cayley-Hamilton yang telah dibuktikan sebelumnya.
+Misalkan polinomial karakteristik dari \(L\) adalah
+</p>
+
+$$
+p(t)=\det(L-tI).
+$$
+
+<p align="justify">
+Menurut Teorema Cayley-Hamilton,
+</p>
+
+$$
+p(L)=O.
+$$
+
+<p align="justify">
+Artinya, \(p(t)\in I\).
+Selain itu, \(p(t)\) bukan polinomial nol karena
+polinomial karakteristik mempunyai derajat
+\(\dim V=n\) dan koefisien tertinggi
+\((-1)^n\), sehingga
+</p>
+
+$$
+p(t)\neq 0.
+$$
+
+<p align="justify">
+Dengan demikian, kita memperoleh
+</p>
+
+$$
+\boxed{I\neq\{0\}.}
+$$
+
+<p align="justify">
+Jadi, \(I\) merupakan ideal tak nol dari \(F[t]\).
+</p>
+
+<h4>Langkah 4. Menggunakan sifat ring polinomial \(F[t]\)</h4>
+
+<p align="justify">
+Kita ingat bahwa \(F[t]\), yaitu ring polinomial
+atas suatu lapangan \(F\), merupakan domain Euclidean.
+Akibatnya, \(F[t]\) merupakan principal ideal domain
+(PID). Artinya, setiap ideal tak nol di \(F[t]\)
+dapat dibangun oleh satu polinomial.
+</p>
+
+<p align="justify">
+Karena \(I\) merupakan ideal tak nol, terdapat
+polinomial \(m(t)\in F[t]\) sehingga
+</p>
+
+$$
+I=\langle m(t)\rangle.
+$$
+
+<p align="justify">
+Dengan kata lain, setiap polinomial yang mengannihilasi
+\(L\) merupakan kelipatan dari \(m(t)\), yaitu
+</p>
+
+$$
+I=\{h(t)m(t)\mid h(t)\in F[t]\}.
+$$
+
+<p align="justify">
+Kita dapat memilih \(m(t)\) sebagai polinomial monik.
+Selain itu, pembangkit monik tersebut tunggal.
+Polinomial ini disebut <b>polinomial minimal</b>
+dari operator \(L\).
+</p>
+
+<p align="justify">
+Mengapa \(m(t)\) disebut polinomial minimal?
+Karena \(m(t)\) merupakan polinomial monik tak nol
+berderajat terkecil yang memenuhi
+</p>
+
+$$
+m(L)=O.
+$$
+
+<p align="justify">
+Perlu diperhatikan bahwa setiap polinomial monik
+tak nol yang mengannihilasi \(L\) harus merupakan
+kelipatan dari \(m(t)\). Hal ini mengikuti langsung
+dari persamaan \(I=\langle m(t)\rangle\).
+</p>
+
+<h4>Langkah 5. Membuktikan keterbagian polinomial karakteristik</h4>
+
+<p align="justify">
+Sekarang kita kembali menggunakan Teorema
+Cayley-Hamilton. Kita telah mengetahui bahwa
+</p>
+
+$$
+p(L)=O.
+$$
+
+<p align="justify">
+Berdasarkan definisi himpunan \(I\), hal ini berarti
+</p>
+
+$$
+p(t)\in I.
+$$
+
+<p align="justify">
+Namun, dari Langkah 4 kita telah memperoleh
+</p>
+
+$$
+I=\langle m(t)\rangle.
+$$
+
+<p align="justify">
+Artinya, setiap anggota \(I\) harus merupakan
+kelipatan dari \(m(t)\). Karena \(p(t)\in I\),
+maka terdapat suatu polinomial \(q(t)\in F[t]\)
+sehingga
+</p>
+
+$$
+p(t)=m(t)q(t).
+$$
+
+<p align="justify">
+Dengan demikian, berdasarkan definisi keterbagian
+dalam ring polinomial, diperoleh
+</p>
+
+$$
+\boxed{m(t)\mid p(t).}
+$$
+
+<p align="justify">
+Jadi, polinomial minimal dari operator \(L\)
+membagi polinomial karakteristiknya.
+Hal ini membuktikan korolari yang diberikan.
+</p>
+
+<p>
+<b>Q.E.D.</b>
+\(\qquad\qquad\qquad\blacksquare\)
+</p>
+
 </div>
 </div>
 </div>
@@ -39874,220 +40841,938 @@ Gambar 6.3.3: Suatu refleksi non-ortogonal pada $\mathbb{R}^2$ yang ditentukan o
   linear pada ruang berdimensi hingga.
 </p>
 
+
 <div class="example-container">
-<div class="example-header" onclick="this.parentElement.classList.toggle('active')">
-<span id="Contoh1541"><b>6.4.6. Contoh</b></span>
-<span class="example-arrow">▼</span>
-</div>
-<div class="example-box">
-  <p align="justify"> 
-      Misalkan $L \in L(\mathbb{R}^3)$ didefinisikan oleh
-      $$L(x, y, z) = (x,\, y + z,\, z).$$
-      Mudah diperiksa bahwa polinomial karakteristik untuk $L$ adalah
-      $$p(t) = (1 - t)^3.$$
-      Karena polinomial minimal membagi polinomial karakteristik, kemungkinan polinomial minimal untuk $L$ 
-      adalah $t - 1$, $(t - 1)^2$, atau $(t - 1)^3$ (dengan konvensi polinomial minimal monik).
-      Periksa pangkat dari $L - I$:
-      $$(L - I)(x, y, z) = (0, z, 0), \quad (L - I)^2 = (0, 0, 0).$$
-      Maka polinomial minimal untuk $L$ adalah $q(t) = (t - 1)^2$.
-   </p>
-</div>
+  <div class="example-header" onclick="this.parentElement.classList.toggle('active')">
+    <span id="Contoh1541"><b>6.4.6. Contoh</b></span>
+    <span class="example-arrow">▼</span>
+  </div>
+  <div class="example-box">
+    <p align="justify">
+      Misalkan \(L\in\mathcal{L}(\mathbb{R}^3)\) didefinisikan oleh
+      \[
+      L(x,y,z)=(x,\,y+z,\,z).
+      \]
+      Untuk menentukan polinomial karakteristiknya, kita terlebih dahulu
+      menggunakan basis standar \(\mathbb{R}^3\). Matriks representasi
+      \(L\) terhadap basis tersebut adalah
+      \[
+      [L]=
+      \begin{bmatrix}
+      1&0&0\\
+      0&1&1\\
+      0&0&1
+      \end{bmatrix}.
+      \]
+      Oleh karena itu,
+      \[
+      \begin{aligned}
+      p_L(t)
+      &=\det([L]-tI)\\
+      &=
+      \det\begin{bmatrix}
+      1-t&0&0\\
+      0&1-t&1\\
+      0&0&1-t
+      \end{bmatrix}\\
+      &=(1-t)^3.
+      \end{aligned}
+      \]
+      Dengan demikian, satu-satunya nilai eigen \(L\) adalah
+      \(\lambda=1\), dengan multipisitas aljabar sebesar \(3\).
+    </p>
+
+    <p align="justify">
+      Selanjutnya, kita menentukan polinomial minimal \(L\).
+      Karena polinomial minimal merupakan polinomial monik berderajat
+      terkecil yang memenuhi \(q(L)=0\), sedangkan polinomial minimal
+      membagi polinomial karakteristik, kemungkinan yang dapat terjadi
+      adalah
+      \[
+      q_L(t)=t-1,\quad (t-1)^2,\quad
+      \text{atau}\quad (t-1)^3.
+      \]
+      Untuk membedakan ketiga kemungkinan tersebut, kita periksa
+      operator \(L-I\). Untuk setiap \((x,y,z)\in\mathbb{R}^3\),
+      diperoleh
+      \[
+      \begin{aligned}
+      (L-I)(x,y,z)
+      &=L(x,y,z)-(x,y,z)\\
+      &=(0,z,0).
+      \end{aligned}
+      \]
+      Artinya, operator \(L-I\) tidak memetakan setiap vektor
+      ke vektor nol. Sebagai contoh,
+      \[
+      (L-I)(0,0,1)=(0,1,0)\neq(0,0,0).
+      \]
+      Jadi, \(L-I\neq 0\), sehingga \(q_L(t)\neq t-1\).
+    </p>
+
+    <p align="justify">
+      Sekarang kita terapkan operator \(L-I\) sekali lagi:
+      \[
+      \begin{aligned}
+      (L-I)^2(x,y,z)
+      &=(L-I)(0,z,0)\\
+      &=(0,0,0).
+      \end{aligned}
+      \]
+      Dengan demikian, \((L-I)^2=0\), tetapi \(L-I\neq0\).
+      Artinya, pangkat terkecil dari \(L-I\) yang menghasilkan
+      operator nol adalah dua. Oleh karena itu,
+      \[
+      \boxed{q_L(t)=(t-1)^2.}
+      \]
+      Contoh ini memperlihatkan bahwa polinomial karakteristik
+      dan polinomial minimal mempunyai informasi yang berbeda.
+      Polinomial karakteristik menunjukkan bahwa nilai eigen \(1\)
+      mempunyai multipisitas aljabar tiga, sedangkan polinomial
+      minimal menunjukkan bahwa pangkat terkecil yang diperlukan
+      untuk menghasilkan operator nol melalui substitusi
+      \(t=L\) adalah dua.
+    </p>
+  </div>
 </div>
 
-  <p align="justify"> 
-      Misalkan $L \in L(\mathbb{R}^3)$ didefinisikan oleh
-      $$L(x, y, z) = (x,\, y + z,\, z).$$
-      Mudah diperiksa bahwa polinomial karakteristik untuk $L$ adalah
-      $$p(t) = (1 - t)^3.$$
-      Karena polinomial minimal membagi polinomial karakteristik, kemungkinan polinomial minimal untuk $L$ 
-      adalah $t - 1$, $(t - 1)^2$, atau $(t - 1)^3$ (dengan konvensi polinomial minimal monik).
-      Periksa pangkat dari $L - I$:
-      $$(L - I)(x, y, z) = (0, z, 0), \quad (L - I)^2 = (0, 0, 0).$$
-      Maka polinomial minimal untuk $L$ adalah $q(t) = (t - 1)^2$.
-   </p>
 <p align="justify">
-  Polinomial karakteristik merupakan ciri dari kelas kesimilaran (similarity class) yang terkait dengan suatu 
-  operator linear pada ruang berdimensi hingga, tetapi **tidak** secara tunggal menentukan kelas keserupaan tersebut: 
-  kelas-kelas yang berbeda dapat memiliki polinomial karakteristik yang sama. Sebagai contoh, polinomial karakteristik 
-  untuk $L_1(x, y) = (2x, 2y)$ dan $L_2(x, y) = (2x + y, 2y)$ identik. Namun mudah dicek bahwa $L_1$ dan $L_2$ memiliki 
-  polinomial minimal yang berbeda. Hal ini cukup untuk menyimpulkan bahwa $L_1$ dan $L_2$ berada pada kelas kesimilaran 
-  yang berbeda dalam $L(\mathbb{R}^2)$.
+  Contoh di atas juga memperlihatkan bahwa polinomial karakteristik
+  tidak cukup untuk menentukan suatu kelas kesimilaran (similarity
+  class) secara tunggal. Dua operator linear dapat mempunyai
+  polinomial karakteristik yang sama, tetapi tidak similar.
+  Untuk melihat hal tersebut, perhatikan dua operator berikut
+  pada \(\mathbb{R}^2\):
+  \[
+  L_1(x,y)=(2x,2y)
+  \]
+  dan
+  \[
+  L_2(x,y)=(2x+y,2y).
+  \]
+  Matriks representasinya terhadap basis standar masing-masing adalah
+  \[
+  [L_1]=
+  \begin{bmatrix}2&0\\0&2\end{bmatrix},
+  \qquad
+  [L_2]=
+  \begin{bmatrix}2&1\\0&2\end{bmatrix}.
+  \]
+  Kedua operator tersebut mempunyai polinomial karakteristik yang sama,
+  yaitu
+  \[
+  p_{L_1}(t)=p_{L_2}(t)=(2-t)^2.
+  \]
+  Akan tetapi, polinomial minimalnya berbeda. Untuk \(L_1\),
+  \[
+  L_1-2I=0,
+  \]
+  sehingga
+  \[
+  q_{L_1}(t)=t-2.
+  \]
+  Sementara itu,
+  \[
+  (L_2-2I)(x,y)=(y,0),
+  \]
+  sehingga \(L_2-2I\neq0\), tetapi
+  \[
+  (L_2-2I)^2=0.
+  \]
+  Akibatnya,
+  \[
+  q_{L_2}(t)=(t-2)^2.
+  \]
+  Karena operator-operator yang similar harus mempunyai polinomial
+  minimal yang sama, maka \(L_1\) dan \(L_2\) tidak similar.
+  Jadi, polinomial karakteristik yang sama belum menjamin
+  kesimilaran dua operator linear. Polinomial minimal memberikan
+  informasi tambahan yang dapat membedakan keduanya.
 </p>
+
 <p align="justify">
-  Ketika $V$ didefinisikan atas $F$ dan $L \in \mathcal{L}(V)$, kita menggunakan $\mathcal{Z}(L)$ untuk menyatakan 
-  himpunan semua akar dari polinomial karakteristik $L$ di $F$. Sebagai contoh, jika $L \in\mathcal{L}(\mathbb{R}^2)$ memiliki 
-  polinomial karakteristik $t^2 + 1$, maka
-  $$\mathcal{Z}(L) = \{ i,\,-i \} \subseteq \mathbb{C}.$$
+  Selanjutnya, kita perlu memperhatikan bahwa keberadaan nilai eigen
+  bergantung pada lapangan tempat ruang vektor didefinisikan.
+  Misalkan \(V\) merupakan ruang vektor berdimensi hingga atas
+  lapangan \(F\), dan \(L\in\mathcal{L}(V)\). Kita menggunakan
+  \(\mathcal{Z}(L)\) untuk menyatakan himpunan akar polinomial
+  karakteristik \(L\) dalam lapangan yang memuat akar-akar polinomial
+  tersebut.
+  Sebagai contoh, jika \(L\in\mathcal{L}(\mathbb{R}^2)\) mempunyai
+  polinomial karakteristik
+  \[
+  p_L(t)=t^2+1,
+  \]
+  maka polinomial tersebut tidak mempunyai akar dalam
+  \(\mathbb{R}\). Namun, jika lapangan diperluas menjadi
+  \(\mathbb{C}\), diperoleh
+  \[
+  \mathcal{Z}(L)=\{i,-i\}\subseteq\mathbb{C}.
+  \]
+  Dengan demikian, operator tersebut tidak mempunyai nilai eigen
+  real, tetapi mempunyai dua nilai eigen kompleks.
+  Perlu dibedakan bahwa perluasan lapangan ini tidak mengubah
+  matriks representasi maupun polinomial karakteristiknya;
+  yang berubah adalah lapangan tempat akar-akar polinomial
+  tersebut dicari.
 </p>
+
 
 <hr class="garis-elegan">
+
 <div class="definition-container">
   <div class="definition-header" onclick="toggleDefinisi(this)">
     <span id="Definisi1542"><b>6.4.7. Definisi</b></span>
     <span class="arrow">▼</span>
   </div>
-    <center>
-      <div class="definition-box">
- <p align="justify"> 
-      Misalkan $L \in\mathcal{L}(V)$ dengan $V \cong F^n$.
-      <b>Multipisitas aljabar</b> dari $\lambda \in\mathcal{Z}(L)$ adalah banyaknya $\lambda$ sebagai akar dari 
-      polinomial karakteristik $L$.
-   </p>
-      </div>
-    </center>
-</div> 
+  <center>
+    <div class="definition-box">
+      <p align="justify">
+        Misalkan \(L\in\mathcal{L}(V)\), dengan
+        \(\dim V=n\), dan polinomial karakteristiknya adalah
+        \[
+        p_L(t)=\det(L-tI).
+        \]
+        Jika \(\lambda\) merupakan akar dari \(p_L(t)\),
+        maka <b>multipisitas aljabar</b> dari \(\lambda\)
+        adalah bilangan bulat positif \(m\) terbesar sehingga
+        \[
+        p_L(t)=(t-\lambda)^m r(t),
+        \qquad r(\lambda)\neq0.
+        \]
+        Dengan kata lain, multipisitas aljabar menyatakan
+        berapa kali faktor \(t-\lambda\) muncul dalam
+        faktorisasi polinomial karakteristik.
+      </p>
+    </div>
+  </center>
+</div>
 
 <p align="justify">
-  Jika $V \cong F^n$ dan $F$ tertutup secara aljabar, <a href="#Teorema1541">Teorema 15.4.1.</a> menjamin bahwa 
-  setiap $L \in\mathcal{L}(V)$ memiliki tepat $n$ nilai eigen, dihitung dengan multipisitas aljabar.
+  Perhatikan bahwa jumlah seluruh multipisitas aljabar dari
+  nilai-nilai eigen sama dengan dimensi ruang vektor, yaitu
+  \(n\), apabila polinomial karakteristik terurai menjadi
+  faktor-faktor linear dalam lapangan yang digunakan.
+  Secara khusus, jika \(F\) merupakan lapangan tertutup secara
+  aljabar, Teorema 6.4.1 menjamin bahwa polinomial karakteristik
+  setiap operator pada ruang berdimensi \(n\) dapat difaktorkan
+  menjadi
+  \[
+  p_L(t)=(-1)^n
+  \prod_{j=1}^{k}(t-\lambda_j)^{m_j},
+  \]
+  dengan \(\lambda_1,\ldots,\lambda_k\) merupakan nilai-nilai
+  eigen yang berbeda dan
+  \[
+  m_1+\cdots+m_k=n.
+  \]
+  Faktor \((-1)^n\) muncul karena konvensi polinomial karakteristik
+  yang digunakan di sini adalah \(\det(L-tI)\).
+  Jika digunakan konvensi \(\det(tI-L)\), faktor tersebut tidak muncul.
 </p>
+
 <p align="justify">
-Karena terdapat dua jenis multipisitas untuk suatu nilai eigen, pasti ada kasus di mana keduanya berbeda.
+  Selain multipisitas aljabar, terdapat pula <b>multipisitas
+  geometri</b> dari suatu nilai eigen \(\lambda\), yaitu dimensi
+  ruang eigennya:
+  \[
+  \operatorname{gm}(\lambda)
+  =\dim\ker(L-\lambda I).
+  \]
+  Ruang eigen tersebut terdiri atas semua vektor yang memenuhi
+  \[
+  L(v)=\lambda v,
+  \]
+  beserta vektor nol.
+  Dengan demikian, multipisitas geometri menyatakan banyaknya
+  vektor eigen yang saling bebas linear secara maksimal untuk
+  nilai eigen \(\lambda\).
 </p>
+
+<p align="justify">
+  Kedua multipisitas tersebut selalu memenuhi hubungan
+  \[
+  \boxed{
+  1\leq \operatorname{gm}(\lambda)
+  \leq \operatorname{am}(\lambda).
+  }
+  \]
+  Ketaksamaan ini menunjukkan bahwa dimensi ruang eigen
+  tidak pernah melebihi banyaknya kemunculan nilai eigen tersebut
+  sebagai akar polinomial karakteristik. Kesamaan kedua
+  multipisitas tidak selalu terjadi. Contoh berikut akan
+  memperlihatkan keadaan ketika multipisitas geometri lebih
+  kecil daripada multipisitas aljabar.
+</p>
+
+
 
 <hr class="garis-elegan">
+
 <div class="example-container">
-<div class="example-header" onclick="this.parentElement.classList.toggle('active')">
-<span id="Contoh1542"><b>6.4.8. Contoh</b></span>
-<span class="example-arrow">▼</span>
-</div>
-<div class="example-box">
- <p align="justify"> 
-      Misalkan $L(x, y, z) = (x + y + z,\, y + z,\, z)$ di $L(\mathbb{R}^3)$.
-      Kita dapat menghitung polinomial karakteristik untuk $L$ melalui matriks standarnya:
-      $$
-      L =\begin{bmatrix}
-      1 & 1 & 1\\
-      0 & 1 & 1\\
-      0 & 0 & 1
-      \end{bmatrix}.
-      $$
-      Maka
-      $$
-      L - tI =
+  <div class="example-header" onclick="this.parentElement.classList.toggle('active')">
+    <span id="Contoh1542"><b>6.4.8. Contoh</b></span>
+    <span class="example-arrow">▼</span>
+  </div>
+  <div class="example-box">
+    <p align="justify">
+      Misalkan \(L\in\mathcal{L}(\mathbb{R}^3)\) didefinisikan oleh
+      \[
+      L(x,y,z)=(x+y+z,\,y+z,\,z).
+      \]
+      Kita akan menentukan nilai eigen, multipisitas aljabar,
+      dan multipisitas geometri dari operator \(L\).
+    </p>
+
+    <p align="justify">
+      Terhadap basis standar \(\mathbb{R}^3\), matriks representasi
+      operator tersebut adalah
+      \[
+      A=
       \begin{bmatrix}
-      1 - t & 1 & 1\\
-      0 & 1 - t & 1\\
-      0 & 0 & 1 - t
+      1&1&1\\
+      0&1&1\\
+      0&0&1
       \end{bmatrix}.
-      $$
-      Dengan demikian polinomial karakteristiknya adalah
-      $$
-      p(t) = (1 - t)^3.
-      $$
-      Satu-satunya nilai eigen $L$ adalah $1$ dengan multipisitas aljabar $3$.
-      Ruang $1$-eigen untuk $L$ adalah null space dari
-      $$
-      L - I =
+      \]
+      Karena matriks tersebut berbentuk segitiga atas,
+      determinannya sama dengan hasil kali elemen-elemen
+      diagonalnya. Oleh karena itu,
+      \[
+      \begin{aligned}
+      p_L(t)
+      &=\det(A-tI)\\
+      &=\det
       \begin{bmatrix}
-       0 & 1 & 1\\
-       0 & 0 & 1\\
-       0 & 0 & 0
-       \end{bmatrix}.
-      $$
-      Subruang tersebut adalah himpunan solusi dari sistem
-      $$
-      y + z = 0,\qquad z = 0
-      $$
-      di $\mathbb{R}^3$. Penyelesaiannya adalah $\{(x, 0, 0)\mid x \in \mathbb{R}\}$, yang berdimensi $1$.
-      Kita simpulkan bahwa <b>multipisitas geometri</b> dari nilai eigen $1$ adalah $1$.
-   </p>
-</div>
+      1-t&1&1\\
+      0&1-t&1\\
+      0&0&1-t
+      \end{bmatrix}\\
+      &=(1-t)^3.
+      \end{aligned}
+      \]
+      Dengan demikian, satu-satunya nilai eigen \(L\) adalah
+      \[
+      \lambda=1
+      \]
+      dengan multipisitas aljabar
+      \[
+      \boxed{\operatorname{am}(1)=3.}
+      \]
+    </p>
+
+    <p align="justify">
+      Selanjutnya, kita menentukan multipisitas geometri
+      dengan mencari ruang eigen untuk \(\lambda=1\).
+      Berdasarkan definisi, ruang eigen tersebut adalah
+      \[
+      E_1=\ker(L-I).
+      \]
+      Matriks representasi \(L-I\) adalah
+      \[
+      A-I=
+      \begin{bmatrix}
+      0&1&1\\
+      0&0&1\\
+      0&0&0
+      \end{bmatrix}.
+      \]
+      Oleh karena itu, untuk memperoleh vektor eigen,
+      kita harus menyelesaikan sistem homogen
+      \[
+      \begin{bmatrix}
+      0&1&1\\
+      0&0&1\\
+      0&0&0
+      \end{bmatrix}
+      \begin{bmatrix}
+      x\\y\\z
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+      0\\0\\0
+      \end{bmatrix}.
+      \]
+      Sistem tersebut ekuivalen dengan
+      \[
+      \begin{cases}
+      y+z=0,\\
+      z=0.
+      \end{cases}
+      \]
+      Dari persamaan kedua diperoleh \(z=0\).
+      Selanjutnya, persamaan pertama memberikan \(y=0\).
+      Tidak terdapat pembatasan terhadap \(x\), sehingga
+      \(x\) merupakan parameter bebas.
+      Dengan demikian,
+      \[
+      E_1=
+      \left\{
+      (x,0,0)\mid x\in\mathbb{R}
+      \right\}
+      =
+      \operatorname{span}\{(1,0,0)\}.
+      \]
+      Karena ruang eigen tersebut berdimensi satu, diperoleh
+      \[
+      \boxed{\operatorname{gm}(1)=1.}
+      \]
+    </p>
+
+    <p align="justify">
+      Jadi, untuk nilai eigen \(\lambda=1\), kita memperoleh
+      \[
+      \operatorname{gm}(1)=1
+      \quad\text{dan}\quad
+      \operatorname{am}(1)=3.
+      \]
+      Artinya, meskipun nilai eigen \(1\) muncul sebanyak tiga
+      kali sebagai akar polinomial karakteristik, hanya terdapat
+      satu arah bebas yang dapat dibentuk oleh vektor-vektor
+      eigen yang saling bebas linear.
+    </p>
+
+    <p align="justify">
+      Perbedaan ini juga dapat dilihat melalui polinomial minimal.
+      Jika kita tuliskan
+      \[
+      N=L-I,
+      \]
+      maka
+      \[
+      N(x,y,z)=(y+z,z,0).
+      \]
+      Selanjutnya,
+      \[
+      N^2(x,y,z)=(z,0,0),
+      \qquad N^3=0.
+      \]
+      Akan tetapi, \(N^2\neq0\). Oleh karena itu,
+      polinomial minimal operator ini adalah
+      \[
+      \boxed{q_L(t)=(t-1)^3.}
+      \]
+      Hal ini berbeda dengan Contoh 6.4.6, ketika
+      polinomial minimalnya hanya \((t-1)^2\).
+      Kedua contoh tersebut memiliki polinomial karakteristik
+      yang sama, tetapi struktur operatornya berbeda.
+    </p>
+
+    <p align="justify">
+      Contoh ini memperlihatkan bahwa keberadaan suatu nilai eigen
+      yang mempunyai multipisitas aljabar lebih dari satu tidak
+      otomatis menghasilkan ruang eigen dengan dimensi yang sama.
+      Informasi mengenai dimensi ruang eigen sangat penting
+      ketika kita akan menentukan apakah suatu operator linear
+      dapat direpresentasikan oleh matriks diagonal.
+    </p>
+  </div>
 </div>
 
 <p align="justify">
-  Ketika sebuah ruang vektor memiliki basis yang terdiri atas vektor-vektor eigen dari suatu operator linear, 
-  kita dapat memahami operator tersebut sebagai skala (penskalaan) pada setiap arah yang diwakili oleh vektor basis.
-  Hal ini memberikan pemahaman konseptual yang baik mengenai sifat operator tersebut dan menyederhanakan perhitungan.
-  Pada bagian berikutnya, kita akan mempelajari kondisi-kondisi yang memungkinkan kita menemukan basis vektor-vektor 
-  eigen bagi operator linear pada ruang berdimensi hingga.
+  Salah satu alasan penting mempelajari multipisitas aljabar
+  dan multipisitas geometri adalah kaitannya dengan keberadaan
+  basis yang terdiri atas vektor-vektor eigen. Misalkan
+  \(V\) merupakan ruang vektor berdimensi \(n\).
+  Jika terdapat \(n\) vektor eigen yang saling bebas linear,
+  maka vektor-vektor tersebut membentuk suatu basis bagi \(V\).
+  Terhadap basis ini, matriks representasi operator \(L\)
+  berbentuk matriks diagonal:
+  \[
+  [L]_{\mathcal{B}}=
+  \begin{bmatrix}
+  \lambda_1&0&\cdots&0\\
+  0&\lambda_2&\cdots&0\\
+  \vdots&\vdots&\ddots&\vdots\\
+  0&0&\cdots&\lambda_n
+  \end{bmatrix}.
+  \]
+  Dengan demikian, operator tersebut hanya melakukan
+  penskalaan pada setiap arah basis yang bersesuaian dengan
+  vektor eigen.
 </p>
 
 <p align="justify">
-<b><a style="color:red">Cara Menghitung Nilai Eigen dan Vektor Eigen Matriks Persegi</a></b><br>
-Misalkan \(A\) suatu matriks berukuran \(n\times n\) dan \(A\pmb{x}=\lambda\pmb{x}\) dengan 
-\(\pmb{x}\neq\pmb{0}\) dan \(\pmb{x}\in\mathbb{F}^n\), maka \((\lambda I-A)\pmb{x}=\pmb{0}\), dengan \(I\) 
-adalah matriks identitas berukuran ukuran \(n\times n\). Persamaan homogin \((\lambda I-A)\pmb{x}=\pmb{0}\) 
-mempunyai jawab nontrivial bila dan hanya bila \(\det(\lambda I-A)=0\). Persamaan \(\det(\lambda I-A)=0\)  
-dinamakan <b>persamaan kharakteristik</b> dari matriks \(A\) yang merupakan persamaan polinomial dalam 
-\(\lambda\) dengan derajad \(n\). Dalam hal ini polinomial \(\det(\lambda I-A)\) dinamakan 
-<b><a style="color:blue">polinomial karakteristik</a></b> dari \(A\).
+  Sebaliknya, pada Contoh 6.4.8, hanya terdapat satu vektor
+  eigen yang saling bebas linear, padahal ruang yang digunakan
+  berdimensi tiga. Oleh karena itu, tidak mungkin membentuk
+  basis \(\mathbb{R}^3\) yang seluruh anggotanya merupakan
+  vektor eigen dari \(L\). Akibatnya, operator tersebut
+  tidak dapat didiagonalisasi.
 </p>
+
+<p align="justify">
+  Pada bagian berikutnya, kita akan mempelajari syarat-syarat
+  yang menjamin keberadaan basis vektor-vektor eigen.
+  Dengan memahami hubungan antara nilai eigen, multipisitas
+  aljabar, dan multipisitas geometri, kita dapat menentukan
+  kapan suatu operator linear dapat didiagonalisasi dan
+  bagaimana representasi diagonalnya diperoleh.
+</p>
+
+
 
 <hr class="garis-elegan">
+
+<h3 class="subsec">
+  Cara Menghitung Nilai Eigen dan Vektor Eigen Matriks Persegi
+</h3>
+
+<p align="justify">
+  Misalkan \(A\in M_n(\mathbb{F})\) merupakan matriks persegi
+  berukuran \(n\times n\). Kita ingin menentukan skalar
+  \(\lambda\in\mathbb{F}\) dan vektor
+  \(\mathbf{x}\in\mathbb{F}^n\), dengan
+  \(\mathbf{x}\neq\mathbf{0}\), yang memenuhi
+  \[
+  A\mathbf{x}=\lambda\mathbf{x}.
+  \]
+  Skalar \(\lambda\) disebut <b>nilai eigen</b>, sedangkan
+  vektor tak nol \(\mathbf{x}\) yang memenuhi persamaan tersebut
+  disebut <b>vektor eigen</b> yang bersesuaian dengan
+  \(\lambda\).
+</p>
+
+<p align="justify">
+  Dengan memindahkan seluruh suku ke ruas kiri, persamaan
+  tersebut dapat ditulis sebagai
+  \[
+  (\lambda I-A)\mathbf{x}=\mathbf{0},
+  \]
+  dengan \(I\) merupakan matriks identitas berukuran
+  \(n\times n\). Persamaan ini merupakan sistem persamaan
+  linear homogen. Sistem tersebut mempunyai solusi tak nol
+  jika dan hanya jika matriks koefisiennya singular,
+  atau secara ekuivalen,
+  \[
+  \boxed{\det(\lambda I-A)=0.}
+  \]
+  Persamaan ini dinamakan <b>persamaan karakteristik</b>
+  dari matriks \(A\), sedangkan polinomial
+  \[
+  \boxed{p_A(\lambda)=\det(\lambda I-A)}
+  \]
+  dinamakan <b>polinomial karakteristik</b> dari \(A\).
+  Polinomial tersebut berderajat \(n\) dan mempunyai
+  koefisien dalam \(\mathbb{F}\).
+</p>
+
+<p align="justify">
+  Setiap akar persamaan karakteristik yang berada dalam
+  lapangan \(\mathbb{F}\) merupakan nilai eigen matriks \(A\).
+  Namun, tidak semua polinomial karakteristik harus mempunyai
+  akar dalam \(\mathbb{F}\). Sebagai contoh,
+  matriks rotasi
+  \[
+  A=
+  \begin{bmatrix}
+  0&-1\\
+  1&0
+  \end{bmatrix}
+  \]
+  mempunyai polinomial karakteristik
+  \[
+  p_A(\lambda)=\lambda^2+1.
+  \]
+  Polinomial ini tidak mempunyai akar real, sehingga
+  \(A\) tidak mempunyai nilai eigen dalam \(\mathbb{R}\).
+  Akan tetapi, jika lapangannya diperluas menjadi
+  \(\mathbb{C}\), diperoleh nilai eigen \(i\) dan \(-i\).
+</p>
+
+<p align="justify">
+  Setelah nilai eigen diperoleh, langkah berikutnya adalah
+  menentukan vektor-vektor eigen yang bersesuaian.
+  Untuk setiap nilai eigen \(\lambda\), kita menyelesaikan
+  sistem homogen
+  \[
+  (\lambda I-A)\mathbf{x}=\mathbf{0}.
+  \]
+  Himpunan seluruh penyelesaian sistem tersebut merupakan
+  ruang eigen
+  \[
+  E_\lambda=\ker(\lambda I-A).
+  \]
+  Setiap vektor tak nol dalam \(E_\lambda\) merupakan
+  vektor eigen yang bersesuaian dengan \(\lambda\).
+  Dengan demikian, ruang eigen sekaligus memberikan
+  informasi mengenai multipisitas geometri nilai eigen
+  melalui
+  \[
+  \boxed{
+  \operatorname{gm}(\lambda)
+  =\dim\ker(\lambda I-A).
+  }
+  \]
+</p>
+
+<p align="justify">
+  Secara ringkas, prosedur menentukan nilai eigen dan vektor
+  eigen suatu matriks persegi dapat dilakukan melalui
+  langkah-langkah berikut:
+</p>
+
+<ol>
+  <li>
+    Tentukan polinomial karakteristik
+    \(p_A(\lambda)=\det(\lambda I-A)\).
+  </li>
+  <li>
+    Selesaikan persamaan karakteristik
+    \(p_A(\lambda)=0\) untuk memperoleh nilai-nilai eigen.
+  </li>
+  <li>
+    Untuk setiap nilai eigen \(\lambda\), tentukan ruang
+    eigen dengan menyelesaikan
+    \((\lambda I-A)\mathbf{x}=\mathbf{0}\).
+  </li>
+  <li>
+    Tentukan dimensi setiap ruang eigen untuk memperoleh
+    multipisitas geometrinya.
+  </li>
+  <li>
+    Bandingkan multipisitas geometri dengan multipisitas
+    aljabar untuk mempelajari kemungkinan diagonalisasi
+    matriks tersebut.
+  </li>
+</ol>
+
+<p align="justify">
+  Perlu diingat bahwa suatu matriks berukuran \(n\times n\)
+  dapat didiagonalisasi jika dan hanya jika terdapat
+  \(n\) vektor eigen yang saling bebas linear.
+  Jika polinomial karakteristik terurai menjadi faktor-faktor
+  linear dalam \(\mathbb{F}\), kondisi tersebut ekuivalen
+  dengan jumlah multipisitas geometri seluruh nilai eigen
+  sama dengan \(n\). Dengan demikian, perhitungan nilai eigen
+  bukan hanya bertujuan memperoleh skalar \(\lambda\),
+  tetapi juga memahami struktur ruang eigen yang menentukan
+  apakah matriks dapat direpresentasikan dalam bentuk diagonal.
+</p>
+
+
+<hr class="garis-elegan">
+
 <div class="example-container">
-<div class="example-header" onclick="this.parentElement.classList.toggle('active')">
-<span id="Contoh1543"><b>6.4.9. Contoh</b></span>
-<span class="example-arrow">▼</span>
+  <div class="example-header" onclick="this.parentElement.classList.toggle('active')">
+    <span id="Contoh1543"><b>6.4.9. Contoh</b></span>
+    <span class="example-arrow">▼</span>
+  </div>
+
+  <div class="example-box">
+
+    <p align="justify">
+      Diberikan matriks persegi
+      \[
+      A=
+      \begin{bmatrix}
+      1&-1\\
+      2&-2
+      \end{bmatrix}.
+      \]
+      Kita akan menentukan nilai eigen dan vektor eigen
+      yang bersesuaian dengan setiap nilai eigen tersebut.
+      Selanjutnya, kita akan memeriksa hubungan antara
+      multipisitas aljabar dan multipisitas geometri serta
+      kemungkinan diagonalisasi matriks \(A\).
+    </p>
+
+    <p align="justify">
+      <b>Langkah 1. Menentukan polinomial karakteristik dan nilai eigen.</b>
+      Berdasarkan definisi, polinomial karakteristik matriks
+      \(A\) adalah
+      \[
+      \begin{aligned}
+      p_A(\lambda)
+      &=\det(\lambda I-A)\\
+      &=
+      \det
+      \begin{bmatrix}
+      \lambda-1&1\\
+      -2&\lambda+2
+      \end{bmatrix}\\
+      &=(\lambda-1)(\lambda+2)+2\\
+      &=\lambda^2+\lambda\\
+      &=\lambda(\lambda+1).
+      \end{aligned}
+      \]
+      Nilai eigen diperoleh dengan menyelesaikan persamaan
+      karakteristik
+      \[
+      p_A(\lambda)=0.
+      \]
+      Dengan demikian,
+      \[
+      \lambda(\lambda+1)=0,
+      \]
+      sehingga diperoleh dua nilai eigen yang berbeda, yaitu
+      \[
+      \boxed{\lambda_1=0,\qquad \lambda_2=-1.}
+      \]
+      Karena kedua nilai eigen tersebut merupakan akar
+      sederhana dari polinomial karakteristik, masing-masing
+      mempunyai multipisitas aljabar satu:
+      \[
+      \operatorname{am}(0)=1,\qquad
+      \operatorname{am}(-1)=1.
+      \]
+    </p>
+
+    <p align="justify">
+      <b>Langkah 2. Menentukan vektor eigen untuk
+      \(\lambda_1=0\).</b>
+      Untuk memperoleh vektor eigen yang bersesuaian dengan
+      \(\lambda_1=0\), kita menyelesaikan sistem homogen
+      \[
+      (A-0I)\mathbf{x}=\mathbf{0},
+      \]
+      atau
+      \[
+      \begin{bmatrix}
+      1&-1\\
+      2&-2
+      \end{bmatrix}
+      \begin{bmatrix}
+      x_1\\x_2
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+      0\\0
+      \end{bmatrix}.
+      \]
+      Sistem tersebut memberikan persamaan
+      \[
+      x_1-x_2=0,\qquad
+      2x_1-2x_2=0.
+      \]
+      Kedua persamaan saling bergantung, sehingga diperoleh
+      \[
+      x_2=x_1.
+      \]
+      Dengan mengambil \(x_1=s\), dengan \(s\in\mathbb{R}\),
+      semua penyelesaian dapat dituliskan sebagai
+      \[
+      \mathbf{x}
+      =
+      \begin{bmatrix}
+      s\\s
+      \end{bmatrix}
+      =
+      s\begin{bmatrix}
+      1\\1
+      \end{bmatrix}.
+      \]
+      Karena vektor eigen harus merupakan vektor tak nol,
+      kita mengambil \(s\neq0\). Jadi, ruang eigen untuk
+      \(\lambda_1=0\) adalah
+      \[
+      E_0=
+      \operatorname{span}
+      \left\{
+      \begin{bmatrix}
+      1\\1
+      \end{bmatrix}
+      \right\}.
+      \]
+      Salah satu vektor eigen yang dapat dipilih adalah
+      \[
+      \boxed{
+      \mathbf{v}_1=
+      \begin{bmatrix}
+      1\\1
+      \end{bmatrix}.
+      }
+      \]
+      Karena ruang eigen tersebut berdimensi satu, multipisitas
+      geometrinya adalah
+      \[
+      \operatorname{gm}(0)=1.
+      \]
+    </p>
+
+    <p align="justify">
+      <b>Langkah 3. Menentukan vektor eigen untuk
+      \(\lambda_2=-1\).</b>
+      Dengan cara yang sama, kita menyelesaikan
+      \[
+      (A-(-1)I)\mathbf{x}=\mathbf{0},
+      \]
+      yaitu
+      \[
+      (A+I)\mathbf{x}=\mathbf{0}.
+      \]
+      Secara eksplisit,
+      \[
+      \begin{bmatrix}
+      2&-1\\
+      2&-1
+      \end{bmatrix}
+      \begin{bmatrix}
+      x_1\\x_2
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+      0\\0
+      \end{bmatrix}.
+      \]
+      Sistem tersebut ekuivalen dengan
+      \[
+      2x_1-x_2=0,
+      \]
+      sehingga
+      \[
+      x_2=2x_1.
+      \]
+      Dengan mengambil \(x_1=s\), diperoleh
+      \[
+      \mathbf{x}
+      =
+      s\begin{bmatrix}
+      1\\2
+      \end{bmatrix}.
+      \]
+      Jadi, ruang eigen untuk \(\lambda_2=-1\) adalah
+      \[
+      E_{-1}=
+      \operatorname{span}
+      \left\{
+      \begin{bmatrix}
+      1\\2
+      \end{bmatrix}
+      \right\}.
+      \]
+      Salah satu vektor eigen yang dapat dipilih adalah
+      \[
+      \boxed{
+      \mathbf{v}_2=
+      \begin{bmatrix}
+      1\\2
+      \end{bmatrix}.
+      }
+      \]
+      Dengan demikian,
+      \[
+      \operatorname{gm}(-1)=1.
+      \]
+    </p>
+
+    <p align="justify">
+      <b>Langkah 4. Membandingkan multipisitas aljabar dan
+      multipisitas geometri.</b>
+      Berdasarkan hasil perhitungan sebelumnya, kita memperoleh
+      \[
+      \begin{array}{c|c|c}
+      \text{Nilai eigen}&
+      \text{Multipisitas aljabar}&
+      \text{Multipisitas geometri}\\ \hline
+      0&1&1\\
+      -1&1&1
+      \end{array}
+      \]
+      Jadi, untuk setiap nilai eigen, multipisitas aljabar
+      sama dengan multipisitas geometri. Selain itu,
+      jumlah multipisitas geometri kedua nilai eigen adalah
+      \[
+      \operatorname{gm}(0)+\operatorname{gm}(-1)
+      =1+1=2.
+      \]
+      Karena matriks \(A\) berukuran \(2\times2\), kita
+      memperoleh dua vektor eigen yang saling bebas linear.
+      Dengan demikian, kedua vektor eigen tersebut membentuk
+      suatu basis bagi \(\mathbb{R}^2\).
+    </p>
+
+    <p align="justify">
+      <b>Langkah 5. Menentukan diagonalisasi matriks \(A\).</b>
+      Kita susun kedua vektor eigen sebagai kolom-kolom
+      matriks \(P\), sehingga
+      \[
+      P=
+      \begin{bmatrix}
+      1&1\\
+      1&2
+      \end{bmatrix}.
+      \]
+      Karena
+      \[
+      \det(P)=2-1=1\neq0,
+      \]
+      maka \(P\) invertibel. Selanjutnya, matriks diagonal
+      yang memuat nilai-nilai eigen dalam urutan yang sesuai
+      dengan kolom-kolom \(P\) adalah
+      \[
+      D=
+      \begin{bmatrix}
+      0&0\\
+      0&-1
+      \end{bmatrix}.
+      \]
+      Invers matriks \(P\) adalah
+      \[
+      P^{-1}=
+      \begin{bmatrix}
+      2&-1\\
+      -1&1
+      \end{bmatrix}.
+      \]
+      Oleh karena itu, diperoleh
+      \[
+      \boxed{A=PDP^{-1}.}
+      \]
+      Dengan kata lain,
+      \[
+      \begin{bmatrix}
+      1&-1\\
+      2&-2
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+      1&1\\
+      1&2
+      \end{bmatrix}
+      \begin{bmatrix}
+      0&0\\
+      0&-1
+      \end{bmatrix}
+      \begin{bmatrix}
+      2&-1\\
+      -1&1
+      \end{bmatrix}.
+      \]
+    </p>
+
+    <p align="justify">
+      Jadi, matriks \(A\) dapat didiagonalisasi. Hasil ini
+      memperlihatkan bahwa apabila suatu matriks persegi
+      mempunyai nilai-nilai eigen berbeda sebanyak dimensinya,
+      maka vektor-vektor eigen yang bersesuaian pasti saling
+      bebas linear dan membentuk suatu basis. Dalam contoh ini,
+      kedua nilai eigen berbeda dan menghasilkan dua vektor
+      eigen yang membentuk basis \(\mathbb{R}^2\).
+    </p>
+
+  </div>
 </div>
-<div class="example-box">
- <p align="justify"> 
- Diberikan matriks
-$$
-A=\left[
-\begin{array}{cc}
-1 & -1 \\
-2 & -2 \\
-\end{array}
-\right]\Rightarrow
-\det(\left[
-\begin{array}{cc}
-\lambda -1 & 1 \\
--2 & \lambda+2 \\
-\end{array}
-\right])=\lambda^2+\lambda=\lambda(\lambda+1).
-$$
-Untuk \(\lambda = 0\) didapat:
-$$
-\left[
-\begin{array}{cc}
-1 & -1 \\
-2 & -2 \\
-\end{array}
-\right]\left[
-\begin{array}{c}
-x_1 \\
-x_2 \\
-\end{array}
-\right]=\left[
-\begin{array}{c}
-0 \\
-0 \\
-\end{array}
-\right]\Rightarrow x_2=x_1 \Rightarrow \pmb{x}=\left[
-\begin{array}{c}
-1 \\
-1 \\
-\end{array}
-\right],
-$$
-sedangkan untuk \(\lambda = -1\) didapat:
-$$
-\left[
-\begin{array}{cc}
--2 & 1 \\
--2 & 1 \\
-\end{array}
-\right]\left[
-\begin{array}{c}
-x_1 \\
-x_2 \\
-\end{array}
-\right]=\left[
-\begin{array}{c}
-0 \\
-0 \\
-\end{array}
-\right]\Rightarrow x_2=2x_1 \Rightarrow \pmb{x}=\left[
-\begin{array}{c}
-1 \\
-2 \\
-\end{array}
-\right].
-$$
-   </p>
-</div>
-</div>
+
+
+<p align="justify">
+  Jika dibandingkan dengan Contoh 6.4.6 dan Contoh 6.4.8,
+  Contoh 6.4.9 memperlihatkan situasi yang berbeda.
+  Pada kedua contoh sebelumnya, hanya terdapat satu nilai
+  eigen, yaitu \(\lambda=1\), dengan multipisitas aljabar
+  tiga, tetapi multipisitas geometrinya lebih kecil daripada
+  tiga. Akibatnya, operator yang bersangkutan tidak dapat
+  didiagonalisasi. Sebaliknya, pada contoh ini terdapat dua
+  nilai eigen berbeda, yaitu \(0\) dan \(-1\), yang masing-masing
+  mempunyai multipisitas aljabar dan geometri satu.
+  Kedua vektor eigennya dengan demikian membentuk basis
+  \(\mathbb{R}^2\), sehingga matriks dapat didiagonalisasi.
+  Perbandingan ini memperlihatkan bahwa struktur ruang eigen,
+  bukan sekadar keberadaan nilai eigen, menentukan apakah
+  suatu matriks dapat direpresentasikan dalam bentuk diagonal.
+</p>
+
+
 <p>
 Kita lakukan komputasi contoh yang dibahas dalam Sel SageMath sebagai berikut.
 </p>
@@ -40136,17 +41821,175 @@ pretty_print(html(r"Vektor Eigen untuk $\lambda_2 = %s$ adalah $\pmb{v}_2 = %s$"
 </script>
 </div>
 <hr class="garis-elegan">
+
 <p align="justify">
-<b><mark>Matriks kompanion</mark></b><br>
-Matriks komponion adalah matriks berukuran \(n\times n\) yang dikontruksi dari suatu polinomial \(p(x)\) 
-derajad \(n\) dengan koefisien bilangan real. Ada empat macam matriks komponian polinomial \(p(x)\): 
-Matriks kompanion <b>kiri</b>, <b>kanan</b>, <b>atas</b> dan <b>bawah</b>. Empat matriks kompanion ini 
-semuanya mempunyai polinomial karakteristik yang sama yaitu \(p(x)\), semua determin dan tracenya juga sama. 
-Kita berikan contoh matriks-matriks kompanion dari polinomial \(p(x) = x^3−9x^2+26x−24\) dalam Sel Sagemath 
-dan pembaca dipersilahkan menyelidiki semua polinomial karakteristinya, semua trace dan semua determinannya. 
-Dalam hal ini empat matriks kompanion adalah matriks-matriks yang <b>similar</b> satu dengan yang lainnya. 
-Matriks-matriks similar dibahas pada bagian <b><a style="color:blue">Matriks Invarian</a></b>.
+  <b><mark>Matriks Kompanion (Companion Matrix)</mark></b><br>
+  Matriks kompanion merupakan matriks persegi yang dibentuk dari
+  suatu polinomial monik (monic polynomial) berderajat \(n\).
+  Matriks ini mempunyai sifat khusus, yaitu polinomial karakteristiknya
+  sama dengan polinomial yang digunakan untuk membentuknya.
+  Oleh karena itu, matriks kompanion memberikan suatu cara sistematis
+  untuk menghubungkan polinomial dengan matriks persegi, khususnya
+  dalam pembahasan nilai eigen dan polinomial karakteristik.
 </p>
+
+<p align="justify">
+  Misalkan diberikan polinomial monik berderajat \(n\) atas
+  \(\mathbb{R}\):
+  \[
+  p(x)=x^n+a_{n-1}x^{n-1}+\cdots+a_2x^2+a_1x+a_0.
+  \]
+  Salah satu bentuk matriks kompanion yang paling umum digunakan
+  adalah matriks kompanion bawah:
+  \[
+  C(p)=
+  \begin{bmatrix}
+  0&0&\cdots&0&-a_0\\
+  1&0&\cdots&0&-a_1\\
+  0&1&\cdots&0&-a_2\\
+  \vdots&\vdots&\ddots&\vdots&\vdots\\
+  0&0&\cdots&1&-a_{n-1}
+  \end{bmatrix}.
+  \]
+  Matriks ini dibentuk dengan menempatkan elemen satu pada
+  subdiagonal, sedangkan koefisien-koefisien polinomial yang
+  bertanda negatif ditempatkan pada kolom terakhir.
+  Bentuk tersebut dikenal sebagai salah satu konvensi standar
+  matriks kompanion.
+</p>
+
+<p align="justify">
+  Salah satu sifat utama matriks kompanion adalah bahwa
+  polinomial karakteristiknya tepat sama dengan polinomial
+  \(p(x)\). Dengan menggunakan konvensi
+  \[
+  \chi_{C(p)}(x)=\det(xI-C(p)),
+  \]
+  diperoleh
+  \[
+  \boxed{\chi_{C(p)}(x)=p(x).}
+  \]
+  Dengan demikian, akar-akar polinomial \(p(x)\) merupakan
+  nilai-nilai eigen matriks kompanion \(C(p)\), dengan
+  memperhitungkan multipisitas aljabarnya.
+  Sifat ini menjadikan matriks kompanion sebagai salah satu
+  cara untuk merepresentasikan suatu polinomial melalui
+  persoalan nilai eigen matriks.
+</p>
+
+<p align="justify">
+  Dalam literatur aljabar linear, terdapat beberapa variasi
+  bentuk matriks kompanion yang dikenal sebagai matriks
+  kompanion <b>kiri</b>, <b>kanan</b>, <b>atas</b>, dan
+  <b>bawah</b>. Perbedaan bentuk tersebut terutama terletak
+  pada penempatan koefisien polinomial dan elemen satuan
+  pada baris atau kolom tertentu. Untuk empat bentuk standar
+  yang digunakan di sini, matriks-matriks tersebut saling
+  serupa (similar). Artinya, jika \(C_1,C_2,C_3,C_4\)
+  menyatakan keempat bentuk matriks kompanion dari polinomial
+  yang sama, maka terdapat matriks invertibel \(P\) yang
+  menghubungkan setiap pasangan matriks melalui transformasi
+  keserupaan:
+  \[
+  C_j=P^{-1}C_iP.
+  \]
+  Oleh karena itu, seluruh matriks kompanion tersebut
+  mempunyai polinomial karakteristik yang sama.
+</p>
+
+<p align="justify">
+  Keserupaan dua matriks tidak hanya menjamin kesamaan
+  polinomial karakteristik, tetapi juga kesamaan determinan
+  dan trace. Secara khusus, jika \(C\) merupakan matriks
+  kompanion dari
+  \[
+  p(x)=x^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0,
+  \]
+  maka berlaku
+  \[
+  \boxed{\det(C)=(-1)^n a_0}
+  \]
+  dan
+  \[
+  \boxed{\operatorname{tr}(C)=-a_{n-1}.}
+  \]
+  Kedua hubungan tersebut dapat diperoleh langsung dari
+  koefisien polinomial karakteristik. Dengan demikian,
+  determinan matriks kompanion ditentukan oleh koefisien
+  konstanta polinomial, sedangkan trace-nya ditentukan
+  oleh koefisien suku berderajat \(n-1\).
+</p>
+
+<p align="justify">
+  Untuk memperjelas konstruksi dan sifat-sifat tersebut,
+  kita perhatikan polinomial
+  \[
+  p(x)=x^3-9x^2+26x-24.
+  \]
+  Dalam hal ini,
+  \[
+  a_2=-9,\qquad a_1=26,\qquad a_0=-24.
+  \]
+  Matriks kompanion bawah yang bersesuaian adalah
+  \[
+  C(p)=
+  \begin{bmatrix}
+  0&0&24\\
+  1&0&-26\\
+  0&1&9
+  \end{bmatrix}.
+  \]
+  Berdasarkan sifat matriks kompanion, polinomial
+  karakteristiknya adalah
+  \[
+  \chi_{C(p)}(x)
+  =x^3-9x^2+26x-24.
+  \]
+  Dengan demikian, akar-akar polinomial tersebut sekaligus
+  merupakan nilai-nilai eigen matriks kompanion.
+</p>
+
+<p align="justify">
+  Perlu diperhatikan bahwa polinomial yang diberikan dapat
+  difaktorkan menjadi
+  \[
+  p(x)=(x-2)(x-3)(x-4).
+  \]
+  Oleh karena itu, matriks kompanion tersebut mempunyai
+  tiga nilai eigen berbeda, yaitu
+  \[
+  \lambda_1=2,\qquad
+  \lambda_2=3,\qquad
+  \lambda_3=4.
+  \]
+  Karena ketiga nilai eigen berbeda, matriks kompanion
+  dapat didiagonalisasi atas \(\mathbb{R}\).
+</p>
+
+<p align="justify">
+  Selanjutnya, melalui Sel SageMath, kita dapat membangun
+  keempat bentuk matriks kompanion dan memeriksa secara
+  komputasional apakah masing-masing mempunyai polinomial
+  karakteristik, determinan, dan trace yang sama.
+  Pembaca juga dapat menyelidiki hubungan keserupaan
+  di antara keempat matriks tersebut. Perlu diingat bahwa
+  kesamaan polinomial karakteristik, determinan, dan trace
+  saja belum cukup untuk membuktikan bahwa dua matriks
+  serupa. Pembuktian keserupaan memerlukan konstruksi
+  matriks invertibel yang menghubungkan keduanya.
+</p>
+
+<p align="justify">
+  Pembahasan ini menjadi pengantar untuk mempelajari
+  <b><a style="color:blue">Matriks Invarian</a></b>,
+  khususnya bagaimana sifat-sifat tertentu dari suatu
+  matriks tetap dipertahankan di bawah transformasi
+  keserupaan. Dalam konteks tersebut, matriks kompanion
+  memperlihatkan bahwa beberapa matriks yang bentuk
+  elemennya berbeda dapat merepresentasikan struktur
+  aljabar yang sama.
+</p>
+
 <hr class="garis-elegan">
 <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
 <script>
@@ -40159,17 +42002,90 @@ Matriks-matriks similar dibahas pada bagian <b><a style="color:blue">Matriks Inv
 </script>
 <div id="CompNeVek1">
 <script type="text/x-sage">
-x = polygen(QQ,'x') 
-p = (x-2)*(x-3)*(x-4) 
+
+# =====================================================
+# 1. Mendefinisikan polinomial
+# =====================================================
+
+x = polygen(QQ,'x')
+p = (x-2)*(x-3)*(x-4)
+
+# =====================================================
+# 2. Membentuk empat matriks kompanion
+# =====================================================
+
 a1 = companion_matrix(p, format='left')
 a2 = companion_matrix(p, format='right')
 a3 = companion_matrix(p, format='top')
 a4 = companion_matrix(p, format='bottom')
+
+# =====================================================
+# 3. Menampilkan polinomial dan matriks kompanion
+# =====================================================
+
 pretty_print(html(r"$p(x) = %s$"%latex(p)))
-pretty_print(html(r"Matriks $\mathbf{kompanion\ kiri}$ dari $p(x):  %s$"%latex(a1)))
-pretty_print(html(r"Matriks $\mathbf{kompanion\ kanan}$ dari $p(x):  %s$"%latex(a2)))
-pretty_print(html(r"Matriks $\mathbf{kompanion\ atas}$ dari $p(x):  %s$"%latex(a3)))
-pretty_print(html(r"Matriks $\mathbf{kompanion\ bawah}$ dari $p(x):  %s$"%latex(a4)))
+
+pretty_print(html(r"Matriks $\mathbf{kompanion\ kiri}$ dari $p(x):  a_1 = %s$"%latex(a1)))
+pretty_print(html(r"Matriks $\mathbf{kompanion\ kanan}$ dari $p(x): a_2 = %s$"%latex(a2)))
+pretty_print(html(r"Matriks $\mathbf{kompanion\ atas}$ dari $p(x): a_3 = %s$"%latex(a3)))
+pretty_print(html(r"Matriks $\mathbf{kompanion\ bawah}$ dari $p(x): a_4 = %s$"%latex(a4)))
+
+# =====================================================
+# 4. Memeriksa polinomial karakteristik
+# =====================================================
+
+pretty_print(html(r"<h3>Polinomial Karakteristik</h3>"))
+
+pretty_print(html(r"$\chi_{a_1}(x) = %s$"%latex(a1.charpoly(x))))
+pretty_print(html(r"$\chi_{a_2}(x) = %s$"%latex(a2.charpoly(x))))
+pretty_print(html(r"$\chi_{a_3}(x) = %s$"%latex(a3.charpoly(x))))
+pretty_print(html(r"$\chi_{a_4}(x) = %s$"%latex(a4.charpoly(x))))
+
+# =====================================================
+# 5. Memeriksa determinan
+# =====================================================
+
+pretty_print(html(r"<h3>Determinan</h3>"))
+
+pretty_print(html(r"$\det(a_1) = %s$"%latex(a1.det())))
+pretty_print(html(r"$\det(a_2) = %s$"%latex(a2.det())))
+pretty_print(html(r"$\det(a_3) = %s$"%latex(a3.det())))
+pretty_print(html(r"$\det(a_4) = %s$"%latex(a4.det())))
+
+# =====================================================
+# 6. Memeriksa trace
+# =====================================================
+
+pretty_print(html(r"<h3>Trace</h3>"))
+
+pretty_print(html(r"$\operatorname{tr}(a_1) = %s$"%latex(a1.trace())))
+pretty_print(html(r"$\operatorname{tr}(a_2) = %s$"%latex(a2.trace())))
+pretty_print(html(r"$\operatorname{tr}(a_3) = %s$"%latex(a3.trace())))
+pretty_print(html(r"$\operatorname{tr}(a_4) = %s$"%latex(a4.trace())))
+
+# =====================================================
+# 7. Memeriksa keserupaan (Similarity)
+# =====================================================
+
+pretty_print(html(r"<h3>Pemeriksaan Kesimilaran Matriks</h3>"))
+
+pretty_print(html(r"$a_1 \sim a_2$: $%s$"%latex(a1.is_similar(a2))))
+pretty_print(html(r"$a_1 \sim a_3$: $%s$"%latex(a1.is_similar(a3))))
+pretty_print(html(r"$a_1 \sim a_4$: $%s$"%latex(a1.is_similar(a4))))
+pretty_print(html(r"$a_2 \sim a_3$: $%s$"%latex(a2.is_similar(a3))))
+pretty_print(html(r"$a_2 \sim a_4$: $%s$"%latex(a2.is_similar(a4))))
+pretty_print(html(r"$a_3 \sim a_4$: $%s$"%latex(a3.is_similar(a4))))
+
+# =====================================================
+# 8. Memeriksa nilai eigen
+# =====================================================
+
+pretty_print(html(r"<h3>Nilai Eigen</h3>"))
+
+pretty_print(html(r"$\operatorname{Eigenvalues}(a_1) = %s$"%latex(a1.eigenvalues())))
+pretty_print(html(r"$\operatorname{Eigenvalues}(a_2) = %s$"%latex(a2.eigenvalues())))
+pretty_print(html(r"$\operatorname{Eigenvalues}(a_3) = %s$"%latex(a3.eigenvalues())))
+pretty_print(html(r"$\operatorname{Eigenvalues}(a_4) = %s$"%latex(a4.eigenvalues())))
 </script>
 </div>
 <br>
