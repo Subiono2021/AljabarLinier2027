@@ -31635,30 +31635,231 @@ display(html(r"$[v]_B^{\dagger} A [w]_B = %s$" % latex(rhs_coords.evalf(6))))
                 Pembahasan berikut membuktikan <a href="#Lemma1441">Lemma 5.4.3.</a> dalam bentuk yang agak berbeda, yang
                 muncul dalam pembuktian ketaksamaan Cauchy-Schwarz.
             </p>
-            <p align="justify">
-                Misalkan $(V,\sigma)$ adalah ruang hasil kali dalam dan norma yang diasosiasikan diberikan oleh
-                \[
-                \|x\| := \sqrt{\sigma(x,x)}.
-                \]
-                Diberikan \(v,w\in V\) dengan \(w\neq 0\), definisikan
-                \[
-                u := v - \frac{\sigma(w,v)}{\|w\|^2}\,w.
-                \]
-                Kita ingin menunjukkan bahwa \(\sigma(w,u)=0\).
-            </p>
-            <p align="justify">
-                Hitung langsung:
-                \begin{align*}
-                \sigma(w,u)
-                &= \sigma\!\left(w,\,v - \frac{\sigma(w,v)}{\|w\|^2} w\right) \\
-                &= \sigma(w,v) - \frac{\sigma(w,v)}{\|w\|^2}\,\sigma(w,w).
-                \end{align*}
-                Karena \(\sigma(w,w)=\|w\|^2\), maka
-                \[
-                \sigma(w,u)=\sigma(w,v) - \frac{\sigma(w,v)}{\|w\|^2}\|w\|^2 = \sigma(w,v) - \sigma(w,v) = 0.
-                \]
-                Oleh karena itu \(u\) ortogonal terhadap \(w\), yaitu \(\sigma(w,u)=0\). $\square$
-            </p>
+            
+<p align="justify">
+    Misalkan $(V,\sigma)$ adalah ruang hasil kali dalam dan norma yang
+    diasosiasikan diberikan oleh
+    \[
+        \|x\| := \sqrt{\sigma(x,x)}.
+    \]
+    Diberikan \(v,w\in V\) dengan \(w\neq 0\), definisikan
+    \[
+        u := v - \frac{\sigma(w,v)}{\|w\|^2}\,w.
+    \]
+    Kita ingin menunjukkan bahwa \(\sigma(w,u)=0\). 
+    Secara geometris, bentuk
+    \[
+        \operatorname{proj}_{w}(v)
+        =\frac{\sigma(w,v)}{\|w\|^2}\,w
+    \]
+    merupakan proyeksi ortogonal vektor \(v\) pada garis yang
+    dibangun oleh \(w\). Dengan demikian, vektor \(u\) merupakan
+    selisih antara \(v\) dan proyeksi ortogonal tersebut. 
+    Pembahasan ini menunjukkan bahwa setiap vektor \(v\) dapat
+    diuraikan menjadi dua komponen yang saling ortogonal:
+    komponen yang sejajar dengan \(w\) dan komponen yang ortogonal
+    terhadap \(w\).
+</p>
+
+<p align="justify">
+    Hitung langsung:
+    \begin{align*}
+        \sigma(w,u)
+        &= \sigma\!\left(w,\,
+        v-\frac{\sigma(w,v)}{\|w\|^2}w\right)\\
+        &= \sigma(w,v)
+        -\frac{\sigma(w,v)}{\|w\|^2}\sigma(w,w).
+    \end{align*}
+    Karena \(\sigma(w,w)=\|w\|^2\), maka
+    \[
+        \begin{aligned}
+        \sigma(w,u)
+        &=\sigma(w,v)
+        -\frac{\sigma(w,v)}{\|w\|^2}\|w\|^2\\
+        &=\sigma(w,v)-\sigma(w,v)=0.
+        \end{aligned}
+    \]
+    Oleh karena itu \(u\) ortogonal terhadap \(w\), yaitu
+    \(\sigma(w,u)=0\). \(\square\)
+</p>
+
+<h3>Contoh di \(\mathbb{R}^2\): Proyeksi Ortogonal</h3>
+
+<p align="justify">
+    Untuk memahami hasil tersebut secara konkret, tinjau ruang
+    hasil kali dalam standar \(\mathbb{R}^2\), dengan
+    hasil kali dalam
+    \[
+        \sigma((x_1,x_2),(y_1,y_2))
+        =x_1y_1+x_2y_2.
+    \]
+    Ambil dua vektor
+    \[
+        v=\begin{pmatrix}4\\3\end{pmatrix},
+        \qquad
+        w=\begin{pmatrix}2\\1\end{pmatrix}.
+    \]
+    Pertama, hitung hasil kali dalam dan norma kuadrat dari \(w\):
+    \[
+        \sigma(w,v)=2(4)+1(3)=11,
+        \qquad
+        \|w\|^2=2^2+1^2=5.
+    \]
+    Dengan demikian, proyeksi ortogonal \(v\) pada arah \(w\)
+    adalah
+    \[
+        \begin{aligned}
+        \operatorname{proj}_{w}(v)
+        &=\frac{\sigma(w,v)}{\|w\|^2}w\\
+        &=\frac{11}{5}
+        \begin{pmatrix}2\\1\end{pmatrix}\\
+        &=\begin{pmatrix}22/5\\11/5\end{pmatrix}.
+        \end{aligned}
+    \]
+</p>
+
+<p align="justify">
+    Selanjutnya, vektor sisaan \(u\) diperoleh dengan mengurangkan
+    \(v\) dengan proyeksinya:
+    \[
+        \begin{aligned}
+        u&=v-\operatorname{proj}_{w}(v)\\
+        &=\begin{pmatrix}4\\3\end{pmatrix}
+        -\begin{pmatrix}22/5\\11/5\end{pmatrix}\\
+        &=\begin{pmatrix}-2/5\\4/5\end{pmatrix}.
+        \end{aligned}
+    \]
+    Untuk memeriksa bahwa kedua vektor tersebut ortogonal,
+    hitung:
+    \[
+        \begin{aligned}
+        \sigma(w,u)
+        &=2\left(-\frac25\right)
+        +1\left(\frac45\right)\\
+        &=-\frac45+\frac45=0.
+        \end{aligned}
+    \]
+    Jadi, \(u\perp w\), sebagaimana telah dibuktikan secara umum.
+</p>
+
+<p align="justify">
+    Gambar berikut memperlihatkan interpretasi geometris
+    perhitungan tersebut. Vektor \(v\) merupakan diagonal
+    jajargenjang yang dibentuk oleh proyeksi ortogonalnya dan
+    vektor sisaan \(u\). Kaki proyeksi terletak pada garis
+    yang melalui titik asal dan searah dengan \(w\).
+</p>
+
+<div style="max-width:650px;margin:20px auto;padding:12px;border:1px solid #aaa;border-radius:10px;">
+<svg viewBox="0 0 600 440" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrasi proyeksi ortogonal v pada garis searah w di R2">
+    <defs>
+        <marker id="arrV" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#2563eb"/>
+        </marker>
+        <marker id="arrW" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#16a34a"/>
+        </marker>
+        <marker id="arrU" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#dc2626"/>
+        </marker>
+        <marker id="arrP" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#d97706"/>
+        </marker>
+    </defs>
+
+    <!-- Grid -->
+    <g stroke="#d1d5db" stroke-width="1">
+        <path d="M60 60 V370 M120 60 V370 M180 60 V370 M240 60 V370 M300 60 V370 M360 60 V370 M420 60 V370 M480 60 V370 M540 60 V370"/>
+        <path d="M60 60 H540 M60 120 H540 M60 180 H540 M60 240 H540 M60 300 H540 M60 360 H540"/>
+    </g>
+
+    <!-- Axes -->
+    <g stroke="currentColor" stroke-width="1.8" fill="none">
+        <path d="M60 360 H555"/>
+        <path d="M60 375 V35"/>
+        <path d="M555 360 l-9 -5 v10 z" fill="currentColor"/>
+        <path d="M60 35 l-5 9 h10 z" fill="currentColor"/>
+    </g>
+    <g fill="currentColor" font-size="13">
+        <text x="560" y="365">x</text>
+        <text x="48" y="28">y</text>
+        <text x="43" y="377">O</text>
+    </g>
+
+    <!-- Coordinate transformation: scale 60; origin (60,360) -->
+    <!-- Line along w=(2,1) -->
+    <line x1="60" y1="360" x2="510" y2="135" stroke="#16a34a" stroke-width="2.2" stroke-dasharray="7 5"/>
+    <text x="450" y="120" fill="#16a34a" font-size="15" font-weight="bold">Arah w</text>
+
+    <!-- v=(4,3) -->
+    <line x1="60" y1="360" x2="300" y2="180" stroke="#2563eb" stroke-width="3.5" marker-end="url(#arrV)"/>
+    <text x="310" y="180" fill="#2563eb" font-size="16" font-weight="bold">v = (4,3)</text>
+
+    <!-- Projection point p=(4.4,2.2) -->
+    <line x1="60" y1="360" x2="324" y2="228" stroke="#d97706" stroke-width="3.5" marker-end="url(#arrP)"/>
+    <text x="335" y="244" fill="#d97706" font-size="14" font-weight="bold">proj_w(v)</text>
+
+    <!-- u from projection point to v -->
+    <line x1="324" y1="228" x2="300" y2="180" stroke="#dc2626" stroke-width="3.5" marker-end="url(#arrU)"/>
+    <text x="337" y="188" fill="#dc2626" font-size="15" font-weight="bold">u</text>
+
+    <!-- right angle marker -->
+    <path d="M314 208 L302 214 L296 202" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <text x="347" y="205" font-size="12" fill="currentColor">90°</text>
+
+    <!-- Points -->
+    <g fill="currentColor">
+        <circle cx="60" cy="360" r="3.5"/>
+        <circle cx="300" cy="180" r="4"/>
+        <circle cx="324" cy="228" r="4"/>
+    </g>
+    <g font-size="12" fill="currentColor">
+        <text x="278" y="165">V</text>
+        <text x="325" y="265">P</text>
+    </g>
+</svg>
+<p align="center"><b>Gambar:</b> Proyeksi ortogonal \(v\) pada garis yang dibangun oleh \(w\).</p>
+</div>
+
+<p align="justify">
+    Dari gambar terlihat bahwa
+    \[
+        v=\operatorname{proj}_{w}(v)+u.
+    \]
+    Komponen \(\operatorname{proj}_{w}(v)\) sejajar dengan
+    \(w\), sedangkan \(u\) tegak lurus terhadap \(w\).
+    Oleh karena itu, berdasarkan teorema Pythagoras,
+    \[
+        \|v\|^2
+        =\|\operatorname{proj}_{w}(v)\|^2+\|u\|^2.
+    \]
+    Dalam contoh ini,
+    \[
+        4^2+3^2
+        =\frac{121}{5}+\frac45
+        =25.
+    \]
+    Hasil tersebut memperlihatkan bahwa penguraian vektor
+    menjadi komponen sejajar dan ortogonal tidak hanya benar
+    secara aljabar, tetapi juga konsisten dengan interpretasi
+    geometris.
+</p>
+
+<p align="justify">
+    <b>Kesimpulan.</b> Untuk setiap \(v,w\in V\) dengan
+    \(w\neq 0\), vektor \(v\) dapat diuraikan secara tunggal
+    menjadi
+    \[
+        \boxed{
+        v=\frac{\sigma(w,v)}{\|w\|^2}w+u,
+        \qquad \sigma(w,u)=0.
+        }
+    \]
+    Hasil ini merupakan dasar bagi proses Gram-Schmidt,
+    yaitu prosedur untuk membangun himpunan vektor ortogonal
+    atau ortonormal dari suatu himpunan vektor bebas linear.
+</p>
+
 <hr class="garis-elegan">
 
 <section class="theorem-section">
@@ -31841,21 +32042,187 @@ Suatu himpunan ortogonal dari vektor-vektor tak-nol dalam ruang hasil kali dalam
                 ortonormal dari himpunan pembentang berhingga disebut <b>Proses Gram-Schmidt</b>.
             </p>
 <hr class="garis-elegan">
-            <h3 id="ProsesGramSchmidt"><b>Proses Gram-Schmidt.</b></h3>
-            <p align="justify">
-                Misalkan $(V, \sigma)$ ruang hasil kali dalam dan diberikan himpunan vektor tak-nol $S = \{v_1, \dots, v_n\}$ di
-                $V$. Kita tertarik pada $\text{Span}(S)$, sehingga dapat diasumsikan $S$ bebas linier.
-            <ul align="justify">
-                <li>Ambil $u_1$ sebagai vektor satuan dalam arah $v_1$.</li>
-                <li>Definisikan
-                    $$
-                    w_2 = v_2 - \sigma(u_1, v_2) u_1.
-                    $$
-                    Maka $\sigma(u_1, w_2) = 0$. Ambil $u_2$ vektor satuan dalam arah $w_2$.
-                </li>
-                <li>Ulangi, sehingga diperoleh himpunan ortonormal $\{u_1, \dots, u_n\}$ yang membentang $\text{Span}(S)$.</li>
-            </ul>
+     
+<h3 id="ProsesGramSchmidt"><b>Proses Gram-Schmidt.</b></h3>
+<p align="justify">
+    Misalkan $(V,\sigma)$ adalah ruang hasil kali dalam dan diberikan
+    himpunan vektor tak-nol $S=\{v_1,\dots,v_n\}$ di $V$.
+    Kita tertarik untuk membangun basis ortonormal bagi
+    $\text{Span}(S)$. Oleh karena itu, dapat diasumsikan bahwa
+    $S$ bebas linier. Gagasan utama proses Gram-Schmidt adalah
+    membangun vektor-vektor yang saling ortogonal secara bertahap
+    dengan menghilangkan komponen proyeksi pada vektor-vektor
+    yang telah diperoleh sebelumnya, kemudian menormalisasikannya
+    menjadi vektor satuan.
+</p>
+<ul align="justify" style="margin-left:40pt; margin-right:100pt;">
+    <li>
+        Ambil $u_1$ sebagai vektor satuan dalam arah $v_1$, yaitu
+        \[
+        u_1=\frac{v_1}{\|v_1\|}.
+        \]
+        Dengan demikian, $\|u_1\|=1$ dan
+        $\text{Span}\{u_1\}=\text{Span}\{v_1\}$.
+    </li>
+    <li>
+        Untuk memperoleh vektor kedua yang ortogonal terhadap
+        $u_1$, kita kurangi $v_2$ dengan proyeksi ortogonalnya
+        pada arah $u_1$. Karena $u_1$ merupakan vektor satuan,
+        proyeksi tersebut adalah $\sigma(u_1,v_2)u_1$.
+        Definisikan
+        \[
+        w_2=v_2-\sigma(u_1,v_2)u_1.
+        \]
+        Maka
+        \[
+        \begin{aligned}
+        \sigma(u_1,w_2)
+        &=\sigma(u_1,v_2)
+          -\sigma(u_1,v_2)\sigma(u_1,u_1)\\
+        &=0.
+        \end{aligned}
+        \]
+        Jadi, $w_2$ ortogonal terhadap $u_1$. Selanjutnya,
+        normalisasikan $w_2$ dengan mengambil
+        \[
+        u_2=\frac{w_2}{\|w_2\|}.
+        \]
+        Karena $S$ bebas linier, $w_2\neq 0$, sehingga
+        normalisasi ini dapat dilakukan.
+    </li>
+    <li>
+        Ulangi proses tersebut. Pada langkah ke-$k$, untuk
+        $k=3,\dots,n$, hilangkan seluruh komponen proyeksi
+        $v_k$ pada arah vektor-vektor ortonormal yang telah
+        diperoleh sebelumnya. Dengan demikian, definisikan
+        \[
+        w_k=v_k-\sum_{j=1}^{k-1}
+        \sigma(u_j,v_k)u_j.
+        \]
+        Kemudian, ambil
+        \[
+        u_k=\frac{w_k}{\|w_k\|}.
+        \]
+        Karena vektor-vektor awal bebas linier, diperoleh
+        $w_k\neq 0$ untuk setiap $k$. Akibatnya,
+        $\{u_1,\dots,u_n\}$ merupakan himpunan ortonormal
+        yang membentang $\text{Span}(S)$.
+    </li>
+</ul>
+<p align="justify">
+    Dengan demikian, proses Gram-Schmidt mengubah himpunan
+    vektor bebas linier menjadi himpunan ortonormal tanpa
+    mengubah ruang yang dibentangnya. Perlu diperhatikan bahwa
+    pengurangan proyeksi menghasilkan ortogonalitas, sedangkan
+    pembagian dengan norma menghasilkan panjang satu.
+    Kedua langkah inilah yang menjadikan hasil akhirnya
+    suatu basis ortonormal bagi $\text{Span}(S)$.
+</p>
             </p>
+<hr class="garis-elegan">
+
+            <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js">
+            </script>
+            <script>
+                sagecell.makeSagecell({
+                    inputLocation: "#GramSchm",
+                    template: sagecell.templates.default,
+                    evalButtonText: "Jalankan",
+                    languages: ['sage', 'python']
+                });
+            </script>
+            <div id="GramSchm">
+                <script type="text/x-sage">
+@interact
+def gram_schmidt_matrix(
+    matrix_str="[[1, 1, 0], [1, 0, 1], [0, 1, 1]]"
+):
+    try:
+        M = matrix(QQ, sage_eval(matrix_str, locals={}))
+    except Exception as e:
+        show(html(f"<p style='color:red;'>Format matriks salah: {e}</p>"))
+        return
+
+    V = [M[i] for i in range(M.nrows())]
+    U = []
+
+    show(html("<h3>Langkah-langkah Proses Gram-Schmidt</h3>"))
+
+    for i, v in enumerate(V):
+        show(html("<hr><b>Iterasi " + str(i+1) + ": Vektor $v_" + str(i+1) + " = " + latex(v) + "$</b>"))
+        u = v
+        
+        if len(U) == 0:
+            show(html("Karena ini vektor pertama, maka $u_1 = v_1$."))
+        else:
+            for j, q in enumerate(U):
+                dot_vq = v.dot_product(q)
+                dot_qq = q.dot_product(q)
+                proj = (dot_vq / dot_qq) * q
+                
+                formula_str = (
+                    r"$\operatorname{proj}_{u_" + str(j+1) + r"}(v_" + str(i+1) + r") = " +
+                    r"\frac{\langle v_" + str(i+1) + r", u_" + str(j+1) + r" \rangle}" +
+                    r"{\langle u_" + str(j+1) + r", u_" + str(j+1) + r" \rangle} u_" + str(j+1) + r" = " +
+                    r"\frac{" + str(dot_vq) + r"}{" + str(dot_qq) + r"} \left(" + latex(q) + r"\right) = " + latex(proj) + r"$"
+                )
+                show(html(formula_str))
+                u = u - proj
+                
+        show(html("<b>Hasil sementara $u_" + str(i+1) + " = " + latex(u) + "$</b>"))
+        U.append(u)
+
+    show(html("<hr><h3>Normalisasi Menjadi Basis Ortonormal</h3>"))
+    E = [u / sqrt(u.dot_product(u)) for u in U]
+
+    for i, (u, e) in enumerate(zip(U, E)):
+        norm_val = sqrt(u.dot_product(u))
+        norm_str = (
+            r"$e_" + str(i+1) + r" = \frac{u_" + str(i+1) + r"}{\|u_" + str(i+1) + r"\|} = " +
+            r"\frac{" + latex(u) + r"}{" + latex(norm_val) + r"} = " + latex(e) + r"$"
+        )
+        show(html(norm_str))
+
+    # --- VERIFIKASI PERKALIAN Q^T Q SECARA EKSPLISIT ---
+    show(html("<hr><h3>Verifikasi Langkah Perkalian $Q^T Q$</h3>"))
+    
+    Q = matrix(E).transpose()
+    n = Q.ncols()
+    
+    show(html(r"Matriks Basis Ortonormal ($Q$):"))
+    show(html(r"$Q = " + latex(Q) + r"$"))
+    
+    show(html(r"Matriks Transpose ($Q^T$):"))
+    show(html(r"$Q^T = " + latex(Q.transpose()) + r"$"))
+    
+    show(html(r"<b>Penjabaran Hasil Kali Dalam Setiap Elemen $Q^T Q$:</b>"))
+    
+    # Menampilkan perkalian titik (dot product) antar kolom matriks Q secara eksplisit
+    for i in range(n):
+        for j in range(n):
+            col_i = Q.column(i)
+            col_j = Q.column(j)
+            dot_val = col_i.dot_product(col_j)
+            
+            detail_str = (
+                r"Elemen baris " + str(i+1) + r", kolom " + str(j+1) + 
+                r" $\rightarrow \langle e_" + str(i+1) + r", e_" + str(j+1) + r" \rangle = " + 
+                latex(col_i) + r" \cdot " + latex(col_j) + r" = " + latex(dot_val) + r"$"
+            )
+            show(html(detail_str))
+            
+    QtQ = Q.transpose() * Q
+    show(html(r"<br><b>Matriks Hasil Akhir $Q^T Q$:</b>"))
+    show(html(r"$Q^T Q = " + latex(QtQ) + r"$"))
+    
+    identitas = matrix.identity(n)
+    if QtQ == identitas:
+        show(html(r"<p style='color:green; font-weight:bold;'>✔ Terbukti: Karena seluruh elemen diagonal bernilai 1 dan elemen non-diagonal bernilai 0, maka $Q^T Q = I$ (Matriks Identitas).</p>"))
+    else:
+        show(html(r"<p style='color:red; font-weight:bold;'>✖ Perhatian: $Q^T Q$ bukan matriks identitas.</p>"))              
+                </script>
+            </div>
+
 <hr class="garis-elegan">
 
 <section class="theorem-section">
